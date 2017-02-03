@@ -80,7 +80,7 @@ public class UserHubFragment extends Fragment {
         session.checkLogin();
         Log.d(TAG, "onStart() called");
     }
-
+//test
     @Override
     public void onPause() {
         super.onPause();
