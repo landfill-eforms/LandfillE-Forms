@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/instantaneous_button"
+            android:layout_margin="40dp"
+            android:text="Instantaneous/IME"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:onClick="onInstantaneousTestClick"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/probe_button"
+            android:layout_margin="40dp"
+            android:text="Probe"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:onClick="onProbeTestClick"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/integrated_button"
+            android:layout_margin="40dp"
+            android:text="Integrated/ISE"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:onClick="onIntegratedTestClick"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>

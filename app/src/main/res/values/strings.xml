@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">Landfill E-Forms</string>
+
+    <string name="location_header">Landfill Locations</string>
+    <string name="tests_header">Available Tests</string>
+    <string name="user_hub_header">Home Page</string>
+    <string name="home_notication_label">Notifications</string>
+    <string name="home_location_label">Locations</string>
+    <string name="user_username_label">User Name</string>
+    <string name="user_password_label">Password</string>
+    <string name="user_login_label">Login</string>
+    <string name="incorrect_login_toast">Username/password combination is incorrect</string>
+    <string name="blank_login_toast">Please enter username and password</string>
+    <string name="instantaneous_list_grid_label">Grid Id</string>
+    <string name="instantaneous_list_start_date_label">Date</string>
+    <string name="instantaneous_list_start_time_label">Start Time</string>
+    <string name="instantaneous_list_end_time_label">End Time</string>
+    <string name="instantaneous_list_methane_level_label">CH4(ppm)</string>
+    <string name="new_instantaneous_data">New Instantaneous Data Entry</string>
+    <string name="delete_instantaneous_data">Remove Instantaneous Data Entry</string>
+    <string name="location_label">Location:</string>
+    <string name="ime_label">IME #:</string>
+    <string name="grid_id_label">Grid ID</string>
+    <string name="grid_id_hint">Ex: LOP-1234?</string>
+    <string name="methane_reading_label">CH4(ppm) Reading</string>
+    <string name="methane_reading_hint">Values: 0\-1000?</string>
+    <string name="time_reading_label">Time</string>
+    <string name="date_picker_title">Date:</string>
+    <string name="time_picker_title">Time:</string>
+    <string name="inspector_title">Inspector:</string>
+    <string name="export_instantaneous_label">Export Instantaneous Data</string>
+    <string name="export_button_label">Export</string>
+    <string name="export_successful_toast">Export Successful!</string>
+    <string name="export_unsuccessful_toast">Export Unsuccessful..</string>
+    <string name="instantaneous_form_header">Instantaneous Form</string>
+    <string name="instantaenous_data_header">Instantaneous Entry</string>
+    <string name="json_export_header">Export</string>
+    <string name="submit_button_label">Submit</string>
+    <string name="coming_soon_toast">Coming soon!</string>
 </resources>
