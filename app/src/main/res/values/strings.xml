@@ -37,4 +37,10 @@
     <string name="json_export_header">Export</string>
     <string name="submit_button_label">Submit</string>
     <string name="coming_soon_toast">Coming soon!</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
