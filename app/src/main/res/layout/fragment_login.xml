@@ -10,16 +10,17 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:background="@drawable/puente_icon"
-    android:weightSum="1">
+    android:addStatesFromChildren="false"
+    android:fitsSystemWindows="false"
+    android:focusable="false">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:id="@+id/transparent_login"
         android:background="@drawable/layout_round_landfill_green"
-        android:padding="10dp"
+        android:padding="15dp"
         android:theme="@style/Base.AlertDialog.AppCompat.Light"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="130dp"
         android:layout_height="wrap_content">
     <TextView
         android:text="@string/app_name"

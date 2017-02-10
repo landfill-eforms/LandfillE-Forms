@@ -1,5 +1,6 @@
 package com.landfilleforms.android.landfille_forms;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,15 +14,33 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.HashMap;
+
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    SessionManager session;
+    User mUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+        //session used
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
+
+        HashMap<String,String> currentUser = session.getUserDetails();
+        mUser = new User();
+        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
+        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +59,9 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
     @Override
@@ -80,13 +102,25 @@ public class MenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_home) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_change_instrument) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_forms) {
+            Intent i = new Intent(this,LocationActivity.class);
+            startActivity(i);
+            //android.app.FragmentManager fm = getFragmentManager();
+           // fm.beginTransaction(R.id.context_frame,).commit();
+        }else if (id == R.id.nav_export) {
+
+
+        } else if (id == R.id.nav_import) {
+
+        }
+        else if (id == R.id.nav_settings) {
+
+        }
+        else if (id == R.id.nav_logout) {
 
         }
 
