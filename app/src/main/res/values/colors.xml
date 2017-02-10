@@ -5,4 +5,9 @@
     <color name="colorAccent">#000000</color>
     <color name="landfillGreen">#CC5F7A51</color>
     <color name="loginButtonGreen">#CC8FA185</color>
+
+    <color name="backgroundTheme">#2e404a</color>
+    <color name="lighterBackgroundTheme">#3d5969</color>
+    <color name="textLabelColor">#838a88</color>
+
 </resources>
