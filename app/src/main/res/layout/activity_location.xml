@@ -24,21 +24,45 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <!--Represents the Bishops button on the Locations Activity-->
-            <Button
-                android:text="Bishops"
-                android:textColor="@android:color/background_light"
-                android:textStyle="bold"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:width="48px"
-                android:height="48px"
-                android:id="@+id/bishops_button"
-                android:layout_weight="1"
-                android:layout_margin="40dp"
-                android:background="@drawable/bishops_icon"
-                android:drawable="@android:color/transparent"
-                android:onClick="onBishopsLocationClick"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--Represents the Bishops button on the Locations Activity-->
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="21dp"
+                    android:id="@+id/bishops_label"
+                    tools:text="Bishops"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/textLabelColor" />
+
+                <Button
+                    android:textColor="@android:color/background_light"
+                    android:textStyle="bold"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:width="48px"
+                    android:height="48px"
+                    android:id="@+id/bishops_button"
+                    android:background="@drawable/bishops_icon"
+                    android:drawable="@android:color/transparent"
+                    android:onClick="onBishopsLocationClick"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+
+            </RelativeLayout>
+
+
 
         </LinearLayout>
 
@@ -48,28 +72,48 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <!--Represents the Gaffey button on the Locations Activity-->
-            <Button
-                android:text="Gaffey"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/gaffey_button"
-                android:layout_weight="1"
-                android:layout_margin="40dp"
-                android:width="48dp"
-                android:height="48dp"
-                android:background="@drawable/gaffey_icon"
-                tools:textStyle="bold"
-                android:textColor="@android:color/background_light"
-                android:onClick="onGaffeyLocationClick"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--Represents the Gaffey button on the Locations Activity-->
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="21dp"
+                    android:id="@+id/gaffey_label"
+                    tools:text="Gaffey"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/textLabelColor" />
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/gaffey_button"
+                    android:width="48dp"
+                    android:height="48dp"
+                    android:background="@drawable/gaffey_icon"
+                    tools:textStyle="bold"
+                    android:textColor="@android:color/background_light"
+                    android:onClick="onGaffeyLocationClick"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+
 
 
         </LinearLayout>
 
     </LinearLayout>
-
-
-
 
 
     <LinearLayout
@@ -79,19 +123,42 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <!--Represents the Toyon button on the Locations Activity-->
-        <Button
-            android:text="Toyon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/_button"
-            android:width="48dp"
-            android:height="48dp"
-            android:layout_margin="40dp"
-            android:textColor="@android:color/background_light"
-            android:background="@drawable/toyon_icon"
-            android:textStyle="normal|bold"
-            android:onClick="onToyonLocationClick"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Represents the Toyon button on the Locations Activity-->
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="21dp"
+                android:id="@+id/toyon_label"
+                tools:text="Toyon"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:textColor="@color/textLabelColor" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/_button"
+                android:width="48dp"
+                android:height="48dp"
+                android:textColor="@android:color/background_light"
+                android:background="@drawable/toyon_icon"
+                android:textStyle="normal|bold"
+                android:onClick="onToyonLocationClick"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+
+        </RelativeLayout>
 
 
     </LinearLayout>
@@ -107,20 +174,44 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <!--Represents the Lopez button on the Locations Activity-->
-            <Button
-                android:text="Lopez"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/lopez_button"
-                android:layout_weight="1"
-                android:layout_margin="40dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/background_light"
-                android:background="@drawable/lopez_icon"
-                android:width="48dp"
-                android:height="48dp"
-                android:onClick="onLopezLocationClick"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--Represents the Lopez button on the Locations Activity-->
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="21dp"
+                    android:id="@+id/lopez_label"
+                    tools:text="Lopez"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/textLabelColor" />
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/lopez_button"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/background_light"
+                    android:background="@drawable/lopez_icon"
+                    android:width="48dp"
+                    android:height="48dp"
+                    android:onClick="onLopezLocationClick"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -130,18 +221,42 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <!--Represents the Sheldon button on the Locations Activity-->
-            <Button
-                android:text="Sheldon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/sheldon_button"
-                android:layout_weight="1"
-                android:layout_margin="40dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/background_light"
-                android:background="@drawable/sheldon_icon"
-                android:onClick="onSheldonLocationClick"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--Represents the Sheldon button on the Locations Activity-->
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="21dp"
+                    android:id="@+id/sheldon_label"
+                    tools:text="Sheldon"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/textLabelColor" />
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/sheldon_button"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/background_light"
+                    android:background="@drawable/sheldon_icon"
+                    android:onClick="onSheldonLocationClick"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+
 
 
         </LinearLayout>
