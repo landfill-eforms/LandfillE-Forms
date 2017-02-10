@@ -106,6 +106,7 @@ public class MenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        android.app.FragmentManager fm = getFragmentManager();
 
         if (id == R.id.nav_home) {
            // myContext.getFragmentManager().beginTransaction(R.id.context_frame,new InstantaneousFormFragment()).commit();
@@ -116,10 +117,10 @@ public class MenuActivity extends AppCompatActivity
             startActivity(i);
 
         }else if (id == R.id.nav_export) {
-
+            fm.beginTransaction().replace(R.id.context_frame,new ExportFragment()).commit();
 
         } else if (id == R.id.nav_sync) {
-
+           // fm.beginTransaction().replace(R.id.context_frame,new InstantaneousDataFragment()).commit()
         }
         else if (id == R.id.nav_settings) {
 
