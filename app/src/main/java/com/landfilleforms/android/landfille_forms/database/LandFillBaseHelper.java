@@ -28,6 +28,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 UsersTable.Cols.PASSWORD + ", " +
                 UsersTable.Cols.FULLNAME + ")"
         );
+
         db.execSQL("create table " + InstantaneousDataTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
                 InstantaneousDataTable.Cols.UUID + ", " +
