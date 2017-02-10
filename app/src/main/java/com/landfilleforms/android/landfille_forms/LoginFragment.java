@@ -94,7 +94,8 @@ public class LoginFragment extends Fragment {
                         mUser.setFullName("Alvin Quach");//Delete this later
                         session.createLoginSession(mUser.getUsername(), mUser.getFullName());
 
-                        Intent i = new Intent(getActivity(),UserHubActivity.class);
+                        //Intent i = new Intent(getActivity(),UserHubActivity.class);
+                        Intent i = new Intent(getActivity(),MenuActivity.class);
                         startActivity(i);
                     } else {
                         Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();

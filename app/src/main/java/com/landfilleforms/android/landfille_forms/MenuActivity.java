@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +20,8 @@ import java.util.HashMap;
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private FragmentActivity myContext;
     SessionManager session;
     User mUser;
     @Override
@@ -27,7 +30,7 @@ public class MenuActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        setTitle("Home");
 
 
         //session used
@@ -42,14 +45,14 @@ public class MenuActivity extends AppCompatActivity
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -81,7 +84,7 @@ public class MenuActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -94,7 +97,9 @@ public class MenuActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -103,25 +108,24 @@ public class MenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+           // myContext.getFragmentManager().beginTransaction(R.id.context_frame,new InstantaneousFormFragment()).commit();
 
-        } else if (id == R.id.nav_change_instrument) {
 
         } else if (id == R.id.nav_forms) {
             Intent i = new Intent(this,LocationActivity.class);
             startActivity(i);
-            //android.app.FragmentManager fm = getFragmentManager();
-           // fm.beginTransaction(R.id.context_frame,).commit();
+
         }else if (id == R.id.nav_export) {
 
 
-        } else if (id == R.id.nav_import) {
+        } else if (id == R.id.nav_sync) {
 
         }
         else if (id == R.id.nav_settings) {
 
         }
         else if (id == R.id.nav_logout) {
-
+            session.logoutUser();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
