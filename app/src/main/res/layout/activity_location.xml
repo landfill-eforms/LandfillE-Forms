@@ -33,7 +33,7 @@
                 <!--Represents the Bishops button on the Locations Activity-->
 
                 <TextView
-                    android:text="TextView"
+                    android:text="Bishops"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -81,7 +81,7 @@
                 <!--Represents the Gaffey button on the Locations Activity-->
 
                 <TextView
-                    android:text="TextView"
+                    android:text="Gaffey"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -132,7 +132,7 @@
             <!--Represents the Toyon button on the Locations Activity-->
 
             <TextView
-                android:text="TextView"
+                android:text="Toyon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -184,7 +184,7 @@
                 <!--Represents the Lopez button on the Locations Activity-->
 
                 <TextView
-                    android:text="TextView"
+                    android:text="Lopez"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -230,7 +230,7 @@
                 <!--Represents the Sheldon button on the Locations Activity-->
 
                 <TextView
-                    android:text="TextView"
+                    android:text="Sheldon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

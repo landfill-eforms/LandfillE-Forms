@@ -111,7 +111,7 @@ public class LoginFragment extends Fragment {
                         if(mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && mUser.getPassword().equals(mExistingUsers.get(i).getPassword())) {
                             session.createLoginSession(mExistingUsers.get(i).getUsername(), mExistingUsers.get(i).getFullName());
 
-                            Intent intent = new Intent(getActivity(),UserHubActivity.class);
+                            Intent intent = new Intent(getActivity(),MenuActivity.class);
                             startActivity(intent);
                         }
 //=======
