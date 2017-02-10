@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
     <color name="landfillGreen">#CC5F7A51</color>
-    <color name="loginButtonGreen">#cc8fa185</color>
-    <color name="background_gray">#838a88</color>
+    <color name="loginButtonGreen">#cc8FA185</color>
+    <color name="backgroundTheme">#2e404a</color>
+    <color name="lighterBackgroundTheme">#3d5969</color>
+    <color name="textLabelColor">#838a88</color>
 </resources>
