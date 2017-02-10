@@ -3,4 +3,8 @@
              android:id="@+id/fragment_container"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+<<<<<<< HEAD
              android:background="@color/backgroundTheme" />
+=======
+    android:background="@color/backgroundTheme" />
+>>>>>>> 4d8387fd21859511a75141235a15aaed4af59665

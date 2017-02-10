@@ -3,6 +3,6 @@
             android:id="@+id/dialog_time_time_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-    >
+    android:background="@color/backgroundTheme">
 
 </TimePicker>

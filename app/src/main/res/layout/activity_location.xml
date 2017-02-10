@@ -8,7 +8,11 @@
               android:clickable="true"
               android:textAlignment="center"
               android:visibility="visible"
+<<<<<<< HEAD
               android:background="@color/backgroundTheme">
+=======
+    android:background="@color/backgroundTheme">
+>>>>>>> 4d8387fd21859511a75141235a15aaed4af59665
 
     <!--Bishops, Gaffey, Lopez, Sheldon, Toyon-->
 

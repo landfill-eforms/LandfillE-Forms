@@ -105,6 +105,7 @@ public class LoginFragment extends Fragment {
                 //Link to other activity.
                 if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().trim().length() > 0) {
                     //In the future, make this query the user table and find a username/pw match.
+<<<<<<< HEAD
                     for(int i = 0; i < mExistingUsers.size(); i++) {
                         Log.d("UserName", mExistingUsers.get(i).getUsername());
                         if(mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && mUser.getPassword().equals(mExistingUsers.get(i).getPassword())) {
@@ -113,6 +114,18 @@ public class LoginFragment extends Fragment {
                             Intent intent = new Intent(getActivity(),UserHubActivity.class);
                             startActivity(intent);
                         }
+=======
+                    if(mUser.getUsername().equals("aquach") && mUser.getPassword().equals("asd")){
+                        //Create session and move on to next activity
+                        mUser.setFullName("Alvin Quach");//Delete this later
+                        session.createLoginSession(mUser.getUsername(), mUser.getFullName());
+
+                        //Intent i = new Intent(getActivity(),UserHubActivity.class);
+                        Intent i = new Intent(getActivity(),MenuActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
+>>>>>>> 4d8387fd21859511a75141235a15aaed4af59665
                     }
                     Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
 //                    if(mUser.getUsername().equals("aquach") && mUser.getPassword().equals("asd")){

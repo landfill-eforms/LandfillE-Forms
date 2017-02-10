@@ -4,8 +4,23 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
     <color name="landfillGreen">#CC5F7A51</color>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <color name="loginButtonGreen">#CC8FA185</color>
+
+    <color name="backgroundTheme">#2e404a</color>
+    <color name="lighterBackgroundTheme">#3d5969</color>
+    <color name="textLabelColor">#838a88</color>
+
+=======
+>>>>>>> 4d8387fd21859511a75141235a15aaed4af59665
     <color name="loginButtonGreen">#CC8FA185</color>
     <color name="backgroundTheme">#2E404a</color>
     <color name="lighterBackgroundTheme">#3d5969</color>
     <color name="textLabelColor">#838a88</color>
+<<<<<<< HEAD
+=======
+>>>>>>> development-cow
+>>>>>>> 4d8387fd21859511a75141235a15aaed4af59665
 </resources>

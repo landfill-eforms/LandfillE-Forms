@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:weightSum="1">
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/la_sanitation_logo02"
-        android:id="@+id/imageView"
-        android:layout_weight="0.49"
-        android:cropToPadding="false"
-        android:adjustViewBounds="true"/>
-
-    <TextView
-        android:text="@string/app_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"/>
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/puente_icon"
+    android:addStatesFromChildren="false"
+    android:fitsSystemWindows="false"
+    android:focusable="false">
 
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/layout_round_landfill_green"
+        android:padding="15dp"
+        android:theme="@style/Base.AlertDialog.AppCompat.Light"
+        android:layout_marginTop="130dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="normal|bold"
+            android:textColor="@color/backgroundTheme" />
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user_username_label"/>
+            android:text="@string/user_username_label"
+            android:textColor="@color/backgroundTheme"
+            android:textStyle="normal|bold" />
         <EditText
             android:id="@+id/user_username"
             android:inputType="textVisiblePassword|textNoSuggestions"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColorLink="?attr/colorControlNormal"
+            android:textIsSelectable="false"
+            android:textColor="@android:color/background_dark" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,24 +57,35 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user_password_label"/>
+            android:text="@string/user_password_label"
+            android:textColor="@color/backgroundTheme"
+            android:textStyle="normal|bold" />
 
         <EditText
             android:id="@+id/user_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColorLink="?attr/actionMenuTextColor" />
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="10dp">
+
         <Button
             android:id="@+id/login_submit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/user_login_label"/>
+            android:background="@drawable/layout_round_landfill_green_button"
+            android:text="@string/user_login_label"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textStyle="normal|bold"
+            android:textColor="@color/backgroundTheme" />
 
     </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
