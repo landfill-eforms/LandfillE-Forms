@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.landfilleforms.android.landfille_forms.database.InstantaneousDataCursorWrapper;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.InstantaneousDataTable;
+import com.landfilleforms.android.landfille_forms.database.TestUtil;
+import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,11 +93,14 @@ public class InstantaneousForm {
         ContentValues values = new ContentValues();
         values.put(InstantaneousDataTable.Cols.UUID, instantaneousData.getId().toString());
         values.put(InstantaneousDataTable.Cols.LOCATION, instantaneousData.getLandFillLocation());
+        values.put(InstantaneousDataTable.Cols.BARO_PRESSURE, instantaneousData.getBarometricPressure());
         values.put(InstantaneousDataTable.Cols.GRID_ID, instantaneousData.getGridId());
         values.put(InstantaneousDataTable.Cols.INSPECTOR_NAME, instantaneousData.getInspectorName());
+        values.put(InstantaneousDataTable.Cols.INSPECTOR_USERNAME, instantaneousData.getInspectorUserName());
         values.put(InstantaneousDataTable.Cols.START_DATE, instantaneousData.getStartDate().getTime());
         values.put(InstantaneousDataTable.Cols.END_DATE, instantaneousData.getEndDate().getTime());
-        values.put(InstantaneousDataTable.Cols.METHANE_READING, instantaneousData.getMethaneReading());
+        values.put(InstantaneousDataTable.Cols.INSTRUMENT_SERIAL, instantaneousData.getInstrumentSerialNumber());
+        values.put(InstantaneousDataTable.Cols.MAX_METHANE_READING, instantaneousData.getMethaneReading());
         values.put(InstantaneousDataTable.Cols.IME_NUMBER, instantaneousData.getImeNumber());
 
         return values;

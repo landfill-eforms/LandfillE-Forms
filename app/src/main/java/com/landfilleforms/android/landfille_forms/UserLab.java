@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.UserCursorWrapper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.UsersTable;
+import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class UserLab {
 
     public User getUser(UUID id) {
         UserCursorWrapper cursor = queryUsers (
-                UsersTable.Cols.UUID + " = ? ",
+                UsersTable.Cols.ID + " = ? ",
                 new String[] { id.toString()}
         );
 
@@ -84,13 +85,13 @@ public class UserLab {
         ContentValues values = getContentValues(user);
 
         mDatabase.update(UsersTable.NAME, values,
-                UsersTable.Cols.UUID + "= ?",
+                UsersTable.Cols.ID + "= ?",
                 new String[] {uuidString});//We use String[] to avoid SQL injections.
     }
 
     private static ContentValues getContentValues(User user) {
         ContentValues values = new ContentValues();
-        values.put(UsersTable.Cols.UUID, user.getId().toString());
+        values.put(UsersTable.Cols.ID, user.getId().toString());
         values.put(UsersTable.Cols.USERNAME, user.getUsername());
         values.put(UsersTable.Cols.PASSWORD, user.getPassword());
         values.put(UsersTable.Cols.FULLNAME, user.getFullName());

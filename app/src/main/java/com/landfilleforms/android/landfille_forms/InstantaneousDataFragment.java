@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 
 import java.util.Date;
 import java.util.UUID;
@@ -45,13 +48,13 @@ public class InstantaneousDataFragment extends Fragment {
     private Button mStartTimeButton;
     private Button mEndTimeButton;
     private Button mSubmitButton;
+    private EditText mInstrumentField;
     private EditText imeField;
     private TextView mLocationLabel;
 
     public static InstantaneousDataFragment newInstance(UUID instantaneousDataId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_INSTANTANEOUS_DATA_ID, instantaneousDataId);
-
         InstantaneousDataFragment fragment = new InstantaneousDataFragment();
         fragment.setArguments(args);
         return fragment;
@@ -62,6 +65,7 @@ public class InstantaneousDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID instantaneousDataId = (UUID) getArguments().getSerializable(ARG_INSTANTANEOUS_DATA_ID);
         mInstantaneousData = InstantaneousForm.get(getActivity()).getInstantaneousData(instantaneousDataId);
+
         setHasOptionsMenu(true);
     }
 
@@ -140,6 +144,25 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
+        mInstrumentField = (EditText)v.findViewById(R.id.instrument_field);
+        mInstrumentField.setText(mInstantaneousData.getInstrumentSerialNumber());
+        mInstrumentField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s=="" || count == 0) mInstantaneousData.setInstrumentSerialNumber("");
+                else mInstantaneousData.setInstrumentSerialNumber(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         imeField = (EditText)v.findViewById(R.id.ime_field);
         imeField.setText(mInstantaneousData.getImeNumber());

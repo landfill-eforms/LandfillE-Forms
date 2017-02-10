@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.model;
 
 import java.util.UUID;
 
@@ -8,21 +8,20 @@ import java.util.UUID;
  */
 
 public class User {
-    private UUID mId;
+    private String mId;
     private String mUsername;
     private String mPassword;
     private String mFullName;
 
     //Will most likely have to change the constructors later on
     public User() {
-        this(UUID.randomUUID());
     }
 
-    public User(UUID id) {
+    public User(String id) {
         mId = id;
     }
 
-    public UUID getId() {
+    public String getId() {
         return mId;
     }
 

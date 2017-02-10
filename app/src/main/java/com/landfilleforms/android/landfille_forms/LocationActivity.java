@@ -1,13 +1,13 @@
 package com.landfilleforms.android.landfille_forms;
 //Need to change this to a single fragment activity
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+
+import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.util.HashMap;
 

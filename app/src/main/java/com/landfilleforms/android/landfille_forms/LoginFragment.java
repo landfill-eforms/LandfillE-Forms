@@ -2,6 +2,8 @@ package com.landfilleforms.android.landfille_forms;
 
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -14,6 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
+import com.landfilleforms.android.landfille_forms.database.TestUtil;
+import com.landfilleforms.android.landfille_forms.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Work on 10/30/2016.
  */
@@ -22,8 +32,10 @@ public class LoginFragment extends Fragment {
     private static final String TAG = "LoginFragment";
 
     SessionManager session;
+    SQLiteDatabase mDatabase;
 
     private User mUser;
+    private List<User> mExistingUsers;
     private EditText mUsernameField;
     private EditText mPasswordField;
     private Button mLoginButton;
@@ -39,6 +51,10 @@ public class LoginFragment extends Fragment {
             Intent i = new Intent(getActivity(),UserHubActivity.class);
             startActivity(i);
         }
+        mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
+        TestUtil.insertDummyUserData(mDatabase);
+        mExistingUsers = UserLab.get(getActivity()).getUsers();
+
         mUser.setUsername("");
         mUser.setPassword("");
     }
@@ -89,18 +105,28 @@ public class LoginFragment extends Fragment {
                 //Link to other activity.
                 if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().trim().length() > 0) {
                     //In the future, make this query the user table and find a username/pw match.
-                    if(mUser.getUsername().equals("aquach") && mUser.getPassword().equals("asd")){
-                        //Create session and move on to next activity
-                        mUser.setFullName("Alvin Quach");//Delete this later
-                        session.createLoginSession(mUser.getUsername(), mUser.getFullName());
+                    for(int i = 0; i < mExistingUsers.size(); i++) {
+                        Log.d("UserName", mExistingUsers.get(i).getUsername());
+                        if(mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && mUser.getPassword().equals(mExistingUsers.get(i).getPassword())) {
+                            session.createLoginSession(mExistingUsers.get(i).getUsername(), mExistingUsers.get(i).getFullName());
 
-                        Intent i = new Intent(getActivity(),UserHubActivity.class);
-                        startActivity(i);
-                    } else {
-                        Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getActivity(),UserHubActivity.class);
+                            startActivity(intent);
+                        }
                     }
-                } else {
-                    Toast.makeText(getActivity(), R.string.blank_login_toast, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
+//                    if(mUser.getUsername().equals("aquach") && mUser.getPassword().equals("asd")){
+//                        //Create session and move on to next activity
+//                        mUser.setFullName("Alvin Quach");//Delete this later
+//                        session.createLoginSession(mUser.getUsername(), mUser.getFullName());
+//
+//                        Intent i = new Intent(getActivity(),UserHubActivity.class);
+//                        startActivity(i);
+//                    } else {
+//                        Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
+//                    }
+//                } else {
+//                    Toast.makeText(getActivity(), R.string.blank_login_toast, Toast.LENGTH_SHORT).show();
                 }
 //                if(mUser.getUsername() != null) Log.d(TAG, "Username:" + mUser.getUsername());
 //                if(mUser.getPassword() != null) Log.d(TAG, "Password:" + mUser.getPassword());
@@ -151,5 +177,16 @@ public class LoginFragment extends Fragment {
         super.onDestroy();
         Log.d(TAG, "onDestroy() called");
     }
-
+    private Cursor getAllUsers() {
+        // COMPLETED (6) Inside, call query on mDb passing in the table name and projection String [] order by COLUMN_TIMESTAMP
+        return mDatabase.query(
+                LandFillDbSchema.UsersTable.NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
 }
