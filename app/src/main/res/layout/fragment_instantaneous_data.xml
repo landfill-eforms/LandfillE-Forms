@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/inspector_title"
-        android:backgroundTint="@color/lighterBackgroundTheme"
-        android:background="@color/lighterBackgroundTheme" />
+        android:textColor="@color/textLabelColor" />
 
     <TextView
         android:id="@+id/inspector_name"
@@ -24,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/location_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
     <TextView
         android:id="@+id/location"
@@ -37,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/grid_id_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
     <EditText
         android:id="@+id/grid_id"
@@ -51,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/methane_reading_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
     <EditText
         android:id="@+id/methane_reading"
@@ -66,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/ime_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
 
     <EditText
@@ -82,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/time_reading_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
     <Button
         android:id="@+id/start_date"
@@ -90,7 +89,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        />
+        android:background="@color/lighterBackgroundTheme"
+        android:textColor="@android:color/background_light" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,5 +118,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginRight="16dp"
+        android:textColor="@android:color/background_light"
+        android:background="@color/lighterBackgroundTheme" />
 </LinearLayout>
