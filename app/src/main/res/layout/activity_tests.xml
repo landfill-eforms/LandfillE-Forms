@@ -31,7 +31,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="21dp"
                     android:id="@+id/instantaneous_label"
-                    tools:text="Instantaneous"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
                     android:textColor="@color/textLabelColor" />
@@ -78,7 +77,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="21dp"
                     android:id="@+id/ime_label"
-                    tools:text="IME"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
                     android:textColor="@color/textLabelColor" />
@@ -90,7 +88,7 @@
                     android:width="48dp"
                     android:height="48dp"
                     android:background="@drawable/ime_icon"
-                    tools:textStyle="bold"
+                    android:textStyle="bold"
                     android:textColor="@android:color/background_light"
                     android:onClick="onIMETestClick"
                     android:layout_marginLeft="40dp"
@@ -129,7 +127,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="21dp"
                 android:id="@+id/probe_label"
-                tools:text="Probe"
                 android:textStyle="normal|bold"
                 android:textSize="18sp"
                 android:textColor="@color/textLabelColor" />
@@ -181,7 +178,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="21dp"
                     android:id="@+id/integrated_label"
-                    tools:text="Integrated"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
                     android:textColor="@color/textLabelColor" />
@@ -227,7 +223,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="21dp"
                     android:id="@+id/ise_label"
-                    tools:text="ISE"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
                     android:textColor="@color/textLabelColor" />

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/backgroundTheme">
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:orientation="vertical"
@@ -15,6 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/inspector_title"
+                android:textColor="@color/textLabelColor"
                 />
 
             <TextView
@@ -29,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/location_label"
+                android:textColor="@color/textLabelColor"
                 />
 
             <TextView
@@ -43,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/grid_id_label"
+                android:textColor="@color/textLabelColor"
                 />
 
             <EditText
@@ -58,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/methane_reading_label"
+                android:textColor="@color/textLabelColor"
                 />
 
             <EditText
@@ -74,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/time_reading_label"
+                android:textColor="@color/textLabelColor"
                 />
 
             <Button
@@ -98,6 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/start_time_label"
+                        android:textColor="@color/textLabelColor"
                         />
                     <Button
                         android:id="@+id/start_time"
@@ -116,6 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/end_time_label"
+                        android:textColor="@color/textLabelColor"
                         />
                     <Button
                         android:id="@+id/end_time"
@@ -132,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/instrument_label"
+                android:textColor="@color/textLabelColor"
                 />
 
             <EditText
@@ -147,6 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ime_label"
+                android:textColor="@color/textLabelColor"
                 />
 
 
@@ -167,7 +176,7 @@
                 android:layout_marginRight="16dp"/>
         </LinearLayout>
     </ScrollView>
-=======
+<!--
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -291,4 +300,4 @@
         android:textColor="@android:color/background_light"
         android:background="@color/lighterBackgroundTheme" />
 </LinearLayout>
->>>>>>> 4d8387fd21859511a75141235a15aaed4af59665
+-->
