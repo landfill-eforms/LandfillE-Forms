@@ -4,13 +4,33 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
     <color name="landfillGreen">#CC5F7A51</color>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> efb7363a2493791d9afd5a662500ab39e31a6b41
     <color name="loginButtonGreen">#CC8FA185</color>
     <color name="backgroundTheme">#2e404a</color>
     <color name="lighterBackgroundTheme">#3d5969</color>
     <color name="textLabelColor">#838a88</color>
+<<<<<<< HEAD
     <color name="loginButtonGreen">#cc8FA185</color>
     <color name="backgroundTheme">#2e404a</color>
     <color name="lighterBackgroundTheme">#3d5969</color>
     <color name="textLabelColor">#838a88</color>
 
+=======
+
+=======
+>>>>>>> 4d8387fd21859511a75141235a15aaed4af59665
+    <color name="loginButtonGreen">#CC8FA185</color>
+    <color name="backgroundTheme">#2E404a</color>
+    <color name="lighterBackgroundTheme">#3d5969</color>
+    <color name="textLabelColor">#838a88</color>
+<<<<<<< HEAD
+=======
+>>>>>>> development-cow
+>>>>>>> 4d8387fd21859511a75141235a15aaed4af59665
+>>>>>>> efb7363a2493791d9afd5a662500ab39e31a6b41
 </resources>

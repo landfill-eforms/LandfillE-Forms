@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
+import com.landfilleforms.android.landfille_forms.model.User;
 
 
 import java.io.File;
@@ -60,6 +62,7 @@ public class InstantaneousFormFragment extends Fragment {
         HashMap<String,String> currentUser = session.getUserDetails();
         mUser = new User();
         mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
+        Log.d("UserName:", mUser.getUsername());
         mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
     }
 
@@ -138,6 +141,7 @@ public class InstantaneousFormFragment extends Fragment {
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 instantaneousData.setLandFillLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 instantaneousData.setInspectorName(mUser.getFullName());
+                instantaneousData.setInspectorUserName(mUser.getUsername());
                 InstantaneousForm.get(getActivity()).addInstantaneousData(instantaneousData);
                 Intent intent = InstantaneousDataPagerActivity.newIntent(getActivity(),instantaneousData.getId());
 
@@ -162,6 +166,7 @@ public class InstantaneousFormFragment extends Fragment {
         }
     }
 
+    //For RecyleView
     private class InstantaneousDataHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private InstantaneousData mInstantaneousData;
@@ -209,6 +214,7 @@ public class InstantaneousFormFragment extends Fragment {
 //            startActivity(intent);
         }
     }
+
 
     private class InstantaneousDataAdapter extends RecyclerView.Adapter<InstantaneousDataHolder> {
 

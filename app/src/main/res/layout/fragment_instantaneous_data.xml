@@ -1,4 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical"
+            >
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/inspector_title"
+                />
+
+            <TextView
+                android:id="@+id/inspector_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/location_label"
+                />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/grid_id_label"
+                />
+
+            <EditText
+                android:id="@+id/grid_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                />
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/methane_reading_label"
+                />
+
+            <EditText
+                android:id="@+id/methane_reading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/methane_reading_hint"
+                android:inputType="numberDecimal"
+                />
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/time_reading_label"
+                />
+
+            <Button
+                android:id="@+id/start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/start_time_label"
+                        />
+                    <Button
+                        android:id="@+id/start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/end_time_label"
+                        />
+                    <Button
+                        android:id="@+id/end_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instrument_label"
+                />
+
+            <EditText
+                android:id="@+id/instrument_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                />
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ime_label"
+                />
+
+
+            <EditText
+                android:id="@+id/ime_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                />
+
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+        </LinearLayout>
+    </ScrollView>
+=======
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -10,8 +179,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/inspector_title"
-        android:backgroundTint="@color/lighterBackgroundTheme"
-        android:background="@color/lighterBackgroundTheme" />
+        android:textColor="@color/textLabelColor" />
 
     <TextView
         android:id="@+id/inspector_name"
@@ -24,7 +192,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/location_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
     <TextView
         android:id="@+id/location"
@@ -37,7 +205,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/grid_id_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
     <EditText
         android:id="@+id/grid_id"
@@ -51,7 +219,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/methane_reading_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
     <EditText
         android:id="@+id/methane_reading"
@@ -66,7 +234,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/ime_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
 
     <EditText
@@ -82,7 +250,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/time_reading_label"
-        />
+        android:textColor="@color/textLabelColor" />
 
     <Button
         android:id="@+id/start_date"
@@ -90,7 +258,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        />
+        android:background="@color/lighterBackgroundTheme"
+        android:textColor="@android:color/background_light" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,5 +287,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginRight="16dp"
+        android:textColor="@android:color/background_light"
+        android:background="@color/lighterBackgroundTheme" />
 </LinearLayout>
+>>>>>>> 4d8387fd21859511a75141235a15aaed4af59665

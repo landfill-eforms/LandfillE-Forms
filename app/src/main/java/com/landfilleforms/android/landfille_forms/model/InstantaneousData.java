@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.model;
 
 import java.util.Date;
 import java.util.UUID;
@@ -10,10 +10,13 @@ import java.util.UUID;
 public class InstantaneousData {
     private UUID mId;
     private String landFillLocation;//Auto-generated
+    private double barometricPressure;
     private String gridId;
     private String inspectorName;//Should make this a user object, auto-generated
+    private String inspectorUserName;
     private Date mStartDate;
     private Date mEndDate;//This is going to be the same date as the start date but we need this to set the end time
+    private String instrumentSerialNumber;
     private double methaneReading;
     private String imeNumber;//Auto-generated
 
@@ -37,6 +40,14 @@ public class InstantaneousData {
 
     public void setLandFillLocation(String landFillLocation) { this.landFillLocation = landFillLocation; }
 
+    public double getBarometricPressure() {
+        return barometricPressure;
+    }
+
+    public void setBarometricPressure(double barometricPressure) {
+        this.barometricPressure = barometricPressure;
+    }
+
     public String getGridId() {
         return gridId;
     }
@@ -48,6 +59,14 @@ public class InstantaneousData {
     public String getInspectorName() { return inspectorName; }
 
     public void setInspectorName(String inspectorName) { this.inspectorName = inspectorName; }
+
+    public String getInspectorUserName() {
+        return inspectorUserName;
+    }
+
+    public void setInspectorUserName(String inspectorUserName) {
+        this.inspectorUserName = inspectorUserName;
+    }
 
     public Date getStartDate() {
         return mStartDate;
@@ -64,6 +83,10 @@ public class InstantaneousData {
     public void setEndDate(Date endDate) {
         mEndDate = endDate;
     }
+
+    public String getInstrumentSerialNumber() { return instrumentSerialNumber; }
+
+    public void setInstrumentSerialNumber(String instrumentSerialNumber) { this.instrumentSerialNumber = instrumentSerialNumber; }
 
     public double getMethaneReading() {
         return methaneReading;
