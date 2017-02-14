@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -48,7 +49,7 @@ public class LoginFragment extends Fragment {
 
         session = new SessionManager(getActivity().getApplicationContext());
         if(session.isLoggedIn()) {
-            Intent i = new Intent(getActivity(),UserHubActivity.class);
+            Intent i = new Intent(getActivity(),MenuActivity.class);
             startActivity(i);
         }
         mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
@@ -111,7 +112,7 @@ public class LoginFragment extends Fragment {
                         if(mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && mUser.getPassword().equals(mExistingUsers.get(i).getPassword())) {
                             session.createLoginSession(mExistingUsers.get(i).getUsername(), mExistingUsers.get(i).getFullName());
 
-                            Intent intent = new Intent(getActivity(),UserHubActivity.class);
+                            Intent intent = new Intent(getActivity(),MenuActivity.class);
                             startActivity(intent);
                         }
 //=======
@@ -157,7 +158,7 @@ public class LoginFragment extends Fragment {
         super.onStart();
         if(session.isLoggedIn()) {
             Log.d(TAG, "onStart() called, isLoggedIn is true");
-            Intent i = new Intent(getActivity(),UserHubActivity.class);
+            Intent i = new Intent(getActivity(),LoginActivity.class);
             startActivity(i);
         }
         Log.d(TAG, "onStart() called");
