@@ -14,6 +14,22 @@
                 android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/baro_reading_label"
+                android:textColor="@color/textLabelColor"
+                />
+
+            <EditText
+                android:id="@+id/baro_reading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                />
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/inspector_title"
                 android:textColor="@color/textLabelColor"
                 />

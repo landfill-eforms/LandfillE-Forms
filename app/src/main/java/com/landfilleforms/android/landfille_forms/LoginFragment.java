@@ -48,7 +48,7 @@ public class LoginFragment extends Fragment {
 
         session = new SessionManager(getActivity().getApplicationContext());
         if(session.isLoggedIn()) {
-            Intent i = new Intent(getActivity(),UserHubActivity.class);
+            Intent i = new Intent(getActivity(),MenuActivity.class);
             startActivity(i);
         }
         mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();

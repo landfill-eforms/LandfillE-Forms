@@ -44,6 +44,7 @@ public class InstantaneousDataFragment extends Fragment {
     private TextView mInspectorLabel;
     private EditText mGridIdField;
     private EditText mMethaneLevelField;
+    private EditText mBaroLevelField;
     private Button mStartDateButton;
     private Button mStartTimeButton;
     private Button mEndTimeButton;
@@ -99,6 +100,26 @@ public class InstantaneousDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_instantaneous_data, container, false);
+
+        mBaroLevelField = (EditText)v.findViewById(R.id.baro_reading);
+        mBaroLevelField.setText(Double.toString(mInstantaneousData.getBarometricPressure()));
+        mBaroLevelField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s=="" || count == 0) mInstantaneousData.setBarometricPressure(0);
+                else mInstantaneousData.setBarometricPressure(Double.parseDouble(s.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mInstantaneousData.getInspectorName());
