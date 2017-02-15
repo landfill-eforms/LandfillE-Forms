@@ -50,6 +50,24 @@ public class TestsActivity extends AppCompatActivity {
     }
 
     //Event handler for Integrated button on Tests Activity
+    public void onISETestClick(View view) {
+        Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
+        //Create Intent to grab IntegratedFormActivity
+        //Intent getIntegratedFormActivity = new Intent(this, IntegratedFormActivity.class);
+
+        //Call Probe activity to open
+        //startActivity(getIntegratedFormActivity);
+    }
+
+    public void onIMETestClick(View view) {
+        Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
+        //Create Intent to grab IntegratedFormActivity
+        //Intent getIntegratedFormActivity = new Intent(this, IntegratedFormActivity.class);
+
+        //Call Probe activity to open
+        //startActivity(getIntegratedFormActivity);
+    }
+
     public void onIntegratedTestClick(View view) {
         Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
         //Create Intent to grab IntegratedFormActivity
@@ -58,6 +76,8 @@ public class TestsActivity extends AppCompatActivity {
         //Call Probe activity to open
         //startActivity(getIntegratedFormActivity);
     }
+
+
 
 
 }
