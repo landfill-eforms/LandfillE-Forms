@@ -7,10 +7,10 @@ import android.util.Log;
  * Created by Work on 2/3/2017.
  */
 
-public class UserHubActivity extends SingleFragmentActivity{
+public class UserHubActivity {
 
-    @Override
-    protected Fragment createFragment() {
-        return new UserHubFragment();
-    }
+//    @Override
+//    protected Fragment createFragment() {
+//        return new UserHubFragment();
+//    }
 }

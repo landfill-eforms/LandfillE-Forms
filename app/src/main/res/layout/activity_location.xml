@@ -7,9 +7,7 @@
               android:padding="16dp"
               android:clickable="true"
               android:textAlignment="center"
-              android:visibility="visible"
-
-              android:background="@color/backgroundTheme">
+              android:visibility="visible">
 
 
     <!--Bishops, Gaffey, Lopez, Sheldon, Toyon-->
