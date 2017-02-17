@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -48,7 +49,7 @@ public class LoginFragment extends Fragment {
 
         session = new SessionManager(getActivity().getApplicationContext());
         if(session.isLoggedIn()) {
-            Intent i = new Intent(getActivity(),UserHubActivity.class);
+            Intent i = new Intent(getActivity(),MenuActivity.class);
             startActivity(i);
         }
         mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
@@ -105,29 +106,20 @@ public class LoginFragment extends Fragment {
                 //Link to other activity.
                 if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().trim().length() > 0) {
                     //In the future, make this query the user table and find a username/pw match.
-<<<<<<< HEAD
                     for(int i = 0; i < mExistingUsers.size(); i++) {
                         Log.d("UserName", mExistingUsers.get(i).getUsername());
                         if(mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && mUser.getPassword().equals(mExistingUsers.get(i).getPassword())) {
                             session.createLoginSession(mExistingUsers.get(i).getUsername(), mExistingUsers.get(i).getFullName());
-
-                            Intent intent = new Intent(getActivity(),UserHubActivity.class);
+                            Intent intent = new Intent(getActivity(),MenuActivity.class);
                             startActivity(intent);
                         }
-=======
-                    if(mUser.getUsername().equals("aquach") && mUser.getPassword().equals("asd")){
-                        //Create session and move on to next activity
-                        mUser.setFullName("Alvin Quach");//Delete this later
-                        session.createLoginSession(mUser.getUsername(), mUser.getFullName());
 
-                        //Intent i = new Intent(getActivity(),UserHubActivity.class);
-                        Intent i = new Intent(getActivity(),MenuActivity.class);
-                        startActivity(i);
-                    } else {
-                        Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
->>>>>>> 4d8387fd21859511a75141235a15aaed4af59665
+
+
+
                     }
-                    Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
+
+                    //Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
 //                    if(mUser.getUsername().equals("aquach") && mUser.getPassword().equals("asd")){
 //                        //Create session and move on to next activity
 //                        mUser.setFullName("Alvin Quach");//Delete this later
@@ -140,7 +132,11 @@ public class LoginFragment extends Fragment {
 //                    }
 //                } else {
 //                    Toast.makeText(getActivity(), R.string.blank_login_toast, Toast.LENGTH_SHORT).show();
+                } else if (mUser.getUsername().trim().length() == 0 || mUser.getPassword().trim().length() == 0) {
+                    Toast.makeText(getActivity(), R.string.blank_login_toast, Toast.LENGTH_SHORT).show();
                 }
+
+
 //                if(mUser.getUsername() != null) Log.d(TAG, "Username:" + mUser.getUsername());
 //                if(mUser.getPassword() != null) Log.d(TAG, "Password:" + mUser.getPassword());
 //                Intent i = new Intent(getActivity(),InstantaneousFormActivity.class);
@@ -157,7 +153,7 @@ public class LoginFragment extends Fragment {
         super.onStart();
         if(session.isLoggedIn()) {
             Log.d(TAG, "onStart() called, isLoggedIn is true");
-            Intent i = new Intent(getActivity(),UserHubActivity.class);
+            Intent i = new Intent(getActivity(),LoginActivity.class);
             startActivity(i);
         }
         Log.d(TAG, "onStart() called");

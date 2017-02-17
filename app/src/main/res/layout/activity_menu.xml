@@ -14,15 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
-        android:text="SUP"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:width="48px"
-        android:height="48px"
-        android:id="@+id/button"
-        android:background="@color/backgroundTheme" />
-
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

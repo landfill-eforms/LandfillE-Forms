@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
+import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +25,8 @@ import java.io.OutputStreamWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+
 
 /**
  * Created by owchr on 2/10/2017.
@@ -52,6 +56,7 @@ public class ExportFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_export, container, false);
+        getActivity().setTitle("Export");
         mExport = (Button) view.findViewById(R.id.menu_export_button);
         mExport.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

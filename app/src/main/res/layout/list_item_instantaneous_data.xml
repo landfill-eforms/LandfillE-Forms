@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_weight=".25"
         />
+
     <Button
         android:id="@+id/list_item_instantaneous_edit_button"
         android:layout_width="0dp"

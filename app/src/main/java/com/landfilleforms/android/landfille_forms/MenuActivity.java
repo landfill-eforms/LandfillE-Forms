@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.landfilleforms.android.landfille_forms.Warmspot.WarmspotFormFragment;
+import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.util.HashMap;
 
@@ -43,17 +47,6 @@ public class MenuActivity extends AppCompatActivity
         mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
 
 
-
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -63,6 +56,8 @@ public class MenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        android.app.FragmentManager fm = getFragmentManager();
+        fm.beginTransaction().replace(R.id.context_frame,new WelcomeFragment()).commit();
 
 
     }
@@ -84,7 +79,7 @@ public class MenuActivity extends AppCompatActivity
         return true;
     }
 
-   /* @Override
+   /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -105,22 +100,21 @@ public class MenuActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        //TODO: convert to switch statements
         int id = item.getItemId();
         android.app.FragmentManager fm = getFragmentManager();
-
         if (id == R.id.nav_home) {
-           // myContext.getFragmentManager().beginTransaction(R.id.context_frame,new InstantaneousFormFragment()).commit();
-
-
+            fm.beginTransaction().replace(R.id.context_frame,new WelcomeFragment()).commit();
         } else if (id == R.id.nav_forms) {
             Intent i = new Intent(this,LocationActivity.class);
             startActivity(i);
 
         }else if (id == R.id.nav_export) {
+            //android.app.FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.context_frame,new ExportFragment()).commit();
 
         } else if (id == R.id.nav_sync) {
-           // fm.beginTransaction().replace(R.id.context_frame,new InstantaneousDataFragment()).commit()
+
         }
         else if (id == R.id.nav_settings) {
 
@@ -128,6 +122,8 @@ public class MenuActivity extends AppCompatActivity
         else if (id == R.id.nav_logout) {
             session.logoutUser();
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

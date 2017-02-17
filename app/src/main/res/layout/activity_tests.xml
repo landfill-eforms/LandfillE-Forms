@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:elevation="23dp"
-    android:background="@color/backgroundTheme">
+    android:background="@color/lighterBackgroundTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="21dp"
                     android:id="@+id/instantaneous_label"
-                    tools:text="Instantaneous"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
                     android:textColor="@color/textLabelColor" />
@@ -44,7 +43,7 @@
                     android:width="48px"
                     android:height="48px"
                     android:id="@+id/instantaneous_button"
-                    android:background="@drawable/methane_icon"
+                    android:background="@drawable/instantaneous_instrument"
                     android:drawable="@android:color/transparent"
                     android:onClick="onInstantaneousTestClick"
                     android:layout_marginLeft="40dp"
@@ -78,7 +77,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="21dp"
                     android:id="@+id/ime_label"
-                    tools:text="IME"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
                     android:textColor="@color/textLabelColor" />
@@ -89,14 +87,15 @@
                     android:id="@+id/ime_button"
                     android:width="48dp"
                     android:height="48dp"
-                    android:background="@drawable/ime_icon"
-                    tools:textStyle="bold"
+                    android:background="@drawable/ime_icon_1"
+                    android:textStyle="bold"
                     android:textColor="@android:color/background_light"
-                    android:onClick="onIMETestClick"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_above="@+id/ime_label"
                     android:layout_centerHorizontal="true" />
+
+                <!--android:onClick="onIMETestClick"-->
 
             </RelativeLayout>
 
@@ -129,7 +128,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="21dp"
                 android:id="@+id/probe_label"
-                tools:text="Probe"
                 android:textStyle="normal|bold"
                 android:textSize="18sp"
                 android:textColor="@color/textLabelColor" />
@@ -143,11 +141,12 @@
                 android:textColor="@android:color/background_light"
                 android:background="@drawable/probe_icon"
                 android:textStyle="normal|bold"
-                android:onClick="onProbeTestClick"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
+
+            <!--android:onClick="onProbeTestClick"-->
 
 
         </RelativeLayout>
@@ -181,7 +180,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="21dp"
                     android:id="@+id/integrated_label"
-                    tools:text="Integrated"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
                     android:textColor="@color/textLabelColor" />
@@ -195,12 +193,14 @@
                     android:background="@drawable/methane_icon"
                     android:width="48dp"
                     android:height="48dp"
-                    android:onClick="onIntegratedTestClick"
+
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp" />
 
+                <!--android:onClick="onIntegratedTestClick"-->
 
             </RelativeLayout>
 
@@ -227,7 +227,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="21dp"
                     android:id="@+id/ise_label"
-                    tools:text="ISE"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
                     android:textColor="@color/textLabelColor" />
@@ -239,12 +238,15 @@
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:textColor="@android:color/background_light"
-                    android:background="@drawable/ime_icon"
+                    android:background="@drawable/ime_icon_1"
                     android:onClick="onISETestClick"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp" />
+
+                <!--android:onClick="onISETestClick"-->
 
             </RelativeLayout>
 
