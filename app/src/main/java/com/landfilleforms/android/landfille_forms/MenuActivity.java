@@ -79,7 +79,7 @@ public class MenuActivity extends AppCompatActivity
         return true;
     }
 
-   /* @Override
+   /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -122,6 +122,8 @@ public class MenuActivity extends AppCompatActivity
         else if (id == R.id.nav_logout) {
             session.logoutUser();
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

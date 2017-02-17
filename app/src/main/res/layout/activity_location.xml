@@ -78,7 +78,6 @@
                 android:layout_height="match_parent">
 
                 <!--Represents the Gaffey button on the Locations Activity-->
-
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="100dp"

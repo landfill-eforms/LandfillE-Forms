@@ -27,21 +27,59 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--&lt;!&ndash;Represents the Sheldon button on the Locations Activity&ndash;&gt;-->
+
+            <!--<TextView-->
+                <!--android:text="ISE"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginBottom="21dp"-->
+                <!--android:id="@+id/ise_label"-->
+                <!--android:textStyle="normal|bold"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textColor="@color/textLabelColor" />-->
+
+            <!--<Button-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:id="@+id/ise_button"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textColor="@android:color/background_light"-->
+                <!--android:background="@drawable/ime_icon"-->
+
+                <!--android:layout_marginLeft="40dp"-->
+                <!--android:layout_marginRight="40dp"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="11dp" />-->
+
+            <!--&lt;!&ndash;android:onClick="onISETestClick"&ndash;&gt;-->
+
+        <!--</RelativeLayout>-->
+
         <!--Represents the Locations Button on the Home Activity-->
         <Button
             android:text="@string/home_location_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/location_button"
             android:layout_weight="1"
             android:layout_margin="40dp"
+
             android:background="@drawable/locations_icon"/>
 
         <!--Represents the Notications Button on the Home Activity-->
         <Button
             android:text="@string/home_notication_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/notification_button"
             android:layout_weight="1"
             android:layout_margin="40dp"

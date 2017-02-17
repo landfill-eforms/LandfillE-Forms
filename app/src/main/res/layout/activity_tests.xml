@@ -90,11 +90,12 @@
                     android:background="@drawable/ime_icon_1"
                     android:textStyle="bold"
                     android:textColor="@android:color/background_light"
-                    android:onClick="onIMETestClick"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_above="@+id/ime_label"
                     android:layout_centerHorizontal="true" />
+
+                <!--android:onClick="onIMETestClick"-->
 
             </RelativeLayout>
 
@@ -140,11 +141,12 @@
                 android:textColor="@android:color/background_light"
                 android:background="@drawable/probe_icon"
                 android:textStyle="normal|bold"
-                android:onClick="onProbeTestClick"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
+
+            <!--android:onClick="onProbeTestClick"-->
 
 
         </RelativeLayout>
@@ -191,12 +193,14 @@
                     android:background="@drawable/methane_icon"
                     android:width="48dp"
                     android:height="48dp"
-                    android:onClick="onIntegratedTestClick"
+
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp" />
 
+                <!--android:onClick="onIntegratedTestClick"-->
 
             </RelativeLayout>
 
@@ -239,7 +243,10 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp" />
+
+                <!--android:onClick="onISETestClick"-->
 
             </RelativeLayout>
 
