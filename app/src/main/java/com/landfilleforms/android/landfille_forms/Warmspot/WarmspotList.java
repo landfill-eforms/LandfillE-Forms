@@ -31,15 +31,15 @@ public class WarmspotList {
         return mWarmspotDatas;
     }
 
-    public WarmspotData getDataForWarmspots(UUID id) {
-        for (WarmspotData w: mWarmspotDatas) {
-            if (w.getId().equals(id)) {
-                return w;
-            }
-            return null;
-        }
-        //return mWarmspotDatas;
-    }
+//    public WarmspotData getDataForWarmspots(UUID id) {
+//        for (WarmspotData w: mWarmspotDatas) {
+//            if (w.getId().equals(id)) {
+//                return w;
+//            }
+//            return null;
+//        }
+//        //return mWarmspotDatas;
+//    }
 
 
 }

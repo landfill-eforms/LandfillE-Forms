@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.landfilleforms.android.landfille_forms.Warmspot.WarmspotFormFragment;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.util.HashMap;

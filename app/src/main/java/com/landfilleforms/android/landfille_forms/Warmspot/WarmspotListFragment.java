@@ -2,6 +2,7 @@ package com.landfilleforms.android.landfille_forms.Warmspot;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.support.v7.widget.LinearLayoutManager;
@@ -80,7 +81,10 @@ public class WarmspotListFragment extends Fragment {
             mWarmspotData = warmspotData;
             mGridIdView.setText(mWarmspotData.getGridId());
             mMethaneReadingView.setText(Double.toString(mWarmspotData.getMethaneReading()));
-            mDateView.setText(new SimpleDateFormat("MM/dd").format(mWarmspotData.getDate()));
+            mDateView.setText(new SimpleDateFormat("MM/dd").format(mWarmspotData.getDate()));//not sure if the format is correct
+            mGridIdView.setTextColor(Color.rgb(255,165,0));
+            mMethaneReadingView.setTextColor(Color.rgb(255,165,0));
+            mDateView.setTextColor(Color.rgb(255,165,0));
             //mDateView.setText(DateFormat.format("M/d",mWarmspotData.getDate()));
         }
 
@@ -94,6 +98,7 @@ public class WarmspotListFragment extends Fragment {
 
         public WarmspotAdapter(List<WarmspotData> warmspotDataEntries) {
             this.mWarmspotDataEntries = warmspotDataEntries;
+
         }
 
 
