@@ -41,8 +41,6 @@ public class LoginFragment extends Fragment {
     private EditText mPasswordField;
     private Button mLoginButton;
 
-    private boolean loginSuccessful;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,12 +106,10 @@ public class LoginFragment extends Fragment {
                 //Link to other activity.
                 if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().trim().length() > 0) {
                     //In the future, make this query the user table and find a username/pw match.
-                    loginSuccessful = false;
                     for(int i = 0; i < mExistingUsers.size(); i++) {
                         Log.d("UserName", mExistingUsers.get(i).getUsername());
                         if(mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && mUser.getPassword().equals(mExistingUsers.get(i).getPassword())) {
                             session.createLoginSession(mExistingUsers.get(i).getUsername(), mExistingUsers.get(i).getFullName());
-                            loginSuccessful = true;
                             Intent intent = new Intent(getActivity(),MenuActivity.class);
                             startActivity(intent);
                         }
@@ -136,10 +132,7 @@ public class LoginFragment extends Fragment {
 //                    }
 //                } else {
 //                    Toast.makeText(getActivity(), R.string.blank_login_toast, Toast.LENGTH_SHORT).show();
-                }else if (!loginSuccessful) {
-                    Toast.makeText(getActivity(), R.string.incorrect_login_toast, Toast.LENGTH_SHORT).show();
-                }
-                else if (mUser.getUsername().trim().length() == 0 || mUser.getPassword().trim().length() == 0) {
+                } else if (mUser.getUsername().trim().length() == 0 || mUser.getPassword().trim().length() == 0) {
                     Toast.makeText(getActivity(), R.string.blank_login_toast, Toast.LENGTH_SHORT).show();
                 }
 

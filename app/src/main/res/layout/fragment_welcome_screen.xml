@@ -23,10 +23,4 @@
         android:textSize="24sp"
         android:gravity="center_vertical|center" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="210dp"
-        app:srcCompat="@drawable/la_city_seal"
-        android:id="@+id/imageView4" />
-
 </LinearLayout>

@@ -104,7 +104,7 @@ public class MenuActivity extends AppCompatActivity
         int id = item.getItemId();
         android.app.FragmentManager fm = getFragmentManager();
         if (id == R.id.nav_home) {
-            //fm.beginTransaction().replace(R.id.context_frame,new UserHubFragment()).commit();
+            fm.beginTransaction().replace(R.id.context_frame,new WelcomeFragment()).commit();
         } else if (id == R.id.nav_forms) {
             Intent i = new Intent(this,LocationActivity.class);
             startActivity(i);
