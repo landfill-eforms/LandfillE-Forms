@@ -108,13 +108,11 @@ public class MenuActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        //TODO: convert to switch statements
         int id = item.getItemId();
         android.app.FragmentManager fm = getFragmentManager();
         if (id == R.id.nav_home) {
-           // myContext.getFragmentManager().beginTransaction(R.id.context_frame,new InstantaneousFormFragment()).commit();
-            //myContext.getFragmentManager().beginTransaction(R.id.context_frame,new UserHubFragment()).commit();
-
-            fm.beginTransaction().replace(R.id.context_frame,new UserHubFragment()).commit();
+            //fm.beginTransaction().replace(R.id.context_frame,new UserHubFragment()).commit();
         } else if (id == R.id.nav_forms) {
             Intent i = new Intent(this,LocationActivity.class);
             startActivity(i);
@@ -124,7 +122,7 @@ public class MenuActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.context_frame,new ExportFragment()).commit();
 
         } else if (id == R.id.nav_sync) {
-           // fm.beginTransaction().replace(R.id.context_frame,new InstantaneousDataFragment()).commit()
+
         }
         else if (id == R.id.nav_settings) {
 

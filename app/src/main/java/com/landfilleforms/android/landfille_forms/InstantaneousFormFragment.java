@@ -182,7 +182,6 @@ public class InstantaneousFormFragment extends Fragment {
         public InstantaneousDataHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
-
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_gridid_view);
             mMethaneReadingView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_methane_level_view);
             mStartDateView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_start_date_view);
@@ -215,7 +214,7 @@ public class InstantaneousFormFragment extends Fragment {
         }
     }
 
-
+    //list_item_instantaneous_data.xml
     private class InstantaneousDataAdapter extends RecyclerView.Adapter<InstantaneousDataHolder> {
 
         private List<InstantaneousData> mInstantaneousDatas;
