@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.InstantaneousDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.UsersTable;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ImeDataTable;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.WarmSpotDataTable;
 
 /**
  * Created by Work on 10/30/2016.
@@ -30,8 +32,6 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 UsersTable.Cols.FULLNAME + ")"
         );
 
-        Log.d("Create:", "Instantaneous Table");
-
         db.execSQL("create table " + InstantaneousDataTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
                 InstantaneousDataTable.Cols.UUID + ", " +
@@ -46,7 +46,31 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 InstantaneousDataTable.Cols.MAX_METHANE_READING + ", " +
                 InstantaneousDataTable.Cols.IME_NUMBER + ")"
         );
-        Log.d("AfterCreate:", "Instantaneous Table");
+
+        db.execSQL("create table " + ImeDataTable.NAME + "(" +
+                "_id integer primary key autoincrement, " +
+                ImeDataTable.Cols.UUID + "," +
+                ImeDataTable.Cols.LOCATION + "," +
+                ImeDataTable.Cols.GRID_ID + "," +
+                ImeDataTable.Cols.DATE + "," +
+                ImeDataTable.Cols.DESCRIPTION + "," +
+                ImeDataTable.Cols.INSPECTOR_NAME + "," +
+                ImeDataTable.Cols.INSPECTOR_USERNAME + "," +
+                ImeDataTable.Cols.MAX_METHANE_READING + ")"
+        );
+
+        db.execSQL("create table " + WarmSpotDataTable.NAME + "(" +
+                WarmSpotDataTable.Cols.UUID + "," +
+                WarmSpotDataTable.Cols.LOCATION + "," +
+                WarmSpotDataTable.Cols.GRID_ID + "," +
+                WarmSpotDataTable.Cols.DATE + "," +
+                WarmSpotDataTable.Cols.DESCRIPTION + "," +
+                WarmSpotDataTable.Cols.ESTIMATED_SIZE + "," +
+                WarmSpotDataTable.Cols.INSPECTOR_NAME + "," +
+                WarmSpotDataTable.Cols.INSPECTOR_USERNAME + "," +
+                WarmSpotDataTable.Cols.MAX_METHANE_READING + "," +
+                WarmSpotDataTable.Cols.INSTRUMENT_SERIAL + ")"
+        );
     }
 
     //When we add/remove columns. Change version number.

@@ -15,102 +15,102 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-<<<<<<< HEAD
-=======
+<!--<<<<<<< HEAD-->
+<!--=======-->
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_weight="1">&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:layout_weight="1">-->
 
+    <!--</LinearLayout>-->
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1">-->
+
+        <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;&lt;!&ndash;Represents the Sheldon button on the Locations Activity&ndash;&gt;&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="ISE"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_centerHorizontal="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginBottom="21dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/ise_label"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="normal|bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="18sp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/textLabelColor" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="100dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="100dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/ise_button"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@android:color/background_light"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@drawable/ime_icon"&ndash;&gt;-->
+
+                <!--&lt;!&ndash;android:layout_marginLeft="40dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginRight="40dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_alignParentTop="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_centerHorizontal="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="11dp" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;&lt;!&ndash;android:onClick="onISETestClick"&ndash;&gt;&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;Represents the Locations Button on the Home Activity&ndash;&gt;-->
+        <!--<Button-->
+            <!--android:text="@string/home_location_label"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:id="@+id/location_button"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_margin="40dp"-->
+
+            <!--android:background="@drawable/locations_icon"/>-->
+
+        <!--&lt;!&ndash;Represents the Notications Button on the Home Activity&ndash;&gt;-->
+        <!--<Button-->
+            <!--android:text="@string/home_notication_label"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:id="@+id/notification_button"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_margin="40dp"-->
+            <!--android:background="@drawable/notifications_icon"/>-->
 
     <!--</LinearLayout>-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center">-->
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/logout_button"-->
+            <!--android:text="Logout"/>&lt;!&ndash;remove static string&ndash;&gt;-->
+    <!--</LinearLayout>-->
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-
-            <!--&lt;!&ndash;Represents the Sheldon button on the Locations Activity&ndash;&gt;-->
-
-            <!--<TextView-->
-                <!--android:text="ISE"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_marginBottom="21dp"-->
-                <!--android:id="@+id/ise_label"-->
-                <!--android:textStyle="normal|bold"-->
-                <!--android:textSize="18sp"-->
-                <!--android:textColor="@color/textLabelColor" />-->
-
-            <!--<Button-->
-                <!--android:layout_width="100dp"-->
-                <!--android:layout_height="100dp"-->
-                <!--android:id="@+id/ise_button"-->
-                <!--android:layout_weight="1"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textColor="@android:color/background_light"-->
-                <!--android:background="@drawable/ime_icon"-->
-
-                <!--android:layout_marginLeft="40dp"-->
-                <!--android:layout_marginRight="40dp"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_marginTop="11dp" />-->
-
-            <!--&lt;!&ndash;android:onClick="onISETestClick"&ndash;&gt;-->
-
-        <!--</RelativeLayout>-->
-
-        <!--Represents the Locations Button on the Home Activity-->
-        <Button
-            android:text="@string/home_location_label"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/location_button"
-            android:layout_weight="1"
-            android:layout_margin="40dp"
-
-            android:background="@drawable/locations_icon"/>
-
-        <!--Represents the Notications Button on the Home Activity-->
-        <Button
-            android:text="@string/home_notication_label"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/notification_button"
-            android:layout_weight="1"
-            android:layout_margin="40dp"
-            android:background="@drawable/notifications_icon"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/logout_button"
-            android:text="Logout"/><!--remove static string-->
-    </LinearLayout>
-
->>>>>>> 29bee1440547d0b1bc0b9c676213983240caf769
+<!--&gt;>>>>>> 29bee1440547d0b1bc0b9c676213983240caf769-->
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
