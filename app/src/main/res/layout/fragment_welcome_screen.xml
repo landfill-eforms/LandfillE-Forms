@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        app:srcCompat="@drawable/la_sanitation_logo01"
+        android:id="@+id/imageView3"
+        android:layout_weight="0.17" />
+
+    <TextView
+        android:text="@string/welcome_string"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcome_text"
+        android:layout_weight="0.07"
+        android:textColorLink="@android:color/white"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:gravity="center_vertical|center" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="210dp"
+        app:srcCompat="@drawable/la_city_seal"
+        android:id="@+id/imageView4" />
+
+</LinearLayout>

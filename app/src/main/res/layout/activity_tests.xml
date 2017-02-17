@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:elevation="23dp"
-    android:background="@color/backgroundTheme">
+    android:background="@color/lighterBackgroundTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:width="48px"
                     android:height="48px"
                     android:id="@+id/instantaneous_button"
-                    android:background="@drawable/methane_icon"
+                    android:background="@drawable/instantaneous_instrument"
                     android:drawable="@android:color/transparent"
                     android:onClick="onInstantaneousTestClick"
                     android:layout_marginLeft="40dp"
@@ -87,7 +87,7 @@
                     android:id="@+id/ime_button"
                     android:width="48dp"
                     android:height="48dp"
-                    android:background="@drawable/ime_icon"
+                    android:background="@drawable/ime_icon_1"
                     android:textStyle="bold"
                     android:textColor="@android:color/background_light"
                     android:onClick="onIMETestClick"
@@ -234,7 +234,7 @@
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:textColor="@android:color/background_light"
-                    android:background="@drawable/ime_icon"
+                    android:background="@drawable/ime_icon_1"
                     android:onClick="onISETestClick"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"

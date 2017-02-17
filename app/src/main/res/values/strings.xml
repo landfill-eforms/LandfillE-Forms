@@ -42,6 +42,7 @@
     <string name="instrument_label">Instrument Serial #</string>
 
     <string name="title_activity_menu">MenuActivity</string>
+    <string name="welcome_string">Welcome!</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -50,5 +51,10 @@
     <string name="size_input_label">Size:</string>>
     <string name="action_settings">Settings</string>
     <string name="description">Description:</string>
+    <string name="bishops">Bishops</string>
+    <string name="gaffey">Gaffey</string>
+    <string name="lopez">Lopez</string>
+    <string name="toyon">Toyon</string>
+    <string name="sheldon">Sheldon</string>
 
 </resources>
