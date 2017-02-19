@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              style="?android:listSeparatorTextViewStyle"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingTop="5dp"
+              android:paddingBottom="5dp"
+              android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/list_item_warm_spot_data_gridid_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        />
+
+    <TextView
+        android:id="@+id/list_item_warm_spot_data_methane_level_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        />
+
+    <TextView
+        android:id="@+id/list_item_warm_spot_data_start_date_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        />
+    <Button
+        android:id="@+id/list_item_warm_spot_edit_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        android:text="Edit"/>
+
+</LinearLayout>

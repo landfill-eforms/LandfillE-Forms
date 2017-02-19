@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -109,16 +110,17 @@ public class MenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         android.app.FragmentManager fm = getFragmentManager();
-
         if (id == R.id.nav_home) {
            // myContext.getFragmentManager().beginTransaction(R.id.context_frame,new InstantaneousFormFragment()).commit();
+            //myContext.getFragmentManager().beginTransaction(R.id.context_frame,new UserHubFragment()).commit();
 
-
+            fm.beginTransaction().replace(R.id.context_frame,new UserHubFragment()).commit();
         } else if (id == R.id.nav_forms) {
             Intent i = new Intent(this,LocationActivity.class);
             startActivity(i);
 
         }else if (id == R.id.nav_export) {
+            //android.app.FragmentManager fm = getFragmentManager();
             fm.beginTransaction().replace(R.id.context_frame,new ExportFragment()).commit();
 
         } else if (id == R.id.nav_sync) {

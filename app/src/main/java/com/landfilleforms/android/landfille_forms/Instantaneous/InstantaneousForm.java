@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.instantaneous;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.landfilleforms.android.landfille_forms.database.InstantaneousDataCursorWrapper;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.InstantaneousDataTable;
-import com.landfilleforms.android.landfille_forms.database.TestUtil;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 
 import java.util.ArrayList;

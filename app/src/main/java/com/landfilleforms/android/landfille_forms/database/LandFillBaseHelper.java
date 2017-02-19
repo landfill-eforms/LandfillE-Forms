@@ -50,6 +50,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + ImeDataTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
                 ImeDataTable.Cols.UUID + "," +
+                ImeDataTable.Cols.IME_NUMBER + "," +
                 ImeDataTable.Cols.LOCATION + "," +
                 ImeDataTable.Cols.GRID_ID + "," +
                 ImeDataTable.Cols.DATE + "," +

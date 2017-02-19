@@ -2,7 +2,6 @@ package com.landfilleforms.android.landfille_forms;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousForm;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
 

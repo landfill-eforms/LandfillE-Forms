@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public class ImeData {
     private UUID mId;
+    private String mImeNumber;
     private String mLocation;
     private String mGridId;
     private Date mDate;
@@ -28,6 +29,14 @@ public class ImeData {
 
     public UUID getId() {
         return mId;
+    }
+
+    public String getImeNumber() {
+        return mImeNumber;
+    }
+
+    public void setImeNumber(String imeNumber) {
+        mImeNumber = imeNumber;
     }
 
     public String getLocation() {

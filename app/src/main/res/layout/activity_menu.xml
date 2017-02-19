@@ -5,7 +5,6 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     android:background="@color/lighterBackgroundTheme">
@@ -14,6 +13,7 @@
         layout="@layout/app_bar_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 
 <!--<<<<<<< HEAD-->
 <!--=======-->
@@ -111,6 +111,7 @@
     <!--</LinearLayout>-->
 
 <!--&gt;>>>>>> 29bee1440547d0b1bc0b9c676213983240caf769-->
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

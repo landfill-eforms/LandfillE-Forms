@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.instantaneous;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.landfilleforms.android.landfille_forms.DatePickerFragment;
+import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 
 import java.util.Date;
@@ -29,10 +31,6 @@ import java.util.UUID;
  */
 
 public class InstantaneousDataFragment extends Fragment {
-    private static final String EXTRA_USERNAME = "com.landfilleforms.android.landfille_forms.username";
-
-    public String[] locations = new String[]{"Bishops","Gaffey","Lopez","Sheldon","Toyon"};//Will be replaced
-
     private static final String ARG_INSTANTANEOUS_DATA_ID = "instantaneous_data_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;

@@ -18,7 +18,7 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
         super(cursor);
     }
 
-    public WarmSpotData getInstantaneousData() {
+    public WarmSpotData getWarmSpotData() {
         String uuidString = getString(getColumnIndex(WarmSpotDataTable.Cols.UUID));
         String location = getString(getColumnIndex(WarmSpotDataTable.Cols.LOCATION));
         String gridId = getString(getColumnIndex(WarmSpotDataTable.Cols.GRID_ID));

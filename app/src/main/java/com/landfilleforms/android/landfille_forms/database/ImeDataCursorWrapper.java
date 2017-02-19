@@ -18,6 +18,7 @@ public class ImeDataCursorWrapper extends CursorWrapper{
 
     public ImeData getImeData() {
         String uuidString = getString(getColumnIndex(ImeDataTable.Cols.UUID));
+        String imeNumber = getString(getColumnIndex(ImeDataTable.Cols.IME_NUMBER));
         String location = getString(getColumnIndex(ImeDataTable.Cols.LOCATION));
         String gridId = getString(getColumnIndex(ImeDataTable.Cols.GRID_ID));
         long date = getLong(getColumnIndex(ImeDataTable.Cols.DATE));
@@ -27,6 +28,7 @@ public class ImeDataCursorWrapper extends CursorWrapper{
         double methaneReading = getDouble(getColumnIndex(ImeDataTable.Cols.MAX_METHANE_READING));
 
         ImeData imeData = new ImeData(UUID.fromString(uuidString));
+        imeData.setImeNumber(imeNumber);
         imeData.setLocation(location);
         imeData.setGridId(gridId);
         imeData.setDate(new Date(date));

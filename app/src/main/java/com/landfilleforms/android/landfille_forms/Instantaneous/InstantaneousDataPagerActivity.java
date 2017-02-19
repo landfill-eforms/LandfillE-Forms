@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.instantaneous;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 
 import java.util.List;
@@ -61,17 +62,4 @@ public class InstantaneousDataPagerActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

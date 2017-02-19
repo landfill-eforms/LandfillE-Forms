@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousDataPagerActivity;
+import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousForm;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
@@ -29,7 +31,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class IntegratedFormFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_instantaneous_form, container, false);
 
-        mExportButton = (Button) view.findViewById(R.id.export_instantaneous);
+        //mExportButton = (Button) view.findViewById(R.id.export_instantaneous);
         mExportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Context context = getActivity();
@@ -118,7 +119,7 @@ public class IntegratedFormFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_new_crime:
+            case R.id.menu_item_new_ime:
                 InstantaneousData instantaneousData = new InstantaneousData();
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 instantaneousData.setLandFillLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
