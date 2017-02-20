@@ -56,6 +56,7 @@ public class ExportFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_export, container, false);
+        getActivity().setTitle("Export");
         mExport = (Button) view.findViewById(R.id.menu_export_button);
         mExport.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
