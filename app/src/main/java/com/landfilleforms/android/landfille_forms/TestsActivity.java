@@ -1,11 +1,15 @@
 package com.landfilleforms.android.landfille_forms;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousFormActivity;
+import com.landfilleforms.android.landfille_forms.ime.ImeFormActivity;
+import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotForm;
+import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotFormActivity;
 
 /**
  * Created by aaleman on 2/2/17.
@@ -60,12 +64,12 @@ public class TestsActivity extends AppCompatActivity {
     }
 
     public void onIMETestClick(View view) {
-        Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
-        //Create Intent to grab IntegratedFormActivity
-        //Intent getIntegratedFormActivity = new Intent(this, IntegratedFormActivity.class);
+        //Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
+        Intent getImeFormActivity = new Intent(this, ImeFormActivity.class);
+        getImeFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, this.getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         //Call Probe activity to open
-        //startActivity(getIntegratedFormActivity);
+        startActivity(getImeFormActivity);
     }
 
     public void onIntegratedTestClick(View view) {

@@ -9,11 +9,11 @@ import java.util.UUID;
 
 public class InstantaneousData {
     private UUID mId;
-    private String landFillLocation;//Auto-generated
-    private double barometricPressure;
+    private String mLocation;//Auto-generated
+    private double mBarometricPressure;
     private String gridId;
-    private String inspectorName;//Should make this a user object, auto-generated
-    private String inspectorUserName;
+    private String mInspectorName;//Should make this a user object, auto-generated
+    private String mInspectorUserName;
     private Date mStartDate;
     private Date mEndDate;//This is going to be the same date as the start date but we need this to set the end time
     private String instrumentSerialNumber;
@@ -36,16 +36,16 @@ public class InstantaneousData {
         return mId;
     }
 
-    public String getLandFillLocation() { return landFillLocation; }
+    public String getLandFillLocation() { return mLocation; }
 
-    public void setLandFillLocation(String landFillLocation) { this.landFillLocation = landFillLocation; }
+    public void setLandFillLocation(String landFillLocation) { this.mLocation = landFillLocation; }
 
     public double getBarometricPressure() {
-        return barometricPressure;
+        return mBarometricPressure;
     }
 
     public void setBarometricPressure(double barometricPressure) {
-        this.barometricPressure = barometricPressure;
+        this.mBarometricPressure = barometricPressure;
     }
 
     public String getGridId() {
@@ -56,16 +56,16 @@ public class InstantaneousData {
         this.gridId = gridId;
     }
 
-    public String getInspectorName() { return inspectorName; }
+    public String getInspectorName() { return mInspectorName; }
 
-    public void setInspectorName(String inspectorName) { this.inspectorName = inspectorName; }
+    public void setInspectorName(String inspectorName) { this.mInspectorName = inspectorName; }
 
     public String getInspectorUserName() {
-        return inspectorUserName;
+        return mInspectorUserName;
     }
 
     public void setInspectorUserName(String inspectorUserName) {
-        this.inspectorUserName = inspectorUserName;
+        this.mInspectorUserName = inspectorUserName;
     }
 
     public Date getStartDate() {

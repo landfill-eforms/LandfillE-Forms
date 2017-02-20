@@ -18,20 +18,20 @@ import java.util.UUID;
  * Created by Work on 11/1/2016.
  */
 
-public class UserLab {
-    public static UserLab sUserLab;
+public class UserAccess {
+    public static UserAccess sUserAccess;
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    public static UserLab get(Context context) {
-        if (sUserLab == null) {
-            sUserLab = new UserLab(context);
+    public static UserAccess get(Context context) {
+        if (sUserAccess == null) {
+            sUserAccess = new UserAccess(context);
         }
-        return sUserLab;
+        return sUserAccess;
     }
 
-    private UserLab(Context context) {
+    private UserAccess(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }

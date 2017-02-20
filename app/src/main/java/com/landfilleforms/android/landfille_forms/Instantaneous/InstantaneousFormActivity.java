@@ -1,12 +1,8 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.instantaneous;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
-import java.util.UUID;
+import com.landfilleforms.android.landfille_forms.SingleFragmentActivity;
 
 /**
  * Created by Work on 11/3/2016.

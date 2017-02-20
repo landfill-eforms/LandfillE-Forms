@@ -93,9 +93,10 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_above="@+id/ime_label"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:onClick="onIMETestClick"/>
 
-                <!--android:onClick="onIMETestClick"-->
+
 
             </RelativeLayout>
 

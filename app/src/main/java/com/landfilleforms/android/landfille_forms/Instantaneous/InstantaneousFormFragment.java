@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.instantaneous;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
@@ -70,7 +72,7 @@ public class InstantaneousFormFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_instantaneous_form, container, false);
 
-        mExportButton = (Button) view.findViewById(R.id.export_instantaneous);
+        /*mExportButton = (Button) view.findViewById(R.id.export_instantaneous);
         mExportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Context context = getActivity();
@@ -110,7 +112,7 @@ public class InstantaneousFormFragment extends Fragment {
                 }
 
             }
-        });
+        });*/
 
         mInstantaneousDataRecyclerView = (RecyclerView) view.findViewById(R.id.instantaneous_data_recycler_view);
         mInstantaneousDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -136,7 +138,7 @@ public class InstantaneousFormFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_new_crime:
+            case R.id.menu_item_new_instantaneous:
                 InstantaneousData instantaneousData = new InstantaneousData();
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 instantaneousData.setLandFillLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
