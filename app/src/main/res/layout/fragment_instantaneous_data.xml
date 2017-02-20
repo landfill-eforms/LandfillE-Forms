@@ -11,7 +11,7 @@
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
-                android:background="@color/colorPrimary"
+                android:background="@color/backgroundTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/baro_reading_label"
@@ -36,20 +36,21 @@
 
             <TextView
                 android:id="@+id/inspector_name"
+                android:background="@color/backgroundTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
-                android:background="@color/colorPrimary"
+                android:background="@color/backgroundTheme"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/location_label"
                 android:textColor="@color/textLabelColor"
                 />
 
             <TextView
+                android:background="@color/backgroundTheme"
                 android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
-                android:background="@color/colorPrimary"
+                android:background="@color/backgroundTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/grid_id_label"
@@ -73,7 +74,7 @@
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
-                android:background="@color/colorPrimary"
+                android:background="@color/backgroundTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/methane_reading_label"
@@ -90,7 +91,7 @@
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
-                android:background="@color/colorPrimary"
+                android:background="@color/backgroundTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/time_reading_label"
@@ -115,7 +116,7 @@
                     android:orientation="vertical">
                     <TextView
                         style="?android:listSeparatorTextViewStyle"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/backgroundTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/start_time_label"
@@ -134,7 +135,7 @@
                     android:orientation="vertical">
                     <TextView
                         style="?android:listSeparatorTextViewStyle"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/backgroundTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/end_time_label"
@@ -151,7 +152,7 @@
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
-                android:background="@color/colorPrimary"
+                android:background="@color/backgroundTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/instrument_label"
@@ -167,7 +168,7 @@
 
             <TextView
                 style="?android:listSeparatorTextViewStyle"
-                android:background="@color/colorPrimary"
+                android:background="@color/backgroundTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ime_label"

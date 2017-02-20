@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:padding="16dp"
-              android:clickable="true"
-              android:textAlignment="center"
-              android:visibility="visible">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:clickable="true"
+    android:textAlignment="center"
+    android:visibility="visible"
+    android:background="@color/lighterBackgroundTheme">
 
 
     <!--Bishops, Gaffey, Lopez, Sheldon, Toyon-->
@@ -30,19 +31,6 @@
 
                 <!--Represents the Bishops button on the Locations Activity-->
 
-                <TextView
-                    android:text="Bishops"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="21dp"
-                    android:id="@+id/bishops_label"
-                    tools:text="Bishops"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/textLabelColor" />
-
                 <Button
                     android:textColor="@android:color/background_light"
                     android:textStyle="bold"
@@ -58,6 +46,19 @@
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:text="@string/bishops"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bishops_label"
+                    tools:text="Bishops"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/textLabelColor"
+                    android:layout_below="@+id/bishops_button"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp" />
 
 
             </RelativeLayout>
@@ -77,20 +78,6 @@
                 android:layout_height="match_parent">
 
                 <!--Represents the Gaffey button on the Locations Activity-->
-
-                <TextView
-                    android:text="Gaffey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="21dp"
-                    android:id="@+id/gaffey_label"
-                    tools:text="Gaffey"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/textLabelColor" />
-
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -105,6 +92,19 @@
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:text="@string/gaffey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gaffey_label"
+                    tools:text="Gaffey"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/textLabelColor"
+                    android:layout_below="@+id/gaffey_button"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp" />
 
             </RelativeLayout>
 
@@ -129,19 +129,6 @@
 
             <!--Represents the Toyon button on the Locations Activity-->
 
-            <TextView
-                android:text="Toyon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="21dp"
-                android:id="@+id/toyon_label"
-                tools:text="Toyon"
-                android:textStyle="normal|bold"
-                android:textSize="18sp"
-                android:textColor="@color/textLabelColor" />
-
             <Button
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -156,6 +143,19 @@
                 android:layout_marginRight="40dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="@string/toyon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/toyon_label"
+                tools:text="Toyon"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:textColor="@color/textLabelColor"
+                android:layout_below="@+id/_button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="11dp" />
 
 
         </RelativeLayout>
@@ -181,19 +181,6 @@
 
                 <!--Represents the Lopez button on the Locations Activity-->
 
-                <TextView
-                    android:text="Lopez"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="21dp"
-                    android:id="@+id/lopez_label"
-                    tools:text="Lopez"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/textLabelColor" />
-
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -208,6 +195,19 @@
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:text="@string/lopez"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lopez_label"
+                    tools:text="Lopez"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/textLabelColor"
+                    android:layout_below="@+id/lopez_button"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp" />
 
 
             </RelativeLayout>
@@ -227,19 +227,6 @@
 
                 <!--Represents the Sheldon button on the Locations Activity-->
 
-                <TextView
-                    android:text="Sheldon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="21dp"
-                    android:id="@+id/sheldon_label"
-                    tools:text="Sheldon"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/textLabelColor" />
-
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -253,6 +240,19 @@
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:text="@string/sheldon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sheldon_label"
+                    tools:text="Sheldon"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/textLabelColor"
+                    android:layout_below="@+id/sheldon_button"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp" />
 
             </RelativeLayout>
 

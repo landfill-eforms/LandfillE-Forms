@@ -36,6 +36,7 @@ public class LocationActivity extends AppCompatActivity {
     }
 
 
+
     //Event handler for Bishops button on Location Activity
     public void onBishopsLocationClick(View view) {
 

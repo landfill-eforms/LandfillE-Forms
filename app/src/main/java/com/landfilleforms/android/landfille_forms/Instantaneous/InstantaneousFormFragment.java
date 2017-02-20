@@ -2,6 +2,7 @@ package com.landfilleforms.android.landfille_forms.instantaneous;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -50,6 +51,8 @@ public class InstantaneousFormFragment extends Fragment {
     private RecyclerView mInstantaneousDataRecyclerView;
     private InstantaneousDataAdapter mAdapter;
     private Button mExportButton;
+
+    private double currentMethane;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -184,13 +187,11 @@ public class InstantaneousFormFragment extends Fragment {
         public InstantaneousDataHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
-
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_gridid_view);
             mMethaneReadingView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_methane_level_view);
             mStartDateView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_start_date_view);
             //mStartTimeView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_start_time_view);
             //mEndTimeView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_end_time_view);
-
             mEditButton = (Button)itemView.findViewById(R.id.list_item_instantaneous_edit_button);
             mEditButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -206,6 +207,17 @@ public class InstantaneousFormFragment extends Fragment {
             mGridIdView.setText(mInstantaneousData.getGridId());
             mMethaneReadingView.setText(Double.toString(mInstantaneousData.getMethaneReading()));
             mStartDateView.setText(DateFormat.format("M/d/yyyy",mInstantaneousData.getStartDate()));
+            //Set colors depending on ch4 level
+            if (mInstantaneousData.getMethaneReading() >= 500) {
+                mGridIdView.setTextColor(Color.RED);
+                mMethaneReadingView.setTextColor(Color.RED);
+                mStartDateView.setTextColor(Color.RED);
+            }
+            else if (mInstantaneousData.getMethaneReading() >= 200 && mInstantaneousData.getMethaneReading() <=499) {
+                mGridIdView.setTextColor(Color.rgb(255,165,0));
+                mMethaneReadingView.setTextColor(Color.rgb(255,165,0));
+                mStartDateView.setTextColor(Color.rgb(255,165,0));
+            }
             //mStartTimeView.setText(DateFormat.format("HH:mm:ss",mInstantaneousData.getStartDate()));
             //mEndTimeView.setText(DateFormat.format("HH:mm:ss",mInstantaneousData.getEndDate()));
         }
@@ -217,13 +229,15 @@ public class InstantaneousFormFragment extends Fragment {
         }
     }
 
-
+    //list_item_instantaneous_data.xml
     private class InstantaneousDataAdapter extends RecyclerView.Adapter<InstantaneousDataHolder> {
 
         private List<InstantaneousData> mInstantaneousDatas;
+        private InstantaneousData d;
 
         public InstantaneousDataAdapter(List<InstantaneousData> instantaneousDatas) {
             mInstantaneousDatas = instantaneousDatas;
+
         }
 
         @Override
