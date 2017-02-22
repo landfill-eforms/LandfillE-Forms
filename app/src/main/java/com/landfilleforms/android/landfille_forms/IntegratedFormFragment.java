@@ -2,6 +2,7 @@ package com.landfilleforms.android.landfille_forms;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -187,6 +188,11 @@ public class IntegratedFormFragment extends Fragment {
             mStartDateView.setText(DateFormat.format("M/d/yyyy",mInstantaneousData.getStartDate()));
             //mStartTimeView.setText(DateFormat.format("HH:mm:ss",mInstantaneousData.getStartDate()));
             //mEndTimeView.setText(DateFormat.format("HH:mm:ss",mInstantaneousData.getEndDate()));
+
+            //Changed color of text in RecyclerView
+            mGridIdView.setTextColor(Color.WHITE);
+            mMethaneReadingView.setTextColor(Color.WHITE);
+            mStartDateView.setTextColor(Color.WHITE);
         }
 
         @Override

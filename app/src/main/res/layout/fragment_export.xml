@@ -10,7 +10,8 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/menu_export_button"
-        android:background="@color/loginButtonGreen" />
+        android:background="@color/loginButtonGreen"
+        android:textColor="@color/white" />
 
     <TextView
         android:text="Export only when you are finished taking data for the day"

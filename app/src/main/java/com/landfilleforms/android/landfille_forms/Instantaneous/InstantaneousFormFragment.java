@@ -207,7 +207,7 @@ public class InstantaneousFormFragment extends Fragment {
             mGridIdView.setText(mInstantaneousData.getGridId());
             mMethaneReadingView.setText(Double.toString(mInstantaneousData.getMethaneReading()));
             mStartDateView.setText(DateFormat.format("M/d/yyyy",mInstantaneousData.getStartDate()));
-            //Set colors depending on ch4 level
+            //Set colors depending on ch4 level in RecyclerView
             if (mInstantaneousData.getMethaneReading() >= 500) {
                 mGridIdView.setTextColor(Color.RED);
                 mMethaneReadingView.setTextColor(Color.RED);
@@ -217,6 +217,11 @@ public class InstantaneousFormFragment extends Fragment {
                 mGridIdView.setTextColor(Color.rgb(255,165,0));
                 mMethaneReadingView.setTextColor(Color.rgb(255,165,0));
                 mStartDateView.setTextColor(Color.rgb(255,165,0));
+            }
+            else {
+                mGridIdView.setTextColor(Color.WHITE);
+                mMethaneReadingView.setTextColor(Color.WHITE);
+                mStartDateView.setTextColor(Color.WHITE);
             }
             //mStartTimeView.setText(DateFormat.format("HH:mm:ss",mInstantaneousData.getStartDate()));
             //mEndTimeView.setText(DateFormat.format("HH:mm:ss",mInstantaneousData.getEndDate()));

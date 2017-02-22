@@ -55,7 +55,7 @@
                     tools:text="Bishops"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
-                    android:textColor="@color/textLabelColor"
+                    android:textColor="@color/white"
                     android:layout_below="@+id/bishops_button"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="14dp" />
@@ -101,7 +101,7 @@
                     tools:text="Gaffey"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
-                    android:textColor="@color/textLabelColor"
+                    android:textColor="@color/white"
                     android:layout_below="@+id/gaffey_button"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="13dp" />
@@ -152,7 +152,7 @@
                 tools:text="Toyon"
                 android:textStyle="normal|bold"
                 android:textSize="18sp"
-                android:textColor="@color/textLabelColor"
+                android:textColor="@color/white"
                 android:layout_below="@+id/_button"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="11dp" />
@@ -204,7 +204,7 @@
                     tools:text="Lopez"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
-                    android:textColor="@color/textLabelColor"
+                    android:textColor="@color/white"
                     android:layout_below="@+id/lopez_button"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="11dp" />
@@ -249,7 +249,7 @@
                     tools:text="Sheldon"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
-                    android:textColor="@color/textLabelColor"
+                    android:textColor="@color/white"
                     android:layout_below="@+id/sheldon_button"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp" />

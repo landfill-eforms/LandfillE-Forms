@@ -1,6 +1,7 @@
 package com.landfilleforms.android.landfille_forms.ime;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -149,6 +150,11 @@ public class ImeFormFragment extends Fragment {
             mStartDateView.setText(DateFormat.format("M/d/yyyy",mImeData.getDate()));
             //mStartTimeView.setText(DateFormat.format("HH:mm:ss",mImeData.getStartDate()));
             //mEndTimeView.setText(DateFormat.format("HH:mm:ss",mImeData.getEndDate()));
+
+            //Changed RecyclerView text to White
+            mGridIdView.setTextColor(Color.WHITE);
+            mMethaneReadingView.setTextColor(Color.WHITE);
+            mStartDateView.setTextColor(Color.WHITE);
         }
 
         @Override
