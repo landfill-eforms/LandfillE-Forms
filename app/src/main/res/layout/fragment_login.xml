@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textStyle="normal|bold"
-            android:textColor="@color/backgroundTheme" />
+            android:textColor="@color/white" />
 
         <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/user_username_label"
-            android:textColor="@color/backgroundTheme"
+            android:textColor="@color/white"
             android:textStyle="normal|bold" />
         <EditText
             android:id="@+id/user_username"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:textColorLink="?attr/colorControlNormal"
             android:textIsSelectable="false"
-            android:textColor="@android:color/background_dark" />
+            android:textColor="@color/white" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/user_password_label"
-            android:textColor="@color/backgroundTheme"
+            android:textColor="@color/white"
             android:textStyle="normal|bold" />
 
         <EditText
@@ -66,7 +66,7 @@
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorLink="?attr/actionMenuTextColor" />
+            android:textColorLink="@android:color/white" />
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -80,10 +80,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/layout_round_landfill_green_button"
             android:text="@string/user_login_label"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
             android:textStyle="normal|bold"
-            android:textColor="@color/backgroundTheme" />
+            android:textColor="@color/white"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
     </LinearLayout>
