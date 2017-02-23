@@ -8,9 +8,9 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="Home" />
         <item
-            android:id="@+id/nav_forms"
+            android:id="@+id/nav_locations"
             android:icon="@drawable/ic_description_black_24dp"
-            android:title="Forms" />
+            android:title="Locations" />
         <item
             android:id="@+id/nav_export"
             android:icon="@drawable/ic_file_upload_black_24dp"

@@ -58,7 +58,7 @@ public class InstantaneousFormFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
+        //super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) called");
 
         session = new SessionManager(getActivity().getApplicationContext());

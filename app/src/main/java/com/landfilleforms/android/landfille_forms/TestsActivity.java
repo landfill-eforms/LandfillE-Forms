@@ -42,6 +42,14 @@ public class TestsActivity extends AppCompatActivity {
         startActivity(getInstantaneousFormActivity);
     }
 
+
+    public void onWarmspotTestClick(View view) {
+        //create an Intent for Warmspot form
+        Intent getWarmspotFormActivity = new Intent(this, WarmSpotFormActivity.class);
+        //navigates to warmspot list
+        startActivity(getWarmspotFormActivity);
+    }
+
     //Event handler for Probe button on Tests Activity
     public void onProbeTestClick(View view) {
         Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
@@ -68,7 +76,7 @@ public class TestsActivity extends AppCompatActivity {
         Intent getImeFormActivity = new Intent(this, ImeFormActivity.class);
         getImeFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, this.getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
-        //Call Probe activity to open
+        //Start Activity
         startActivity(getImeFormActivity);
     }
 
