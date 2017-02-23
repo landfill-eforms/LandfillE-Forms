@@ -78,6 +78,8 @@
     <string name="equipment_serial_no">Serial No.:</string>
     <string name="methane_data_entry_label">Methane Reading Data Entry</string>
     <string name="warmspot_label">Warmspot</string>
+    <string name="equipment_type_label">Equipment Type:</string>
+    <string name="serial_no_label">Serial No.:</string>
 
     <!-- Array for Equipment Spinner-->
     <string-array name="equipment_array">

@@ -164,25 +164,25 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-        mInstrumentField = (EditText)v.findViewById(R.id.instrument_field);
-        mInstrumentField.setText(mInstantaneousData.getInstrumentSerialNumber());
-        mInstrumentField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mInstantaneousData.setInstrumentSerialNumber("");
-                else mInstantaneousData.setInstrumentSerialNumber(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+//        mInstrumentField = (EditText)v.findViewById(R.id.instrument_field);
+//        mInstrumentField.setText(mInstantaneousData.getInstrumentSerialNumber());
+//        mInstrumentField.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (s=="" || count == 0) mInstantaneousData.setInstrumentSerialNumber("");
+//                else mInstantaneousData.setInstrumentSerialNumber(s.toString());
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
 
         imeField = (EditText)v.findViewById(R.id.ime_field);
         imeField.setText(mInstantaneousData.getImeNumber());
@@ -203,38 +203,38 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-        mStartDateButton = (Button)v.findViewById(R.id.start_date);
-        updateDate();
-        mStartDateButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment.newInstance(mInstantaneousData.getStartDate());
-                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_DATE);
-                dialog.show(manager, DIALOG_DATE);
-            }
-        });
+//        mStartDateButton = (Button)v.findViewById(R.id.start_date);
+//        updateDate();
+//        mStartDateButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                FragmentManager manager = getActivity().getSupportFragmentManager();
+//                DatePickerFragment dialog = DatePickerFragment.newInstance(mInstantaneousData.getStartDate());
+//                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_DATE);
+//                dialog.show(manager, DIALOG_DATE);
+//            }
+//        });
 
-        mStartTimeButton = (Button)v.findViewById(R.id.start_time);
-        updateStartTime();
-        mStartTimeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getStartDate());
-                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_START_TIME);
-                dialog.show(manager, DIALOG_TIME);
-            }
-        });
+//        mStartTimeButton = (Button)v.findViewById(R.id.start_time);
+//        updateStartTime();
+//        mStartTimeButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                FragmentManager manager = getActivity().getSupportFragmentManager();
+//                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getStartDate());
+//                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_START_TIME);
+//                dialog.show(manager, DIALOG_TIME);
+//            }
+//        });
 
-        mEndTimeButton = (Button)v.findViewById(R.id.end_time);
-        updateEndTime();
-        mEndTimeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getEndDate());
-                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_END_TIME);
-                dialog.show(manager, DIALOG_TIME);
-            }
-        });
+//        mEndTimeButton = (Button)v.findViewById(R.id.end_time);
+//        updateEndTime();
+//        mEndTimeButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                FragmentManager manager = getActivity().getSupportFragmentManager();
+//                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getEndDate());
+//                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_END_TIME);
+//                dialog.show(manager, DIALOG_TIME);
+//            }
+//        });
 
         mSubmitButton = (Button)v.findViewById(R.id.submit);
         mSubmitButton.setText(R.string.submit_button_label);

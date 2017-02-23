@@ -4,184 +4,386 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/backgroundTheme">
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="vertical"
-            >
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:background="@color/backgroundTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/baro_reading_label"
-                android:textColor="@color/textLabelColor"
-                />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/baro_reading"
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                />
+                android:layout_height="match_parent"
+                android:layout_weight="2">
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:background="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/inspector_title"
-                android:textColor="@color/textLabelColor"
-                />
+                <TableRow android:paddingTop="3dp">
 
-            <TextView
-                android:id="@+id/inspector_name"
-                android:background="@color/backgroundTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:background="@color/backgroundTheme"
-                android:layout_width="match_parent"
-                android:text="@string/location_label"
-                android:textColor="@color/textLabelColor"
-                />
-
-            <TextView
-                android:background="@color/backgroundTheme"
-                android:id="@+id/location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:background="@color/backgroundTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/grid_id_label"
-                android:textColor="@color/textLabelColor"
-                />
-
-            <EditText
-                android:id="@+id/grid_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberSigned"
-                />
-
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:background="@color/backgroundTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/methane_reading_label"
-                android:textColor="@color/textLabelColor"
-                />
-
-            <EditText
-                android:id="@+id/methane_reading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/methane_reading_hint"
-                android:inputType="numberDecimal"
-                />
-
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:background="@color/backgroundTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/time_reading_label"
-                android:textColor="@color/textLabelColor"
-                />
-
-            <Button
-                android:id="@+id/start_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
                     <TextView
                         style="?android:listSeparatorTextViewStyle"
                         android:background="@color/backgroundTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/start_time_label"
-                        android:textColor="@color/textLabelColor"
+                        android:text="@string/inspector_title"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textStyle="normal|bold"
+                        android:textSize="20dp"
                         />
-                    <Button
-                        android:id="@+id/start_time"
-                        android:layout_width="wrap_content"
+
+                    <TextView
+                        android:id="@+id/inspector_name"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textStyle="normal"
+                        android:textSize="20dp"
+                        />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:text="@string/location_label"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textStyle="normal|bold"
+                        android:textSize="20dp"
+                        />
+
+                    <TextView
+                        android:background="@color/backgroundTheme"
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textStyle="normal"
+                        android:textSize="20dp"
+                        />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:text="@string/current_date"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textStyle="normal|bold"
+                        android:textSize="20dp"
+                        />
+
+                    <!--Should display current date from system-->
+                    <TextView
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:text="2017-01-01"
+                        android:textAllCaps="false"
+                        android:textStyle="normal"
+                        android:textSize="20dp"
+                        />
+
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:text="@string/current_time"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textStyle="normal|bold"
+                        android:textSize="20dp"
+                        />
+
+                    <!--Should display current time from system-->
+                    <TextView
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:text="13:30"
+                        android:textAllCaps="false"
+                        android:textStyle="normal"
+                        android:textSize="20dp"
+                        />
+
+                </TableRow>
+
+                <!--Spinner for Equipment List-->
+
+                <TableRow>
+
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:text="@string/equipment_type_label"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textStyle="normal|bold"
+                        android:textSize="20dp"
+                        />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/equipment_spinner"
+                        android:textSize="20dp"/>
+
+
+                </TableRow>
+
+                <!--Spinner for Serial No List-->
+
+                <TableRow>
+
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:text="@string/serial_no_label"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textStyle="normal|bold"
+                        android:textSize="20dp"
+                        />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/serial_no_spinner"
+                        android:textSize="20dp"/>
+
+                </TableRow>
+
+            </TableLayout>
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         style="?android:listSeparatorTextViewStyle"
                         android:background="@color/backgroundTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/end_time_label"
-                        android:textColor="@color/textLabelColor"
+                        android:text="@string/grid_id_label"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:textAllCaps="false"
                         />
-                    <Button
-                        android:id="@+id/end_time"
-                        android:layout_width="wrap_content"
+
+                    <EditText
+                        android:id="@+id/grid_id"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"/>
-                </LinearLayout>
-            </LinearLayout>
+                        android:inputType="numberSigned"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textSize="20dp"
+                        />
+                </TableRow>
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:background="@color/backgroundTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/instrument_label"
-                android:textColor="@color/textLabelColor"
-                />
+                <TableRow>
 
-            <EditText
-                android:id="@+id/instrument_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                />
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/methane_reading_label"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:textAllCaps="false"
+                        />
 
-            <TextView
-                style="?android:listSeparatorTextViewStyle"
-                android:background="@color/backgroundTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ime_label"
-                android:textColor="@color/textLabelColor"
-                />
+                    <EditText
+                        android:id="@+id/methane_reading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/methane_reading_hint"
+                        android:inputType="numberDecimal"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:textSize="20dp"
+                        />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/baro_reading_label"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textSize="18dp"/>
+
+                    <EditText
+                        android:id="@+id/baro_reading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textSize="20dp"
+                        android:textColor="@android:color/holo_blue_bright"
+                    />
 
 
-            <EditText
-                android:id="@+id/ime_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="?android:listSeparatorTextViewStyle"
+                        android:background="@color/backgroundTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ime_label"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/ime_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textSize="20dp"
+                        android:textColor="@android:color/holo_blue_bright"
+                        />
+
+
+                </TableRow>
+
+
+            </TableLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--<TextView-->
+                <!--style="?android:listSeparatorTextViewStyle"-->
+                <!--android:background="@color/backgroundTheme"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/time_reading_label"-->
+                <!--android:textColor="@color/textLabelColor"-->
+                <!--/>-->
+
+            <!--<Button-->
+                <!--android:id="@+id/start_date"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--/>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:gravity="center_horizontal">-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical">-->
+                    <!--<TextView-->
+                        <!--style="?android:listSeparatorTextViewStyle"-->
+                        <!--android:background="@color/backgroundTheme"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="@string/start_time_label"-->
+                        <!--android:textColor="@color/textLabelColor"-->
+                        <!--/>-->
+                    <!--<Button-->
+                        <!--android:id="@+id/start_time"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="16dp"-->
+                        <!--android:layout_marginRight="16dp"/>-->
+                <!--</LinearLayout>-->
+                <!---->
+                <!---->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical">-->
+                    <!--<TextView-->
+                        <!--style="?android:listSeparatorTextViewStyle"-->
+                        <!--android:background="@color/backgroundTheme"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="@string/end_time_label"-->
+                        <!--android:textColor="@color/textLabelColor"-->
+                        <!--/>-->
+                    <!--<Button-->
+                        <!--android:id="@+id/end_time"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="16dp"-->
+                        <!--android:layout_marginRight="16dp"/>-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+            <!--<TextView-->
+                <!--style="?android:listSeparatorTextViewStyle"-->
+                <!--android:background="@color/backgroundTheme"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/instrument_label"-->
+                <!--android:textColor="@color/textLabelColor"-->
+                <!--/>-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/instrument_field"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:inputType="number"-->
+                <!--/>-->
+
 
 
             <Button
