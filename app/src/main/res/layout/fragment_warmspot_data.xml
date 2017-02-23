@@ -4,106 +4,227 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/backgroundTheme">
-    <LinearLayout android:layout_width="match_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:background="@color/backgroundTheme"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inspector_title"
-            android:textColor="@color/textLabelColor"
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="2">
 
-        <TextView
-            android:id="@+id/warmspot_inspector_name"
-            android:background="@color/backgroundTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:background="@color/backgroundTheme"
-            android:layout_width="match_parent"
-            android:text="@string/location_label"
-            android:textColor="@color/textLabelColor"
-            />
+            <TableRow android:paddingTop="3dp">
 
-        <TextView
-            android:background="@color/backgroundTheme"
-            android:id="@+id/warmspot_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspector_title"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:background="@color/backgroundTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/grid_id_label"
-            android:textColor="@color/textLabelColor"
-            />
+                <TextView
+                    android:id="@+id/warmspot_inspector_name"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
 
-        <TextView
-            android:id="@+id/warmspot_grid_id"
-            android:background="@color/backgroundTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            </TableRow>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:background="@color/backgroundTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/methane_reading_label"
-            android:textColor="@color/textLabelColor"
-            />
+            <TableRow>
 
-        <TextView
-            android:id="@+id/warmspot_methane_reading"
-            android:background="@color/backgroundTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:text="@string/location_label"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:background="@color/backgroundTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/time_picker_title"
-            android:textColor="@color/textLabelColor"
-            />
+                <TextView
+                    android:background="@color/backgroundTheme"
+                    android:id="@+id/warmspot_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
 
-        <Button
-            android:id="@+id/warmspot_time_button"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="200dp"
-            android:layout_gravity="center" />
+            </TableRow>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:background="@color/backgroundTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/size_input_label"
-            android:textColor="@color/textLabelColor"
-            />
+            <TableRow>
 
-        <EditText
-            android:id="@+id/warmspot_size_field"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="e.g. 10 cm, " />
+                <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/backgroundTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/time_picker_title"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                />
+
+                <!--<Button-->
+                <!--android:id="@+id/warmspot_time_button"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_width="200dp"-->
+                <!--android:layout_gravity="center" />-->
+
+                <!--Should display current time from system-->
+                <TextView
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:text="13:30"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
+
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/grid_id_label"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/warmspot_grid_id"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
+
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/methane_reading_label"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/warmspot_methane_reading"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+
+                    />
+
+
+
+            </TableRow>
+
+            <!--<TableRow>-->
+
+                <!--<TextView-->
+                    <!--style="?android:listSeparatorTextViewStyle"-->
+                    <!--android:background="@color/backgroundTheme"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/time_picker_title"-->
+                    <!--android:textColor="@color/textLabelColor"-->
+                    <!--/>-->
+
+                <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/warmspot_time_button"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginLeft="16dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginRight="16dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="200dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_gravity="center" />&ndash;&gt;-->
+
+
+
+            <!--</TableRow>-->
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/size_input_label"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <EditText
+                    android:id="@+id/warmspot_size_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    android:hint="e.g. 10 cm, " />
+
+
+            </TableRow>
+
+        </TableLayout>
+
+
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
@@ -111,7 +232,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/description"
-            android:textColor="@color/textLabelColor"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textAllCaps="false"
             />
 
 
@@ -121,7 +244,7 @@
             android:layout_width="match_parent"
             android:inputType="text"
             android:hint="add a description. "
-            android:layout_height="120dp"
+            android:layout_height="200dp"
             android:gravity="left" />
 
 
