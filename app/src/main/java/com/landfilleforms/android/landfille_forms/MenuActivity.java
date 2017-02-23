@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.model.User;
 
@@ -99,27 +100,36 @@ public class MenuActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        //TODO: convert to switch statements
         int id = item.getItemId();
         android.app.FragmentManager fm = getFragmentManager();
-        if (id == R.id.nav_home) {
-            fm.beginTransaction().replace(R.id.context_frame,new WelcomeFragment()).commit();
-        } else if (id == R.id.nav_forms) {
-            Intent i = new Intent(this,LocationActivity.class);
-            startActivity(i);
+        switch(id) {
+            //case home, navigate back to welcome fragment
+            case R.id.nav_home:
+                fm.beginTransaction().replace(R.id.context_frame,new WelcomeFragment()).commit();
+                break;
+            //case locations, navigate to locations activity
+            case R.id.nav_locations:
+                Intent i = new Intent(this,LocationActivity.class);
+                startActivity(i);
+                break;
+            //case export , navigate to export fragment
+            case R.id.nav_export:
+                fm.beginTransaction().replace(R.id.context_frame,new ExportFragment()).commit();
+                break;
+            //coming soon. Unsure if we are going to take this out or not.
+            case R.id.nav_sync:
+                Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
+                break;
+            //Unsure if we are going to take this out or not.
+            case R.id.nav_settings:
+                Toast.makeText(this, R.string.to_be_determined_toast, Toast.LENGTH_SHORT).show();
+                break;
+            //logs you out of session and navigates back to login activity.
+            case R.id.nav_logout:
+                Toast.makeText(this, R.string.logout_toast, Toast.LENGTH_SHORT).show();
+                session.logoutUser();
+                break;
 
-        }else if (id == R.id.nav_export) {
-            //android.app.FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.context_frame,new ExportFragment()).commit();
-
-        } else if (id == R.id.nav_sync) {
-
-        }
-        else if (id == R.id.nav_settings) {
-
-        }
-        else if (id == R.id.nav_logout) {
-            session.logoutUser();
         }
 
 

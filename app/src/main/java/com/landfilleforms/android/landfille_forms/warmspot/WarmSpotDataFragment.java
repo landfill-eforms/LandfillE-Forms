@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
@@ -193,6 +194,7 @@ public class WarmSpotDataFragment extends Fragment {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 getActivity().finish();
+                Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
             }
         });
 
