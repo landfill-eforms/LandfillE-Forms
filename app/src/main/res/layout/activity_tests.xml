@@ -10,8 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:weightSum="3">
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,43 +18,45 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!--Represents the Bishops button on the Locations Activity-->
+                <!--Represents the Lopez button on the Locations Activity-->
 
                 <TextView
-                    android:text="Instantaneous"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="21dp"
-                    android:id="@+id/instantaneous_label"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/white" />
+                android:text="Instantaneous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="21dp"
+                android:id="@+id/instantaneous_label"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
 
                 <Button
-                    android:textColor="@android:color/background_light"
-                    android:textStyle="bold"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:width="48px"
-                    android:height="48px"
-                    android:id="@+id/instantaneous_button"
-                    android:background="@drawable/instantaneous_instrument"
-                    android:drawable="@android:color/transparent"
-                    android:onClick="onInstantaneousTestClick"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_above="@+id/instantaneous_label"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="13dp" />
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:width="48px"
+                android:height="48px"
+                android:id="@+id/instantaneous_button"
+                android:background="@drawable/instantaneous_instrument"
+                android:drawable="@android:color/transparent"
+                android:onClick="onInstantaneousTestClick"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_above="@+id/instantaneous_label"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="13dp" />
 
 
             </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -69,103 +70,300 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!--Represents the Gaffey button on the Locations Activity-->
+                <!--Represents the Sheldon button on the Locations Activity-->
 
                 <TextView
-                    android:text="@string/warmspot_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="21dp"
-                    android:id="@+id/warmspot_label"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/white" />
+                android:text="@string/warmspot_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="21dp"
+                android:id="@+id/warmspot_label"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
 
                 <Button
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:id="@+id/warmspot_button"
-                    android:width="48dp"
-                    android:height="48dp"
-                    android:background="@drawable/ime_icon_1"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/background_light"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_above="@+id/warmspot_label"
-                    android:layout_centerHorizontal="true"
-                    android:onClick="onWarmspotTestClick"/>
-
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/warmspot_button"
+                android:width="48dp"
+                android:height="48dp"
+                android:background="@drawable/ime_icon_1"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_light"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_above="@+id/warmspot_label"
+                android:layout_centerHorizontal="true"
+                android:onClick="onWarmspotTestClick"/>
 
 
             </RelativeLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <!--Represents the Gaffey button on the Locations Activity-->
-
-                <TextView
-                    android:text="IME"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="21dp"
-                    android:id="@+id/ime_label"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:id="@+id/ime_button"
-                    android:width="48dp"
-                    android:height="48dp"
-                    android:background="@drawable/ime_icon_1"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/background_light"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_above="@+id/ime_label"
-                    android:layout_centerHorizontal="true"
-                    android:onClick="onIMETestClick"/>
-
-
-
-            </RelativeLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:weightSum="3">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--&lt;!&ndash;Represents the Bishops button on the Locations Activity&ndash;&gt;-->
+
+                <!--<TextView-->
+                    <!--android:text="Instantaneous"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginBottom="21dp"-->
+                    <!--android:id="@+id/instantaneous_label"-->
+                    <!--android:textStyle="normal|bold"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:textColor="@color/white" />-->
+
+                <!--<Button-->
+                    <!--android:textColor="@android:color/background_light"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:width="48px"-->
+                    <!--android:height="48px"-->
+                    <!--android:id="@+id/instantaneous_button"-->
+                    <!--android:background="@drawable/instantaneous_instrument"-->
+                    <!--android:drawable="@android:color/transparent"-->
+                    <!--android:onClick="onInstantaneousTestClick"-->
+                    <!--android:layout_marginLeft="40dp"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:layout_above="@+id/instantaneous_label"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginBottom="13dp" />-->
+
+
+            <!--</RelativeLayout>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--&lt;!&ndash;Represents the Gaffey button on the Locations Activity&ndash;&gt;-->
+
+                <!--<TextView-->
+                    <!--android:text="@string/warmspot_label"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginBottom="21dp"-->
+                    <!--android:id="@+id/warmspot_label"-->
+                    <!--android:textStyle="normal|bold"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:textColor="@color/white" />-->
+
+                <!--<Button-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:id="@+id/warmspot_button"-->
+                    <!--android:width="48dp"-->
+                    <!--android:height="48dp"-->
+                    <!--android:background="@drawable/ime_icon_1"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@android:color/background_light"-->
+                    <!--android:layout_marginLeft="40dp"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:layout_above="@+id/warmspot_label"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:onClick="onWarmspotTestClick"/>-->
+
+
+
+            <!--</RelativeLayout>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--&lt;!&ndash;Represents the Gaffey button on the Locations Activity&ndash;&gt;-->
+
+                <!--<TextView-->
+                    <!--android:text="IME"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginBottom="21dp"-->
+                    <!--android:id="@+id/ime_label"-->
+                    <!--android:textStyle="normal|bold"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:textColor="@color/white" />-->
+
+                <!--<Button-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:id="@+id/ime_button"-->
+                    <!--android:width="48dp"-->
+                    <!--android:height="48dp"-->
+                    <!--android:background="@drawable/ime_icon_1"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@android:color/background_light"-->
+                    <!--android:layout_marginLeft="40dp"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:layout_above="@+id/ime_label"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:onClick="onIMETestClick"/>-->
+
+
+
+            <!--</RelativeLayout>-->
+
+        <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--&lt;!&ndash;Represents the Toyon button on the Locations Activity&ndash;&gt;-->
+
+            <!--<TextView-->
+                <!--android:text="Probe"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginBottom="21dp"-->
+                <!--android:id="@+id/probe_label"-->
+                <!--android:textStyle="normal|bold"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textColor="@color/white" />-->
+
+            <!--<Button-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:id="@+id/probe_button"-->
+                <!--android:width="48dp"-->
+                <!--android:height="48dp"-->
+                <!--android:textColor="@android:color/background_light"-->
+                <!--android:background="@drawable/probe_icon"-->
+                <!--android:textStyle="normal|bold"-->
+                <!--android:layout_marginLeft="40dp"-->
+                <!--android:layout_marginRight="40dp"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:onClick="onProbeTestClick"/>-->
+
+
+        <!--</RelativeLayout>-->
+
+
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_weight="1">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-            <!--Represents the Toyon button on the Locations Activity-->
 
-            <TextView
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--Represents the Lopez button on the Locations Activity-->
+
+                <TextView
+                android:text="IME"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="21dp"
+                android:id="@+id/ime_label"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+
+                <Button
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/ime_button"
+                android:width="48dp"
+                android:height="48dp"
+                android:background="@drawable/hotspot"
+                android:textStyle="bold"
+                android:textColor="@android:color/background_light"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_above="@+id/ime_label"
+                android:layout_centerHorizontal="true"
+                android:onClick="onIMETestClick"/>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--Represents the Sheldon button on the Locations Activity-->
+
+                <TextView
                 android:text="Probe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,7 +375,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/white" />
 
-            <Button
+                <Button
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/probe_button"
@@ -194,11 +392,14 @@
 
 
 
+            </RelativeLayout>
 
-        </RelativeLayout>
 
+        </LinearLayout>
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -294,8 +495,6 @@
                 <!--android:onClick="onISETestClick"-->
 
             </RelativeLayout>
-
-
 
 
         </LinearLayout>
