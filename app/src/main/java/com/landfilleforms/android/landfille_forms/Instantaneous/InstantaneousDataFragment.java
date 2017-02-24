@@ -436,6 +436,7 @@ public class InstantaneousDataFragment extends Fragment {
 
     }
 
+
     private void dialogDeleteInstantaneousEntry(AlertDialog.Builder alertBuilder) {
         alertBuilder.setMessage("Are you sure you want to delete this entry?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
