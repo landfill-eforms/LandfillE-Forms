@@ -9,5 +9,6 @@
     <color name="backgroundTheme">#2e404a</color>
     <color name="lighterBackgroundTheme">#3d5969</color>
     <color name="textLabelColor">#838a88</color>
+    <color name="customLightBackground">#d6d6d6</color>
 
 </resources>

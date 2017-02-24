@@ -1,6 +1,8 @@
 package com.landfilleforms.android.landfille_forms.warmspot;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -73,16 +75,16 @@ public class WarmSpotDataFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        //inflater.inflate(R.menu.fragment_ime_data, menu);
+        inflater.inflate(R.menu.fragment_warm_spot_data, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_item_delete_warm_spot_data:
-                WarmSpotForm.get(getActivity()).removeWarmSpotData(mWarmSpotData);
-                getActivity().finish();
-                return true;
+            AlertDialog.Builder alertBuilder =  new AlertDialog.Builder(getActivity());
+            dialogDeleteWarmspotEntry(alertBuilder);
+            return true;
            default:
                 return super.onOptionsItemSelected(item);
         }
@@ -219,5 +221,24 @@ public class WarmSpotDataFragment extends Fragment {
         mDateButton.setText(DateFormat.format("EEEE, MMM d, yyyy",mWarmSpotData.getDate()));
     }
 
+    private void dialogDeleteWarmspotEntry(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        WarmSpotForm.get(getActivity()).removeWarmSpotData(mWarmSpotData);
+                        getActivity().finish();
+                        Toast.makeText(getActivity(), R.string.entry_deleted_toast, Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("Delete Warmspot Entry");
+        deleteAlert.show();
+    }
 
 }
