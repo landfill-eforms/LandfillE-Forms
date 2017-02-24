@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
@@ -101,13 +102,24 @@ public class LoginFragment extends Fragment {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().trim().length() > 0) {
+                    boolean loginInfoValid = false;
                     for(int i = 0; i < mExistingUsers.size(); i++) {
                         Log.d("UserName", mExistingUsers.get(i).getUsername());
                         if(mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && mUser.getPassword().equals(mExistingUsers.get(i).getPassword())) {
                             session.createLoginSession(mExistingUsers.get(i).getUsername(), mExistingUsers.get(i).getFullName());
-                            Intent intent = new Intent(getActivity(),MenuActivity.class);
-                            startActivity(intent);
+                            loginInfoValid = true;
+                            break;
                         }
+                        else {
+                            Toast.makeText(getActivity(), "Please enter username/password.",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    if(loginInfoValid) {
+                        Intent intent = new Intent(getActivity(),MenuActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "Invalid Username/Password Combination.",Toast.LENGTH_SHORT).show();
                     }
                 }
             }

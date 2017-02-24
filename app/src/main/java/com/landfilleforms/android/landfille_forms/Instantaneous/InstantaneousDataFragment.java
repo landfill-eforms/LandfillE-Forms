@@ -132,7 +132,8 @@ public class InstantaneousDataFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_instantaneous_data, container, false);
 
         mBaroLevelField = (EditText)v.findViewById(R.id.baro_reading);
-        mBaroLevelField.setText(Double.toString(mInstantaneousData.getBarometricPressure()));
+        if(mInstantaneousData.getBarometricPressure() != 0)
+            mBaroLevelField.setText(Double.toString(mInstantaneousData.getBarometricPressure()));
         mBaroLevelField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -155,7 +156,8 @@ public class InstantaneousDataFragment extends Fragment {
         mInspectorLabel.setText(mInstantaneousData.getInspectorName());
 
         mMethaneLevelField = (EditText)v.findViewById(R.id.methane_reading);
-        mMethaneLevelField.setText(Double.toString(mInstantaneousData.getMethaneReading()));
+        if(mInstantaneousData.getMethaneReading() != 0)
+            mMethaneLevelField.setText(Double.toString(mInstantaneousData.getMethaneReading()));
         mMethaneLevelField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
