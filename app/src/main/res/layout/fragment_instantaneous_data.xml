@@ -107,7 +107,7 @@
                         style="?android:listSeparatorTextViewStyle"
                         android:background="@color/backgroundTheme"
                         android:layout_width="match_parent"
-                        android:text="@string/current_time"
+                        android:text="@string/start_time"
                         android:layout_margin="3dp"
                         android:textColor="@color/white"
                         android:textAllCaps="false"
@@ -116,17 +116,24 @@
                         />
 
                     <!--Should display current time from system-->
-                    <TextView
-                        android:background="@color/backgroundTheme"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="3dp"
-                        android:textColor="@color/white"
-                        android:text="13:30"
-                        android:textAllCaps="false"
-                        android:textStyle="normal"
-                        android:textSize="20dp"
-                        />
+                    <!--<TextView-->
+                        <!--android:background="@color/backgroundTheme"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="3dp"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:text="13:30"-->
+                        <!--android:textAllCaps="false"-->
+                        <!--android:textStyle="normal"-->
+                        <!--android:textSize="20dp"-->
+                        <!--/>-->
+
+                    <Button
+                    android:id="@+id/start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"/>
 
                 </TableRow>
 
