@@ -259,16 +259,16 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-//        mEndTimeButton = (Button)v.findViewById(R.id.end_time);
-//        updateEndTime();
-//        mEndTimeButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                FragmentManager manager = getActivity().getSupportFragmentManager();
-//                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getEndDate());
-//                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_END_TIME);
-//                dialog.show(manager, DIALOG_TIME);
-//            }
-//        });
+        mEndTimeButton = (Button)v.findViewById(R.id.end_time);
+        updateEndTime();
+        mEndTimeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getEndDate());
+                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_END_TIME);
+                dialog.show(manager, DIALOG_TIME);
+            }
+        });
 
         mSubmitButton = (Button)v.findViewById(R.id.submit);
         mSubmitButton.setText(R.string.submit_button_label);
