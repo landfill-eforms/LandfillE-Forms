@@ -25,7 +25,7 @@
         <activity
             android:name=".instantaneous.InstantaneousFormActivity"
             android:label="@string/instantaneous_form_header"
-            android:parentActivityName=".LoginActivity"/>
+            android:parentActivityName=".TestsActivity"/>
         <activity
             android:name=".instantaneous.InstantaneousDataPagerActivity"
             android:label="@string/instantaenous_data_header"
@@ -33,15 +33,15 @@
         <activity
             android:name=".LocationActivity"
             android:label="@string/location_header"
-            android:parentActivityName=".instantaneous.InstantaneousFormActivity"/>
+            android:parentActivityName=".MenuActivity"/>
         <activity
             android:name=".TestsActivity"
             android:label="@string/tests_header"
-            android:parentActivityName=".instantaneous.InstantaneousFormActivity"/>
+            android:parentActivityName=".LocationActivity"/>
         <activity
             android:name=".ime.ImeFormActivity"
             android:label="@string/ime_form_header"
-            android:parentActivityName=".LoginActivity"/>
+            android:parentActivityName=".TestsActivity"/>
         <activity
             android:name=".ime.ImeDataPagerActivity"
             android:label="@string/ime_data_header"
@@ -49,7 +49,7 @@
         <activity
             android:name=".warmspot.WarmSpotFormActivity"
             android:label="@string/warm_spot_form_header"
-            android:parentActivityName=".LoginActivity"/>
+            android:parentActivityName=".TestsActivity"/>
         <activity
             android:name=".warmspot.WarmSpotDataPagerActivity"
             android:label="@string/warm_spot_data_header"
