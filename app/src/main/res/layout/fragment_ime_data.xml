@@ -182,45 +182,34 @@
 
         </TableLayout>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="188dp">
-
-
-            <TableRow>
-
-                <TextView
-                    style="?android:listSeparatorTextViewStyle"
-                    android:background="@color/backgroundTheme"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/description_label"
-                    android:textColor="@color/white"
-                    android:layout_margin="3dp"
-                    android:textAllCaps="false"
-                    android:textStyle="normal|bold"
-                    android:textSize="20dp"
-                    />
-
-            </TableRow>
-
-            <TableRow>
-
-                <!--Set it so it's a box & has a white background-->
-                <EditText
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:scrollbars="vertical"
-                    android:minLines="6"
-                    />
-
-            </TableRow>
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/backgroundTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description_label"
+                android:textColor="@color/white"
+                android:layout_margin="3dp"
+                android:textAllCaps="false"
+                android:textStyle="normal|bold"
+                android:textSize="20dp"
+                />
 
 
 
-        </TableLayout>
+            <!--Set it so it's a box & has a white background-->
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:minLines="6"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@color/white"
+                />
+
+
 
 
 
