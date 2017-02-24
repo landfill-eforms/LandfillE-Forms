@@ -246,16 +246,16 @@ public class InstantaneousDataFragment extends Fragment {
 //            }
 //        });
 
-//        mStartTimeButton = (Button)v.findViewById(R.id.start_time);
-//        updateStartTime();
-//        mStartTimeButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                FragmentManager manager = getActivity().getSupportFragmentManager();
-//                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getStartDate());
-//                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_START_TIME);
-//                dialog.show(manager, DIALOG_TIME);
-//            }
-//        });
+        mStartTimeButton = (Button)v.findViewById(R.id.start_time);
+        updateStartTime();
+        mStartTimeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getStartDate());
+                dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_START_TIME);
+                dialog.show(manager, DIALOG_TIME);
+            }
+        });
 
 //        mEndTimeButton = (Button)v.findViewById(R.id.end_time);
 //        updateEndTime();
@@ -435,6 +435,7 @@ public class InstantaneousDataFragment extends Fragment {
         alert.show();
 
     }
+
 
     private void dialogDeleteInstantaneousEntry(AlertDialog.Builder alertBuilder) {
         alertBuilder.setMessage("Are you sure you want to delete this entry?")
