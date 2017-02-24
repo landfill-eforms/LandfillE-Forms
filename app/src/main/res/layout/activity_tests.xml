@@ -189,9 +189,10 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:onClick="onProbeTestClick"/>
 
-            <!--android:onClick="onProbeTestClick"-->
+
 
 
         </RelativeLayout>
@@ -238,14 +239,13 @@
                     android:background="@drawable/methane_icon"
                     android:width="48dp"
                     android:height="48dp"
-
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="11dp" />
+                    android:layout_marginTop="11dp"
+                    android:onClick="onIntegratedTestClick"/>
 
-                <!--android:onClick="onIntegratedTestClick"-->
 
             </RelativeLayout>
 

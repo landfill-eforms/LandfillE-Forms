@@ -14,7 +14,7 @@ public class ImeData {
     private String mGridId;
     private Date mDate;
     private String mDescription;
-    private String mInspectorFullName;
+    private transient String mInspectorFullName;
     private String mInspectorUserName;
     private double mMethaneReading;
 

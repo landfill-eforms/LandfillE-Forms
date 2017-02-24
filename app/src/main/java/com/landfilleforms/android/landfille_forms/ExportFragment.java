@@ -14,9 +14,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.ime.ImeForm;
 import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousForm;
+import com.landfilleforms.android.landfille_forms.model.DataDump;
+import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
+import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
+import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotForm;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -61,14 +66,25 @@ public class ExportFragment extends Fragment {
         mExport.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Context context = getActivity();
+
                 InstantaneousForm instantaneousForm = InstantaneousForm.get(getActivity());
                 List<InstantaneousData> instantaneousDatas = instantaneousForm.getInstantaneousDatas();
+
+                ImeForm imeForm = ImeForm.get(getActivity());
+                List<ImeData> imeDatas = imeForm.getImeDatas();
+
+                WarmSpotForm warmSpotForm = WarmSpotForm.get(getActivity());
+                List<WarmSpotData> warmSpotDatas = warmSpotForm.getWarmSpotDatas();
+
+                DataDump dataDump = new DataDump(instantaneousDatas, imeDatas, warmSpotDatas);
+
                 GsonBuilder builder = new GsonBuilder();
                 builder.serializeNulls();
                 builder.setDateFormat("EEE, dd MMM yyyy HH:mm:ss");
                 Gson gson = builder.create();
 
-                String jsonOutput = gson.toJson(instantaneousDatas);
+                String jsonOutput = gson.toJson(dataDump);
+
                 Log.d("Json",jsonOutput);
                 int messageResId;
 
