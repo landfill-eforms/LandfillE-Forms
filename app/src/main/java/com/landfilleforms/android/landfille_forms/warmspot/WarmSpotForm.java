@@ -64,6 +64,24 @@ public class WarmSpotForm {
         return warmSpotForm;
     }
 
+    public List<WarmSpotData> getWarmSpotDatasByLocation(String[] location) {
+        List<WarmSpotData> warmSpotDatas = new ArrayList<>();
+
+        //Gotta create a WHERE clause
+        WarmSpotDataCursorWrapper cursor = queryWarmSpotData(WarmSpotDataTable.Cols.LOCATION + "= ? ", location);
+
+        try {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                warmSpotDatas.add(cursor.getWarmSpotData());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return warmSpotDatas;
+    }
+
     public WarmSpotData getWarmSpotData(UUID id) {
         WarmSpotDataCursorWrapper cursor = queryWarmSpotData(
                 WarmSpotDataTable.Cols.UUID + "= ? ",

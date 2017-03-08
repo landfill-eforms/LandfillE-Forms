@@ -1,10 +1,8 @@
 package com.landfilleforms.android.landfille_forms.instantaneous;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,22 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -80,7 +70,7 @@ public class InstantaneousFormFragment extends Fragment {
             public void onClick(View view) {
                 Context context = getActivity();
                 InstantaneousForm instantaneousForm = InstantaneousForm.get(getActivity());
-                List<InstantaneousData> instantaneousDatas = instantaneousForm.getInstantaneousDatas();
+                List<InstantaneousData> instantaneousDatas = instantaneousForm.getInstantaneousDatasByLocation();
                 GsonBuilder builder = new GsonBuilder();
                 builder.serializeNulls();
                 builder.setDateFormat("EEE, dd MMM yyyy HH:mm:ss");
@@ -157,10 +147,11 @@ public class InstantaneousFormFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    //TODO: querying by location
     private void updateUI() {
         InstantaneousForm instantaneousForm = InstantaneousForm.get(getActivity());
-        List<InstantaneousData> instantaneousDatas = instantaneousForm.getInstantaneousDatas();
+        String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
+        List<InstantaneousData> instantaneousDatas = instantaneousForm.getInstantaneousDatasByLocation(args);
 
         if(mAdapter == null) {
             mAdapter = new InstantaneousDataAdapter(instantaneousDatas);

@@ -102,7 +102,8 @@ public class ImeFormFragment extends Fragment {
 
     private void updateUI() {
         ImeForm imeForm = ImeForm.get(getActivity());
-        List<ImeData> imeDatas = imeForm.getImeDatas();
+        String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
+        List<ImeData> imeDatas = imeForm.getImeDatasByLocation(args);
 
         if(mAdapter == null) {
             mAdapter = new ImeDataAdapter(imeDatas);

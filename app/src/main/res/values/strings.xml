@@ -54,6 +54,7 @@
     <string name="estimated_size_label">Estimated Size</string>
     <string name="entry_deleted_toast">Entry deleted.</string>
     <string name="warmspot_added_toast">The Warmspot entry has been added to the list. </string>
+    <string name="ime_added_toast">The IME entry has been added to the list. </string>
     <string name="instantaneous_added_toast">The instantaneous entry has been added to the list. </string>
 
 

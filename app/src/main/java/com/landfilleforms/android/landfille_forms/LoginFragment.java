@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        mLoginButton = (Button)v.findViewById(R.id.login_submit);//Change!
+        mLoginButton = (Button)v.findViewById(R.id.login_submit);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().trim().length() > 0) {
@@ -110,9 +110,6 @@ public class LoginFragment extends Fragment {
                             loginInfoValid = true;
                             break;
                         }
-                        else {
-                            Toast.makeText(getActivity(), "Please enter username/password.",Toast.LENGTH_SHORT).show();
-                        }
                     }
                     if(loginInfoValid) {
                         Intent intent = new Intent(getActivity(),MenuActivity.class);
@@ -121,6 +118,8 @@ public class LoginFragment extends Fragment {
                     else {
                         Toast.makeText(getActivity(), "Invalid Username/Password Combination.",Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(getActivity(), "Username/password fields can't be blank.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -165,6 +164,8 @@ public class LoginFragment extends Fragment {
         super.onDestroy();
         Log.d(TAG, "onDestroy() called");
     }
+
+
     private Cursor getAllUsers() {
         // COMPLETED (6) Inside, call query on mDb passing in the table name and projection String [] order by COLUMN_TIMESTAMP
         return mDatabase.query(
