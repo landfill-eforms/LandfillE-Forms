@@ -36,6 +36,8 @@ import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotDataPagerActivity;
 import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotForm;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
@@ -57,6 +59,7 @@ public class InstantaneousDataFragment extends Fragment {
     private EditText mGridIdField;
     private EditText mMethaneLevelField;
     private EditText mBaroLevelField;
+    private TextView mstartDateText;
     private Button mStartDateButton;
     private Button mStartTimeButton;
     private Button mEndTimeButton;
@@ -151,6 +154,9 @@ public class InstantaneousDataFragment extends Fragment {
 
             }
         });
+
+        mstartDateText = (TextView)v.findViewById(R.id.date_label);
+        mstartDateText.setText(DateFormat.format("EEEE, MMM d, yyyy",mInstantaneousData.getStartDate()));
 
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mInstantaneousData.getInspectorName());
@@ -339,6 +345,8 @@ public class InstantaneousDataFragment extends Fragment {
     }
 
     //dialog when there is an IME
+    //TODO: Declining to add either the warmspot/IME dialog should take you back to the InstantaneousForm fragment or you'd just be stuck in the data entry forever
+    //Grant: I removed dialog.cancel() and just made it end the activity instead.
     private void dialogIME(AlertDialog.Builder alertBuilder) {
         final AlertDialog.Builder redirectionAlert = new AlertDialog.Builder(getActivity());
         alertBuilder.setMessage("CH4 levels are over 500! There is an IME! Navigate to IME form?")
@@ -355,16 +363,18 @@ public class InstantaneousDataFragment extends Fragment {
 
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+                getActivity().finish();
+                //dialog.cancel();
             }
         });
         AlertDialog alert = alertBuilder.create();
         alert.setTitle("New IME");
         alert.show();
     }
-
+    //TODO: Rewrite the way it adds an existing IME data & replace all the Strings w/ the ones from the resource folder
     //dialog to create a new IME form or add to an existing IME
     private void dialogIMENavigation(AlertDialog.Builder redirectionAlert) {
         redirectionAlert.setMessage("Would you like to create a new IME or add to an existing one?")
@@ -383,20 +393,26 @@ public class InstantaneousDataFragment extends Fragment {
         }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+                getActivity().finish();
+                //dialog.cancel();
             }
         }).setNegativeButton("Create a new IME", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //make a new IME
                 ImeData imeData = new ImeData();
-                imeData.setLocation("Lopez");
+                imeData.setLocation(mInstantaneousData.getLandFillLocation());
+                imeData.setDate(mInstantaneousData.getStartDate());
+                imeData.setGridId(mInstantaneousData.getGridId());
+                imeData.setImeNumber(mInstantaneousData.getImeNumber());
+                imeData.setMethaneReading(mInstantaneousData.getMethaneReading());
                 imeData.setInspectorFullName(mUser.getFullName());
                 imeData.setInspectorUserName(mUser.getUsername());
                 ImeForm.get(getActivity()).addImeData(imeData);
                 Intent navigateIMEForm = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
                 startActivity(navigateIMEForm);
-                getActivity().finish();
+                //Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
+
             }
         });
         AlertDialog alert = redirectionAlert.create();
@@ -415,16 +431,19 @@ public class InstantaneousDataFragment extends Fragment {
                 WarmSpotData warmSpotData = new WarmSpotData();
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 //temp default is lopez
-                warmSpotData.setLocation("Lopez");
+                warmSpotData.setGridId(mInstantaneousData.getGridId());
+                warmSpotData.setMaxMethaneReading(mInstantaneousData.getMethaneReading());
+                warmSpotData.setDate(mInstantaneousData.getStartDate());
+                warmSpotData.setLocation(mInstantaneousData.getLandFillLocation());
+                warmSpotData.setInstrumentSerial(mInstantaneousData.getInstrumentSerialNumber());
                 warmSpotData.setInspectorFullName(mUser.getFullName());
                 warmSpotData.setInspectorUserName(mUser.getUsername());
                 WarmSpotForm.get(getActivity()).addWarmSpotData(warmSpotData);
                 //still need to pass through some data between warmspots
                 Intent navigateWarmspotForm = WarmSpotDataPagerActivity.newIntent(getActivity(),warmSpotData.getId());
                 startActivity(navigateWarmspotForm);
-                getActivity().finish();
                 //note: add this one to the warmspot form.
-               // Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override

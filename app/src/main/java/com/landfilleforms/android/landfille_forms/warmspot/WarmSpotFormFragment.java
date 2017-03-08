@@ -116,7 +116,8 @@ public class WarmSpotFormFragment extends Fragment {
 
     private void updateUI() {
         WarmSpotForm warmSpotForm = WarmSpotForm.get(getActivity());
-        List<WarmSpotData> warmSpotDatas = warmSpotForm.getWarmSpotDatas();
+        String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
+        List<WarmSpotData> warmSpotDatas = warmSpotForm.getWarmSpotDatasByLocation(args);
 
         if(mAdapter == null) {
             mAdapter = new WarmSpotDataAdapter(warmSpotDatas);

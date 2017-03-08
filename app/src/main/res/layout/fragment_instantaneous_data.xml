@@ -90,11 +90,11 @@
                 <!--Should display current date from system-->
                 <TextView
                     android:background="@color/backgroundTheme"
+                    android:id="@+id/date_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:textColor="@color/white"
-                    android:text="2017-01-01"
                     android:textAllCaps="false"
                     android:textStyle="normal"
                     android:textSize="20dp"
@@ -323,7 +323,7 @@
                     android:id="@+id/ime_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="textVisiblePassword"
                     android:textSize="20dp"
                     android:textColor="@android:color/holo_blue_bright"
                     />

@@ -47,20 +47,38 @@ public class ImeForm {
     }
 
     public List<ImeData> getImeDatas() {
-        List<ImeData> imeForm = new ArrayList<>();
+        List<ImeData> imeDatas = new ArrayList<>();
 
         ImeDataCursorWrapper cursor = queryImeData(null, null);//Having both values null effectively selects all
 
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                imeForm.add(cursor.getImeData());
+                imeDatas.add(cursor.getImeData());
                 cursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
-        return imeForm;
+        return imeDatas;
+    }
+
+    public List<ImeData> getImeDatasByLocation(String[] location) {
+        List<ImeData> imeDatas = new ArrayList<>();
+
+        //Gotta create a WHERE clause
+        ImeDataCursorWrapper cursor = queryImeData(ImeDataTable.Cols.LOCATION + "= ? ", location);
+
+        try {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                imeDatas.add(cursor.getImeData());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return imeDatas;
     }
 
     public ImeData getImeData(UUID id) {

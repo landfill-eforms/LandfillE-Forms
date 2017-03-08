@@ -200,6 +200,7 @@ public class ImeDataFragment extends Fragment {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 getActivity().finish();
+                Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
             }
         });
 

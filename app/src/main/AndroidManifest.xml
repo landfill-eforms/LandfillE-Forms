@@ -25,11 +25,11 @@
         <activity
             android:name=".instantaneous.InstantaneousFormActivity"
             android:label="@string/instantaneous_form_header"
-            android:parentActivityName=".TestsActivity"/>
+            android:parentActivityName=".LocationActivity"/>
         <activity
             android:name=".instantaneous.InstantaneousDataPagerActivity"
-            android:label="@string/instantaenous_data_header"
-            android:parentActivityName=".instantaneous.InstantaneousFormActivity"/>
+            android:label="@string/instantaenous_data_header"/>
+            <!--android:parentActivityName=".instantaneous.InstantaneousFormActivity"/>-->
         <activity
             android:name=".LocationActivity"
             android:label="@string/location_header"
@@ -41,19 +41,19 @@
         <activity
             android:name=".ime.ImeFormActivity"
             android:label="@string/ime_form_header"
-            android:parentActivityName=".TestsActivity"/>
+            android:parentActivityName=".LocationActivity"/>
         <activity
             android:name=".ime.ImeDataPagerActivity"
-            android:label="@string/ime_data_header"
-            android:parentActivityName=".ime.ImeFormActivity"/>
+            android:label="@string/ime_data_header"/>
+            <!--android:parentActivityName=".ime.ImeFormActivity"-->
         <activity
             android:name=".warmspot.WarmSpotFormActivity"
             android:label="@string/warm_spot_form_header"
-            android:parentActivityName=".TestsActivity"/>
+            android:parentActivityName=".LocationActivity"/>
         <activity
             android:name=".warmspot.WarmSpotDataPagerActivity"
-            android:label="@string/warm_spot_data_header"
-            android:parentActivityName=".warmspot.WarmSpotFormActivity"/>
+            android:label="@string/warm_spot_data_header"/>
+            <!--android:parentActivityName=".warmspot.WarmSpotFormActivity"-->
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"

@@ -29,6 +29,7 @@ public class InstantaneousData {
         mId = id;
         mStartDate = new Date();
         mEndDate = new Date();
+        mEndDate.setTime(mStartDate.getTime() + 1800000);
     }
 
 

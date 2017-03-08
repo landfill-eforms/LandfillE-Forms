@@ -15,7 +15,11 @@ import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotFormActivity;
  * Created by aaleman on 2/2/17.
  */
 
+/*TODO: Atm, the instantaneous/IME/warmspot forms' parent activity is the location activity rather than the tests activity
+  TODO: This is due to the extra location info being lost when back is pressed. Possible solution is storing the location info in shared preferences.
 
+  TODO: Also, make a TestsFragment and don't make the .xml file directly call the event handlers.
+ */
 public class TestsActivity extends AppCompatActivity {
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
 
@@ -46,6 +50,7 @@ public class TestsActivity extends AppCompatActivity {
     public void onWarmspotTestClick(View view) {
         //create an Intent for Warmspot form
         Intent getWarmspotFormActivity = new Intent(this, WarmSpotFormActivity.class);
+        getWarmspotFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, this.getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
         //navigates to warmspot list
         startActivity(getWarmspotFormActivity);
     }

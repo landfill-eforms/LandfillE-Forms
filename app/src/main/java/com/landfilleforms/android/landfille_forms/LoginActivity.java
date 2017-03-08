@@ -22,4 +22,10 @@ public class LoginActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
         return new LoginFragment();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+    }
 }

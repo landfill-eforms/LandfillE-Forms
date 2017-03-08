@@ -68,7 +68,7 @@ public class ExportFragment extends Fragment {
                 Context context = getActivity();
 
                 InstantaneousForm instantaneousForm = InstantaneousForm.get(getActivity());
-                List<InstantaneousData> instantaneousDatas = instantaneousForm.getInstantaneousDatas();
+                List<InstantaneousData> instantaneousDatas = instantaneousForm.getInstantaneousDatasByLocation();
 
                 ImeForm imeForm = ImeForm.get(getActivity());
                 List<ImeData> imeDatas = imeForm.getImeDatas();
@@ -106,6 +106,9 @@ public class ExportFragment extends Fragment {
                     fOut.close();
                     messageResId = R.string.export_successful_toast;
                     Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
+
+                    //TODO: Create a way for the (Instantaneous/IME/Warmspot) Data to get either wiped out or be hidden.
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     messageResId = R.string.export_unsuccessful_toast;

@@ -46,10 +46,29 @@ public class InstantaneousForm {
     }
 
     //Data is already plural but I made it Datas to show that we're getting all the data from the table
-    public List<InstantaneousData> getInstantaneousDatas() {
+    public List<InstantaneousData> getInstantaneousDatasByLocation() {
         List<InstantaneousData> instantaneousForm = new ArrayList<>();
 
         InstantaneousDataCursorWrapper cursor = queryInstantaneousData(null, null);//Having both values null effectively selects all
+
+        try {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                instantaneousForm.add(cursor.getInstantaneousData());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return instantaneousForm;
+    }
+
+    //TODO just testing, may need to change how this works
+    public List<InstantaneousData> getInstantaneousDatasByLocation(String[] location) {
+        List<InstantaneousData> instantaneousForm = new ArrayList<>();
+
+        //Gotta create a WHERE clause
+        InstantaneousDataCursorWrapper cursor = queryInstantaneousData(InstantaneousDataTable.Cols.LOCATION + "= ? ", location);//Having both values null effectively selects all
 
         try {
             cursor.moveToFirst();
