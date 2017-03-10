@@ -1,11 +1,11 @@
-package com.landfilleforms.android.landfille_forms.instantaneous;
+package com.landfilleforms.android.landfille_forms.database.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.landfilleforms.android.landfille_forms.database.InstantaneousDataCursorWrapper;
+import com.landfilleforms.android.landfille_forms.database.cursorwrapper.InstantaneousDataCursorWrapper;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.InstantaneousDataTable;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
@@ -18,20 +18,20 @@ import java.util.UUID;
  * Created by Work on 10/30/2016.
  */
 
-public class InstantaneousForm {
-    public static InstantaneousForm sInstantaneousForm;
+public class InstantaneousDao {
+    public static InstantaneousDao sInstantaneousDao;
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    public static InstantaneousForm get(Context context) {
-        if (sInstantaneousForm == null) {
-            sInstantaneousForm = new InstantaneousForm(context);
+    public static InstantaneousDao get(Context context) {
+        if (sInstantaneousDao == null) {
+            sInstantaneousDao = new InstantaneousDao(context);
         }
-        return sInstantaneousForm;
+        return sInstantaneousDao;
     }
 
-    private InstantaneousForm(Context context) {
+    private InstantaneousDao(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
@@ -98,13 +98,24 @@ public class InstantaneousForm {
         }
     }
 
-    public void updateInstantanteousData(InstantaneousData instantaneousData) {
+    public void updateInstantaneousData(InstantaneousData instantaneousData) {
         String uuidString = instantaneousData.getId().toString();
         ContentValues values = getContentValues(instantaneousData);
 
         mDatabase.update(InstantaneousDataTable.NAME, values,
                 InstantaneousDataTable.Cols.UUID + "= ?",
                 new String[] {uuidString});
+    }
+
+    public void updateInstantaneousDatas(List<InstantaneousData> instantaneousDatas) {
+        for (int i = 0; i < instantaneousDatas.size(); i++) {
+            String uuidString = instantaneousDatas.get(i).getId().toString();
+            ContentValues values = getContentValues(instantaneousDatas.get(i));
+
+            mDatabase.update(InstantaneousDataTable.NAME, values,
+                    InstantaneousDataTable.Cols.UUID + "= ?",
+                    new String[] {uuidString});
+        }
     }
 
     private static ContentValues getContentValues(InstantaneousData instantaneousData) {

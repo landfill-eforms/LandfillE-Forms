@@ -176,7 +176,8 @@
 
             <!--Spinner for Equipment List-->
 
-            <TableRow>
+
+<!--            <TableRow>
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
@@ -197,7 +198,7 @@
                     android:textSize="20dp"/>
 
 
-            </TableRow>
+            </TableRow>-->
 
             <!--Spinner for Serial No List-->
 
@@ -247,11 +248,10 @@
                     android:textAllCaps="false"
                     />
 
-                <EditText
+                <Spinner
                     android:id="@+id/grid_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberSigned"
                     android:textColor="@android:color/holo_blue_bright"
                     android:textSize="20dp"
                     />
@@ -294,12 +294,10 @@
                     android:textAllCaps="false"
                     android:textSize="18dp"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/baro_reading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:textSize="20dp"
                     android:textColor="@android:color/holo_blue_bright"
                     />
 

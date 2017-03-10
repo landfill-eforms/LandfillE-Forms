@@ -1,9 +1,7 @@
 package com.landfilleforms.android.landfille_forms.warmspot;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,24 +15,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
+import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Work on 11/3/2016.
@@ -45,7 +38,10 @@ public class WarmSpotFormFragment extends Fragment {
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
     private SessionManager session;
     private User mUser;
+    public List<WarmSpotData> mWarmSpotDatas;
 
+    private TextView mWarmspotGridsField;
+    private TextView mCurrentLocation;
 
     private RecyclerView mWarmSpotDataRecyclerView;
     private WarmSpotDataAdapter mAdapter;
@@ -70,14 +66,30 @@ public class WarmSpotFormFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_warm_spot_form, container, false);
+        View v = inflater.inflate(R.layout.fragment_warm_spot_form, container, false);
 
-        mWarmSpotDataRecyclerView = (RecyclerView) view.findViewById(R.id.warm_spot_data_recycler_view);
+        final WarmSpotDao warmspotDao = WarmSpotDao.get(getActivity());
+        String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
+        mWarmSpotDatas = warmspotDao.getWarmSpotDatasByLocation(args);
+
+        mCurrentLocation = (TextView) v.findViewById(R.id.location);
+        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+
+
+        Set<String> warmspotGrids = new HashSet<String>();
+        for(int i = 0; i < mWarmSpotDatas.size(); i++) {
+            if(mWarmSpotDatas.get(i).getGridId() != null && mWarmSpotDatas.get(i).getGridId().trim().length() != 0)
+                warmspotGrids.add(mWarmSpotDatas.get(i).getGridId());
+        }
+        mWarmspotGridsField = (TextView) v.findViewById(R.id.warmspot_grids);
+        mWarmspotGridsField.setText(warmspotGrids.toString());
+
+        mWarmSpotDataRecyclerView = (RecyclerView) v.findViewById(R.id.warm_spot_data_recycler_view);
         mWarmSpotDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
 
-        return view;
+        return v;
     }
 
     @Override
@@ -103,7 +115,7 @@ public class WarmSpotFormFragment extends Fragment {
 //                warmSpotData.setLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 //                warmSpotData.setInspectorFullName(mUser.getFullName());
 //                warmSpotData.setInspectorUserName(mUser.getUsername());
-//                WarmSpotForm.get(getActivity()).addWarmSpotData(warmSpotData);
+//                WarmSpotDao.get(getActivity()).addWarmSpotData(warmSpotData);
 //                Intent intent = WarmSpotDataPagerActivity.newIntent(getActivity(),warmSpotData.getId());
 //
 //                startActivity(intent);
@@ -115,9 +127,9 @@ public class WarmSpotFormFragment extends Fragment {
     }
 
     private void updateUI() {
-        WarmSpotForm warmSpotForm = WarmSpotForm.get(getActivity());
+        WarmSpotDao warmSpotDao = WarmSpotDao.get(getActivity());
         String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
-        List<WarmSpotData> warmSpotDatas = warmSpotForm.getWarmSpotDatasByLocation(args);
+        List<WarmSpotData> warmSpotDatas = warmSpotDao.getWarmSpotDatasByLocation(args);
 
         if(mAdapter == null) {
             mAdapter = new WarmSpotDataAdapter(warmSpotDatas);

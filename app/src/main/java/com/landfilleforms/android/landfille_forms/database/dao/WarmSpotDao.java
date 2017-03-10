@@ -1,11 +1,11 @@
-package com.landfilleforms.android.landfille_forms.warmspot;
+package com.landfilleforms.android.landfille_forms.database.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.landfilleforms.android.landfille_forms.database.WarmSpotDataCursorWrapper;
+import com.landfilleforms.android.landfille_forms.database.cursorwrapper.WarmSpotDataCursorWrapper;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.WarmSpotDataTable;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
@@ -19,20 +19,20 @@ import java.util.UUID;
 
 //Done
 
-public class WarmSpotForm {
-    public static WarmSpotForm sWarmSpotForm;
+public class WarmSpotDao {
+    public static WarmSpotDao sWarmSpotDao;
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    public static WarmSpotForm get(Context context) {
-        if (sWarmSpotForm == null) {
-            sWarmSpotForm = new WarmSpotForm(context);
+    public static WarmSpotDao get(Context context) {
+        if (sWarmSpotDao == null) {
+            sWarmSpotDao = new WarmSpotDao(context);
         }
-        return sWarmSpotForm;
+        return sWarmSpotDao;
     }
 
-    private WarmSpotForm(Context context) {
+    private WarmSpotDao(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }

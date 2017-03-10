@@ -16,13 +16,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 
 import java.util.Date;
@@ -37,7 +41,7 @@ public class WarmSpotDataFragment extends Fragment {
     private WarmSpotData mWarmSpotData;
 
     private TextView mLocationLabel;
-    private EditText mGridIdField;//Text
+    private Spinner mGridIdSpinner;//Text
     private TextView mInspectorLabel;
     private EditText mDescriptionField;//Text
     private EditText mEstimatedSizeField;//Number
@@ -60,7 +64,7 @@ public class WarmSpotDataFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID imeDataId = (UUID) getArguments().getSerializable(ARG_WARM_SPOT_DATA_ID);
-        mWarmSpotData = WarmSpotForm.get(getActivity()).getWarmSpotData(imeDataId);
+        mWarmSpotData = WarmSpotDao.get(getActivity()).getWarmSpotData(imeDataId);
 
         setHasOptionsMenu(true);
     }
@@ -69,7 +73,7 @@ public class WarmSpotDataFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        WarmSpotForm.get(getActivity()).updateWarmSpotData(mWarmSpotData);
+        WarmSpotDao.get(getActivity()).updateWarmSpotData(mWarmSpotData);
     }
 
     @Override
@@ -121,21 +125,41 @@ public class WarmSpotDataFragment extends Fragment {
         mLocationLabel = (TextView) v.findViewById(R.id.location);
         mLocationLabel.setText(mWarmSpotData.getLocation());
 
-        mGridIdField = (EditText)v.findViewById(R.id.grid_id);
-        mGridIdField.setText(mWarmSpotData.getGridId());
-        mGridIdField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        //TODO: Create a grid table in the DB and use that instead.
+        mGridIdSpinner = (Spinner)v.findViewById(R.id.grid_id);
+        ArrayAdapter<CharSequence> adapter;
+        switch(mWarmSpotData.getLocation()) {
+            case "Bishops":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Gaffey":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Lopez":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Sheldon":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Toyon":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, android.R.layout.simple_spinner_item);
+                break;
+            default:
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, android.R.layout.simple_spinner_item);;
+        }
+        mGridIdSpinner.setAdapter(adapter);
+        mGridIdSpinner.setSelection(adapter.getPosition(mWarmSpotData.getGridId()));
 
+
+
+        mGridIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mWarmSpotData.setGridId(parent.getItemAtPosition(position).toString());
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mWarmSpotData.setGridId(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -226,7 +250,7 @@ public class WarmSpotDataFragment extends Fragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        WarmSpotForm.get(getActivity()).removeWarmSpotData(mWarmSpotData);
+                        WarmSpotDao.get(getActivity()).removeWarmSpotData(mWarmSpotData);
                         getActivity().finish();
                         Toast.makeText(getActivity(), R.string.entry_deleted_toast, Toast.LENGTH_SHORT).show();
                     }

@@ -1,11 +1,11 @@
-package com.landfilleforms.android.landfille_forms.ime;
+package com.landfilleforms.android.landfille_forms.database.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.landfilleforms.android.landfille_forms.database.ImeDataCursorWrapper;
+import com.landfilleforms.android.landfille_forms.database.cursorwrapper.ImeDataCursorWrapper;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ImeDataTable;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
@@ -19,20 +19,20 @@ import java.util.UUID;
  */
 
 //Done
-public class ImeForm {
-    public static ImeForm sImeForm;
+public class ImeDao {
+    public static ImeDao sImeDao;
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    public static ImeForm get(Context context) {
-        if (sImeForm == null) {
-            sImeForm = new ImeForm(context);
+    public static ImeDao get(Context context) {
+        if (sImeDao == null) {
+            sImeDao = new ImeDao(context);
         }
-        return sImeForm;
+        return sImeDao;
     }
 
-    private ImeForm(Context context) {
+    private ImeDao(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
@@ -68,6 +68,23 @@ public class ImeForm {
 
         //Gotta create a WHERE clause
         ImeDataCursorWrapper cursor = queryImeData(ImeDataTable.Cols.LOCATION + "= ? ", location);
+
+        try {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                imeDatas.add(cursor.getImeData());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return imeDatas;
+    }
+
+    public List<ImeData> getImeDatasByLocationAndIme(String[] locationAndImeNumber) {
+        List<ImeData> imeDatas = new ArrayList<>();
+
+        ImeDataCursorWrapper cursor = queryImeData(ImeDataTable.Cols.LOCATION + " = ? " + "AND " + ImeDataTable.Cols.IME_NUMBER + "= ? ", locationAndImeNumber);
 
         try {
             cursor.moveToFirst();

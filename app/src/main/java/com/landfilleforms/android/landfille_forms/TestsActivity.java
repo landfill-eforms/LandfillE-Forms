@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousFormActivity;
 import com.landfilleforms.android.landfille_forms.ime.ImeFormActivity;
-import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotForm;
 import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotFormActivity;
 
 /**

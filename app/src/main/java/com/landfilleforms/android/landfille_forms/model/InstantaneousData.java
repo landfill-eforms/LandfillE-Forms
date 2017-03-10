@@ -8,6 +8,7 @@ import java.util.UUID;
  */
 
 public class InstantaneousData {
+    //TODO: Use ORM, might have to put this off for way later since it makes us restructure a bunch of other things.
     private UUID mId;
     private String mLocation;//Auto-generated
     private double mBarometricPressure;
@@ -31,7 +32,6 @@ public class InstantaneousData {
         mEndDate = new Date();
         mEndDate.setTime(mStartDate.getTime() + 1800000);
     }
-
 
     public UUID getId() {
         return mId;

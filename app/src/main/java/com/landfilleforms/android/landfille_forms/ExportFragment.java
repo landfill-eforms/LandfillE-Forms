@@ -14,14 +14,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.landfilleforms.android.landfille_forms.ime.ImeForm;
-import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousForm;
+import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
+import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
 import com.landfilleforms.android.landfille_forms.model.DataDump;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
-import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotForm;
+import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -67,14 +67,14 @@ public class ExportFragment extends Fragment {
             public void onClick(View view) {
                 Context context = getActivity();
 
-                InstantaneousForm instantaneousForm = InstantaneousForm.get(getActivity());
-                List<InstantaneousData> instantaneousDatas = instantaneousForm.getInstantaneousDatasByLocation();
+                InstantaneousDao instantaneousDao = InstantaneousDao.get(getActivity());
+                List<InstantaneousData> instantaneousDatas = instantaneousDao.getInstantaneousDatasByLocation();
 
-                ImeForm imeForm = ImeForm.get(getActivity());
-                List<ImeData> imeDatas = imeForm.getImeDatas();
+                ImeDao imeDao = ImeDao.get(getActivity());
+                List<ImeData> imeDatas = imeDao.getImeDatas();
 
-                WarmSpotForm warmSpotForm = WarmSpotForm.get(getActivity());
-                List<WarmSpotData> warmSpotDatas = warmSpotForm.getWarmSpotDatas();
+                WarmSpotDao warmSpotDao = WarmSpotDao.get(getActivity());
+                List<WarmSpotData> warmSpotDatas = warmSpotDao.getWarmSpotDatas();
 
                 DataDump dataDump = new DataDump(instantaneousDatas, imeDatas, warmSpotDatas);
 

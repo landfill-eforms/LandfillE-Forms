@@ -1,5 +1,6 @@
 package com.landfilleforms.android.landfille_forms.instantaneous;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 
 import java.util.List;
@@ -40,7 +42,7 @@ public class InstantaneousDataPagerActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.activity_instantaneous_data_pager_view_pager);
 
-        mInstantaneousDataList = InstantaneousForm.get(this).getInstantaneousDatasByLocation();
+        mInstantaneousDataList = InstantaneousDao.get(this).getInstantaneousDatasByLocation();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
@@ -62,4 +64,15 @@ public class InstantaneousDataPagerActivity extends AppCompatActivity {
             }
         }
     }
+
+    //TODO: Implement so that it asks if you wanna discard changes when back is pressed. Issues: Data pager might mess up how data is saved.
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+
+
+        this.finish();
+    }
+
 }

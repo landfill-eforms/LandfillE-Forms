@@ -16,13 +16,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 
 import java.util.Date;
@@ -38,7 +42,7 @@ public class ImeDataFragment extends Fragment {
 
     private EditText mImeField;
     private TextView mLocationLabel;
-    private EditText mGridIdField;
+    private Spinner mGridIdSpinner;
     private TextView mInspectorLabel;
     private EditText mDescriptionField;
     private EditText mMethaneLevelField;
@@ -60,7 +64,7 @@ public class ImeDataFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID imeDataId = (UUID) getArguments().getSerializable(ARG_IME_DATA_ID);
-        mImeData = ImeForm.get(getActivity()).getImeData(imeDataId);
+        mImeData = ImeDao.get(getActivity()).getImeData(imeDataId);
 
         setHasOptionsMenu(true);
     }
@@ -69,7 +73,7 @@ public class ImeDataFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        ImeForm.get(getActivity()).updateImeData(mImeData);
+        ImeDao.get(getActivity()).updateImeData(mImeData);
     }
 
     @Override
@@ -86,7 +90,7 @@ public class ImeDataFragment extends Fragment {
             case R.id.menu_item_delete_ime_data:
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 dialogDeleteIMEEntry(alertBuilder);
-//                ImeForm.get(getActivity()).removeImeData(mImeData);
+//                ImeDao.get(getActivity()).removeImeData(mImeData);
 //                getActivity().finish();
                 return true;
            default:
@@ -125,21 +129,38 @@ public class ImeDataFragment extends Fragment {
         mLocationLabel = (TextView) v.findViewById(R.id.location);
         mLocationLabel.setText(mImeData.getLocation());
 
-        mGridIdField = (EditText)v.findViewById(R.id.grid_id);
-        mGridIdField.setText(mImeData.getGridId());
-        mGridIdField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        mGridIdSpinner = (Spinner)v.findViewById(R.id.grid_id);
+        ArrayAdapter<CharSequence> adapter;
+        switch(mImeData.getLocation()) {
+            case "Bishops":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Gaffey":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Lopez":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Sheldon":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Toyon":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, android.R.layout.simple_spinner_item);
+                break;
+            default:
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, android.R.layout.simple_spinner_item);;
+        }
+        mGridIdSpinner.setAdapter(adapter);
+        mGridIdSpinner.setSelection(adapter.getPosition(mImeData.getGridId()));
 
+        mGridIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mImeData.setGridId(parent.getItemAtPosition(position).toString());
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mImeData.setGridId(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -231,7 +252,7 @@ public class ImeDataFragment extends Fragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ImeForm.get(getActivity()).removeImeData(mImeData);
+                        ImeDao.get(getActivity()).removeImeData(mImeData);
                         getActivity().finish();
                         Toast.makeText(getActivity(), R.string.entry_deleted_toast, Toast.LENGTH_SHORT).show();
                     }
