@@ -31,11 +31,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="21dp"
                 android:id="@+id/instantaneous_label"
                 android:textStyle="normal|bold"
                 android:textSize="18sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_below="@+id/instantaneous_button"/>
 
                 <Button
                 android:textColor="@android:color/background_light"
@@ -50,9 +50,8 @@
                 android:onClick="onInstantaneousTestClick"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_above="@+id/instantaneous_label"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="13dp" />
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
 
 
             </RelativeLayout>
@@ -78,11 +77,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="21dp"
                 android:id="@+id/warmspot_label"
                 android:textStyle="normal|bold"
                 android:textSize="18sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                    android:layout_below="@+id/warmspot_button"/>
 
                 <Button
                 android:layout_width="100dp"
@@ -90,14 +89,14 @@
                 android:id="@+id/warmspot_button"
                 android:width="48dp"
                 android:height="48dp"
-                android:background="@drawable/ime_icon_1"
+                android:background="@drawable/warmspot"
                 android:textStyle="bold"
                 android:textColor="@android:color/background_light"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_above="@+id/warmspot_label"
-                android:layout_centerHorizontal="true"
-                android:onClick="onWarmspotTestClick"/>
+                android:onClick="onWarmspotTestClick"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
 
 
             </RelativeLayout>
@@ -324,11 +323,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="21dp"
                 android:id="@+id/ime_label"
                 android:textStyle="normal|bold"
                 android:textSize="18sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                    android:layout_below="@+id/ime_button"/>
 
                 <Button
                 android:layout_width="100dp"
@@ -336,14 +335,14 @@
                 android:id="@+id/ime_button"
                 android:width="48dp"
                 android:height="48dp"
-                android:background="@drawable/hotspot"
+                android:background="@drawable/hotspot3"
                 android:textStyle="bold"
                 android:textColor="@android:color/background_light"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_above="@+id/ime_label"
-                android:layout_centerHorizontal="true"
-                android:onClick="onIMETestClick"/>
+                    android:onClick="onIMETestClick"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
 
 
             </RelativeLayout>
@@ -369,7 +368,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="21dp"
                 android:id="@+id/probe_label"
                 android:textStyle="normal|bold"
                 android:textSize="18sp"
@@ -386,10 +384,9 @@
                 android:textStyle="normal|bold"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:onClick="onProbeTestClick"/>
-
+                    android:onClick="onProbeTestClick"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
 
 
             </RelativeLayout>
@@ -425,11 +422,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="21dp"
                     android:id="@+id/integrated_label"
                     android:textStyle="normal|bold"
                     android:textSize="18sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/integrated_button"/>
 
                 <Button
                     android:layout_width="100dp"
@@ -442,10 +439,9 @@
                     android:height="48dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="11dp"
-                    android:onClick="onIntegratedTestClick"/>
+                    android:onClick="onIntegratedTestClick"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
 
 
             </RelativeLayout>
@@ -465,6 +461,18 @@
 
                 <!--Represents the Sheldon button on the Locations Activity-->
 
+                <TextView
+                    android:text="ISE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ise_label"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/ise_button"
+                    android:layout_centerHorizontal="true"
+                    />
+
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -476,21 +484,8 @@
                     android:onClick="onISETestClick"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="11dp" />
-
-                <TextView
-                    android:text="ISE"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ise_label"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/ise_button"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="14dp" />
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
 
                 <!--android:onClick="onISETestClick"-->
 
