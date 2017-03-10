@@ -86,15 +86,10 @@
                     android:textSize="20dp"
                     />
 
-                <EditText
+                <Spinner
                     android:id="@+id/grid_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberSigned"
-                    android:layout_margin="3dp"
-                    android:textColor="@color/white"
-                    android:textAllCaps="false"
-                    android:textStyle="normal"
                     android:textSize="20dp"
                     />
 

@@ -14,18 +14,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
+import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 // TODO: Create Layout file, include all the fields
 public class ImeFormFragment extends Fragment {
@@ -33,6 +41,17 @@ public class ImeFormFragment extends Fragment {
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
     private SessionManager session;
     private User mUser;
+    List<ImeData> mImeDatas;
+    private String mCurrentImeNumber;
+
+
+
+
+    private TextView mCurrentLocation;
+    private TextView mImeGridsField;
+    private Spinner mImeNumberSpinner;
+    private Button mImeNumbersSetButton;
+
 
 
     private RecyclerView mImeDataRecyclerView;
@@ -57,14 +76,78 @@ public class ImeFormFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ime_form, container, false);
+        View v = inflater.inflate(R.layout.fragment_ime_form, container, false);
 
-        mImeDataRecyclerView = (RecyclerView) view.findViewById(R.id.ime_data_recycler_view);
+        final ImeDao imeDao = ImeDao.get(getActivity());
+        String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
+        mImeDatas = imeDao.getImeDatasByLocation(args);
+
+        //ImeNumbers for spinner
+        Set<String> imeNumbers = new HashSet<String>();
+        for(ImeData imeData: mImeDatas) {
+            if(imeData.getImeNumber() != null && imeData.getImeNumber().trim().length() != 0)
+                imeNumbers.add(imeData.getImeNumber());
+        }
+        imeNumbers.add("");
+        mImeNumberSpinner = (Spinner) v.findViewById(R.id.ime_spinner);
+        List<String> imeNumbersList = new ArrayList<String>(imeNumbers);
+        ArrayAdapter<String> imeNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, imeNumbersList);
+        mImeNumberSpinner.setAdapter(imeNumberSpinnerItems);
+        mImeNumberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mCurrentImeNumber = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                mCurrentImeNumber = "";
+            }
+        });
+
+        mImeNumbersSetButton = (Button) v.findViewById(R.id.ime_button);
+        mImeNumbersSetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CurrentLoc:",getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+                String [] args = {getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION), mCurrentImeNumber};
+                /*List<ImeData> imeDatasFilteredByImeNumber = new ArrayList<ImeData>();
+                for(int i = 0; i < mImeDatas.size(); i++) {
+                    if(mImeDatas.get(i).getImeNumber() == mCurrentImeNumber)
+                        imeDatasFilteredByImeNumber.add(mImeDatas.get(i));
+                }
+                Log.d("CurrentIME:", mCurrentImeNumber);
+                mImeDatas = imeDatasFilteredByImeNumber;
+                Log.d("FilteredSize:" ,Integer.toString(mImeDatas.size()));*/
+                updateUIwithImeNumber(args);
+            }
+        });
+
+
+
+        mCurrentLocation = (TextView) v.findViewById(R.id.location);
+        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+
+        //Finds all the grids related to a list of IME entries
+        Set<String> imeGrids = new HashSet<String>();
+        for(int i = 0; i < mImeDatas.size(); i++) {
+            if(mImeDatas.get(i).getGridId() != null && mImeDatas.get(i).getGridId().trim().length() != 0)
+                imeGrids.add(mImeDatas.get(i).getGridId());
+        }
+        mImeGridsField = (TextView) v.findViewById(R.id.ime_grids);
+        mImeGridsField.setText(imeGrids.toString());
+
+
+
+
+
+
+        mImeDataRecyclerView = (RecyclerView) v.findViewById(R.id.ime_data_recycler_view);
         mImeDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
 
-        return view;
+        return v;
     }
 
     @Override
@@ -89,7 +172,7 @@ public class ImeFormFragment extends Fragment {
                 imeData.setLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 imeData.setInspectorFullName(mUser.getFullName());
                 imeData.setInspectorUserName(mUser.getUsername());
-                ImeForm.get(getActivity()).addImeData(imeData);
+                ImeDao.get(getActivity()).addImeData(imeData);
                 Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
                 Log.d(TAG,"Hoi");
                 startActivity(intent);
@@ -101,9 +184,22 @@ public class ImeFormFragment extends Fragment {
     }
 
     private void updateUI() {
-        ImeForm imeForm = ImeForm.get(getActivity());
+        ImeDao imeDao = ImeDao.get(getActivity());
         String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
-        List<ImeData> imeDatas = imeForm.getImeDatasByLocation(args);
+        List<ImeData> imeDatas = imeDao.getImeDatasByLocation(args);
+
+        if(mAdapter == null) {
+            mAdapter = new ImeDataAdapter(imeDatas);
+            mImeDataRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.setImeDatas(imeDatas);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void updateUIwithImeNumber(String [] args) {
+        ImeDao imeDao = ImeDao.get(getActivity());
+        List<ImeData> imeDatas = imeDao.getImeDatasByLocationAndIme(args);
 
         if(mAdapter == null) {
             mAdapter = new ImeDataAdapter(imeDatas);

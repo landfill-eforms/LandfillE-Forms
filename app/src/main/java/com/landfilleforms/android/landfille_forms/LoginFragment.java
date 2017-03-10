@@ -18,7 +18,8 @@ import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
-import com.landfilleforms.android.landfille_forms.database.TestUtil;
+import com.landfilleforms.android.landfille_forms.database.dao.UserDao;
+import com.landfilleforms.android.landfille_forms.database.util.TestUtil;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class LoginFragment extends Fragment {
         }
         mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
         TestUtil.insertDummyUserData(mDatabase);
-        mExistingUsers = UserAccess.get(getActivity()).getUsers();
+        mExistingUsers = UserDao.get(getActivity()).getUsers();
 
         mUser.setUsername("");
         mUser.setPassword("");

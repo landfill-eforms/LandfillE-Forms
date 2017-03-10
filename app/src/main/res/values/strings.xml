@@ -11,8 +11,8 @@
     <string name="incorrect_login_toast">Username/password combination is incorrect</string>
     <string name="logout_toast">You have successfully logged out.</string>
     <string name="blank_login_toast">Please enter username and password</string>
-    <string name="instantaneous_list_grid_label">Grid Id</string>
-    <string name="instantaneous_list_start_date_label">Date</string>
+    <string name="instantaneous_list_grid_label">Grid Id: </string>
+    <string name="instantaneous_list_start_date_label">Date: </string>
     <string name="instantaneous_list_start_time_label">Start Time</string>
     <string name="instantaneous_list_end_time_label">End Time</string>
     <string name="instantaneous_list_methane_level_label">CH4(ppm)</string>
@@ -56,6 +56,10 @@
     <string name="warmspot_added_toast">The Warmspot entry has been added to the list. </string>
     <string name="ime_added_toast">The IME entry has been added to the list. </string>
     <string name="instantaneous_added_toast">The instantaneous entry has been added to the list. </string>
+    <string name="edit_button_label">Edit</string>
+    <string name="set_button_label">Set</string>
+    <string name="updated_barometric_toast">Updated barometric pressure for current entries.</string>
+    <string name="blank_barometric_toast">Barometric pressure field blank. Setting default value.</string>
 
 
     <string name="title_activity_menu">MenuActivity</string>
@@ -86,8 +90,9 @@
     <string name="methane_data_entry_label">Methane Reading Data Entry</string>
     <string name="warmspot_label">Warmspot</string>
     <string name="equipment_type_label">Equipment Type:</string>
-    <string name="serial_no_label">Serial No.:</string>
-    <string name="start_time">Start Time:</string>
+    <string name="serial_no_label">Equipment Serial No.:</string>
+    <string name="start_time">Start Time: </string>
+
 
     <!-- Array for Equipment Spinner-->
     <string-array name="equipment_array">
@@ -108,6 +113,11 @@
 
     <string-array name="serial_no_array">
         <item>100</item>
+    </string-array>
+
+
+    <string-array name="empty_array">
+
     </string-array>
 
 
