@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class WarmSpotDataPagerActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.activity_warm_spot_data_pager_view_pager);
 
-        mWarmSpotDataList = WarmSpotForm.get(this).getWarmSpotDatas();
+        mWarmSpotDataList = WarmSpotDao.get(this).getWarmSpotDatas();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override

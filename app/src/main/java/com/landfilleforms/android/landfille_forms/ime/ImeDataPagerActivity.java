@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class ImeDataPagerActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.activity_ime_data_pager_view_pager);
 
-        mImeDataList = ImeForm.get(this).getImeDatas();
+        mImeDataList = ImeDao.get(this).getImeDatas();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override

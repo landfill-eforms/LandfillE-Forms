@@ -17,8 +17,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,18 +29,18 @@ import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.TimePickerFragment;
+import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
+import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
 import com.landfilleforms.android.landfille_forms.ime.ImeDataPagerActivity;
-import com.landfilleforms.android.landfille_forms.ime.ImeForm;
 import com.landfilleforms.android.landfille_forms.ime.ImeFormActivity;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotDataPagerActivity;
-import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotForm;
+import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 
-import org.w3c.dom.Text;
-
+import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
@@ -57,8 +60,9 @@ public class InstantaneousDataFragment extends Fragment {
     private InstantaneousData mInstantaneousData;
     private TextView mInspectorLabel;
     private EditText mGridIdField;
+    private Spinner mGridIdSpinner;
     private EditText mMethaneLevelField;
-    private EditText mBaroLevelField;
+    private TextView mBaroLevelField;
     private TextView mstartDateText;
     private Button mStartDateButton;
     private Button mStartTimeButton;
@@ -67,7 +71,7 @@ public class InstantaneousDataFragment extends Fragment {
     private EditText mInstrumentField;
     private EditText imeField;
     private TextView mLocationLabel;
-
+    private Spinner mInstrumentSerialNoSpinner;
 
     //chris added this
     private User mUser;
@@ -86,7 +90,7 @@ public class InstantaneousDataFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID instantaneousDataId = (UUID) getArguments().getSerializable(ARG_INSTANTANEOUS_DATA_ID);
-        mInstantaneousData = InstantaneousForm.get(getActivity()).getInstantaneousData(instantaneousDataId);
+        mInstantaneousData = InstantaneousDao.get(getActivity()).getInstantaneousData(instantaneousDataId);
 
         setHasOptionsMenu(true);
 
@@ -104,8 +108,8 @@ public class InstantaneousDataFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-
-        InstantaneousForm.get(getActivity()).updateInstantanteousData(mInstantaneousData);
+        //TODO: It shouldn't update the instantaneous data on exit.
+        //InstantaneousDao.get(getActivity()).updateInstantaneousData(mInstantaneousData);
     }
 
     @Override
@@ -122,7 +126,7 @@ public class InstantaneousDataFragment extends Fragment {
                 //chris modified this
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 dialogDeleteInstantaneousEntry(alertBuilder);
-//                InstantaneousForm.get(getActivity()).removeInstantaneousData(mInstantaneousData);
+//                InstantaneousDao.get(getActivity()).removeInstantaneousData(mInstantaneousData);
 //                getActivity().finish();
                 return true;
             default:
@@ -134,26 +138,10 @@ public class InstantaneousDataFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_instantaneous_data, container, false);
 
-        mBaroLevelField = (EditText)v.findViewById(R.id.baro_reading);
+        mBaroLevelField = (TextView)v.findViewById(R.id.baro_reading);
         if(mInstantaneousData.getBarometricPressure() != 0)
             mBaroLevelField.setText(Double.toString(mInstantaneousData.getBarometricPressure()));
-        mBaroLevelField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mInstantaneousData.setBarometricPressure(0);
-                else mInstantaneousData.setBarometricPressure(Double.parseDouble(s.toString()));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         mstartDateText = (TextView)v.findViewById(R.id.date_label);
         mstartDateText.setText(DateFormat.format("EEEE, MMM d, yyyy",mInstantaneousData.getStartDate()));
@@ -184,8 +172,47 @@ public class InstantaneousDataFragment extends Fragment {
 
         mLocationLabel = (TextView) v.findViewById(R.id.location);
         mLocationLabel.setText(mInstantaneousData.getLandFillLocation());
-        
-        mGridIdField = (EditText)v.findViewById(R.id.grid_id);
+
+        //TODO: Create a grid table in the DB and use that instead.
+        mGridIdSpinner = (Spinner)v.findViewById(R.id.grid_id);
+        ArrayAdapter<CharSequence> adapter;
+        switch(mInstantaneousData.getLandFillLocation()) {
+            case "Bishops":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Gaffey":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Lopez":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Sheldon":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, android.R.layout.simple_spinner_item);
+                break;
+            case "Toyon":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, android.R.layout.simple_spinner_item);
+                break;
+            default:
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, android.R.layout.simple_spinner_item);;
+        }
+        mGridIdSpinner.setAdapter(adapter);
+        mGridIdSpinner.setSelection(adapter.getPosition(mInstantaneousData.getGridId()));
+
+
+
+        mGridIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mInstantaneousData.setGridId(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+/*        mGridIdField = (EditText)v.findViewById(R.id.grid_id);
         mGridIdField.setText(mInstantaneousData.getGridId());
         mGridIdField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -202,7 +229,9 @@ public class InstantaneousDataFragment extends Fragment {
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        });*/
+
+
 
 //        mInstrumentField = (EditText)v.findViewById(R.id.instrument_field);
 //        mInstrumentField.setText(mInstantaneousData.getInstrumentSerialNumber());
@@ -281,6 +310,8 @@ public class InstantaneousDataFragment extends Fragment {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //create a new alert dialog
+                InstantaneousDao.get(getActivity()).updateInstantaneousData(mInstantaneousData);
+
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 //System.out.println(mInstantaneousData.getMethaneReading());
                 //case where ch4 is over 500, indicated as an IME
@@ -345,7 +376,7 @@ public class InstantaneousDataFragment extends Fragment {
     }
 
     //dialog when there is an IME
-    //TODO: Declining to add either the warmspot/IME dialog should take you back to the InstantaneousForm fragment or you'd just be stuck in the data entry forever
+    //TODO: Declining to add either the warmspot/IME dialog should take you back to the InstantaneousDao fragment or you'd just be stuck in the data entry forever
     //Grant: I removed dialog.cancel() and just made it end the activity instead.
     private void dialogIME(AlertDialog.Builder alertBuilder) {
         final AlertDialog.Builder redirectionAlert = new AlertDialog.Builder(getActivity());
@@ -357,7 +388,7 @@ public class InstantaneousDataFragment extends Fragment {
                 //comment this out temp
                 //getActivity().finish();
                 dialogIMENavigation(redirectionAlert);
-                InstantaneousForm.get(getActivity()).updateInstantanteousData(mInstantaneousData);
+                InstantaneousDao.get(getActivity()).updateInstantaneousData(mInstantaneousData);
                 //later, need to redirect to appropriate location's IME list
                 //Toast.makeText(getActivity(), R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
 
@@ -408,7 +439,7 @@ public class InstantaneousDataFragment extends Fragment {
                 imeData.setMethaneReading(mInstantaneousData.getMethaneReading());
                 imeData.setInspectorFullName(mUser.getFullName());
                 imeData.setInspectorUserName(mUser.getUsername());
-                ImeForm.get(getActivity()).addImeData(imeData);
+                ImeDao.get(getActivity()).addImeData(imeData);
                 Intent navigateIMEForm = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
                 startActivity(navigateIMEForm);
                 //Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
@@ -438,7 +469,7 @@ public class InstantaneousDataFragment extends Fragment {
                 warmSpotData.setInstrumentSerial(mInstantaneousData.getInstrumentSerialNumber());
                 warmSpotData.setInspectorFullName(mUser.getFullName());
                 warmSpotData.setInspectorUserName(mUser.getUsername());
-                WarmSpotForm.get(getActivity()).addWarmSpotData(warmSpotData);
+                WarmSpotDao.get(getActivity()).addWarmSpotData(warmSpotData);
                 //still need to pass through some data between warmspots
                 Intent navigateWarmspotForm = WarmSpotDataPagerActivity.newIntent(getActivity(),warmSpotData.getId());
                 startActivity(navigateWarmspotForm);
@@ -448,7 +479,7 @@ public class InstantaneousDataFragment extends Fragment {
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+                getActivity().finish();
             }
         });
         AlertDialog alert = alertBuilder.create();
@@ -463,7 +494,7 @@ public class InstantaneousDataFragment extends Fragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        InstantaneousForm.get(getActivity()).removeInstantaneousData(mInstantaneousData);
+                        InstantaneousDao.get(getActivity()).removeInstantaneousData(mInstantaneousData);
                         getActivity().finish();
                         Toast.makeText(getActivity(), R.string.entry_deleted_toast, Toast.LENGTH_SHORT).show();
                     }
