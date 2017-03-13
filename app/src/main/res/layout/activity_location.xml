@@ -39,7 +39,7 @@
                     android:width="48px"
                     android:height="48px"
                     android:id="@+id/bishops_button"
-                    android:background="@drawable/bishops_icon"
+                    android:background="@drawable/bishops"
                     android:drawable="@android:color/transparent"
                     android:onClick="onBishopsLocationClick"
                     android:layout_marginLeft="40dp"
@@ -78,6 +78,20 @@
                 android:layout_height="match_parent">
 
                 <!--Represents the Gaffey button on the Locations Activity-->
+
+                <TextView
+                    android:text="@string/gaffey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gaffey_label"
+                    tools:text="Gaffey"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/gaffey_button"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp" />
+
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -92,19 +106,6 @@
                     android:layout_marginRight="40dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
-
-                <TextView
-                    android:text="@string/gaffey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/gaffey_label"
-                    tools:text="Gaffey"
-                    android:textStyle="normal|bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/gaffey_button"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="13dp" />
 
             </RelativeLayout>
 
@@ -129,6 +130,19 @@
 
             <!--Represents the Toyon button on the Locations Activity-->
 
+            <TextView
+                android:text="@string/toyon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/toyon_label"
+                tools:text="Toyon"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_below="@+id/_button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="11dp" />
+
             <Button
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -143,19 +157,6 @@
                 android:layout_marginRight="40dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:text="@string/toyon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/toyon_label"
-                tools:text="Toyon"
-                android:textStyle="normal|bold"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:layout_below="@+id/_button"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="11dp" />
 
 
         </RelativeLayout>
@@ -187,7 +188,7 @@
                     android:id="@+id/lopez_button"
                     android:textStyle="bold"
                     android:textColor="@android:color/background_light"
-                    android:background="@drawable/lopez_icon"
+                    android:background="@drawable/new_lopez_canyon"
                     android:width="48dp"
                     android:height="48dp"
                     android:onClick="onLopezLocationClick"
