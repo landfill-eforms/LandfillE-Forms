@@ -209,7 +209,7 @@
 
             <!--Spinner for Serial No List-->
 
-            <TableRow>
+            <TableRow android:paddingTop="5dp">
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
