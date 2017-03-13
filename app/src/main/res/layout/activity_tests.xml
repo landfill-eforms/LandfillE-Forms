@@ -380,7 +380,7 @@
                 android:width="48dp"
                 android:height="48dp"
                 android:textColor="@android:color/background_light"
-                android:background="@drawable/probe_icon"
+                android:background="@drawable/probe_test"
                 android:textStyle="normal|bold"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
@@ -395,7 +395,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 
     <LinearLayout
@@ -434,7 +433,7 @@
                     android:id="@+id/integrated_button"
                     android:textStyle="bold"
                     android:textColor="@android:color/background_light"
-                    android:background="@drawable/methane_icon"
+                    android:background="@drawable/integrated_instrument"
                     android:width="48dp"
                     android:height="48dp"
                     android:layout_marginLeft="40dp"
