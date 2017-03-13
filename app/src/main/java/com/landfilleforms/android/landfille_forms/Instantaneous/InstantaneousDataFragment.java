@@ -178,22 +178,22 @@ public class InstantaneousDataFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter;
         switch(mInstantaneousData.getLandFillLocation()) {
             case "Bishops":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, R.layout.dark_spinner_layout);
                 break;
             case "Gaffey":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, R.layout.dark_spinner_layout);
                 break;
             case "Lopez":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, R.layout.dark_spinner_layout);
                 break;
             case "Sheldon":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, R.layout.dark_spinner_layout);
                 break;
             case "Toyon":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, R.layout.dark_spinner_layout);
                 break;
             default:
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, android.R.layout.simple_spinner_item);;
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, R.layout.dark_spinner_layout);;
         }
         mGridIdSpinner.setAdapter(adapter);
         mGridIdSpinner.setSelection(adapter.getPosition(mInstantaneousData.getGridId()));

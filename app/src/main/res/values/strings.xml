@@ -90,7 +90,7 @@
     <string name="methane_data_entry_label">Methane Reading Data Entry</string>
     <string name="warmspot_label">Warmspot</string>
     <string name="equipment_type_label">Equipment Type:</string>
-    <string name="serial_no_label">Equipment Serial No.:</string>
+    <string name="serial_no_label">Equipment SN:</string>
     <string name="start_time">Start Time: </string>
     <string name="filter_button_label">Filter</string>
     <string name="search_button_label">Search</string>
