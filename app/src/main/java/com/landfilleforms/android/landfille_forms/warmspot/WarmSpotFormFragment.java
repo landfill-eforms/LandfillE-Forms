@@ -21,6 +21,7 @@ import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
+import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 
@@ -101,29 +102,29 @@ public class WarmSpotFormFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        //inflater.inflate(R.menu.fragment_warm_spot_form, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_warm_spot_form, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-//        switch (item.getItemId()) {
-//            case R.id.menu_item_new_warm_spot:
-//                WarmSpotData warmSpotData = new WarmSpotData();
-//                //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
-//                warmSpotData.setLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
-//                warmSpotData.setInspectorFullName(mUser.getFullName());
-//                warmSpotData.setInspectorUserName(mUser.getUsername());
-//                WarmSpotDao.get(getActivity()).addWarmSpotData(warmSpotData);
-//                Intent intent = WarmSpotDataPagerActivity.newIntent(getActivity(),warmSpotData.getId());
-//
-//                startActivity(intent);
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
+        //return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.menu_item_new_warm_spot:
+                WarmSpotData warmSpotData = new WarmSpotData();
+                //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
+                warmSpotData.setLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+                warmSpotData.setInspectorFullName(mUser.getFullName());
+                warmSpotData.setInspectorUserName(mUser.getUsername());
+                WarmSpotDao.get(getActivity()).addWarmSpotData(warmSpotData);
+                Intent intent = WarmSpotDataPagerActivity.newIntent(getActivity(),warmSpotData.getId());
+
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void updateUI() {
