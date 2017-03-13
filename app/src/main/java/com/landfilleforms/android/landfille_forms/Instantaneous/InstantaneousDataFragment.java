@@ -50,6 +50,7 @@ import java.util.UUID;
  */
 
 public class InstantaneousDataFragment extends Fragment {
+    private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
     private static final String ARG_INSTANTANEOUS_DATA_ID = "instantaneous_data_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
@@ -415,9 +416,8 @@ public class InstantaneousDataFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 //add extisting, put them into list
                 Intent getImeFormActivity = new Intent(getActivity(), ImeFormActivity.class);
-                //temp just put lopez
-                String tempLocation = null;
-                getImeFormActivity.putExtra(tempLocation, "Lopez");
+               // String tempLocation = null;
+                getImeFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, mInstantaneousData.getLandFillLocation());
                 startActivity(getImeFormActivity);
                 getActivity().finish();
             }//temp fix, set this to cancel to rearrange order of options
