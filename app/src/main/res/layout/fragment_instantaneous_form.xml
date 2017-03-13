@@ -27,7 +27,8 @@
     -->
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="vertical">
+                  android:orientation="vertical"
+        android:background="@color/backgroundTheme">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            />
+                android:background="@color/darkThemeButtonBackground"
+                android:textColor="@color/white" />
 
         </LinearLayout>
         <LinearLayout
@@ -49,11 +51,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/location_label"
-                />
+                android:textColor="@color/white"
+                android:textStyle="normal|bold"
+                android:textSize="20dp"
+                android:layout_marginRight="5dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/location"/>
+                android:id="@+id/location"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -62,17 +69,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/baro_reading_label"/>
+                android:text="@string/baro_reading_label"
+                android:textColor="@color/white"
+                android:textStyle="normal|bold"
+                android:textSize="20dp"
+                android:layout_marginRight="5dp" />
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/barometric_field"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:textSize="20dp"
+                android:textColor="@color/white"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/barometric_button"
-                android:text="@string/set_button_label"/>
+                android:text="@string/set_button_label"
+                android:background="@color/darkThemeButtonBackground"
+                android:textStyle="normal|bold"
+                android:textColor="@color/white" />
 
         </LinearLayout>
     </LinearLayout>
@@ -86,7 +102,8 @@
             android:layout_weight="0.25"
             android:text="@string/instantaneous_list_grid_label"
             android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:background="@color/backgroundTheme" />
 
         <TextView
             android:layout_width="0dp"
@@ -94,7 +111,8 @@
             android:layout_weight="0.25"
             android:text="@string/instantaneous_list_methane_level_label"
             android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:background="@color/backgroundTheme" />
 
         <TextView
             android:layout_width="0dp"
@@ -102,7 +120,8 @@
             android:layout_weight="0.25"
             android:text="@string/instantaneous_list_start_date_label"
             android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:background="@color/backgroundTheme" />
 
         <TextView
             android:layout_width="0dp"
@@ -110,7 +129,8 @@
             android:layout_weight="0.25"
             android:text="Action"
             android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:background="@color/backgroundTheme" />
 
         <!--
         <TextView
