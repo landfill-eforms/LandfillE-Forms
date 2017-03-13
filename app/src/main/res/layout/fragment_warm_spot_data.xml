@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/lighterBackgroundTheme">
+    android:background="@color/backgroundTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/backgroundTheme">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -19,7 +20,7 @@
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
-                    android:background="@color/lighterBackgroundTheme"
+                    android:background="@color/backgroundTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/inspector_title"
@@ -47,7 +48,7 @@
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
-                    android:background="@color/lighterBackgroundTheme"
+                    android:background="@color/backgroundTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/location_label"
@@ -75,7 +76,7 @@
             <TableRow>
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
-                    android:background="@color/lighterBackgroundTheme"
+                    android:background="@color/backgroundTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/grid_id_label"
@@ -100,7 +101,7 @@
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
-                    android:background="@color/lighterBackgroundTheme"
+                    android:background="@color/backgroundTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/estimated_size_label"
@@ -128,7 +129,7 @@
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
-                    android:background="@color/lighterBackgroundTheme"
+                    android:background="@color/backgroundTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/methane_reading_label"
@@ -144,6 +145,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/methane_reading_hint"
+                    android:textColorHint="@android:color/darker_gray"
                     android:inputType="numberDecimal"
                     android:layout_margin="3dp"
                     android:textColor="@color/white"
@@ -162,7 +164,7 @@
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
-            android:background="@color/lighterBackgroundTheme"
+            android:background="@color/backgroundTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/description_label"
@@ -171,7 +173,7 @@
             android:textAllCaps="false"
             android:textStyle="normal|bold"
             android:textSize="20dp"
-            />
+            android:paddingBottom="5dp" />
 
         <!--Set it so it's a box & has a white background-->
         <EditText
@@ -196,7 +198,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            />
+            android:background="@color/darkThemeButtonBackground"
+            android:textStyle="normal|bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
 
         <Button
             android:id="@+id/submit"
@@ -204,6 +210,9 @@
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp"
+            android:textColor="@color/white"
+            android:textStyle="normal|bold"
+            android:background="@color/darkThemeButtonBackground" />
     </LinearLayout>
 </ScrollView>
