@@ -33,7 +33,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".25"
-        android:text="Edit"/>
+        android:text="Edit"
+        android:background="@color/darkThemeButtonBackground"
+        android:textStyle="normal|bold"
+        android:textColor="@color/white"/>
     <!--
             <TextView
                 android:id="@+id/list_item_instantaneous_data_start_time_view"

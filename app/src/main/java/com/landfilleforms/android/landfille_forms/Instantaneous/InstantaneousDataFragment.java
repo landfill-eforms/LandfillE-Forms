@@ -50,6 +50,7 @@ import java.util.UUID;
  */
 
 public class InstantaneousDataFragment extends Fragment {
+    private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
     private static final String ARG_INSTANTANEOUS_DATA_ID = "instantaneous_data_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
@@ -178,22 +179,22 @@ public class InstantaneousDataFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter;
         switch(mInstantaneousData.getLandFillLocation()) {
             case "Bishops":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, R.layout.dark_spinner_layout);
                 break;
             case "Gaffey":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, R.layout.dark_spinner_layout);
                 break;
             case "Lopez":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, R.layout.dark_spinner_layout);
                 break;
             case "Sheldon":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, R.layout.dark_spinner_layout);
                 break;
             case "Toyon":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, R.layout.dark_spinner_layout);
                 break;
             default:
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, android.R.layout.simple_spinner_item);;
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, R.layout.dark_spinner_layout);;
         }
         mGridIdSpinner.setAdapter(adapter);
         mGridIdSpinner.setSelection(adapter.getPosition(mInstantaneousData.getGridId()));
@@ -415,9 +416,8 @@ public class InstantaneousDataFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 //add extisting, put them into list
                 Intent getImeFormActivity = new Intent(getActivity(), ImeFormActivity.class);
-                //temp just put lopez
-                String tempLocation = null;
-                getImeFormActivity.putExtra(tempLocation, "Lopez");
+               // String tempLocation = null;
+                getImeFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, mInstantaneousData.getLandFillLocation());
                 startActivity(getImeFormActivity);
                 getActivity().finish();
             }//temp fix, set this to cancel to rearrange order of options

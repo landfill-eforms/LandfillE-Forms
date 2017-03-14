@@ -91,7 +91,7 @@ public class ImeFormFragment extends Fragment {
         imeNumbers.add("");
         mImeNumberSpinner = (Spinner) v.findViewById(R.id.ime_spinner);
         List<String> imeNumbersList = new ArrayList<String>(imeNumbers);
-        ArrayAdapter<String> imeNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, imeNumbersList);
+        ArrayAdapter<String> imeNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(), R.layout.dark_spinner_layout, imeNumbersList);
         mImeNumberSpinner.setAdapter(imeNumberSpinnerItems);
         mImeNumberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,10 +136,6 @@ public class ImeFormFragment extends Fragment {
         }
         mImeGridsField = (TextView) v.findViewById(R.id.ime_grids);
         mImeGridsField.setText(imeGrids.toString());
-
-
-
-
 
 
         mImeDataRecyclerView = (RecyclerView) v.findViewById(R.id.ime_data_recycler_view);
