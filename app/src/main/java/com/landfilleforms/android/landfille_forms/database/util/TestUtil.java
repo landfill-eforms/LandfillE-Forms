@@ -39,7 +39,43 @@ public class TestUtil {
         cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
         cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "Alvin Quach");
         list.add(cv);
-
+		
+		cv = new ContentValues();
+        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "nbolas");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
+        cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "Nicol Bolas");
+        list.add(cv);
+		
+		cv = new ContentValues();
+        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "cnalaar");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
+        cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "Chandra Nalaar");
+        list.add(cv);
+		
+		cv = new ContentValues();
+        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "jbeleren");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
+        cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "Jace Beleren");
+        list.add(cv);
+		
+		cv = new ContentValues();
+        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "lvess");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
+        cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "Liliana Vess");
+        list.add(cv);
+		
+		cv = new ContentValues();
+        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "ccolbert");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
+        cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "Camille Colbert");
+        list.add(cv);
+		
+		cv = new ContentValues();
+        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "akord");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
+        cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "Arlenn Kord");
+        list.add(cv);
+		
         try {
             db.beginTransaction();
             db.delete(LandFillDbSchema.UsersTable.NAME,null,null);
