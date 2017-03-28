@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +25,6 @@ import android.widget.Toast;
 import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
-import com.landfilleforms.android.landfille_forms.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
@@ -180,6 +177,8 @@ public class InstantaneousFormFragment extends Fragment {
                 instantaneousData.setLandFillLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 instantaneousData.setInspectorName(mUser.getFullName());
                 instantaneousData.setInspectorUserName(mUser.getUsername());
+                instantaneousData.setStartDate(currentDate);
+                instantaneousData.setEndDate(new Date(instantaneousData.getStartDate().getTime() + 1800000));
 
                 if(mBarometricPressureField.getText().toString().trim().length() == 0)
                     instantaneousData.setBarometricPressure(defaultBarometricPressure);
@@ -192,7 +191,9 @@ public class InstantaneousFormFragment extends Fragment {
 
                 startActivity(intent);
                 return true;
-
+            case android.R.id.home:
+                this.getActivity().onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -294,7 +295,7 @@ public class InstantaneousFormFragment extends Fragment {
                 mMethaneReadingView.setTextColor(Color.RED);
                 mStartDateView.setTextColor(Color.RED);
             }
-            else if (mInstantaneousData.getMethaneReading() >= 200 && mInstantaneousData.getMethaneReading() <=499) {
+            else if (mInstantaneousData.getMethaneReading() >= 200 && mInstantaneousData.getMethaneReading() <500) {
                 mGridIdView.setTextColor(Color.rgb(255,165,0));
                 mMethaneReadingView.setTextColor(Color.rgb(255,165,0));
                 mStartDateView.setTextColor(Color.rgb(255,165,0));

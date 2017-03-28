@@ -11,7 +11,10 @@ import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ImeD
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -97,6 +100,31 @@ public class ImeDao {
         }
         return imeDatas;
     }
+
+    public int getImeSequenceNumber (String[] location, Date currentDate) {
+        List<ImeData> imeDatas = new ArrayList<>();
+
+        //Gotta create a WHERE clause
+        ImeDataCursorWrapper cursor = queryImeData(ImeDataTable.Cols.LOCATION + "= ? ", location);
+
+        try {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                imeDatas.add(cursor.getImeData());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        Set<String> imeNumbers = new HashSet<String>();
+        for(int i = 0; i < imeDatas.size(); i++) {
+            if(currentDate.getMonth() == imeDatas.get(i).getDate().getMonth() && currentDate.getYear() == imeDatas.get(i).getDate().getYear())
+                imeNumbers.add(imeDatas.get(i).getImeNumber());
+        }
+        return imeNumbers.size();
+    }
+
+
 
     public ImeData getImeData(UUID id) {
         ImeDataCursorWrapper cursor = queryImeData(

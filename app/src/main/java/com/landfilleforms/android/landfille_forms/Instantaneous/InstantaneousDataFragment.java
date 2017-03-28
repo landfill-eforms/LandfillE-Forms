@@ -29,6 +29,7 @@ import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.TimePickerFragment;
+import com.landfilleforms.android.landfille_forms.database.Site;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
 import com.landfilleforms.android.landfille_forms.ime.ImeDataPagerActivity;
@@ -41,6 +42,7 @@ import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotDataPagerActi
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 
 import java.lang.reflect.Array;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
@@ -58,6 +60,7 @@ public class InstantaneousDataFragment extends Fragment {
     private static final int REQUEST_START_TIME = 1;
     private static final int REQUEST_END_TIME = 2;
 
+    private double tempMethaneLevel;//For the dialogs
     private InstantaneousData mInstantaneousData;
     private TextView mInspectorLabel;
     private EditText mGridIdField;
@@ -70,7 +73,7 @@ public class InstantaneousDataFragment extends Fragment {
     private Button mEndTimeButton;
     private Button mSubmitButton;
     private EditText mInstrumentField;
-    private EditText imeField;
+    private TextView imeField;
     private TextView mLocationLabel;
     private Spinner mInstrumentSerialNoSpinner;
 
@@ -174,9 +177,10 @@ public class InstantaneousDataFragment extends Fragment {
         mLocationLabel = (TextView) v.findViewById(R.id.location);
         mLocationLabel.setText(mInstantaneousData.getLandFillLocation());
 
-        //TODO: Create a grid table in the DB and use that instead.
+        //TODO: Create a grid table in the DB and use that instead. UPDATE: I think we can use Alvin's Enum rather than having the Site names be stored in a .xml file.
         mGridIdSpinner = (Spinner)v.findViewById(R.id.grid_id);
         ArrayAdapter<CharSequence> adapter;
+        //TODO: Ask Alvin if it's possible to use his Enums for switch/case. While the Enum names are constant, I don't think the String properties of that Enum are.
         switch(mInstantaneousData.getLandFillLocation()) {
             case "Bishops":
                 adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, R.layout.dark_spinner_layout);
@@ -213,27 +217,6 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-/*        mGridIdField = (EditText)v.findViewById(R.id.grid_id);
-        mGridIdField.setText(mInstantaneousData.getGridId());
-        mGridIdField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mInstantaneousData.setGridId(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });*/
-
-
-
 //        mInstrumentField = (EditText)v.findViewById(R.id.instrument_field);
 //        mInstrumentField.setText(mInstantaneousData.getInstrumentSerialNumber());
 //        mInstrumentField.addTextChangedListener(new TextWatcher() {
@@ -254,24 +237,8 @@ public class InstantaneousDataFragment extends Fragment {
 //            }
 //        });
 
-        imeField = (EditText)v.findViewById(R.id.ime_field);
+        imeField = (TextView) v.findViewById(R.id.ime_field);
         imeField.setText(mInstantaneousData.getImeNumber());
-        imeField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mInstantaneousData.setImeNumber(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
 //        mStartDateButton = (Button)v.findViewById(R.id.start_date);
 //        updateDate();
@@ -285,11 +252,11 @@ public class InstantaneousDataFragment extends Fragment {
 //        });
 
         mStartTimeButton = (Button)v.findViewById(R.id.start_time);
-        updateStartTime();
+            updateStartTime();
         mStartTimeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
-                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getStartDate());
+                TimePickerFragment dialog = TimePickerFragment.newInstance((Date)mInstantaneousData.getStartDate().clone());
                 dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_START_TIME);
                 dialog.show(manager, DIALOG_TIME);
             }
@@ -300,10 +267,10 @@ public class InstantaneousDataFragment extends Fragment {
         mEndTimeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
-                TimePickerFragment dialog = TimePickerFragment.newInstance(mInstantaneousData.getEndDate());
+                TimePickerFragment dialog = TimePickerFragment.newInstance((Date)mInstantaneousData.getEndDate().clone());
                 dialog.setTargetFragment(InstantaneousDataFragment.this, REQUEST_END_TIME);
                 dialog.show(manager, DIALOG_TIME);
-            }
+        }
         });
 
         mSubmitButton = (Button)v.findViewById(R.id.submit);
@@ -311,17 +278,28 @@ public class InstantaneousDataFragment extends Fragment {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //create a new alert dialog
-                InstantaneousDao.get(getActivity()).updateInstantaneousData(mInstantaneousData);
+                //Compare methane level of pre-existing entry in the DB
+                tempMethaneLevel = mInstantaneousData.getMethaneReading();
+                InstantaneousDao instantaneousDao = InstantaneousDao.get(getActivity());
+                InstantaneousData originalEntry = instantaneousDao.getInstantaneousData(mInstantaneousData.getId());
+                if(mInstantaneousData.getMethaneReading() < originalEntry.getMethaneReading()){
+                    mInstantaneousData.setMethaneReading(originalEntry.getMethaneReading());
+                }
+                instantaneousDao.get(getActivity()).updateInstantaneousData(mInstantaneousData);
 
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 //System.out.println(mInstantaneousData.getMethaneReading());
                 //case where ch4 is over 500, indicated as an IME
-                if (mInstantaneousData.getMethaneReading() >= 500) {
+                if (tempMethaneLevel >= 500) {
                     dialogIME(alertBuilder);
                 }
                 //case where ch4 is between 200 and 499, indicated as a Warmspot
-                else if (mInstantaneousData.getMethaneReading() >= 200 && mInstantaneousData.getMethaneReading() <=499) {
+                else if (tempMethaneLevel >= 200 && tempMethaneLevel <=499) {
                     dialogWarmspot(alertBuilder);
+                }
+                else if (tempMethaneLevel == 0){
+                    dialogDeleteInstantaneousEntry(alertBuilder);
+
                 }
                 else{
                     //use this after all other ones are working
@@ -351,15 +329,25 @@ public class InstantaneousDataFragment extends Fragment {
             updateEndTime();
         }
 
-        else if (requestCode == REQUEST_START_TIME) {//Accidentally setting this as (resultCode == REQUEST_DATE) cost me 30 min of debug time orz
+        else if (requestCode == REQUEST_START_TIME) {
             Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-            mInstantaneousData.setStartDate(date);
+            if(mInstantaneousData.getEndDate().getTime() < date.getTime()){
+                Toast.makeText(getActivity(), R.string.start_end_time_error_toast, Toast.LENGTH_SHORT).show();
+            }
+            else {
+                mInstantaneousData.setStartDate(date);
+            }
             updateStartTime();
         }
 
-        else if (requestCode == REQUEST_END_TIME) {//Accidentally setting this as (resultCode == REQUEST_DATE) cost me 30 min of debug time orz
+        else if (requestCode == REQUEST_END_TIME) {
             Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-            mInstantaneousData.setEndDate(date);
+            if(mInstantaneousData.getStartDate().getTime() > date.getTime()){
+                Toast.makeText(getActivity(), R.string.end_start_time_error_toast, Toast.LENGTH_SHORT).show();
+            }
+            else {
+                mInstantaneousData.setEndDate(date);
+            }
             updateEndTime();
         }
     }
@@ -414,6 +402,7 @@ public class InstantaneousDataFragment extends Fragment {
                 .setCancelable(false).setPositiveButton("Add to Existing IME", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //TODO: Should open up another dialog on click w/ a Spinner composed of all the IME#s for that month.(Or maybe just include every single IME# but that sounds like a bad idea.
                 //add extisting, put them into list
                 Intent getImeFormActivity = new Intent(getActivity(), ImeFormActivity.class);
                // String tempLocation = null;
@@ -431,12 +420,16 @@ public class InstantaneousDataFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //make a new IME
+                Log.d("Location:",mInstantaneousData.getLandFillLocation());
+                String generatedImeNumber = generateIMEnumber(mInstantaneousData.getLandFillLocation(), mInstantaneousData.getStartDate());
+
+                mInstantaneousData.setImeNumber(generatedImeNumber);//Don't think this line will edit the Instantaneous entry in the DB since the block that does that is in the submit
                 ImeData imeData = new ImeData();
                 imeData.setLocation(mInstantaneousData.getLandFillLocation());
                 imeData.setDate(mInstantaneousData.getStartDate());
                 imeData.setGridId(mInstantaneousData.getGridId());
                 imeData.setImeNumber(mInstantaneousData.getImeNumber());
-                imeData.setMethaneReading(mInstantaneousData.getMethaneReading());
+                imeData.setMethaneReading(tempMethaneLevel);
                 imeData.setInspectorFullName(mUser.getFullName());
                 imeData.setInspectorUserName(mUser.getUsername());
                 ImeDao.get(getActivity()).addImeData(imeData);
@@ -463,7 +456,7 @@ public class InstantaneousDataFragment extends Fragment {
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 //temp default is lopez
                 warmSpotData.setGridId(mInstantaneousData.getGridId());
-                warmSpotData.setMaxMethaneReading(mInstantaneousData.getMethaneReading());
+                warmSpotData.setMaxMethaneReading(tempMethaneLevel);
                 warmSpotData.setDate(mInstantaneousData.getStartDate());
                 warmSpotData.setLocation(mInstantaneousData.getLandFillLocation());
                 warmSpotData.setInstrumentSerial(mInstantaneousData.getInstrumentSerialNumber());
@@ -489,6 +482,26 @@ public class InstantaneousDataFragment extends Fragment {
     }
 
 
+    private void dialogEmptyMethaneFieldInstantaneousEntryCheck(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("This entry has no methane level. Delete this entry?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        InstantaneousDao.get(getActivity()).removeInstantaneousData(mInstantaneousData);
+                        getActivity().finish();
+                        Toast.makeText(getActivity(), R.string.entry_deleted_toast, Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("Delete Instantaneous Entry");
+        deleteAlert.show();
+    }
+
     private void dialogDeleteInstantaneousEntry(AlertDialog.Builder alertBuilder) {
         alertBuilder.setMessage("Are you sure you want to delete this entry?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -507,5 +520,41 @@ public class InstantaneousDataFragment extends Fragment {
         AlertDialog deleteAlert = alertBuilder.create();
         deleteAlert.setTitle("Delete Instantaneous Entry");
         deleteAlert.show();
+    }
+
+    private String generateIMEnumber(String currentSite, Date currentDate) {
+        StringBuilder sb = new StringBuilder();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        int month = cal.get(Calendar.MONTH) + 1;        //For java's Calendar, January = 0
+        int year = cal.get(Calendar.YEAR);
+        int sequenceNumber;
+
+        if (currentSite.equals(Site.BISHOPS.getName()))
+            sb.append(Site.BISHOPS.getShortName());
+        else if (currentSite.equals(Site.GAFFEY.getName()))
+            sb.append(Site.GAFFEY.getShortName());
+        else if (currentSite.equals(Site.LOPEZ.getName()))
+            sb.append(Site.LOPEZ.getShortName());
+        else if (currentSite.equals(Site.SHELDON.getName()))
+            sb.append(Site.SHELDON.getShortName());
+        else if (currentSite.equals(Site.TOYON.getName()))
+            sb.append(Site.TOYON.getShortName());
+
+        sb.append("-");
+        sb.append(Integer.toString(year).substring(2,4));
+        if(month < 10)
+            sb.append(0);
+        sb.append(month);
+        //TODO: generate sequence number by getting info from DB(Maybe by COUNT)
+        ImeDao imeDao = ImeDao.get(getActivity());
+        String[] args = {currentSite};
+        sequenceNumber = imeDao.getImeSequenceNumber(args, currentDate) + 1;
+        sb.append("-");
+        if(sequenceNumber < 10)
+            sb.append(0);
+        sb.append(sequenceNumber);
+
+        return sb.toString();
     }
 }

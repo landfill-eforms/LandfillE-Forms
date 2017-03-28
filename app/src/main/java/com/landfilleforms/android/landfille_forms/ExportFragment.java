@@ -68,7 +68,7 @@ public class ExportFragment extends Fragment {
                 Context context = getActivity();
 
                 InstantaneousDao instantaneousDao = InstantaneousDao.get(getActivity());
-                List<InstantaneousData> instantaneousDatas = instantaneousDao.getInstantaneousDatasByLocation();
+                List<InstantaneousData> instantaneousDatas = instantaneousDao.getInstantaneousDatas();
 
                 ImeDao imeDao = ImeDao.get(getActivity());
                 List<ImeData> imeDatas = imeDao.getImeDatas();

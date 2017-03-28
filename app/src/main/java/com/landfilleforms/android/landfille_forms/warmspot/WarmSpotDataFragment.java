@@ -51,9 +51,9 @@ public class WarmSpotDataFragment extends Fragment {
 
 
 
-    public static WarmSpotDataFragment newInstance(UUID imeDataId) {
+    public static WarmSpotDataFragment newInstance(UUID warmspotDataId) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_WARM_SPOT_DATA_ID, imeDataId);
+        args.putSerializable(ARG_WARM_SPOT_DATA_ID, warmspotDataId);
         WarmSpotDataFragment fragment = new WarmSpotDataFragment();
         fragment.setArguments(args);
         return fragment;
@@ -63,8 +63,8 @@ public class WarmSpotDataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID imeDataId = (UUID) getArguments().getSerializable(ARG_WARM_SPOT_DATA_ID);
-        mWarmSpotData = WarmSpotDao.get(getActivity()).getWarmSpotData(imeDataId);
+        UUID warmspotDataId = (UUID) getArguments().getSerializable(ARG_WARM_SPOT_DATA_ID);
+        mWarmSpotData = WarmSpotDao.get(getActivity()).getWarmSpotData(warmspotDataId);
 
         setHasOptionsMenu(true);
     }
@@ -219,8 +219,13 @@ public class WarmSpotDataFragment extends Fragment {
         mSubmitButton.setText(R.string.submit_button_label);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                getActivity().finish();
-                Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
+                if(mWarmSpotData.getMaxMethaneReading() < 200 || mWarmSpotData.getMaxMethaneReading() >=500) {
+                    Toast.makeText(getActivity(), R.string.improper_methane_warmspot_toast, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    getActivity().finish();
+                    Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

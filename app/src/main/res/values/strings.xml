@@ -16,12 +16,14 @@
     <string name="instantaneous_list_start_time_label">Start Time</string>
     <string name="instantaneous_list_end_time_label">End Time</string>
     <string name="instantaneous_list_methane_level_label">CH4(ppm)</string>
+    <string name="new_probe_data">New Probe Data Entry</string>
     <string name="new_instantaneous_data">New Instantaneous Data Entry</string>
     <string name="delete_instantaneous_data">Remove Instantaneous Data Entry</string>
     <string name="new_ime_data">New IME Data Entry</string>
     <string name="delete_ime_data">Remove IME Data Entry</string>
     <string name="new_warm_spot_data">New WarmSpot Data Entry</string>
     <string name="delete_warm_spot_data">Remove WarmSpot Data Entry</string>
+    <string name="delete_probe_data">Remove Probe Data Entry</string>
     <string name="location_label">Location:</string>
     <string name="ime_label">IME #:</string>
     <string name="grid_id_label">Grid ID: </string>
@@ -60,11 +62,16 @@
     <string name="set_button_label">Set</string>
     <string name="updated_barometric_toast">Updated barometric pressure for current entries.</string>
     <string name="blank_barometric_toast">Barometric pressure field blank. Setting default value.</string>
-
-
+    <string name="start_end_time_error_toast">Start time cannot be after the end time.</string>
+    <string name="end_start_time_error_toast">End time cannot be before the start time.</string>
+    <string name="improper_methane_ime_toast">An IME entry cannot have CH4 levels below 500</string>
+    <string name="improper_methane_warmspot_toast">A warmspot entry must have CH4 levels between 200 &amp; 500</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="welcome_string">Welcome!</string>
-
+    <string name="inspector_list_label">Inspectors: </string>
+    <string name="probe_list_probe_number_label">Probe</string>
+    <string name="probe_list_water_pressure_label">Pressure "H2O</string>
+    <string name="probe_list_methane_percentage_label">%CH4</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

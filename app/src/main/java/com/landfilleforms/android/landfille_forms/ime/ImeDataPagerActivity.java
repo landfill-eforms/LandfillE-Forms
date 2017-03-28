@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
@@ -21,6 +23,8 @@ public class ImeDataPagerActivity extends AppCompatActivity {
     private static final String EXTRA_IME_DATA_ID = "com.landfilleforms.android.landfille_forms.ime_data_id";
 
     private ViewPager mViewPager;
+
+
     private List<ImeData> mImeDataList;
 
     public static Intent newIntent(Context packageContext, UUID imeDataId) {
@@ -37,6 +41,10 @@ public class ImeDataPagerActivity extends AppCompatActivity {
         UUID imeDataId = (UUID) getIntent().getSerializableExtra(EXTRA_IME_DATA_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_ime_data_pager_view_pager);
+
+        //TODO: Try to disable scrolling feature as it messes with submit/cancel,(Maybe we should only including ViewPagers for looking at old data.
+
+
 
         mImeDataList = ImeDao.get(this).getImeDatas();
         FragmentManager fragmentManager = getSupportFragmentManager();
