@@ -42,7 +42,7 @@ public class InstantaneousDataPagerActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.activity_instantaneous_data_pager_view_pager);
 
-        mInstantaneousDataList = InstantaneousDao.get(this).getInstantaneousDatasByLocation();
+        mInstantaneousDataList = InstantaneousDao.get(this).getInstantaneousDatas();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override

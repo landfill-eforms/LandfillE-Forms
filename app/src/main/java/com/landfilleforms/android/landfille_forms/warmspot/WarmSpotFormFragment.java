@@ -1,6 +1,7 @@
 package com.landfilleforms.android.landfille_forms.warmspot;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,13 +78,9 @@ public class WarmSpotFormFragment extends Fragment {
         mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
 
-        Set<String> warmspotGrids = new HashSet<String>();
-        for(int i = 0; i < mWarmSpotDatas.size(); i++) {
-            if(mWarmSpotDatas.get(i).getGridId() != null && mWarmSpotDatas.get(i).getGridId().trim().length() != 0)
-                warmspotGrids.add(mWarmSpotDatas.get(i).getGridId());
-        }
-        mWarmspotGridsField = (TextView) v.findViewById(R.id.warmspot_grids);
-        mWarmspotGridsField.setText(warmspotGrids.toString());
+        //TODO: Deleted the code for Grid array since it isn't needed for Warmspots. Should delete the code related to this on the DAO end as well.
+
+        //TODO: Include a spinner so users can filter by Quarter
 
         mWarmSpotDataRecyclerView = (RecyclerView) v.findViewById(R.id.warm_spot_data_recycler_view);
         mWarmSpotDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -121,7 +118,9 @@ public class WarmSpotFormFragment extends Fragment {
 
                 startActivity(intent);
                 return true;
-
+            case android.R.id.home:
+                this.getActivity().onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -159,6 +158,9 @@ public class WarmSpotFormFragment extends Fragment {
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_warm_spot_data_gridid_view);
             mMethaneReadingView = (TextView) itemView.findViewById(R.id.list_item_warm_spot_data_methane_level_view);
             mStartDateView = (TextView) itemView.findViewById(R.id.list_item_warm_spot_data_start_date_view);
+            mGridIdView.setTextColor(Color.rgb(255,165,0));
+            mMethaneReadingView.setTextColor(Color.rgb(255,165,0));
+            mStartDateView.setTextColor(Color.rgb(255,165,0));
 
             mEditButton = (Button)itemView.findViewById(R.id.list_item_warm_spot_edit_button);
             mEditButton.setOnClickListener(new View.OnClickListener() {

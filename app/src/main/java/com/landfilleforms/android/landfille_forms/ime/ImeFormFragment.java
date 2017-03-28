@@ -1,5 +1,7 @@
 package com.landfilleforms.android.landfille_forms.ime;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,17 +25,20 @@ import android.widget.TextView;
 
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
+import com.landfilleforms.android.landfille_forms.database.Site;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 // TODO: Create Layout file, include all the fields
 public class ImeFormFragment extends Fragment {
@@ -163,17 +168,12 @@ public class ImeFormFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_ime:
-                ImeData imeData = new ImeData();
-                //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
-                imeData.setLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
-                imeData.setInspectorFullName(mUser.getFullName());
-                imeData.setInspectorUserName(mUser.getUsername());
-                ImeDao.get(getActivity()).addImeData(imeData);
-                Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
-                Log.d(TAG,"Hoi");
-                startActivity(intent);
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
+                dialogIMENavigation(alertBuilder);
                 return true;
-
+            case android.R.id.home:
+                this.getActivity().onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -206,7 +206,87 @@ public class ImeFormFragment extends Fragment {
         }
     }
 
-    //For RecyleView
+    private void dialogIMENavigation(AlertDialog.Builder redirectionAlert) {
+        redirectionAlert.setMessage("Would you like to add to current IME or create a new one?")
+                //set positive as "Add to Existing IME",
+                .setCancelable(false).setPositiveButton("Add to Current IME", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ImeData imeData = new ImeData();
+                //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
+                imeData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+                imeData.setInspectorFullName(mUser.getFullName());
+                imeData.setInspectorUserName(mUser.getUsername());
+                imeData.setImeNumber(mCurrentImeNumber);
+                ImeDao.get(getActivity()).addImeData(imeData);
+                Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
+                startActivity(intent);
+
+            }//temp fix, set this to cancel to rearrange order of options
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        }).setNegativeButton("Create a new IME", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ImeData imeData = new ImeData();
+                //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
+                imeData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+                imeData.setInspectorFullName(mUser.getFullName());
+                imeData.setInspectorUserName(mUser.getUsername());
+                imeData.setImeNumber(mCurrentImeNumber);
+                ImeDao.get(getActivity()).addImeData(imeData);
+                Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
+                startActivity(intent);
+            }
+        });
+        AlertDialog alert = redirectionAlert.create();
+        alert.setTitle("New IME Entry");
+        alert.show();
+
+    }
+
+    private String generateIMEnumber(String currentSite, Date currentDate) {
+        StringBuilder sb = new StringBuilder();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        int month = cal.get(Calendar.MONTH) + 1;        //For java's Calendar, January = 0
+        int year = cal.get(Calendar.YEAR);
+        int sequenceNumber;
+
+        if (currentSite.equals(Site.BISHOPS.getName()))
+            sb.append(Site.BISHOPS.getShortName());
+        else if (currentSite.equals(Site.GAFFEY.getName()))
+            sb.append(Site.GAFFEY.getShortName());
+        else if (currentSite.equals(Site.LOPEZ.getName()))
+            sb.append(Site.LOPEZ.getShortName());
+        else if (currentSite.equals(Site.SHELDON.getName()))
+            sb.append(Site.SHELDON.getShortName());
+        else if (currentSite.equals(Site.TOYON.getName()))
+            sb.append(Site.TOYON.getShortName());
+
+        sb.append("-");
+        sb.append(Integer.toString(year).substring(2,4));
+        sb.append(Integer.toString(year).substring(2,4));
+        if(month < 10)
+            sb.append(0);
+        sb.append(month);
+        //TODO: generate sequence number by getting info from DB(Maybe by COUNT)
+        ImeDao imeDao = ImeDao.get(getActivity());
+        String[] args = {currentSite};
+        sequenceNumber = imeDao.getImeSequenceNumber(args, currentDate) + 1;
+        sb.append("-");
+        if(sequenceNumber < 10)
+            sb.append(0);
+        sb.append(sequenceNumber);
+
+        return sb.toString();
+    }
+
+
+    //For RecycleView
     private class ImeDataHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImeData mImeData;
@@ -225,6 +305,9 @@ public class ImeFormFragment extends Fragment {
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_ime_data_gridid_view);
             mMethaneReadingView = (TextView) itemView.findViewById(R.id.list_item_ime_data_methane_level_view);
             mStartDateView = (TextView) itemView.findViewById(R.id.list_item_ime_date_view);
+            mGridIdView.setTextColor(Color.RED);
+            mMethaneReadingView.setTextColor(Color.RED);
+            mStartDateView.setTextColor(Color.RED);
 
             mEditButton = (Button)itemView.findViewById(R.id.list_item_ime_edit_button);
             mEditButton.setOnClickListener(new View.OnClickListener() {
@@ -255,6 +338,8 @@ public class ImeFormFragment extends Fragment {
 //            Intent intent = ImeDataPagerActivity.newIntent(getActivity(), mImeData.getId());
 //            startActivity(intent);
         }
+
+
     }
 
 
@@ -288,4 +373,6 @@ public class ImeFormFragment extends Fragment {
             mImeDatas = imeDatas;
         }
     }
+
+
 }

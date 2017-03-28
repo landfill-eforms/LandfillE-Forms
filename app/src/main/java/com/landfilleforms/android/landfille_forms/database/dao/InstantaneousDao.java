@@ -46,7 +46,7 @@ public class InstantaneousDao {
     }
 
     //Data is already plural but I made it Datas to show that we're getting all the data from the table
-    public List<InstantaneousData> getInstantaneousDatasByLocation() {
+    public List<InstantaneousData> getInstantaneousDatas() {
         List<InstantaneousData> instantaneousForm = new ArrayList<>();
 
         InstantaneousDataCursorWrapper cursor = queryInstantaneousData(null, null);//Having both values null effectively selects all

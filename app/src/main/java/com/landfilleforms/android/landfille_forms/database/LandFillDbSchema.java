@@ -4,6 +4,8 @@ package com.landfilleforms.android.landfille_forms.database;
  * Created by Work on 10/30/2016.
  */
 
+//TODO: Turn the DB to relational one and use foreign keys
+
 public class LandFillDbSchema {
     public static final class InstantaneousDataTable {
         //Kinda like a contract class
@@ -53,6 +55,41 @@ public class LandFillDbSchema {
             public static final String MAX_METHANE_READING = "max_methane_reading";
             public static final String INSTRUMENT_SERIAL = "instrument_serial_number";
 
+        }
+    }
+
+    public static final class IntegratedDataTable {
+        public static final String NAME = "integrated_data";
+        public static class Cols {
+            public static final String UUID = "uuid";
+            public static final String LOCATION = "location";
+            public static final String GRID_ID = "grid_id";
+            public static final String INSTRUMENT_SERIAL = "instrument_serial";
+            public static final String BARO_PRESSURE = "barometric_pressure";
+            public static final String INSPECTOR_NAME = "inspector_name";
+            public static final String INSPECTOR_USERNAME = "inspector_username";
+            public static final String SAMPLE_ID = "sample_id"; //Seems similar to IME #(LocationCode-grid#-YearMonthDay
+            public static final String BAG_NUMBER = "bag_number";
+            public static final String START_DATE = "start_date";
+            public static final String END_DATE = "end_date";
+            public static final String VOLUME_READING = "volume";
+            public static final String MAX_METHANE_READING = "max_methane_reading";
+        }
+    }
+
+    public static final class ProbeDataTable {
+        public static final String NAME = "probe_data";
+        public static class Cols {
+            public static final String UUID = "uuid";
+            public static final String LOCATION = "location";
+            public static final String DATE = "date";
+            public static final String INSPECTOR_NAME = "inspector_name";
+            public static final String INSPECTOR_USERNAME = "inspector_username";
+            public static final String BARO_PRESSURE = "barometric_pressure";
+            public static final String PROBE_NUMBER = "probe_number";
+            public static final String WATER_PRESSURE = "water_pressure";
+            public static final String METHANE_PERCENTAGE = "methane_percentage";
+            public static final String REMARKS = "remarks";
         }
     }
 

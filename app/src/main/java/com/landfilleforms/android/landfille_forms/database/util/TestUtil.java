@@ -75,6 +75,12 @@ public class TestUtil {
         cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
         cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "Arlenn Kord");
         list.add(cv);
+
+        cv = new ContentValues();
+        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "gyu");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
+        cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "George Yu");
+        list.add(cv);
 		
         try {
             db.beginTransaction();

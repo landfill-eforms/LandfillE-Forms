@@ -9,6 +9,8 @@ import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.Inst
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.UsersTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ImeDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.WarmSpotDataTable;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.IntegratedDataTable;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ProbeDataTable;
 
 /**
  * Created by Work on 10/30/2016.
@@ -61,6 +63,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
         );
 
         db.execSQL("create table " + WarmSpotDataTable.NAME + "(" +
+                "_id integer primary key autoincrement, " +
                 WarmSpotDataTable.Cols.UUID + "," +
                 WarmSpotDataTable.Cols.LOCATION + "," +
                 WarmSpotDataTable.Cols.GRID_ID + "," +
@@ -71,6 +74,37 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 WarmSpotDataTable.Cols.INSPECTOR_USERNAME + "," +
                 WarmSpotDataTable.Cols.MAX_METHANE_READING + "," +
                 WarmSpotDataTable.Cols.INSTRUMENT_SERIAL + ")"
+        );
+
+        db.execSQL("create table " + IntegratedDataTable.NAME + "(" +
+                "_id integer primary key autoincrement, " +
+                IntegratedDataTable.Cols.UUID + "," +
+                IntegratedDataTable.Cols.LOCATION + "," +
+                IntegratedDataTable.Cols.GRID_ID + "," +
+                IntegratedDataTable.Cols.INSTRUMENT_SERIAL + "," +
+                IntegratedDataTable.Cols.BARO_PRESSURE + "," +
+                IntegratedDataTable.Cols.INSPECTOR_NAME + "," +
+                IntegratedDataTable.Cols.INSPECTOR_USERNAME + "," +
+                IntegratedDataTable.Cols.SAMPLE_ID + "," +
+                IntegratedDataTable.Cols.BAG_NUMBER + "," +
+                IntegratedDataTable.Cols.START_DATE + "," +
+                IntegratedDataTable.Cols.END_DATE + "," +
+                IntegratedDataTable.Cols.VOLUME_READING + "," +
+                IntegratedDataTable.Cols.MAX_METHANE_READING + ")"
+        );
+
+        db.execSQL("create table " + ProbeDataTable.NAME + "(" +
+                "_id integer primary key autoincrement, " +
+                ProbeDataTable.Cols.UUID + "," +
+                ProbeDataTable.Cols.LOCATION + "," +
+                ProbeDataTable.Cols.DATE + "," +
+                ProbeDataTable.Cols.INSPECTOR_NAME + "," +
+                ProbeDataTable.Cols.INSPECTOR_USERNAME + "," +
+                ProbeDataTable.Cols.BARO_PRESSURE + "," +
+                ProbeDataTable.Cols.PROBE_NUMBER + "," +
+                ProbeDataTable.Cols.WATER_PRESSURE + "," +
+                ProbeDataTable.Cols.METHANE_PERCENTAGE + "," +
+                ProbeDataTable.Cols.REMARKS + ")"
         );
     }
 
