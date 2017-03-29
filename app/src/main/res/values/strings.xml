@@ -16,15 +16,21 @@
     <string name="instantaneous_list_start_time_label">Start Time</string>
     <string name="instantaneous_list_end_time_label">End Time</string>
     <string name="instantaneous_list_methane_level_label">CH4(ppm)</string>
+    <string name="integrated_list_bag_number_label">Bag No.</string>
     <string name="new_probe_data">New Probe Data Entry</string>
     <string name="new_instantaneous_data">New Instantaneous Data Entry</string>
+    <string name="new_integrated_data">New Integrated Data Entry</string>
     <string name="delete_instantaneous_data">Remove Instantaneous Data Entry</string>
+    <string name="delete_integrated_data">Remove Integrated Data Entry</string>
     <string name="new_ime_data">New IME Data Entry</string>
     <string name="delete_ime_data">Remove IME Data Entry</string>
     <string name="new_warm_spot_data">New WarmSpot Data Entry</string>
     <string name="delete_warm_spot_data">Remove WarmSpot Data Entry</string>
     <string name="delete_probe_data">Remove Probe Data Entry</string>
     <string name="location_label">Location:</string>
+    <string name="probe_number_label">Probe:</string>
+    <string name="water_pressure_label">Pressure "H2O:</string>
+    <string name="methane_percentage_label">%Methane:</string>
     <string name="ime_label">IME #:</string>
     <string name="grid_id_label">Grid ID: </string>
     <string name="grid_id_hint">Ex: LOP-1234?</string>
@@ -51,8 +57,9 @@
     <string name="baro_reading_label">Barometric pressure</string>
     <string name="start_time_label">Start Time</string>
     <string name="end_time_label">End Time</string>
-    <string name="instrument_label">Instrument Serial #</string>
-    <string name="description_label">Description</string>
+    <string name="instrument_label">Instrument Serial #:</string>
+    <string name="description_label">Description:</string>
+    <string name="remarks_label">Remarks:</string>
     <string name="estimated_size_label">Estimated Size</string>
     <string name="entry_deleted_toast">Entry deleted.</string>
     <string name="warmspot_added_toast">The Warmspot entry has been added to the list. </string>
@@ -74,6 +81,12 @@
     <string name="probe_list_methane_percentage_label">%CH4</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="improper_methane_percentage_toast">%CH4 must be between 0 and 100!</string>
+    <string name="probe_entry_added_toast">Probe added!</string>
+    <string name="probe_form_header">Probe Form</string>
+    <string name="probe_data_header">Probe Entry</string>
+    <string name="integrated_form_header">Integrated Form</string>
+    <string name="integrated_data_header">Integrated Entry</string>
 
     <string name="size_label">Size</string>
     <string name="size_input_label">Size:</string>

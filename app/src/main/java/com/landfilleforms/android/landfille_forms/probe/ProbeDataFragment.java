@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,6 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -42,10 +46,11 @@ public class ProbeDataFragment extends Fragment {
     private TextView mLocationLabel;
     private Spinner mProbeNumberSpinner;
     private TextView mInspectorLabel;
+    private TextView mDateLabel;
+    private TextView mBaroLevelField;
     private EditText mRemarksField;
     private EditText mWaterPressureField;
     private EditText mMethanePercentageField;
-    private Button mDateButton;
     private Button mSubmitButton;
 
     public static ProbeDataFragment newInstance(UUID probeDataId) {
@@ -93,13 +98,134 @@ public class ProbeDataFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_probe_data, container, false);
 
+        mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
+        mInspectorLabel.setText(mProbeData.getInspectorName());
 
+        mLocationLabel = (TextView)v.findViewById(R.id.location);
+        mLocationLabel.setText(mProbeData.getLocation());
 
+        mBaroLevelField = (TextView)v.findViewById(R.id.baro_reading);
+        if(mProbeData.getBarometricPressure() != 0)
+            mBaroLevelField.setText(Double.toString(mProbeData.getBarometricPressure()));
+
+        mDateLabel = (TextView)v.findViewById(R.id.date_label);
+        mDateLabel.setText(DateFormat.format("EEEE, MMM d, yyyy",mProbeData.getDate()));
+
+        mProbeNumberSpinner = (Spinner)v.findViewById(R.id.probe_number_spinner);
+        ArrayAdapter<CharSequence> adapter;
+        switch(mProbeData.getLocation()) {
+            case "Bishops":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_probe, R.layout.dark_spinner_layout);
+                break;
+            case "Gaffey":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_probe, R.layout.dark_spinner_layout);
+                break;
+            case "Lopez":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_probe, R.layout.dark_spinner_layout);
+                break;
+            case "Sheldon":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_probe, R.layout.dark_spinner_layout);
+                break;
+            case "Toyon":
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_probe, R.layout.dark_spinner_layout);
+                break;
+            default:
+                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, R.layout.dark_spinner_layout);;
+        }
+        mProbeNumberSpinner.setAdapter(adapter);
+        mProbeNumberSpinner.setSelection(adapter.getPosition(mProbeData.getProbeNumber()));
+
+        mProbeNumberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mProbeData.setProbeNumber(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        mWaterPressureField = (EditText)v.findViewById(R.id.water_pressure_field);
+        if(mProbeData.getWaterPressure() != 0)
+            mWaterPressureField.setText(Double.toString(mProbeData.getWaterPressure()));
+        mWaterPressureField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s=="" || count == 0) mProbeData.setWaterPressure(0);
+                else mProbeData.setWaterPressure(Double.parseDouble(s.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mMethanePercentageField = (EditText)v.findViewById(R.id.methane_percentage_field);
+        if(mProbeData.getMethanePercentage() != 0)
+            mMethanePercentageField.setText(Double.toString(mProbeData.getMethanePercentage()));
+        mMethanePercentageField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s=="" || count == 0) mProbeData.setMethanePercentage(0);
+                else mProbeData.setMethanePercentage(Double.parseDouble(s.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mRemarksField = (EditText)v.findViewById(R.id.remarks_field);
+        mRemarksField.setText(mProbeData.getRemarks());
+        mRemarksField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mProbeData.setRemarks(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mSubmitButton = (Button)v.findViewById(R.id.submit);
+        mSubmitButton.setText(R.string.submit_button_label);
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if(mProbeData.getMethanePercentage() < 0 || mProbeData.getMethanePercentage() >=100) {
+                    Toast.makeText(getActivity(), R.string.improper_methane_percentage_toast, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    getActivity().finish();
+                    Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return v;
     }
 
-
+    //TODO: Delete later if not needed
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
@@ -115,7 +241,7 @@ public class ProbeDataFragment extends Fragment {
     }
 
     private void updateDate() {
-        mDateButton.setText(DateFormat.format("EEEE, MMM d, yyyy",mProbeData.getDate()));
+        mDateLabel.setText(DateFormat.format("EEEE, MMM d, yyyy",mProbeData.getDate()));
     }
 
     private void dialogDeleteProbeEntry(AlertDialog.Builder alertBuilder) {

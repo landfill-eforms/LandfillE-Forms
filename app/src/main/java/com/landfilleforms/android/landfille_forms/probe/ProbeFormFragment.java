@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
@@ -95,6 +96,7 @@ public class ProbeFormFragment extends Fragment {
         mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         mDateButton = (Button) v.findViewById(R.id.current_date_button);
+        updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
@@ -122,6 +124,7 @@ public class ProbeFormFragment extends Fragment {
                         mProbeDatas.get(i).setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
                 }
                 probeDao.updateProbeDatas(mProbeDatas);
+                Toast.makeText(getActivity(), R.string.updated_barometric_toast,Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,7 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/backgroundTheme">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/backgroundTheme">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+
+            <TableRow android:paddingTop="3dp">
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspector_title"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/inspector_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_label"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
+
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:text="@string/current_date"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <!--Should display current date from system-->
+                <TextView
+                    android:background="@color/backgroundTheme"
+                    android:id="@+id/date_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/baro_reading_label"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:id="@+id/baro_reading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_blue_bright"
+                    />
+
+
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/probe_number_label"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <Spinner
+                    android:id="@+id/probe_number_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    />
+
+            </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/water_pressure_label"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <EditText
+                    android:id="@+id/water_pressure_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/methane_percentage_label"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+
+                <EditText
+                    android:id="@+id/methane_percentage_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:inputType="numberDecimal"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
+            </TableRow>
+
+
+
+        </TableLayout>
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:background="@color/backgroundTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remarks_label"
+            android:layout_margin="3dp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textStyle="normal|bold"
+            android:textSize="20dp"
+            android:paddingBottom="5dp" />
+
+        <!--Set it so it's a box & has a white background-->
+        <EditText
+            android:id="@+id/remarks_field"
+            android:layout_width="match_parent"
+            android:layout_height="137dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@color/white"
+            />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/white"
+            android:textStyle="normal|bold"
+            android:background="@color/darkThemeButtonBackground" />
+    </LinearLayout>
+</ScrollView>

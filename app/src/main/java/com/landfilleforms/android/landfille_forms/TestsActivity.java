@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousFormActivity;
 import com.landfilleforms.android.landfille_forms.ime.ImeFormActivity;
+import com.landfilleforms.android.landfille_forms.integrated.IntegratedFormActivity;
+import com.landfilleforms.android.landfille_forms.probe.ProbeFormActivity;
 import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotFormActivity;
 
 /**
@@ -56,13 +58,13 @@ public class TestsActivity extends AppCompatActivity {
 
     //Event handler for Probe button on Tests Activity
     public void onProbeTestClick(View view) {
-        Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
         //Create Intent to grab ProbeFormActivity
-        //Intent getProbeFormActivity = new Intent(this, ProbeFormActivity.class);
+        Intent getProbeFormActivity = new Intent(this, ProbeFormActivity.class);
+        getProbeFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, this.getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
-        //Call Instantaneous Activity to open
-        //startActivity(getProbeFormActivity);
-
+        //Start Activity
+        startActivity(getProbeFormActivity);
     }
 
     //Event handler for Integrated button on Tests Activity
@@ -85,12 +87,11 @@ public class TestsActivity extends AppCompatActivity {
     }
 
     public void onIntegratedTestClick(View view) {
-        Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
-        //Create Intent to grab IntegratedFormActivity
-        //Intent getIntegratedFormActivity = new Intent(this, IntegratedFormActivity.class);
+        Intent getIntegratedFormActivity = new Intent(this, IntegratedFormActivity.class);
+        getIntegratedFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, this.getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
-        //Call Probe activity to open
-        //startActivity(getIntegratedFormActivity);
+        //Start Activity
+        startActivity(getIntegratedFormActivity);
     }
 
 

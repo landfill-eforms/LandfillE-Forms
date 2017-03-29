@@ -55,6 +55,22 @@
             android:label="@string/warm_spot_data_header"/>
             <!--android:parentActivityName=".warmspot.WarmSpotFormActivity"-->
         <activity
+            android:name=".probe.ProbeFormActivity"
+            android:label="@string/probe_form_header"
+            android:parentActivityName=".LocationActivity"/>
+        <activity
+            android:name=".probe.ProbeDataPagerActivity"
+            android:label="@string/probe_data_header"/>
+        <!--android:parentActivityName=".probe.ProbeFormActivity"-->
+        <activity
+            android:name=".integrated.IntegratedFormActivity"
+            android:label="@string/integrated_form_header"
+            android:parentActivityName=".LocationActivity"/>
+        <activity
+            android:name=".integrated.IntegratedDataPagerActivity"
+            android:label="@string/integrated_data_header"/>
+        <!--android:parentActivityName=".probe.ProbeFormActivity"-->
+        <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar"/>
