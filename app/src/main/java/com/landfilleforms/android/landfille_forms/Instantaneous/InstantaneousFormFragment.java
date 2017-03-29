@@ -61,7 +61,6 @@ public class InstantaneousFormFragment extends Fragment {
 
     private RecyclerView mInstantaneousDataRecyclerView;
     private InstantaneousDataAdapter mAdapter;
-    private Button mExportButton;
 
 
 
@@ -253,7 +252,7 @@ public class InstantaneousFormFragment extends Fragment {
             mBarometricPressureField.setText(Double.toString(defaultBarometricPressure));
     }
 
-    //For RecycleView
+    //For RecyclerView
     private class InstantaneousDataHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private InstantaneousData mInstantaneousData;
