@@ -89,15 +89,15 @@
 
                 <!--Should display current date from system-->
                 <TextView
-                    android:background="@color/backgroundTheme"
                     android:id="@+id/date_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:textColor="@color/white"
+                    android:background="@color/backgroundTheme"
                     android:textAllCaps="false"
-                    android:textStyle="normal"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
+                    android:textStyle="normal"
                     />
 
             </TableRow>
@@ -282,9 +282,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/methane_reading_hint"
-                    android:textColorHint="@android:color/darker_gray"
                     android:inputType="numberDecimal"
                     android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textSize="20dp"
                     />
 

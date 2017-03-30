@@ -29,10 +29,12 @@ import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.TimePickerFragment;
+import com.landfilleforms.android.landfille_forms.database.Site;
 import com.landfilleforms.android.landfille_forms.database.dao.IntegratedDao;
 import com.landfilleforms.android.landfille_forms.model.IntegratedData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
@@ -53,19 +55,23 @@ public class IntegratedDataFragment extends Fragment {
 
     private double tempMethaneLevel;//For the dialogs
     private IntegratedData mIntegratedData;
-    private TextView mInspectorLabel;
-    private EditText mGridIdField;
+
+    private TextView mInspectorField;
+    private TextView mLocationField;
     private Spinner mGridIdSpinner;
-    private EditText mMethaneLevelField;
+    private TextView mStartDateField;
+    private TextView mSampleIdField;
+    private EditText mBagNumberField;
     private TextView mBaroLevelField;
-    private TextView mstartDateText;
     private Button mStartDateButton;
     private Button mStartTimeButton;
     private Button mEndTimeButton;
+    private EditText mMethaneLevelField;
+    private EditText mVolumeField;
     private Button mSubmitButton;
-    private EditText mInstrumentField;
-    private TextView imeField;
-    private TextView mLocationLabel;
+
+
+
     private Spinner mInstrumentSerialNoSpinner;
 
     //chris added this
@@ -132,16 +138,42 @@ public class IntegratedDataFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_integrated_data, container, false);
 
+        mInspectorField = (TextView)v.findViewById(R.id.inspector_name);
+        mInspectorField.setText(mIntegratedData.getInspectorName());
+
+        mLocationField = (TextView) v.findViewById(R.id.location);
+        mLocationField.setText(mIntegratedData.getLocation());
+
+        mStartDateField = (TextView)v.findViewById(R.id.date_label);
+        mStartDateField.setText(DateFormat.format("EEEE, MMM d, yyyy",mIntegratedData.getStartDate()));
+
         mBaroLevelField = (TextView)v.findViewById(R.id.baro_reading);
         if(mIntegratedData.getBarometricPressure() != 0)
             mBaroLevelField.setText(Double.toString(mIntegratedData.getBarometricPressure()));
 
+        mSampleIdField = (TextView) v.findViewById(R.id.sample_id_field);
+        //mSampleIdField.setText(mIntegratedData.getSampleId());
 
-        mstartDateText = (TextView)v.findViewById(R.id.date_label);
-        mstartDateText.setText(DateFormat.format("EEEE, MMM d, yyyy",mIntegratedData.getStartDate()));
+        mBagNumberField = (EditText) v.findViewById(R.id.bag_number_field);
+        if(mIntegratedData.getBagNumber() != 0)
+            mBagNumberField.setText(Integer.toString(mIntegratedData.getBagNumber()));
+        mBagNumberField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
-        mInspectorLabel.setText(mIntegratedData.getInspectorName());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s=="" || count == 0) mIntegratedData.setBagNumber(0);
+                else mIntegratedData.setBagNumber(Integer.parseInt(s.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         mMethaneLevelField = (EditText)v.findViewById(R.id.methane_reading);
         if(mIntegratedData.getMethaneReading() != 0)
@@ -164,8 +196,26 @@ public class IntegratedDataFragment extends Fragment {
             }
         });
 
-        mLocationLabel = (TextView) v.findViewById(R.id.location);
-        mLocationLabel.setText(mIntegratedData.getLocation());
+        mVolumeField = (EditText)v.findViewById(R.id.volume_reading);
+        if(mIntegratedData.getVolumeReading() != 0)
+            mVolumeField.setText(Integer.toString(mIntegratedData.getVolumeReading()));
+        mVolumeField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s=="" || count == 0) mIntegratedData.setVolumeReading(0);
+                else mIntegratedData.setVolumeReading(Integer.parseInt(s.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         //TODO: Create a grid table in the DB and use that instead. UPDATE: I think we can use Alvin's Enum rather than having the Site names be stored in a .xml file.
         mGridIdSpinner = (Spinner)v.findViewById(R.id.grid_id);
@@ -199,6 +249,8 @@ public class IntegratedDataFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mIntegratedData.setGridId(parent.getItemAtPosition(position).toString());
+                mIntegratedData.setSampleId(generateSampleId(mIntegratedData.getLocation(),mIntegratedData.getStartDate(),mIntegratedData.getGridId()));
+                updateTextViews();
             }
 
             @Override
@@ -207,10 +259,6 @@ public class IntegratedDataFragment extends Fragment {
             }
         });
 
-
-
-        imeField = (TextView) v.findViewById(R.id.ime_field);
-        imeField.setText(mIntegratedData.getSampleId());
 
 
 
@@ -321,6 +369,13 @@ public class IntegratedDataFragment extends Fragment {
         mEndTimeButton.setText(DateFormat.format("HH:mm",mIntegratedData.getEndDate()));
     }
 
+    private void updateTextViews() {
+        mStartDateField.setText(DateFormat.format("EEEE, MMM d, yyyy",mIntegratedData.getStartDate()));
+        mStartTimeButton.setText(DateFormat.format("HH:mm",mIntegratedData.getStartDate()));
+        mEndTimeButton.setText(DateFormat.format("HH:mm",mIntegratedData.getEndDate()));
+        mSampleIdField.setText(mIntegratedData.getSampleId());
+
+    }
 
 
     private void dialogEmptyMethaneFieldIntegratedEntryCheck(AlertDialog.Builder alertBuilder) {
@@ -361,5 +416,34 @@ public class IntegratedDataFragment extends Fragment {
         AlertDialog deleteAlert = alertBuilder.create();
         deleteAlert.setTitle("Delete Integrated Entry");
         deleteAlert.show();
+    }
+
+    private String generateSampleId(String currentSite, Date currentDate, String currentGrid) {
+        StringBuilder sb = new StringBuilder();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        int month = cal.get(Calendar.MONTH) + 1;        //For java's Calendar, January = 0
+        int year = cal.get(Calendar.YEAR);
+
+        if (currentSite.equals(Site.BISHOPS.getName()))
+            sb.append(Site.BISHOPS.getShortName());
+        else if (currentSite.equals(Site.GAFFEY.getName()))
+            sb.append(Site.GAFFEY.getShortName());
+        else if (currentSite.equals(Site.LOPEZ.getName()))
+            sb.append(Site.LOPEZ.getShortName());
+        else if (currentSite.equals(Site.SHELDON.getName()))
+            sb.append(Site.SHELDON.getShortName());
+        else if (currentSite.equals(Site.TOYON.getName()))
+            sb.append(Site.TOYON.getShortName());
+
+        sb.append("-");
+        sb.append(currentGrid);
+        sb.append("-");
+        sb.append(Integer.toString(year).substring(2,4));
+        if(month < 10)
+            sb.append(0);
+        sb.append(month);
+
+        return sb.toString();
     }
 }
