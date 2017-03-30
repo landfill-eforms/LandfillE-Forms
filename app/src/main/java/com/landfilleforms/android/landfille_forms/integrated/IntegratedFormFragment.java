@@ -274,7 +274,7 @@ public class IntegratedFormFragment extends Fragment {
         }
 
         public void bindIntegratedData(IntegratedData integratedData) {
-            mIntegratedData = mIntegratedData;
+            mIntegratedData = integratedData;
             mGridIdView.setText(mIntegratedData.getGridId());
             mMethaneReadingView.setText(Double.toString(mIntegratedData.getMethaneReading()));
             mBagNumberView.setText(Integer.toString(mIntegratedData.getBagNumber()));

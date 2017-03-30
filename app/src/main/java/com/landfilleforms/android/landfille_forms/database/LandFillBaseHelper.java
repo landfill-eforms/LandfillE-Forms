@@ -111,6 +111,12 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
     //When we add/remove columns. Change version number.
     @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("delete from "+ LandFillDbSchema.InstantaneousDataTable.NAME);
+        db.execSQL("delete from "+ LandFillDbSchema.ImeDataTable.NAME);
+        db.execSQL("delete from "+ LandFillDbSchema.WarmSpotDataTable.NAME);
+        db.execSQL("delete from "+ LandFillDbSchema.IntegratedDataTable.NAME);
+        db.execSQL("delete from "+ LandFillDbSchema.ProbeDataTable.NAME);
 
     }
+
 }

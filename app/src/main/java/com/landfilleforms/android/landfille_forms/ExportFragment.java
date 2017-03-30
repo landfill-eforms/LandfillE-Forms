@@ -2,6 +2,7 @@ package com.landfilleforms.android.landfille_forms;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
 import com.landfilleforms.android.landfille_forms.model.DataDump;
@@ -41,6 +44,8 @@ public class ExportFragment extends Fragment {
     Button mExport;
     private SessionManager session;
     private User mUser;
+    private SQLiteDatabase mDatabase;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +94,7 @@ public class ExportFragment extends Fragment {
                 int messageResId;
 
                 Date d = new Date();
-                String name = "Instantaneous" + d.toString() + ".json";
+                String name = "LandFillDataExport" + d.toString() + ".json";
                 String path = "LandfillData";
                 try {
 
@@ -106,6 +111,11 @@ public class ExportFragment extends Fragment {
                     fOut.close();
                     messageResId = R.string.export_successful_toast;
                     Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
+                    mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
+                    mDatabase.execSQL("delete from "+ LandFillDbSchema.InstantaneousDataTable.NAME);
+                    mDatabase.execSQL("delete from "+ LandFillDbSchema.ImeDataTable.NAME);
+                    mDatabase.execSQL("delete from "+ LandFillDbSchema.WarmSpotDataTable.NAME);
+
 
                     //TODO: Create a way for the (Instantaneous/IME/Warmspot) Data to get either wiped out or be hidden.
 
