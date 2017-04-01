@@ -24,7 +24,7 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
         String gridId = getString(getColumnIndex(WarmSpotDataTable.Cols.GRID_ID));
         long date = getLong(getColumnIndex(WarmSpotDataTable.Cols.DATE));
         String description = getString(getColumnIndex(WarmSpotDataTable.Cols.DESCRIPTION));
-        double estimatedSize = getDouble(getColumnIndex(WarmSpotDataTable.Cols.ESTIMATED_SIZE));
+        String estimatedSize = getString(getColumnIndex(WarmSpotDataTable.Cols.ESTIMATED_SIZE));
         String inspectorFullName = getString(getColumnIndex(WarmSpotDataTable.Cols.INSPECTOR_NAME));
         String inspectorUserName = getString(getColumnIndex(WarmSpotDataTable.Cols.INSPECTOR_USERNAME));
         double methaneReading = getDouble(getColumnIndex(WarmSpotDataTable.Cols.MAX_METHANE_READING));

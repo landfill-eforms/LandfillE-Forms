@@ -171,24 +171,8 @@ public class ImeDataFragment extends Fragment {
         });
 
 
-        mImeField = (EditText)v.findViewById(R.id.ime_field);
+        mImeField = (TextView)v.findViewById(R.id.ime_field);
         mImeField.setText(mImeData.getImeNumber());
-        /*mImeField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mImeData.setImeNumber(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });*/
 
         mDescriptionField = (EditText)v.findViewById(R.id.description);
         mDescriptionField.setText(mImeData.getDescription());

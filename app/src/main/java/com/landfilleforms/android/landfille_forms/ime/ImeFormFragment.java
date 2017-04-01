@@ -267,7 +267,7 @@ public class ImeFormFragment extends Fragment {
         else if (currentSite.equals(Site.TOYON.getName()))
             sb.append(Site.TOYON.getShortName());
 
-        sb.append("-");
+
         sb.append(Integer.toString(year).substring(2,4));
         sb.append(Integer.toString(year).substring(2,4));
         if(month < 10)

@@ -184,7 +184,7 @@ public class WarmSpotDataFragment extends Fragment {
         });
 
         mEstimatedSizeField = (EditText)v.findViewById(R.id.estimated_size);
-        mEstimatedSizeField.setText(Double.toString(mWarmSpotData.getEstimatedSize()));
+        mEstimatedSizeField.setText(mWarmSpotData.getEstimatedSize());
         mEstimatedSizeField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -193,8 +193,7 @@ public class WarmSpotDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mWarmSpotData.setEstimatedSize(0);
-                else mWarmSpotData.setEstimatedSize(Double.parseDouble(s.toString()));
+                mWarmSpotData.setEstimatedSize(s.toString());
             }
 
             @Override

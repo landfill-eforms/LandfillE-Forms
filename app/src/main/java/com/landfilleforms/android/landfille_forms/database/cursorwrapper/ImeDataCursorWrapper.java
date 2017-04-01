@@ -27,6 +27,7 @@ public class ImeDataCursorWrapper extends CursorWrapper{
         String inspectorUserName = getString(getColumnIndex(ImeDataTable.Cols.INSPECTOR_USERNAME));
         double methaneReading = getDouble(getColumnIndex(ImeDataTable.Cols.MAX_METHANE_READING));
 
+
         ImeData imeData = new ImeData(UUID.fromString(uuidString));
         imeData.setImeNumber(imeNumber);
         imeData.setLocation(location);

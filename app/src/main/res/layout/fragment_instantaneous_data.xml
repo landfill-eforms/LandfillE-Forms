@@ -312,7 +312,8 @@
 
             </TableRow>
 
-            <TableRow>
+            <!--TODO:Get rid of IME number for model as well-->
+<!--            <TableRow>
 
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
@@ -335,7 +336,7 @@
                     />
 
 
-            </TableRow>
+            </TableRow>-->
 
 
         </TableLayout>

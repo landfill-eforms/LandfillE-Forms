@@ -85,12 +85,11 @@
                     android:textStyle="normal|bold"
                     android:textSize="20dp"
                     />
-
-                <EditText
+                <!--TODO: Maybe make this a spinner so they can switch it to an existing IME? Or create a new one. In any case, the user shouldn't be an EditText.-->
+                <TextView
                     android:id="@+id/ime_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textNoSuggestions"
                     android:layout_margin="3dp"
                     android:textAllCaps="false"
                     android:textStyle="normal"

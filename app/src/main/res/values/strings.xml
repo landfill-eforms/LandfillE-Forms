@@ -90,6 +90,7 @@
     <string name="sample_id_label">Sample ID:</string>
     <string name="bag_number_label">Bag #:</string>
     <string name="volume_reading_label">Volume:</string>
+    <string name="same_grid_time_conflict_toast">This time duration conflicts w/ another entry from the same grid!</string>
 
     <string name="size_label">Size</string>
     <string name="size_input_label">Size:</string>
