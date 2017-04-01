@@ -422,6 +422,7 @@ public class IntegratedDataFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
         int month = cal.get(Calendar.MONTH) + 1;        //For java's Calendar, January = 0
         int year = cal.get(Calendar.YEAR);
 
@@ -436,13 +437,16 @@ public class IntegratedDataFragment extends Fragment {
         else if (currentSite.equals(Site.TOYON.getName()))
             sb.append(Site.TOYON.getShortName());
 
-        sb.append("-");
+        sb.append("IS-");
         sb.append(currentGrid);
         sb.append("-");
         sb.append(Integer.toString(year).substring(2,4));
         if(month < 10)
             sb.append(0);
         sb.append(month);
+        if(day < 10)
+            sb.append(0);
+        sb.append(day);
 
         return sb.toString();
     }
