@@ -1,43 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              style="?android:listSeparatorTextViewStyle"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:paddingTop="5dp"
-              android:paddingBottom="5dp"
-              android:orientation="horizontal">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/list_item_instantaneous_data_gridid_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
+    <!--CardView for Instantaneous Data with Instantaneous-->
 
-    <TextView
-        android:id="@+id/list_item_instantaneous_data_methane_level_view"
-        android:layout_width="0dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/instantaneous_data_cv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
-
-    <TextView
-        android:id="@+id/list_item_instantaneous_data_start_date_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
-
-    <Button
-        android:id="@+id/list_item_instantaneous_edit_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        android:text="@string/edit_button_label"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
         android:background="@color/darkThemeButtonBackground"
-        android:textStyle="normal|bold"
-        android:textColor="@color/white"/>
+        app:cardCornerRadius="4dp">
+
+        <!--Elements inside CardView-->
+        <!--TextView for Label follow by TextView for Data-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/darkThemeButtonBackground"
+            android:padding="16dp">
+
+            <!--Grid ID-->
+
+            <TextView
+                android:id="@+id/grid_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                android:text="@string/grid_id_label"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_instantaneous_data_gridid_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/grid_label_cv"
+                android:textSize="20sp" />
+
+            <!--Methane Reading-->
+            <TextView
+                android:id="@+id/methane_reading_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/grid_label_cv"
+                android:layout_marginRight="16dp"
+                android:text="@string/ch4_list_item_label"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_instantaneous_data_methane_level_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/methane_reading_label_cv"
+                android:layout_toEndOf="@+id/methane_reading_label_cv" />
+
+
+            <!--Date-->
+            <!--<TextView-->
+                <!--android:id="@+id/data_label_cv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/methane_reading_label_cv"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:text="@string/current_date"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textStyle="bold" />-->
+
+            <TextView
+                android:id="@+id/list_item_instantaneous_data_start_date_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/list_item_instantaneous_data_methane_level_view"
+                android:layout_alignBottom="@+id/list_item_instantaneous_data_methane_level_view"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="44dp"
+                android:layout_toEndOf="@+id/list_item_instantaneous_data_methane_level_view" />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_instantaneous_data_gridid_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_instantaneous_data_methane_level_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_instantaneous_data_start_date_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/list_item_instantaneous_edit_button"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--android:text="@string/edit_button_label"-->
+        <!--android:background="@color/darkThemeButtonBackground"-->
+        <!--android:textStyle="normal|bold"-->
+        <!--android:textColor="@color/white"/>-->
     <!--
             <TextView
                 android:id="@+id/list_item_instantaneous_data_start_time_view"
