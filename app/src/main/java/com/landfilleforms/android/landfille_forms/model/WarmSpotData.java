@@ -13,7 +13,7 @@ public class WarmSpotData {
     private String mGridId;
     private Date mDate;
     private String mDescription;
-    private double mEstimatedSize;
+    private String mEstimatedSize;
     private String mInspectorFullName;
     private String mInspectorUserName;
     private double mMaxMethaneReading;
@@ -64,11 +64,11 @@ public class WarmSpotData {
         mDescription = description;
     }
 
-    public double getEstimatedSize() {
+    public String getEstimatedSize() {
         return mEstimatedSize;
     }
 
-    public void setEstimatedSize(double estimatedSize) {
+    public void setEstimatedSize(String estimatedSize) {
         mEstimatedSize = estimatedSize;
     }
 

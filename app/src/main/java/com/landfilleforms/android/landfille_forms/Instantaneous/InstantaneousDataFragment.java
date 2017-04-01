@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -42,9 +43,13 @@ import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotDataPagerActi
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -52,6 +57,7 @@ import java.util.UUID;
  */
 
 public class InstantaneousDataFragment extends Fragment {
+    private static final String TAG = "InstantaneousDataFrag:";
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
     private static final String ARG_INSTANTANEOUS_DATA_ID = "instantaneous_data_id";
     private static final String DIALOG_DATE = "DialogDate";
@@ -76,6 +82,7 @@ public class InstantaneousDataFragment extends Fragment {
     private TextView imeField;
     private TextView mLocationLabel;
     private Spinner mInstrumentSerialNoSpinner;
+    private String mCurrentImeNumber;
 
     //chris added this
     private User mUser;
@@ -237,8 +244,8 @@ public class InstantaneousDataFragment extends Fragment {
 //            }
 //        });
 
-        imeField = (TextView) v.findViewById(R.id.ime_field);
-        imeField.setText(mInstantaneousData.getImeNumber());
+/*        imeField = (TextView) v.findViewById(R.id.ime_field);
+        imeField.setText(mInstantaneousData.getImeNumber());*/
 
 //        mStartDateButton = (Button)v.findViewById(R.id.start_date);
 //        updateDate();
@@ -290,6 +297,12 @@ public class InstantaneousDataFragment extends Fragment {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
                 //System.out.println(mInstantaneousData.getMethaneReading());
                 //case where ch4 is over 500, indicated as an IME
+
+                if(isSameGridTimeConflict()) {
+                    Toast.makeText(getActivity(),R.string.same_grid_time_conflict_toast,Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (tempMethaneLevel >= 500) {
                     dialogIME(alertBuilder);
                 }
@@ -396,19 +409,25 @@ public class InstantaneousDataFragment extends Fragment {
     }
     //TODO: Rewrite the way it adds an existing IME data & replace all the Strings w/ the ones from the resource folder
     //dialog to create a new IME form or add to an existing IME
-    private void dialogIMENavigation(AlertDialog.Builder redirectionAlert) {
+    private void dialogIMENavigation(final AlertDialog.Builder redirectionAlert) {
         redirectionAlert.setMessage("Would you like to create a new IME or add to an existing one?")
                 //set positive as "Add to Existing IME",
                 .setCancelable(false).setPositiveButton("Add to Existing IME", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //TODO: Should open up another dialog on click w/ a Spinner composed of all the IME#s for that month.(Or maybe just include every single IME# but that sounds like a bad idea.
-                //add extisting, put them into list
-                Intent getImeFormActivity = new Intent(getActivity(), ImeFormActivity.class);
-               // String tempLocation = null;
-                getImeFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, mInstantaneousData.getLandFillLocation());
-                startActivity(getImeFormActivity);
-                getActivity().finish();
+                //Check if IME #s exist. If not show a toast saying that there are no available.
+                final ImeDao imeDao = ImeDao.get(getActivity());
+                String [] args = {mInstantaneousData.getLandFillLocation()};
+                List<ImeData> imeDatas = imeDao.getImeDatasByLocation(args);
+                if(imeDatas.size() == 0) {
+                    //TODO: Create string resource
+                    Toast.makeText(getActivity(),"No IME entries exist.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    final AlertDialog.Builder newRedirectionAlert = new AlertDialog.Builder(getActivity());
+                    dialogExistingIme(newRedirectionAlert);
+                }
             }//temp fix, set this to cancel to rearrange order of options
         }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -442,6 +461,66 @@ public class InstantaneousDataFragment extends Fragment {
         AlertDialog alert = redirectionAlert.create();
         alert.setTitle("IME Navigation");
         alert.show();
+
+    }
+
+    //TODO:
+    private void dialogExistingIme(AlertDialog.Builder redirectionAlert) {
+
+        redirectionAlert.setTitle("Add to existing IME");
+        redirectionAlert.setMessage("Which existing IME would you like to use?").setCancelable(false).setPositiveButton("Generate IME", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String generatedImeNumber = generateIMEnumber(mInstantaneousData.getLandFillLocation(), mInstantaneousData.getStartDate());
+
+                mInstantaneousData.setImeNumber(generatedImeNumber);//Don't think this line will edit the Instantaneous entry in the DB since the block that does that is in the submit
+                ImeData imeData = new ImeData();
+                imeData.setImeNumber(mCurrentImeNumber);
+                imeData.setLocation(mInstantaneousData.getLandFillLocation());
+                imeData.setDate(mInstantaneousData.getStartDate());
+                imeData.setGridId(mInstantaneousData.getGridId());
+                imeData.setMethaneReading(tempMethaneLevel);
+                imeData.setInspectorFullName(mUser.getFullName());
+                imeData.setInspectorUserName(mUser.getUsername());
+                ImeDao.get(getActivity()).addImeData(imeData);
+                Intent navigateIMEForm = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
+                startActivity(navigateIMEForm);
+            }//temp fix, set this to cancel to rearrange order of options
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().finish();
+                //dialog.cancel();
+            }
+        });
+        redirectionAlert.setView(R.layout.dialog_add_to_existing_ime);
+        Spinner existingImeSpinner;
+        final ImeDao imeDao = ImeDao.get(getActivity());
+        String [] args = {mInstantaneousData.getLandFillLocation()};
+        List<ImeData> mImeDatas = imeDao.getImeDatasByLocation(args);
+        //ImeNumbers for spinner
+        Set<String> imeNumbers = new HashSet<String>();
+        for(ImeData imeData: mImeDatas) {
+            if(imeData.getImeNumber() != null && imeData.getImeNumber().trim().length() != 0)
+                imeNumbers.add(imeData.getImeNumber());
+        }
+        imeNumbers.add("");
+        existingImeSpinner = (Spinner) redirectionAlert.show().findViewById(R.id.existing_ime_spinner);
+        List<String> imeNumbersList = new ArrayList<String>(imeNumbers);
+        ArrayAdapter<String> imeNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, imeNumbersList);
+        existingImeSpinner.setAdapter(imeNumberSpinnerItems);
+        existingImeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mCurrentImeNumber = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                mCurrentImeNumber = "";
+            }
+        });
+
 
     }
 
@@ -522,6 +601,8 @@ public class InstantaneousDataFragment extends Fragment {
         deleteAlert.show();
     }
 
+
+
     private String generateIMEnumber(String currentSite, Date currentDate) {
         StringBuilder sb = new StringBuilder();
         Calendar cal = Calendar.getInstance();
@@ -541,7 +622,7 @@ public class InstantaneousDataFragment extends Fragment {
         else if (currentSite.equals(Site.TOYON.getName()))
             sb.append(Site.TOYON.getShortName());
 
-        sb.append("-");
+
         sb.append(Integer.toString(year).substring(2,4));
         if(month < 10)
             sb.append(0);
@@ -556,5 +637,39 @@ public class InstantaneousDataFragment extends Fragment {
         sb.append(sequenceNumber);
 
         return sb.toString();
+    }
+
+    private boolean isSameGridTimeConflict() {
+        String[] args = {mInstantaneousData.getLandFillLocation(),mInstantaneousData.getGridId()};
+        List<InstantaneousData> instantaneousDatas = InstantaneousDao.get(this.getActivity()).getInstantaneousDatasByLocationGrid(args);
+
+        for(int i = 0; i < instantaneousDatas.size(); i++) {
+            if(instantaneousDatas.get(i).getId() != mInstantaneousData.getId()){
+                long otherInstantaneousStartTime = instantaneousDatas.get(i).getStartDate().getTime();
+                long otherInstantaneousEndTime = instantaneousDatas.get(i).getEndDate().getTime();
+                long thisInstantaneousStartTime = mInstantaneousData.getStartDate().getTime();
+                long thisInstantaneousEndTime = mInstantaneousData.getEndDate().getTime();
+                //This function already assumes that an Instantaneous Entry's startTime is always before its endTime
+                //There should be four cases when time conflicts.(TOOT,OTTO,TOTO,OTOT)
+                //OTTO
+                if (thisInstantaneousStartTime > otherInstantaneousStartTime && thisInstantaneousEndTime < otherInstantaneousEndTime){
+                    return true;
+                }
+
+                //TOOT
+                else if (thisInstantaneousStartTime < otherInstantaneousStartTime && thisInstantaneousEndTime > otherInstantaneousEndTime) {
+                    return true;
+                }
+                //TOTO
+                else if (thisInstantaneousStartTime < otherInstantaneousStartTime && thisInstantaneousEndTime > otherInstantaneousStartTime && otherInstantaneousStartTime < thisInstantaneousEndTime) {
+                    return true;
+                }
+                //OTOT
+                else if (thisInstantaneousStartTime > otherInstantaneousStartTime && thisInstantaneousStartTime < otherInstantaneousEndTime && thisInstantaneousEndTime > otherInstantaneousEndTime) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

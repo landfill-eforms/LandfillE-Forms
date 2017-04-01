@@ -82,6 +82,25 @@ public class InstantaneousDao {
         return instantaneousForm;
     }
 
+    public List<InstantaneousData> getInstantaneousDatasByLocationGrid(String[] args) {
+        List<InstantaneousData> instantaneousForm = new ArrayList<>();
+
+        //Gotta create a WHERE clause
+        InstantaneousDataCursorWrapper cursor = queryInstantaneousData(InstantaneousDataTable.Cols.LOCATION + "= ? AND " + InstantaneousDataTable.Cols.GRID_ID + "= ?", args);//Having both values null effectively selects all
+
+        try {
+            cursor.moveToFirst();
+            while(!cursor.isAfterLast()) {
+                instantaneousForm.add(cursor.getInstantaneousData());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return instantaneousForm;
+    }
+
+
     public InstantaneousData getInstantaneousData(UUID id) {
         InstantaneousDataCursorWrapper cursor = queryInstantaneousData(
                 InstantaneousDataTable.Cols.UUID + "= ? ",
