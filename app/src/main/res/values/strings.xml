@@ -118,6 +118,7 @@
     <string name="start_time">Start Time: </string>
     <string name="filter_button_label">Filter</string>
     <string name="search_button_label">Search</string>
+    <string name="ch4_list_item_label">CH4(ppm):</string>
 
 
     <!-- Array for Equipment Spinner-->
