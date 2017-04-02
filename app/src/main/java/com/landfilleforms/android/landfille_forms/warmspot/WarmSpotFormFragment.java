@@ -51,6 +51,7 @@ public class WarmSpotFormFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getActivity().setTitle(getResources().getString(R.string.warm_spot_form_header) + ": " + this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);

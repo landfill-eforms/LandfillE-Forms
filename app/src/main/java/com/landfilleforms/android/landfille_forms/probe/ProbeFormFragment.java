@@ -64,6 +64,7 @@ public class ProbeFormFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getActivity().setTitle(getResources().getString(R.string.probe_form_header) + ": " + this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
