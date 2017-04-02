@@ -7,4 +7,5 @@
         android:title="@string/new_instantaneous_data"
         app:showAsAction="ifRoom|withText"
         />
+
 </menu>
