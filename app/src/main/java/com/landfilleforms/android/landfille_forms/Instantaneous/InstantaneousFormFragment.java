@@ -68,7 +68,10 @@ public class InstantaneousFormFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        //Set Action Bar Title
         getActivity().setTitle(getResources().getString(R.string.instantaneous_form_header) + ": " + this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         //super.onCreate(savedInstanceState);
@@ -108,7 +111,7 @@ public class InstantaneousFormFragment extends Fragment {
 
 
         mCurrentLocation = (TextView) v.findViewById(R.id.location);
-        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+//        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         mStartDateButton = (Button)v.findViewById(R.id.current_date);
         updateDate();

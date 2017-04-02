@@ -142,7 +142,6 @@
                     android:id="@+id/methane_reading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/methane_reading_hint"
                     android:inputType="numberDecimal"
                     android:textColor="@color/white"
                     android:layout_margin="3dp"
