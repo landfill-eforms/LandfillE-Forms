@@ -26,6 +26,7 @@ public class TestsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setTitle(getResources().getString(R.string.tests_header) + ": " + this.getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tests);
     }

@@ -2,6 +2,7 @@ package com.landfilleforms.android.landfille_forms.instantaneous;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -67,6 +68,7 @@ public class InstantaneousFormFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getActivity().setTitle(getResources().getString(R.string.instantaneous_form_header) + ": " + this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         //super.onCreate(savedInstanceState);
