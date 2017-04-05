@@ -61,11 +61,11 @@
             android:layout_marginTop="5dp"
             app:cardBackgroundColor="@color/backgroundTheme">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:weightSum="4">
 
                 <!--<TextView-->
                 <!--android:id="@+id/location"-->
@@ -87,8 +87,9 @@
                     android:textColor="@color/white"
                     android:textSize="18dp"
                     android:textStyle="normal|bold"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                     />
 
                 <EditText
                     android:id="@+id/barometric_field"
@@ -100,7 +101,8 @@
                     android:inputType="numberDecimal"
                     android:textColor="@color/white"
                     android:textSize="18dp"
-                    android:layout_alignTop="@+id/baro_label" />
+                    android:layout_weight="1"
+                    />
 
                 <Button
                     android:id="@+id/barometric_button"
@@ -111,10 +113,10 @@
                     android:textColor="@color/white"
                     android:textStyle="normal|bold"
                     android:layout_marginEnd="21dp"
-                    android:layout_alignTop="@+id/baro_label"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_weight="1"
+                     />
 
-            </RelativeLayout>
+            </LinearLayout>
 
 
         </android.support.v7.widget.CardView>
