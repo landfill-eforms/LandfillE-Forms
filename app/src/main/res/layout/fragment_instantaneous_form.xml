@@ -64,53 +64,55 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
                 android:paddingTop="10dp">
 
-                <TextView
-                    android:id="@+id/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="3dp"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_alignBottom="@+id/barometric_button"
-                    android:layout_alignParentStart="true" />
+                <!--<TextView-->
+                <!--android:id="@+id/location"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingEnd="3dp"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_alignBottom="@+id/barometric_button"-->
+                <!--android:layout_alignParentStart="true" />-->
 
                 <TextView
                     android:id="@+id/baro_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="20dp"
                     android:text="@string/baro_reading_label"
                     android:textColor="@color/white"
                     android:textSize="18dp"
                     android:textStyle="normal|bold"
-
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/location" />
+                    android:layout_alignParentStart="true" />
 
                 <EditText
                     android:id="@+id/barometric_field"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/barometric_button"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/baro_label"
                     android:inputType="numberDecimal"
                     android:textColor="@color/white"
                     android:textSize="18dp"
-                    android:layout_alignBaseline="@+id/location"
-                    android:layout_alignBottom="@+id/location"
-                    android:layout_toEndOf="@+id/baro_label" />
+                    android:layout_alignTop="@+id/baro_label" />
 
                 <Button
                     android:id="@+id/barometric_button"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@id/barometric_field"
                     android:background="@color/darkThemeButtonBackground"
                     android:text="@string/set_button_label"
                     android:textColor="@color/white"
-                    android:textStyle="normal|bold" />
+                    android:textStyle="normal|bold"
+                    android:layout_marginEnd="21dp"
+                    android:layout_alignTop="@+id/baro_label"
+                    android:layout_alignParentEnd="true" />
 
             </RelativeLayout>
 

@@ -147,8 +147,6 @@
 
     </string-array>
 
-
-
     <string-array name="bishops_grid">
         <item>A1</item>
         <item>A2</item>
@@ -538,7 +536,6 @@
     </string-array>
 
 
-
     <string-array name="sheldon_probe">
         <item>01A</item>
         <item>01B</item>
@@ -639,7 +636,6 @@
         <item>20E</item>
     </string-array>
 
-
     <string-array name="toyon_probe">
         <item>01A</item>
         <item>01B</item>
@@ -682,6 +678,94 @@
         <item>15B</item>
         <item>16A</item>
     </string-array>
-    
 
+
+    <!--Serial Number for Equipment Types-->
+    <string-array name="instantaneous_integrated_probe">
+
+        <item>GM05311</item>
+        <item>GM05322</item>
+        <item>GM05326</item>
+        <item>GM05328</item>
+        <item>GM05881</item>
+        <item>GM12524</item>
+        <item>G501938</item>
+        <item>12111812</item>
+        <item>67176223</item>
+        <item>121126615</item>
+        <item>7157035</item>
+        <item>17192486</item>
+        <item>33435442</item>
+        <item>425908759</item>
+
+    </string-array>
+    
+    <string-array name="perc_co2_n2_pressure">
+
+        <item>GM05311</item>
+        <item>GM05322</item>
+        <item>GM05326</item>
+        <item>GM05328</item>
+        <item>GM05881</item>
+        <item>GM12524</item>
+        <item>G501938</item>
+        <item>12111812</item>
+        <item>67176223</item>
+        <item>121126615</item>
+        <item>7157035</item>
+        <item>17192486</item>
+        <item>33435442</item>
+        <item>425908759</item>
+        
+    </string-array>
+
+    <string-array name="percent_ch4">
+
+        <item>E0X058</item>
+        <item>E84103</item>
+        <item>GM05311</item>
+        <item>GM05322</item>
+        <item>GM05326</item>
+        <item>GM05328</item>
+        <item>GM05881</item>
+        <item>GM12524</item>
+        <item>G501938</item>
+
+    </string-array>
+
+    <string-array name="ppm_ch4">
+
+        <item>E84103</item>
+        <item>12111812</item>
+        <item>67176223</item>
+        <item>121126615</item>
+        <item>7157035</item>
+        <item>17192486</item>
+        <item>33435442</item>
+        <item>425908759</item>
+
+    </string-array>
+    
+    <string-array name="ppm_h2s">
+
+        <item>E0X058</item>
+        <item>G501938</item>
+
+    </string-array>
+
+    <string-array name="perc_o2">
+
+        <item>E0X058</item>
+        <item>E84103</item>
+        <item>GM05311</item>
+        <item>GM05322</item>
+        <item>GM05326</item>
+        <item>GM05328</item>
+        <item>GM05881</item>
+        <item>GM12524</item>
+        <item>G501938</item>
+
+    </string-array>
+
+    
 </resources>
