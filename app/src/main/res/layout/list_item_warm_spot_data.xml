@@ -28,14 +28,15 @@
         android:layout_height="wrap_content"
         android:layout_weight=".25"
         />
+
     <Button
         android:id="@+id/list_item_warm_spot_edit_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".25"
-        android:text="@string/edit_button_label"
         android:background="@color/darkThemeButtonBackground"
-        android:textStyle="normal|bold"
-        android:textColor="@color/white"/>
+        android:text="@string/edit_button_label"
+        android:textColor="@color/white"
+        android:textStyle="normal|bold"/>
 
 </LinearLayout>

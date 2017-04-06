@@ -28,7 +28,6 @@ public class TimePickerFragment extends DialogFragment {
 
     private TimePicker mTimePicker;
 
-
     public static TimePickerFragment newInstance(Date date) {//This sets the time shown in the timepicker
         Bundle args = new Bundle();
         args.putSerializable(ARG_TIME, date);
