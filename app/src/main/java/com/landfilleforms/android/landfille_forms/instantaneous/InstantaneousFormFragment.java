@@ -286,6 +286,7 @@ public class InstantaneousFormFragment extends Fragment {
             mCardView = (CardView)itemView.findViewById(R.id.instantaneous_data_cv);
             mCardView.setOnClickListener(new View.OnClickListener() {
 
+                @Override
                 public void onClick(View v) {
                     Intent intent = InstantaneousDataPagerActivity.newIntent(getActivity(), mInstantaneousData.getId());
                     startActivity(intent);
