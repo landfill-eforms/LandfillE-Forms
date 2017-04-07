@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -156,6 +157,8 @@ public class InstantaneousFormFragment extends Fragment {
         mInstantaneousDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
+
+
 
         return v;
     }
@@ -370,4 +373,5 @@ public class InstantaneousFormFragment extends Fragment {
             mInstantaneousDatas = instantaneousDatas;
         }
     }
+
 }

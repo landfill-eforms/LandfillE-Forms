@@ -33,7 +33,6 @@ public class TimePickerFragment extends DialogFragment {
         args.putSerializable(ARG_TIME, date);
         TimePickerFragment fragment = new TimePickerFragment();
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -42,8 +41,13 @@ public class TimePickerFragment extends DialogFragment {
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_time, null);
 
+        Date date = (Date) getArguments().getSerializable(ARG_TIME);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
         mTimePicker = (TimePicker) v.findViewById(R.id.dialog_time_time_picker);
         mTimePicker.setIs24HourView(true);
+        mTimePicker.setCurrentHour(cal.get(Calendar.HOUR_OF_DAY));
+        mTimePicker.setCurrentMinute(cal.get(Calendar.MINUTE));
 
 
         return new AlertDialog.Builder(getActivity()).setView(v).setTitle(R.string.time_picker_title).setPositiveButton(android.R.string.ok,
