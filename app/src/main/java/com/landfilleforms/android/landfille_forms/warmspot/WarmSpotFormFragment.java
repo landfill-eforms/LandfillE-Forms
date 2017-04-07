@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -48,6 +49,7 @@ public class WarmSpotFormFragment extends Fragment {
     private RecyclerView mWarmSpotDataRecyclerView;
     private WarmSpotDataAdapter mAdapter;
     private Button mExportButton;
+    private CardView mCardView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,8 +77,8 @@ public class WarmSpotFormFragment extends Fragment {
         String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
         mWarmSpotDatas = warmspotDao.getWarmSpotDatasByLocation(args);
 
-        mCurrentLocation = (TextView) v.findViewById(R.id.location);
-        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+//        mCurrentLocation = (TextView) v.findViewById(R.id.location);
+//        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
 
         //TODO: Deleted the code for Grid array since it isn't needed for Warmspots. Should delete the code related to this on the DAO end as well.
@@ -163,14 +165,26 @@ public class WarmSpotFormFragment extends Fragment {
             mMethaneReadingView.setTextColor(Color.rgb(255,165,0));
             mStartDateView.setTextColor(Color.rgb(255,165,0));
 
-            mEditButton = (Button)itemView.findViewById(R.id.list_item_warm_spot_edit_button);
-            mEditButton.setOnClickListener(new View.OnClickListener() {
+            mCardView = (CardView)itemView.findViewById(R.id.instantaneous_data_cv);
+            mCardView.setOnClickListener(new View.OnClickListener(){
+
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v){
                     Intent intent = WarmSpotDataPagerActivity.newIntent(getActivity(), mWarmSpotData.getId());
                     startActivity(intent);
                 }
+
             });
+
+
+//            mEditButton = (Button)itemView.findViewById(R.id.list_item_warm_spot_edit_button);
+//            mEditButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = WarmSpotDataPagerActivity.newIntent(getActivity(), mWarmSpotData.getId());
+//                    startActivity(intent);
+//                }
+//            });
         }
 
         public void bindWarmSpotData(WarmSpotData warmSpotData) {

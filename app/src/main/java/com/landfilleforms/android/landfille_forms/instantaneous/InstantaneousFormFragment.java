@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -157,6 +158,8 @@ public class InstantaneousFormFragment extends Fragment {
 
         updateUI();
 
+
+
         return v;
     }
 
@@ -286,6 +289,7 @@ public class InstantaneousFormFragment extends Fragment {
             mCardView = (CardView)itemView.findViewById(R.id.instantaneous_data_cv);
             mCardView.setOnClickListener(new View.OnClickListener() {
 
+                @Override
                 public void onClick(View v) {
                     Intent intent = InstantaneousDataPagerActivity.newIntent(getActivity(), mInstantaneousData.getId());
                     startActivity(intent);
@@ -369,4 +373,5 @@ public class InstantaneousFormFragment extends Fragment {
             mInstantaneousDatas = instantaneousDatas;
         }
     }
+
 }
