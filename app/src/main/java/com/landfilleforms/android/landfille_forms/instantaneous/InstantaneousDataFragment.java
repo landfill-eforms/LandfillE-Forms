@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,7 +70,6 @@ public class InstantaneousDataFragment extends Fragment {
     private double tempMethaneLevel;//For the dialogs
     private InstantaneousData mInstantaneousData;
     private TextView mInspectorLabel;
-    private EditText mGridIdField;
     private Spinner mGridIdSpinner;
     private EditText mMethaneLevelField;
     private TextView mBaroLevelField;
@@ -83,6 +83,7 @@ public class InstantaneousDataFragment extends Fragment {
     private TextView mLocationLabel;
     private Spinner mInstrumentSerialNoSpinner;
     private String mCurrentImeNumber;
+    private boolean newlyCreatedData;
 
     //chris added this
     private User mUser;
@@ -102,6 +103,10 @@ public class InstantaneousDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID instantaneousDataId = (UUID) getArguments().getSerializable(ARG_INSTANTANEOUS_DATA_ID);
         mInstantaneousData = InstantaneousDao.get(getActivity()).getInstantaneousData(instantaneousDataId);
+        if(mInstantaneousData.getGridId() == null)
+            newlyCreatedData = true;
+        else
+            newlyCreatedData = false;
 
         setHasOptionsMenu(true);
 
@@ -171,7 +176,8 @@ public class InstantaneousDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mInstantaneousData.setMethaneReading(0);
+                if (s.equals("") || count == 0||s.toString().equals(".")) mInstantaneousData.setMethaneReading(0);
+
                 else mInstantaneousData.setMethaneReading(Double.parseDouble(s.toString()));
             }
 
@@ -323,7 +329,24 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-
+        //TODO: fix this
+        //This deletes newly created entries if you back out but I don't think this is a good solution
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i(TAG, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    if(newlyCreatedData)
+                        InstantaneousDao.get(getActivity()).removeInstantaneousData(mInstantaneousData);
+                    getActivity().finish();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         return v;
     }
 
@@ -672,4 +695,5 @@ public class InstantaneousDataFragment extends Fragment {
         }
         return false;
     }
+
 }
