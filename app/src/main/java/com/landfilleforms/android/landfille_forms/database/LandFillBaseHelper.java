@@ -10,7 +10,9 @@ import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.User
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ImeDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.WarmSpotDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.IntegratedDataTable;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.IseDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ProbeDataTable;
+
 
 /**
  * Created by Work on 10/30/2016.
@@ -91,6 +93,20 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 IntegratedDataTable.Cols.END_DATE + "," +
                 IntegratedDataTable.Cols.VOLUME_READING + "," +
                 IntegratedDataTable.Cols.MAX_METHANE_READING + ")"
+        );
+
+        //add ISE data table
+        db.execSQL("create table " + IseDataTable.NAME + "(" +
+                "_id integer primary key autoincrement, " +
+                IseDataTable.Cols.UUID + "," +
+                IseDataTable.Cols.ISE_NUMBER + "," +
+                IseDataTable.Cols.LOCATION + "," +
+                IseDataTable.Cols.GRID_ID + "," +
+                IseDataTable.Cols.DATE + "," +
+                IseDataTable.Cols.DESCRIPTION + "," +
+                IseDataTable.Cols.INSPECTOR_NAME + "," +
+                IseDataTable.Cols.INSPECTOR_USERNAME + "," +
+                IseDataTable.Cols.MAX_METHANE_READING + ")"
         );
 
         db.execSQL("create table " + ProbeDataTable.NAME + "(" +

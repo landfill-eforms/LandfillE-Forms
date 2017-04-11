@@ -77,6 +77,22 @@ public class LandFillDbSchema {
         }
     }
 
+    public static final class IseDataTable {
+        public static final String NAME = "ise_data";
+        public static class Cols {
+            public static final String UUID = "uuid";
+            public static final String ISE_NUMBER = "ise_number";
+            public static final String LOCATION = "location";
+            public static final String GRID_ID = "grid_id";
+            public static final String DATE = "date";
+            public static final String DESCRIPTION = "description";
+            public static final String INSPECTOR_NAME = "inspector_name";
+            public static final String INSPECTOR_USERNAME = "inspector_username";
+            public static final String MAX_METHANE_READING = "max_methane_reading";
+
+        }
+    }
+
     public static final class ProbeDataTable {
         public static final String NAME = "probe_data";
         public static class Cols {
