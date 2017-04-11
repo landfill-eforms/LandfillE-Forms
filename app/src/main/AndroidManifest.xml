@@ -83,6 +83,15 @@
             android:name=".integrated.IntegratedDataPagerActivity"
             android:label="@string/integrated_data_header"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ise.IseFormActivity"
+            android:label="@string/ise_form_header"
+            android:parentActivityName=".LocationActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ise.IseDataPagerActivity"
+            android:label="@string/ise_data_header"
+            android:screenOrientation="portrait"/>
         <!--android:parentActivityName=".probe.ProbeFormActivity"-->
         <activity
             android:name=".MenuActivity"

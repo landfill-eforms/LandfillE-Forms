@@ -1,4 +1,5 @@
 <resources>
+    <string name= "action">Action</string>
     <string name="app_name">Landfill E-Forms</string>
     <string name="location_header">Landfill Locations</string>
     <string name="tests_header">Available Tests</string>
@@ -12,10 +13,13 @@
     <string name="logout_toast">You have successfully logged out.</string>
     <string name="blank_login_toast">Please enter username and password</string>
     <string name="instantaneous_list_grid_label">Grid Id: </string>
+    <string name="integrated_list_grid_label">Grid Id: </string>
     <string name="instantaneous_list_start_date_label">Date: </string>
+    <string name="integrated_list_start_date_label">Date: </string>
     <string name="instantaneous_list_start_time_label">Start Time</string>
     <string name="instantaneous_list_end_time_label">End Time</string>
     <string name="instantaneous_list_methane_level_label">CH4(ppm)</string>
+    <string name="integrated_list_methane_level_label">CH4(ppm)</string>
     <string name="integrated_list_bag_number_label">Bag No.</string>
     <string name="new_probe_data">New Probe Data Entry</string>
     <string name="new_instantaneous_data">New Instantaneous Data Entry</string>
@@ -23,7 +27,9 @@
     <string name="delete_instantaneous_data">Remove Instantaneous Data Entry</string>
     <string name="delete_integrated_data">Remove Integrated Data Entry</string>
     <string name="new_ime_data">New IME Data Entry</string>
+    <string name="new_ise_data">New ISE Data Entry</string>
     <string name="delete_ime_data">Remove IME Data Entry</string>
+    <string name="delete_ise_data">Remove ISE Data Entry</string>
     <string name="new_warm_spot_data">New WarmSpot Data Entry</string>
     <string name="delete_warm_spot_data">Remove WarmSpot Data Entry</string>
     <string name="delete_probe_data">Remove Probe Data Entry</string>
@@ -32,6 +38,7 @@
     <string name="water_pressure_label">Pressure "H2O:</string>
     <string name="methane_percentage_label">%Methane:</string>
     <string name="ime_label">IME #:</string>
+    <string name="ise_label">ISE #:</string>
     <string name="grid_id_label">Grid ID: </string>
     <string name="grid_id_hint">Ex: LOP-1234?</string>
     <string name="methane_reading_label">CH4(ppm) Reading</string>
@@ -47,7 +54,9 @@
     <string name="instantaneous_form_header">Instantaneous Form</string>
     <string name="instantaenous_data_header">Instantaneous Entry</string>
     <string name="ime_form_header">IME Form</string>
+    <string name="ise_form_header">ISE Form</string>
     <string name="ime_data_header">IME Entry</string>
+    <string name="ise_data_header">ISE Entry</string>
     <string name="warm_spot_form_header">WarmSpot Form</string>
     <string name="warm_spot_data_header">WarmSpot Entry</string>
     <string name="json_export_header">Export</string>
@@ -64,6 +73,7 @@
     <string name="entry_deleted_toast">Entry deleted.</string>
     <string name="warmspot_added_toast">The Warmspot entry has been added to the list. </string>
     <string name="ime_added_toast">The IME entry has been added to the list. </string>
+    <string name="ise_added_toast">The ISE entry has been added to the list. </string>
     <string name="instantaneous_added_toast">The instantaneous entry has been added to the list. </string>
     <string name="edit_button_label">Edit</string>
     <string name="set_button_label">Set</string>
@@ -72,6 +82,7 @@
     <string name="start_end_time_error_toast">Start time cannot be after the end time.</string>
     <string name="end_start_time_error_toast">End time cannot be before the start time.</string>
     <string name="improper_methane_ime_toast">An IME entry cannot have CH4 levels below 500</string>
+    <string name="improper_methane_ise_toast">An ISE entry cannot have CH4 levels below 25</string>
     <string name="improper_methane_warmspot_toast">A warmspot entry must have CH4 levels between 200 &amp; 500</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="welcome_string">Welcome!</string>

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousFormActivity;
 import com.landfilleforms.android.landfille_forms.ime.ImeFormActivity;
 import com.landfilleforms.android.landfille_forms.integrated.IntegratedFormActivity;
+import com.landfilleforms.android.landfille_forms.ise.IseFormActivity;
 import com.landfilleforms.android.landfille_forms.probe.ProbeFormActivity;
 import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotFormActivity;
 
@@ -71,11 +72,12 @@ public class TestsActivity extends AppCompatActivity {
     //Event handler for Integrated button on Tests Activity
     public void onISETestClick(View view) {
         Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
-        //Create Intent to grab IntegratedFormActivity
-        //Intent getIntegratedFormActivity = new Intent(this, IntegratedFormActivity.class);
+        Intent getIseFormActivity = new Intent(this, IseFormActivity.class);
+        Toast.makeText(this, EXTRA_LANDFILL_LOCATION, Toast.LENGTH_SHORT).show();
+        getIseFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, this.getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
-        //Call Probe activity to open
-        //startActivity(getIntegratedFormActivity);
+        //Start Activity
+        startActivity(getIseFormActivity);
     }
 
     public void onIMETestClick(View view) {
