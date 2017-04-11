@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/backgroundTheme">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <TableRow android:paddingTop="3dp">
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspector_title"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/ise_inspector_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_label"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/ise_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ise_label"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/ise_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/white" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/grid_id_label"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp" />
+
+                <Spinner
+                    android:id="@+id/ise_grid_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textColor="@color/white" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/methane_reading_label"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/ise_methane_reading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/backgroundTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description_label"
+                android:textColor="@color/white"
+                android:layout_margin="3dp"
+                android:textAllCaps="false"
+                android:textStyle="normal|bold"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/ise_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:minLines="6"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@color/white" />
+
+            <Button
+                android:layout_weight="9"
+                android:id="@+id/ise_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/white"
+                android:background="@color/darkThemeButtonBackground"
+                android:textStyle="normal|bold"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/ise_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/darkThemeButtonBackground"
+                android:textColor="@color/white"
+                android:textStyle="normal|bold"
+                android:layout_marginBottom="5dp"/>
+
+            <Button
+                android:id="@+id/ise_submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/darkThemeButtonBackground"
+                android:textColor="@color/white"
+                android:textStyle="normal|bold"/>
+
+    </LinearLayout>
+
+</ScrollView>
