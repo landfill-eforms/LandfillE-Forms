@@ -203,10 +203,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:background="@color/white"
                 />
-
-
-
-
+        
 
             <Button
                 android:layout_weight="9"
