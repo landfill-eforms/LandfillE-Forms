@@ -191,7 +191,7 @@ public class WarmSpotFormFragment extends Fragment {
             mWarmSpotData = warmSpotData;
             mGridIdView.setText(mWarmSpotData.getGridId());
             mMethaneReadingView.setText(Double.toString(mWarmSpotData.getMaxMethaneReading()));
-            mStartDateView.setText(DateFormat.format("M/d/yyyy",mWarmSpotData.getDate()));
+            mStartDateView.setText(DateFormat.format("yyyy-MM-dd",mWarmSpotData.getDate()));
             //mStartTimeView.setText(DateFormat.format("HH:mm:ss",mWarmSpotData.getStartDate()));
             //mEndTimeView.setText(DateFormat.format("HH:mm:ss",mWarmSpotData.getEndDate()));
         }

@@ -108,9 +108,6 @@ public class InstantaneousFormFragment extends Fragment {
         Log.d("filteredSize", Integer.toString(filteredByDateInstantaneousDatas.size()));
 
 
-
-
-
         mCurrentLocation = (TextView) v.findViewById(R.id.location);
 //        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
@@ -273,7 +270,7 @@ public class InstantaneousFormFragment extends Fragment {
         private TextView mMethaneReadingView;
         private Button mEditButton;
         private CardView mCardView;
-
+        private TextView mInstUser;
 
         //Form Data Holder
 
@@ -285,6 +282,7 @@ public class InstantaneousFormFragment extends Fragment {
             mStartDateView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_start_date_view);
             //mStartTimeView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_start_time_view);
             //mEndTimeView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_end_time_view);
+            mInstUser = (TextView) itemView.findViewById(R.id.list_item_instantaneous_inspector_name);
 
             mCardView = (CardView)itemView.findViewById(R.id.instantaneous_data_cv);
             mCardView.setOnClickListener(new View.OnClickListener() {
@@ -312,7 +310,7 @@ public class InstantaneousFormFragment extends Fragment {
             mInstantaneousData = instantaneousData;
             mGridIdView.setText(mInstantaneousData.getGridId());
             mMethaneReadingView.setText(Double.toString(mInstantaneousData.getMethaneReading()));
-            mStartDateView.setText(DateFormat.format("M/d/yyyy",mInstantaneousData.getStartDate()));
+            mStartDateView.setText(DateFormat.format("yyyy-MM-dd",mInstantaneousData.getStartDate()));
             //Set colors depending on ch4 level in RecyclerView
             if (mInstantaneousData.getMethaneReading() >= 500) {
                 mGridIdView.setTextColor(Color.RED);
