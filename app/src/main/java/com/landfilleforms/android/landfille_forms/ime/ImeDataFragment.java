@@ -121,7 +121,7 @@ public class ImeDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mImeData.setMethaneReading(0);
+                if (s=="" || count == 0 || s.equals(".")) mImeData.setMethaneReading(0);
                 else mImeData.setMethaneReading(Double.parseDouble(s.toString()));
             }
 

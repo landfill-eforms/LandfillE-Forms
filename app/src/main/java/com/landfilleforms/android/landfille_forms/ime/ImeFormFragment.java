@@ -324,14 +324,14 @@ public class ImeFormFragment extends Fragment {
             mImeData = imeData;
             mGridIdView.setText(mImeData.getGridId());
             mMethaneReadingView.setText(Double.toString(mImeData.getMethaneReading()));
-            mStartDateView.setText(DateFormat.format("M/d/yyyy",mImeData.getDate()));
+            mStartDateView.setText(DateFormat.format("yyyy-MM-dd",mImeData.getDate()));
             //mStartTimeView.setText(DateFormat.format("HH:mm:ss",mImeData.getStartDate()));
             //mEndTimeView.setText(DateFormat.format("HH:mm:ss",mImeData.getEndDate()));
 
-            //Changed RecyclerView text to White
-            mGridIdView.setTextColor(Color.WHITE);
-            mMethaneReadingView.setTextColor(Color.WHITE);
-            mStartDateView.setTextColor(Color.WHITE);
+            //Changed RecyclerView text to Red
+            mGridIdView.setTextColor(Color.RED);
+            mMethaneReadingView.setTextColor(Color.RED);
+            mStartDateView.setTextColor(Color.RED);
         }
 
         @Override
