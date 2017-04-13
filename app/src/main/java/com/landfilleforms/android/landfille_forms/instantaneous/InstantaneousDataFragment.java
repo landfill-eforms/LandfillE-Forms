@@ -165,6 +165,7 @@ public class InstantaneousDataFragment extends Fragment {
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mInstantaneousData.getInspectorName());
 
+        //between 0.1 - 70000, round before storing, if "1", 3 sig fig, else 2 sig fig
         mMethaneLevelField = (EditText)v.findViewById(R.id.methane_reading);
         if(mInstantaneousData.getMethaneReading() != 0)
             mMethaneLevelField.setText(Double.toString(mInstantaneousData.getMethaneReading()));
@@ -696,4 +697,13 @@ public class InstantaneousDataFragment extends Fragment {
         return false;
     }
 
+    private boolean checkMethaneWithinRange(double value) {
+        if (value >= 0.1 && value <= 70000) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
 }

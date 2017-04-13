@@ -267,12 +267,12 @@ public class ProbeFormFragment extends Fragment {
             mWaterPressureView.setText(Double.toString(mProbeData.getWaterPressure()));
             mMethanePercentageView.setText(Double.toString(mProbeData.getMethanePercentage()));
             //Set colors depending on ch4 level in RecyclerView
-            if (mProbeData.getMethanePercentage() >= 500) {
+            if (mProbeData.getMethanePercentage() >= 5.0) {
                 mProbeNumberView.setTextColor(Color.RED);
                 mWaterPressureView.setTextColor(Color.RED);
                 mMethanePercentageView.setTextColor(Color.RED);
             }
-            else if (mProbeData.getMethanePercentage() >= 200 && mProbeData.getMethanePercentage() <500) {
+            else if (mProbeData.getMethanePercentage() >= 0.1 && mProbeData.getMethanePercentage() < 4.9) {
                 mProbeNumberView.setTextColor(Color.rgb(255,165,0));
                 mWaterPressureView.setTextColor(Color.rgb(255,165,0));
                 mMethanePercentageView.setTextColor(Color.rgb(255,165,0));

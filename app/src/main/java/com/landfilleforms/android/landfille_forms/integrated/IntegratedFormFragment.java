@@ -280,13 +280,12 @@ public class IntegratedFormFragment extends Fragment {
             mMethaneReadingView.setText(Double.toString(mIntegratedData.getMethaneReading()));
             mBagNumberView.setText(Integer.toString(mIntegratedData.getBagNumber()));
             //Set colors depending on ch4 level in RecyclerView
-            //TODO: if these entries are to be color coded as well, may need different conditions
-            if (mIntegratedData.getMethaneReading() >= 500) {
+            if (mIntegratedData.getMethaneReading() >= 25) {
                 mGridIdView.setTextColor(Color.RED);
                 mMethaneReadingView.setTextColor(Color.RED);
                 mBagNumberView.setTextColor(Color.RED);
             }
-            else if (mIntegratedData.getMethaneReading() >= 200 && mIntegratedData.getMethaneReading() <500) {
+            else if (mIntegratedData.getMethaneReading() >= 10 && mIntegratedData.getMethaneReading() < 25) {
                 mGridIdView.setTextColor(Color.rgb(255,165,0));
                 mMethaneReadingView.setTextColor(Color.rgb(255,165,0));
                 mBagNumberView.setTextColor(Color.rgb(255,165,0));
