@@ -3,6 +3,7 @@ package com.landfilleforms.android.landfille_forms;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ public class LocationActivity extends AppCompatActivity {
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
     SessionManager session;
     User mUser;
+    private DrawerLayout mDrawer;
 
 
     @Override

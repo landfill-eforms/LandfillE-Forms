@@ -94,7 +94,7 @@ public class ProbeFormFragment extends Fragment {
         mProbeDatas = probeDatasFilteredByDates;
 
         mCurrentLocation = (TextView) v.findViewById(R.id.location);
-        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+//        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         mDateButton = (Button) v.findViewById(R.id.current_date_button);
         updateDate();
