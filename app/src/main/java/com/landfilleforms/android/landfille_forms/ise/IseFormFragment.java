@@ -296,10 +296,6 @@ public class IseFormFragment extends Fragment {
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_ise_data_gridid_view);
             mMethaneReadingView = (TextView) itemView.findViewById(R.id.list_item_ise_data_methane_level_view);
             mStartDateView = (TextView) itemView.findViewById(R.id.list_item_ise_date_view);
-            mGridIdView.setTextColor(Color.RED);
-            mMethaneReadingView.setTextColor(Color.RED);
-            mStartDateView.setTextColor(Color.RED);
-
             mEditButton = (Button)itemView.findViewById(R.id.list_item_ise_edit_button);
             mEditButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -315,9 +311,9 @@ public class IseFormFragment extends Fragment {
             mGridIdView.setText(mIseData.getGridId());
             mMethaneReadingView.setText(Double.toString(mIseData.getMethaneReading()));
             mStartDateView.setText(DateFormat.format("M/d/yyyy",mIseData.getDate()));
-            mGridIdView.setTextColor(Color.WHITE);
-            mMethaneReadingView.setTextColor(Color.WHITE);
-            mStartDateView.setTextColor(Color.WHITE);
+            mGridIdView.setTextColor(Color.RED);
+            mMethaneReadingView.setTextColor(Color.RED);
+            mStartDateView.setTextColor(Color.RED);
         }
 
         @Override
