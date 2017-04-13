@@ -207,7 +207,7 @@ public class IntegratedDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mIntegratedData.setVolumeReading(0);
+                if (s=="" || count == 0 || s.toString().equals(".")) mIntegratedData.setVolumeReading(0);
                 else mIntegratedData.setVolumeReading(Integer.parseInt(s.toString()));
             }
 

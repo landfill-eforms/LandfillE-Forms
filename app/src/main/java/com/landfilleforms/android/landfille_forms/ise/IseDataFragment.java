@@ -112,7 +112,7 @@ public class IseDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mIseData.setMethaneReading(0);
+                if (s=="" || count == 0 || s.toString().equals(".")) mIseData.setMethaneReading(0);
                 else mIseData.setMethaneReading(Double.parseDouble(s.toString()));
             }
 
