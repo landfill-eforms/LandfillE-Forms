@@ -69,11 +69,9 @@ public class TestsActivity extends AppCompatActivity {
         startActivity(getProbeFormActivity);
     }
 
-    //Event handler for Integrated button on Tests Activity
+    //Event handler for ISE button on Tests Activity
     public void onISETestClick(View view) {
-        Toast.makeText(this, R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
         Intent getIseFormActivity = new Intent(this, IseFormActivity.class);
-        Toast.makeText(this, EXTRA_LANDFILL_LOCATION, Toast.LENGTH_SHORT).show();
         getIseFormActivity.putExtra(EXTRA_LANDFILL_LOCATION, this.getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         //Start Activity
