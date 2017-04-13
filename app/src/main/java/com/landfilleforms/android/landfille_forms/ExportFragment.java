@@ -19,9 +19,15 @@ import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
+import com.landfilleforms.android.landfille_forms.database.dao.IntegratedDao;
+import com.landfilleforms.android.landfille_forms.database.dao.IseDao;
+import com.landfilleforms.android.landfille_forms.database.dao.ProbeDao;
 import com.landfilleforms.android.landfille_forms.model.DataDump;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
+import com.landfilleforms.android.landfille_forms.model.IntegratedData;
+import com.landfilleforms.android.landfille_forms.model.IseData;
+import com.landfilleforms.android.landfille_forms.model.ProbeData;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
@@ -81,48 +87,64 @@ public class ExportFragment extends Fragment {
                 WarmSpotDao warmSpotDao = WarmSpotDao.get(getActivity());
                 List<WarmSpotData> warmSpotDatas = warmSpotDao.getWarmSpotDatas();
 
-                DataDump dataDump = new DataDump(instantaneousDatas, imeDatas, warmSpotDatas);
+                IntegratedDao integratedDao = IntegratedDao.get(getActivity());
+                List<IntegratedData> integratedDatas = integratedDao.getIntegratedDatas();
 
-                GsonBuilder builder = new GsonBuilder();
-                builder.serializeNulls();
-                builder.setDateFormat("EEE, dd MMM yyyy HH:mm:ss");
-                Gson gson = builder.create();
+                IseDao iseDao = IseDao.get(getActivity());
+                List<IseData> iseDatas = iseDao.getIseDatas();
 
-                String jsonOutput = gson.toJson(dataDump);
+                ProbeDao probeDao = ProbeDao.get(getActivity());
+                List<ProbeData> probeDatas = probeDao.getProbeDatas();
 
-                Log.d("Json",jsonOutput);
-                int messageResId;
+                DataDump dataDump = new DataDump(instantaneousDatas, imeDatas, warmSpotDatas,integratedDatas,iseDatas,probeDatas);
 
-                Date d = new Date();
-                String name = "LandFillDataExport" + d.toString() + ".json";
-                String path = "LandfillData";
-                try {
+                if (dataDump.containsNoData()) {
+                    Toast.makeText(context, R.string.no_data, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    GsonBuilder builder = new GsonBuilder();
+                    builder.serializeNulls();
+                    builder.setDateFormat("EEE, dd MMM yyyy HH:mm:ss");
+                    Gson gson = builder.create();
 
-                    File myFile = new File(Environment.getExternalStorageDirectory()+File.separator+path);
-                    myFile.mkdirs();
-                    myFile = new File(Environment.getExternalStorageDirectory()+File.separator+path+File.separator+name);
+                    String jsonOutput = gson.toJson(dataDump);
 
-                    myFile.createNewFile();
-                    FileOutputStream fOut = new FileOutputStream(myFile);
-                    OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
-                    myOutWriter.append(jsonOutput);
+                    Log.d("Json",jsonOutput);
+                    int messageResId;
 
-                    myOutWriter.close();
-                    fOut.close();
-                    messageResId = R.string.export_successful_toast;
-                    Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
-                    mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
-                    mDatabase.execSQL("delete from "+ LandFillDbSchema.InstantaneousDataTable.NAME);
-                    mDatabase.execSQL("delete from "+ LandFillDbSchema.ImeDataTable.NAME);
-                    mDatabase.execSQL("delete from "+ LandFillDbSchema.WarmSpotDataTable.NAME);
+                    Date d = new Date();
+                    String name = "LandFillDataExport" + d.toString() + ".json";
+                    String path = "LandfillData";
+                    try {
 
+                        File myFile = new File(Environment.getExternalStorageDirectory()+File.separator+path);
+                        myFile.mkdirs();
+                        myFile = new File(Environment.getExternalStorageDirectory()+File.separator+path+File.separator+name);
 
-                    //TODO: Create a way for the (Instantaneous/IME/Warmspot) Data to get either wiped out or be hidden.
+                        myFile.createNewFile();
+                        FileOutputStream fOut = new FileOutputStream(myFile);
+                        OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+                        myOutWriter.append(jsonOutput);
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    messageResId = R.string.export_unsuccessful_toast;
-                    Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
+                        myOutWriter.close();
+                        fOut.close();
+                        messageResId = R.string.export_successful_toast;
+                        Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
+                        mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
+                        mDatabase.execSQL("delete from "+ LandFillDbSchema.InstantaneousDataTable.NAME);
+                        mDatabase.execSQL("delete from "+ LandFillDbSchema.ImeDataTable.NAME);
+                        mDatabase.execSQL("delete from "+ LandFillDbSchema.WarmSpotDataTable.NAME);
+                        mDatabase.execSQL("delete from "+ LandFillDbSchema.IntegratedDataTable.NAME);
+                        mDatabase.execSQL("delete from "+ LandFillDbSchema.IseDataTable.NAME);
+                        mDatabase.execSQL("delete from "+ LandFillDbSchema.ProbeDataTable.NAME);
+
+                        //TODO: Create a way for the (Instantaneous/IME/Warmspot) Data to get either wiped out or be hidden.
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        messageResId = R.string.export_unsuccessful_toast;
+                        Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
