@@ -112,7 +112,7 @@ public class WarmSpotDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mWarmSpotData.setMaxMethaneReading(0);
+                if (s=="" || count == 0 || s.toString().equals(".")) mWarmSpotData.setMaxMethaneReading(0);
                 else mWarmSpotData.setMaxMethaneReading(Double.parseDouble(s.toString()));
             }
 

@@ -178,9 +178,9 @@ public class InstantaneousDataFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.equals("") || count == 0||s.toString().equals(".")) mInstantaneousData.setMethaneReading(0);
-
                 else mInstantaneousData.setMethaneReading(Double.parseDouble(s.toString()));
             }
+
 
             @Override
             public void afterTextChanged(Editable s) {

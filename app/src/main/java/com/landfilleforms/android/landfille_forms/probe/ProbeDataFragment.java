@@ -158,7 +158,7 @@ public class ProbeDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mProbeData.setWaterPressure(0);
+                if (s=="" || count == 0 || s.toString().equals(".")) mProbeData.setWaterPressure(0);
                 else mProbeData.setWaterPressure(Double.parseDouble(s.toString()));
             }
 
@@ -179,7 +179,7 @@ public class ProbeDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mProbeData.setMethanePercentage(0);
+                if (s=="" || count == 0 || s.toString().equals(".")) mProbeData.setMethanePercentage(0);
                 else mProbeData.setMethanePercentage(Double.parseDouble(s.toString()));
             }
 
