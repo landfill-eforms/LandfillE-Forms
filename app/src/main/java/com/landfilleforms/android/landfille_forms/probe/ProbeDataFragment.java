@@ -217,7 +217,7 @@ public class ProbeDataFragment extends Fragment {
                 }
                 else {
                     getActivity().finish();
-                    Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.probe_added_toast, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -263,4 +263,41 @@ public class ProbeDataFragment extends Fragment {
         deleteAlert.setTitle("Delete Probe Entry");
         deleteAlert.show();
     }
+
+    private void dialogWaterNotification(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("H2O pressure is above 1.0. Are you sure the reading is over 1.0?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("H2O Pressure");
+        deleteAlert.show();
+    }
+
+    private void dialogMethaneNotification(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("CH4 readings are above 2.5%. Are you sure these readings are above 2.5%?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("CH4 Readings");
+        deleteAlert.show();
+    }
+
 }
