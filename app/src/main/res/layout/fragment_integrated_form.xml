@@ -29,27 +29,7 @@
                 android:paddingTop="0dp"/>
 
         </LinearLayout>
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:paddingTop="5dp">-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@string/location_label"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textStyle="normal|bold"-->
-                <!--android:textSize="20dp"-->
-                <!--android:layout_marginRight="5dp" />-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/location"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="20dp"/>-->
-        <!--</LinearLayout>-->
-<!--        <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -57,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/instrument_label"
+                android:text="@string/location_label"
                 android:textColor="@color/white"
                 android:textStyle="normal|bold"
                 android:textSize="20dp"
@@ -65,10 +45,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/instrument_serial_number"
+                android:id="@+id/location"
                 android:textColor="@color/white"
                 android:textSize="20dp"/>
-        </LinearLayout>-->
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,6 +80,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instrument_label"
+                android:textColor="@color/white"
+                android:textStyle="normal|bold"
+                android:textSize="20dp"
+                android:layout_marginRight="5dp" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/instrument_serial_no_spinner"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/instrument_serial_no_button"
+                android:text="@string/set_button_label"
+                android:background="@color/darkThemeButtonBackground"
+                android:textStyle="normal|bold"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </LinearLayout>
 
     <!--<LinearLayout  android:layout_width="match_parent"-->

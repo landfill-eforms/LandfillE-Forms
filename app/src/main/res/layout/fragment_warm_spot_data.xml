@@ -126,7 +126,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
                     android:background="@color/backgroundTheme"
@@ -151,9 +150,33 @@
                     android:textStyle="normal"
                     android:textSize="20dp"
                     />
+            </TableRow>
 
+            <TableRow>
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/instrument_label"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
 
-
+                <EditText
+                    android:id="@+id/instrument_serial_no_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:layout_margin="3dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textStyle="normal"
+                    android:textSize="20dp"
+                    />
             </TableRow>
 
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -193,29 +192,29 @@ public class InstantaneousDataFragment extends Fragment {
 
         //TODO: Create a grid table in the DB and use that instead. UPDATE: I think we can use Alvin's Enum rather than having the Site names be stored in a .xml file.
         mGridIdSpinner = (Spinner)v.findViewById(R.id.grid_id);
-        ArrayAdapter<CharSequence> adapter;
+        ArrayAdapter<CharSequence> gridIdAdapter;
         //TODO: Ask Alvin if it's possible to use his Enums for switch/case. While the Enum names are constant, I don't think the String properties of that Enum are.
         switch(mInstantaneousData.getLandFillLocation()) {
             case "Bishops":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, R.layout.dark_spinner_layout);
+                gridIdAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.bishops_grid, R.layout.dark_spinner_layout);
                 break;
             case "Gaffey":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, R.layout.dark_spinner_layout);
+                gridIdAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.gaffey_grid, R.layout.dark_spinner_layout);
                 break;
             case "Lopez":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, R.layout.dark_spinner_layout);
+                gridIdAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.lopez_grid, R.layout.dark_spinner_layout);
                 break;
             case "Sheldon":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, R.layout.dark_spinner_layout);
+                gridIdAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.sheldon_grid, R.layout.dark_spinner_layout);
                 break;
             case "Toyon":
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, R.layout.dark_spinner_layout);
+                gridIdAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.toyon_grid, R.layout.dark_spinner_layout);
                 break;
             default:
-                adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, R.layout.dark_spinner_layout);;
+                gridIdAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, R.layout.dark_spinner_layout);;
         }
-        mGridIdSpinner.setAdapter(adapter);
-        mGridIdSpinner.setSelection(adapter.getPosition(mInstantaneousData.getGridId()));
+        mGridIdSpinner.setAdapter(gridIdAdapter);
+        mGridIdSpinner.setSelection(gridIdAdapter.getPosition(mInstantaneousData.getGridId()));
 
 
 
@@ -231,25 +230,24 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-//        mInstrumentField = (EditText)v.findViewById(R.id.instrument_field);
-//        mInstrumentField.setText(mInstantaneousData.getInstrumentSerialNumber());
-//        mInstrumentField.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (s=="" || count == 0) mInstantaneousData.setInstrumentSerialNumber("");
-//                else mInstantaneousData.setInstrumentSerialNumber(s.toString());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+        mInstrumentSerialNoSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+        ArrayAdapter<CharSequence> instrumentSerialAdapter;
+        instrumentSerialAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.instantaneous_integrated_probe, R.layout.dark_spinner_layout);
+        mInstrumentSerialNoSpinner.setAdapter(instrumentSerialAdapter);
+        mInstrumentSerialNoSpinner.setSelection(instrumentSerialAdapter.getPosition(mInstantaneousData.getInstrumentSerialNumber()));
+
+        mInstrumentSerialNoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mInstantaneousData.setInstrumentSerialNumber(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
 /*        imeField = (TextView) v.findViewById(R.id.ime_field);
         imeField.setText(mInstantaneousData.getImeNumber());*/

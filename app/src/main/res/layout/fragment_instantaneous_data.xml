@@ -226,7 +226,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/serial_no_spinner"
+                    android:id="@+id/instrument_serial_no_spinner"
                     android:textSize="20dp"/>
 
             </TableRow>
@@ -305,6 +305,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/holo_blue_bright"
+                    android:textSize="20dp"
                     />
 
 

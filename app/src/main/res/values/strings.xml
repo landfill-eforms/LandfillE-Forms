@@ -1,5 +1,5 @@
 <resources>
-    <string name= "action">Action</string>
+    <string name="action">Action</string>
     <string name="app_name">Landfill E-Forms</string>
     <string name="location_header">Landfill Locations</string>
     <string name="tests_header">Tests</string>
@@ -104,6 +104,7 @@
     <string name="bag_number_label">Bag #:</string>
     <string name="volume_reading_label">Volume:</string>
     <string name="same_grid_time_conflict_toast">This time duration conflicts w/ another entry from the same grid!</string>
+    <string name="updated_instrument_ime_datas">Updated instrument serial #s for current entries.</string>
 
     <string name="size_label">Size</string>
     <string name="size_input_label">Size:</string>
@@ -153,14 +154,10 @@
         <item>MP-20</item>
     </string-array>
 
-    <string-array name="serial_no_array">
-        <item>100</item>
-    </string-array>
-
-
     <string-array name="empty_array">
 
     </string-array>
+
 
     <string-array name="bishops_grid">
         <item>A1</item>
