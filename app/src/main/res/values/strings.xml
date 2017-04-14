@@ -72,10 +72,11 @@
     <string name="remarks_label">Remarks:</string>
     <string name="estimated_size_label">Estimated Size</string>
     <string name="entry_deleted_toast">Entry deleted.</string>
-    <string name="warmspot_added_toast">The Warmspot entry has been added to the list. </string>
+    <string name="integrated_added_toast">The Integrated entry has been added to the list.</string>
+    <string name="warmspot_added_toast">The Warmspot entry has been added to the list.</string>
     <string name="ime_added_toast">The IME entry has been added to the list. </string>
     <string name="ise_added_toast">The ISE entry has been added to the list. </string>
-    <string name="instantaneous_added_toast">The instantaneous entry has been added to the list. </string>
+    <string name="instantaneous_added_toast">The Instantaneous entry has been added to the list. </string>
     <string name="probe_added_toast">The Probe entry has been added to the list. </string>
     <string name="edit_button_label">Edit</string>
     <string name="set_button_label">Set</string>
@@ -105,6 +106,14 @@
     <string name="volume_reading_label">Volume:</string>
     <string name="same_grid_time_conflict_toast">This time duration conflicts w/ another entry from the same grid!</string>
     <string name="updated_instrument_ime_datas">Updated instrument serial #s for current entries.</string>
+    <string name="new_instantaneous_cancelation_toast">New Instantaneous Entry discarded.</string>
+    <string name="new_integrated_cancelation_toast">New Integrated Entry discarded.</string>
+    <string name="new_ise_cancelation_toast">New ISE Entry discarded.</string>
+    <string name="new_probe_cancelation_toast">New Probe Entry discarded.</string>
+    <string name="new_warmspot_cancelation_toast">New Warmspot Entry discarded.</string>
+    <string name="new_ime_cancelation_toast">New IME Entry discarded.</string>
+    <string name="unsaved_changes_discarded_toast">Unsaved changes discarded.</string>
+    <string name="option_repair_toast">This option currently has bugs. Please use the other one.</string>
 
     <string name="size_label">Size</string>
     <string name="size_input_label">Size:</string>

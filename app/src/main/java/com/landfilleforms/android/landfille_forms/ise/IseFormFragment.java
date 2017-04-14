@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.landfilleforms.android.landfille_forms.R;
@@ -162,8 +163,21 @@ public class IseFormFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_ise:
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
-                dialogISENavigation(alertBuilder);
+                if(mIseDatas.size() != 0){
+                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
+                    dialogISENavigation(alertBuilder);
+                }
+                else {
+                    IseData iseData = new IseData();
+                    iseData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+                    iseData.setInspectorFullName(mUser.getFullName());
+                    iseData.setInspectorUserName(mUser.getUsername());
+                    iseData.setIseNumber(generateIseNumber(iseData.getLocation(),new Date()));
+                    IseDao.get(getActivity()).addIseData(iseData);
+                    Intent intent = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
+                    startActivity(intent);
+                }
+
                 return true;
             case android.R.id.home:
                 this.getActivity().onBackPressed();
@@ -205,7 +219,7 @@ public class IseFormFragment extends Fragment {
                 .setCancelable(false).setPositiveButton("Add to Current ISE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                IseData iseData = new IseData();
+                /*IseData iseData = new IseData();
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 iseData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 iseData.setInspectorFullName(mUser.getFullName());
@@ -213,8 +227,8 @@ public class IseFormFragment extends Fragment {
                 iseData.setIseNumber(mCurrentIseNumber);
                 IseDao.get(getActivity()).addIseData(iseData);
                 Intent intent = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
-                startActivity(intent);
-
+                startActivity(intent);*/
+                Toast.makeText(getActivity(),R.string.option_repair_toast, Toast.LENGTH_SHORT).show();
             }
         }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -228,7 +242,7 @@ public class IseFormFragment extends Fragment {
                 iseData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 iseData.setInspectorFullName(mUser.getFullName());
                 iseData.setInspectorUserName(mUser.getUsername());
-                iseData.setIseNumber(mCurrentIseNumber);
+                iseData.setIseNumber(generateIseNumber(iseData.getLocation(),new Date()));
                 IseDao.get(getActivity()).addIseData(iseData);
                 Intent intent = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
                 startActivity(intent);
@@ -240,7 +254,7 @@ public class IseFormFragment extends Fragment {
 
     }
 
-    private String generateISEnumber(String currentSite, Date currentDate) {
+    private String generateIseNumber(String currentSite, Date currentDate) {
         StringBuilder sb = new StringBuilder();
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
@@ -258,13 +272,12 @@ public class IseFormFragment extends Fragment {
             sb.append(Site.SHELDON.getShortName());
         else if (currentSite.equals(Site.TOYON.getName()))
             sb.append(Site.TOYON.getShortName());
-
-
-        sb.append(Integer.toString(year).substring(2,4));
         sb.append(Integer.toString(year).substring(2,4));
         if(month < 10)
             sb.append(0);
         sb.append(month);
+
+
         IseDao iseDao = IseDao.get(getActivity());
         String[] args = {currentSite};
         sequenceNumber = iseDao.getIseSequenceNumber(args, currentDate) + 1;
@@ -274,6 +287,7 @@ public class IseFormFragment extends Fragment {
         sb.append(sequenceNumber);
 
         return sb.toString();
+
     }
 
 

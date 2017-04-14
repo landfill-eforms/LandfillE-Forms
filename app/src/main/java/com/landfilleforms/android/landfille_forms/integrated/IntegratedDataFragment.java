@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,6 +53,7 @@ import java.util.UUID;
 
 //TODO: Finish this
 public class IntegratedDataFragment extends Fragment {
+    private static final String TAG = "IntegratedDataFrag:";
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
     private static final String ARG_INTEGRATED_DATA_ID = "integrated_data_id";
     private static final String DIALOG_DATE = "DialogDate";
@@ -62,6 +64,8 @@ public class IntegratedDataFragment extends Fragment {
 
     private double tempMethaneLevel;//For the dialogs
     private IntegratedData mIntegratedData;
+    private String mCurrentIseNumber;
+    private boolean newlyCreatedData;
 
     private TextView mInspectorField;
     private TextView mLocationField;
@@ -100,6 +104,13 @@ public class IntegratedDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID integratedDataId = (UUID) getArguments().getSerializable(ARG_INTEGRATED_DATA_ID);
         mIntegratedData = IntegratedDao.get(getActivity()).getIntegratedData(integratedDataId);
+        if(mIntegratedData.getGridId() == null)
+            newlyCreatedData = true;
+        else
+            newlyCreatedData = false;
+
+        setHasOptionsMenu(true);
+
 
         setHasOptionsMenu(true);
 
@@ -331,8 +342,34 @@ public class IntegratedDataFragment extends Fragment {
         });
 
 
+
+        //TODO: fix this
+        //This deletes newly created entries if you back out but I don't think this is a good solution
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i(TAG, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    if(newlyCreatedData) {
+                        IntegratedDao.get(getActivity()).removeIntegratedData(mIntegratedData);
+                        Toast.makeText(getActivity(), R.string.new_integrated_cancelation_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), R.string.unsaved_changes_discarded_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    getActivity().finish();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         return v;
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -452,6 +489,7 @@ public class IntegratedDataFragment extends Fragment {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), R.string.integrated_added_toast, Toast.LENGTH_SHORT).show();
                 getActivity().finish();
                 //dialog.cancel();
             }
@@ -491,14 +529,14 @@ public class IntegratedDataFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 //make a new ISE
                 Log.d("Location:",mIntegratedData.getLocation());
-                //String generatedIseNumber = generateISEnumber(mIntegratedData.getLocation(), mIntegratedData.getStartDate());
+                String generatedIseNumber = generateIseNumber(mIntegratedData.getLocation(), mIntegratedData.getStartDate());
 
-                //mIntegratedData.setImeNumber(generatedImeNumber);//Don't think this line will edit the Instantaneous entry in the DB since the block that does that is in the submit
+
                 IseData iseData = new IseData();
                 iseData.setLocation(mIntegratedData.getLocation());
                 iseData.setDate(mIntegratedData.getStartDate());
                 iseData.setGridId(mIntegratedData.getGridId());
-                //iseData.setIseNumber(mInstantaneousData.getImeNumber());
+                iseData.setIseNumber(generatedIseNumber);
                 iseData.setMethaneReading(tempMethaneLevel);
                 iseData.setInspectorFullName(mUser.getFullName());
                 iseData.setInspectorUserName(mUser.getUsername());
@@ -521,11 +559,10 @@ public class IntegratedDataFragment extends Fragment {
         redirectionAlert.setMessage("Which existing IME would you like to use?").setCancelable(false).setPositiveButton("Generate IME", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //String generatedImeNumber = generateISEnumber(mInstantaneousData.getLandFillLocation(), mInstantaneousData.getStartDate());
+                String generatedImeNumber = generateIseNumber(mIntegratedData.getLocation(), mIntegratedData.getStartDate());
 
-                //mInstantaneousData.setImeNumber(generatedImeNumber);//Don't think this line will edit the Instantaneous entry in the DB since the block that does that is in the submit
                 IseData iseData = new IseData();
-                //imeData.setIseNumber(mCurrentIseNumber);
+                iseData.setIseNumber(mCurrentIseNumber);
                 iseData.setLocation(mIntegratedData.getLocation());
                 iseData.setDate(mIntegratedData.getStartDate());
                 iseData.setGridId(mIntegratedData.getGridId());
@@ -545,31 +582,52 @@ public class IntegratedDataFragment extends Fragment {
         });
         redirectionAlert.setView(R.layout.dialog_add_to_existing_ise);
         Spinner existingIseSpinner;
-        final IseDao imeDao = IseDao.get(getActivity());
+        final IseDao iseDao = IseDao.get(getActivity());
         String [] args = {mIntegratedData.getLocation()};
-        List<IseData> mImeDatas = imeDao.getIseDatasByLocation(args);
+        List<IseData> mIseDatas = iseDao.getIseDatasByLocation(args);
         //ImeNumbers for spinner
         Set<String> iseNumbers = new HashSet<String>();
-        for(IseData iseData: mImeDatas) {
+        for(IseData iseData: mIseDatas) {
             if(iseData.getIseNumber() != null && iseData.getIseNumber().trim().length() != 0)
                 iseNumbers.add(iseData.getIseNumber());
         }
         iseNumbers.add("");
         existingIseSpinner = (Spinner) redirectionAlert.show().findViewById(R.id.existing_ise_spinner);
         List<String> iseNumbersList = new ArrayList<String>(iseNumbers);
-        ArrayAdapter<String> iseNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, iseNumbersList);
+        ArrayAdapter<String> iseNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, iseNumbersList){
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+
+                View v = null;
+
+                if (position == 0) {
+                    TextView tv = new TextView(getContext());
+                    tv.setHeight(0);
+                    tv.setVisibility(View.GONE);
+                    v = tv;
+                }
+                else {
+
+                    v = super.getDropDownView(position, null, parent);
+                }
+
+                parent.setVerticalScrollBarEnabled(false);
+                return v;
+            }
+        };
         existingIseSpinner.setAdapter(iseNumberSpinnerItems);
-//        existingIseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                mCurrentIseNumber = parent.getItemAtPosition(position).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                mCurrentImeNumber = "";
-//            }
-//        });
+        existingIseSpinner.setSelection(iseNumberSpinnerItems.getPosition(iseNumberSpinnerItems.getItem(1).toString()));
+        existingIseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mCurrentIseNumber = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                mCurrentIseNumber = "";
+            }
+        });
 
     }
 
@@ -604,5 +662,41 @@ public class IntegratedDataFragment extends Fragment {
         sb.append(day);
 
         return sb.toString();
+    }
+
+    private String generateIseNumber(String currentSite, Date currentDate) {
+        StringBuilder sb = new StringBuilder();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int year = cal.get(Calendar.YEAR);
+        int sequenceNumber;
+
+        if (currentSite.equals(Site.BISHOPS.getName()))
+            sb.append(Site.BISHOPS.getShortName());
+        else if (currentSite.equals(Site.GAFFEY.getName()))
+            sb.append(Site.GAFFEY.getShortName());
+        else if (currentSite.equals(Site.LOPEZ.getName()))
+            sb.append(Site.LOPEZ.getShortName());
+        else if (currentSite.equals(Site.SHELDON.getName()))
+            sb.append(Site.SHELDON.getShortName());
+        else if (currentSite.equals(Site.TOYON.getName()))
+            sb.append(Site.TOYON.getShortName());
+        sb.append(Integer.toString(year).substring(2,4));
+        if(month < 10)
+            sb.append(0);
+        sb.append(month);
+
+
+        IseDao iseDao = IseDao.get(getActivity());
+        String[] args = {currentSite};
+        sequenceNumber = iseDao.getIseSequenceNumber(args, currentDate) + 1;
+        sb.append("-");
+        if(sequenceNumber < 10)
+            sb.append(0);
+        sb.append(sequenceNumber);
+
+        return sb.toString();
+
     }
 }

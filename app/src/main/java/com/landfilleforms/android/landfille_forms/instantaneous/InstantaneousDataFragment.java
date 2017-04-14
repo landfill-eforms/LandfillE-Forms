@@ -337,8 +337,14 @@ public class InstantaneousDataFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.i(TAG, "keyCode: " + keyCode);
                 if( keyCode == KeyEvent.KEYCODE_BACK ) {
-                    if(newlyCreatedData)
+                    if(newlyCreatedData) {
                         InstantaneousDao.get(getActivity()).removeInstantaneousData(mInstantaneousData);
+                        Toast.makeText(getActivity(), R.string.new_instantaneous_cancelation_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), R.string.unsaved_changes_discarded_toast, Toast.LENGTH_SHORT).show();
+                    }
+
                     getActivity().finish();
                     return true;
                 } else {
@@ -421,6 +427,7 @@ public class InstantaneousDataFragment extends Fragment {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), R.string.instantaneous_added_toast, Toast.LENGTH_SHORT).show();
                 getActivity().finish();
                 //dialog.cancel();
             }
@@ -454,6 +461,7 @@ public class InstantaneousDataFragment extends Fragment {
         }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 getActivity().finish();
                 //dialog.cancel();
             }
@@ -529,8 +537,30 @@ public class InstantaneousDataFragment extends Fragment {
         imeNumbers.add("");
         existingImeSpinner = (Spinner) redirectionAlert.show().findViewById(R.id.existing_ime_spinner);
         List<String> imeNumbersList = new ArrayList<String>(imeNumbers);
-        ArrayAdapter<String> imeNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, imeNumbersList);
+        ArrayAdapter<String> imeNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, imeNumbersList){
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+
+                View v = null;
+
+                if (position == 0) {
+                    TextView tv = new TextView(getContext());
+                    tv.setHeight(0);
+                    tv.setVisibility(View.GONE);
+                    v = tv;
+                }
+                else {
+
+                    v = super.getDropDownView(position, null, parent);
+                }
+
+                parent.setVerticalScrollBarEnabled(false);
+                return v;
+            }
+        };
+
         existingImeSpinner.setAdapter(imeNumberSpinnerItems);
+        existingImeSpinner.setSelection(imeNumberSpinnerItems.getPosition(imeNumberSpinnerItems.getItem(1).toString()));
         existingImeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -573,6 +603,7 @@ public class InstantaneousDataFragment extends Fragment {
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), R.string.instantaneous_added_toast, Toast.LENGTH_SHORT).show();
                 getActivity().finish();
             }
         });

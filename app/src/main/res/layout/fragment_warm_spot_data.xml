@@ -166,17 +166,11 @@
                     android:textSize="20dp"
                     />
 
-                <EditText
-                    android:id="@+id/instrument_serial_no_spinner"
+                <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:layout_margin="3dp"
-                    android:textColor="@color/white"
-                    android:textAllCaps="false"
-                    android:textStyle="normal"
-                    android:textSize="20dp"
-                    />
+                    android:id="@+id/instrument_serial_no_spinner"
+                    android:textSize="20dp"/>
             </TableRow>
 
 

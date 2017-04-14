@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,11 +36,13 @@ import java.util.UUID;
 
 //Done?
 public class WarmSpotDataFragment extends Fragment {
+    private static final String TAG = "WarmspotDataFrag:";
     private static final String ARG_WARM_SPOT_DATA_ID = "warm_spot_data_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
     private WarmSpotData mWarmSpotData;
+    private boolean newlyCreatedData;
 
     private TextView mLocationLabel;
     private Spinner mGridIdSpinner;//Text
@@ -66,6 +70,10 @@ public class WarmSpotDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID warmspotDataId = (UUID) getArguments().getSerializable(ARG_WARM_SPOT_DATA_ID);
         mWarmSpotData = WarmSpotDao.get(getActivity()).getWarmSpotData(warmspotDataId);
+        if(mWarmSpotData.getGridId() == null)
+            newlyCreatedData = true;
+        else
+            newlyCreatedData = false;
 
         setHasOptionsMenu(true);
     }
@@ -249,6 +257,29 @@ public class WarmSpotDataFragment extends Fragment {
             }
         });
 
+        //TODO: fix this
+        //This deletes newly created entries if you back out but I don't think this is a good solution
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i(TAG, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    if(newlyCreatedData) {
+                        WarmSpotDao.get(getActivity()).removeWarmSpotData(mWarmSpotData);
+                        Toast.makeText(getActivity(), R.string.new_warmspot_cancelation_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), R.string.unsaved_changes_discarded_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    getActivity().finish();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         return v;
     }
 
