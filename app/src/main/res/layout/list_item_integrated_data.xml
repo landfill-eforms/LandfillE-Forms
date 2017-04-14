@@ -8,36 +8,139 @@
               android:paddingBottom="5dp"
               android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/list_item_integrated_data_gridid_view"
-        android:layout_width="0dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/integrated_data_cv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@color/darkThemeButtonBackground">
 
-    <TextView
-        android:id="@+id/list_item_integrated_data_bag_number_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
+        <!--Elements inside CardView-->
+        <!--TextView for Label follow by TextView for Data-->
 
-    <TextView
-        android:id="@+id/list_item_integrated_data_methane_level_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/darkThemeButtonBackground"
+            android:padding="16dp">
 
-    <Button
-        android:id="@+id/list_item_integrated_edit_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        android:text="@string/edit_button_label"
-        android:background="@color/darkThemeButtonBackground"
-        android:textStyle="normal|bold"
-        android:textColor="@color/white"/>
+            <!--Grid ID-->
+
+            <TextView
+                android:id="@+id/grid_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                android:text="@string/grid_id_label"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_integrated_data_gridid_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/grid_label_cv"
+                android:textSize="20sp" />
+
+            <!--Bag Number-->
+            <TextView
+                android:id="@+id/bag_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="@string/integrated_list_bag_number_label"
+                android:layout_below="@id/grid_label_cv"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_integrated_data_bag_number_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/grid_label_cv"
+                android:layout_toEndOf="@+id/bag_label_cv" />
+
+
+            <!--Methane Reading-->
+            <TextView
+                android:id="@+id/methane_reading_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bag_label_cv"
+                android:layout_marginRight="16dp"
+                android:text="@string/ch4_list_item_label"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_integrated_data_methane_level_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/methane_reading_label_cv"
+                android:layout_toEndOf="@+id/methane_reading_label_cv" />
+
+
+            <!--Date-->
+            <!--<TextView-->
+            <!--android:id="@+id/data_label_cv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/methane_reading_label_cv"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:text="@string/current_date"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textStyle="bold" />-->
+
+            <TextView
+                android:id="@+id/list_item_integrated_data_start_date_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/methane_reading_label_cv" />
+
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_integrated_data_gridid_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_integrated_data_bag_number_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_integrated_data_methane_level_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/list_item_integrated_edit_button"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--android:text="@string/edit_button_label"-->
+        <!--android:background="@color/darkThemeButtonBackground"-->
+        <!--android:textStyle="normal|bold"-->
+        <!--android:textColor="@color/white"/>-->
     <!--
             <TextView
                 android:id="@+id/list_item_instantaneous_data_start_time_view"

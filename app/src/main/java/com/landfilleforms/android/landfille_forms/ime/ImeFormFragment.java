@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -146,6 +147,7 @@ public class ImeFormFragment extends Fragment {
 
         mImeDataRecyclerView = (RecyclerView) v.findViewById(R.id.ime_data_recycler_view);
         mImeDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         updateUI();
 
