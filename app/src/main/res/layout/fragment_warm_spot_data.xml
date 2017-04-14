@@ -180,6 +180,7 @@
             android:layout_height="137dp"
             android:textColor="@color/colorPrimaryDark"
             android:background="@color/white"
+            android:gravity="top"
             />
 
         <!--<TextView-->

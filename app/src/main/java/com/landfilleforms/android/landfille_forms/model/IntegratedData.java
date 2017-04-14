@@ -22,6 +22,7 @@ public class IntegratedData {
     private int mVolumeReading;
     private double mMethaneReading;
 
+
     public IntegratedData() { this(UUID.randomUUID()); }
 
     public IntegratedData(UUID id) {

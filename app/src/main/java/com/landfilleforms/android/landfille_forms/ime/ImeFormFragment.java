@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -146,6 +148,7 @@ public class ImeFormFragment extends Fragment {
 
         mImeDataRecyclerView = (RecyclerView) v.findViewById(R.id.ime_data_recycler_view);
         mImeDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         updateUI();
 
@@ -297,6 +300,8 @@ public class ImeFormFragment extends Fragment {
 
         private TextView mMethaneReadingView;
         private Button mEditButton;
+        private CardView mCardView;
+        private TextView mIMEno;
 
 
         public ImeDataHolder(View itemView){
@@ -306,18 +311,33 @@ public class ImeFormFragment extends Fragment {
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_ime_data_gridid_view);
             mMethaneReadingView = (TextView) itemView.findViewById(R.id.list_item_ime_data_methane_level_view);
             mStartDateView = (TextView) itemView.findViewById(R.id.list_item_ime_date_view);
+            mIMEno = (TextView) itemView.findViewById(R.id.list_item_ime_no_view);
+
             mGridIdView.setTextColor(Color.RED);
             mMethaneReadingView.setTextColor(Color.RED);
             mStartDateView.setTextColor(Color.RED);
+            mIMEno.setTextColor(Color.RED);
 
-            mEditButton = (Button)itemView.findViewById(R.id.list_item_ime_edit_button);
-            mEditButton.setOnClickListener(new View.OnClickListener() {
+            mCardView = (CardView)itemView.findViewById(R.id.ime_data_cv);
+            mCardView.setOnClickListener(new View.OnClickListener(){
+
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v){
                     Intent intent = ImeDataPagerActivity.newIntent(getActivity(), mImeData.getId());
                     startActivity(intent);
                 }
+
             });
+
+
+//            mEditButton = (Button)itemView.findViewById(R.id.list_item_ime_edit_button);
+//            mEditButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = ImeDataPagerActivity.newIntent(getActivity(), mImeData.getId());
+//                    startActivity(intent);
+//                }
+//            });
         }
 
         public void bindImeData(ImeData imeData) {
@@ -325,6 +345,7 @@ public class ImeFormFragment extends Fragment {
             mGridIdView.setText(mImeData.getGridId());
             mMethaneReadingView.setText(Double.toString(mImeData.getMethaneReading()));
             mStartDateView.setText(DateFormat.format("yyyy-MM-dd",mImeData.getDate()));
+            mIMEno.setText(mImeData.getImeNumber());
             //mStartTimeView.setText(DateFormat.format("HH:mm:ss",mImeData.getStartDate()));
             //mEndTimeView.setText(DateFormat.format("HH:mm:ss",mImeData.getEndDate()));
 
@@ -332,6 +353,7 @@ public class ImeFormFragment extends Fragment {
             mGridIdView.setTextColor(Color.RED);
             mMethaneReadingView.setTextColor(Color.RED);
             mStartDateView.setTextColor(Color.RED);
+            mIMEno.setTextColor(Color.RED);
         }
 
         @Override

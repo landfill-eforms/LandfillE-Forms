@@ -2,7 +2,7 @@
     <string name= "action">Action</string>
     <string name="app_name">Landfill E-Forms</string>
     <string name="location_header">Landfill Locations</string>
-    <string name="tests_header">Available Tests</string>
+    <string name="tests_header">Tests</string>
     <string name="user_hub_header">Home Page</string>
     <string name="home_notication_label">Notifications</string>
     <string name="home_location_label">Locations</string>
@@ -52,14 +52,14 @@
     <string name="export_successful_toast">Export Successful!</string>
     <string name="no_data">There is no data to be exported.</string>
     <string name="export_unsuccessful_toast">Export Unsuccessful..</string>
-    <string name="instantaneous_form_header">Instantaneous Form</string>
-    <string name="instantaenous_data_header">Instantaneous Entry</string>
-    <string name="ime_form_header">IME Form</string>
-    <string name="ise_form_header">ISE Form</string>
-    <string name="ime_data_header">IME Entry</string>
-    <string name="ise_data_header">ISE Entry</string>
-    <string name="warm_spot_form_header">WarmSpot Form</string>
-    <string name="warm_spot_data_header">WarmSpot Entry</string>
+    <string name="instantaneous_form_header">Instantaneous Entries</string>
+    <string name="instantaenous_data_header">Instantaneous Form</string>
+    <string name="ime_form_header">IME Entries</string>
+    <string name="ise_form_header">ISE Entries</string>
+    <string name="ime_data_header">IME Form</string>
+    <string name="ise_data_header">ISE Form</string>
+    <string name="warm_spot_form_header">Warmspot Entries</string>
+    <string name="warm_spot_data_header">Warmspot Form</string>
     <string name="json_export_header">Export</string>
     <string name="submit_button_label">Submit</string>
     <string name="coming_soon_toast">Coming soon!</string>
@@ -96,10 +96,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="improper_methane_percentage_toast">%CH4 must be between 0 and 100!</string>
     <string name="probe_entry_added_toast">Probe added!</string>
-    <string name="probe_form_header">Probe Form</string>
-    <string name="probe_data_header">Probe Entry</string>
-    <string name="integrated_form_header">Integrated Form</string>
-    <string name="integrated_data_header">Integrated Entry</string>
+    <string name="probe_form_header">Probe Entries</string>
+    <string name="probe_data_header">Probe Form</string>
+    <string name="integrated_form_header">Integrated Entries</string>
+    <string name="integrated_data_header">Integrated Form</string>
     <string name="sample_id_label">Sample ID:</string>
     <string name="bag_number_label">Bag #:</string>
     <string name="volume_reading_label">Volume:</string>
@@ -132,6 +132,8 @@
     <string name="filter_button_label">Filter</string>
     <string name="search_button_label">Search</string>
     <string name="ch4_list_item_label">CH4(ppm):</string>
+    <string name="pressure_h20_label">Pressure H20:</string>
+    <string name="ime_no_label">IME No.:</string>
 
 
     <!-- Array for Equipment Spinner-->

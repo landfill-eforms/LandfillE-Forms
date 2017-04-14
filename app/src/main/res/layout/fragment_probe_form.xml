@@ -98,47 +98,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout  android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="5dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:text="@string/probe_list_probe_number_label"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:background="@color/backgroundTheme" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:text="@string/probe_list_water_pressure_label"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:background="@color/backgroundTheme" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:text="@string/probe_list_methane_percentage_label"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:background="@color/backgroundTheme" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:text="Action"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:background="@color/backgroundTheme" />
-
-    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/probe_data_recycler_view"

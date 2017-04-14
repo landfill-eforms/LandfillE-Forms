@@ -2,6 +2,7 @@ package com.landfilleforms.android.landfille_forms.ime;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -192,6 +194,10 @@ public class ImeDataFragment extends Fragment {
 
             }
         });
+
+        //Work on making sure keyboard does not auto-focus
+        InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(mDescriptionField.getWindowToken(), 0);
 
         mDateButton = (Button)v.findViewById(R.id.date);
         updateDate();
