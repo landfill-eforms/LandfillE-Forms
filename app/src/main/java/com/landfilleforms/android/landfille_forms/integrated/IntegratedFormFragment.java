@@ -17,8 +17,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +61,8 @@ public class IntegratedFormFragment extends Fragment {
 
     private EditText mBarometricPressureField;
     private Button mBarometricPressureButton;
+    private Spinner mInstrumentSerialNoSpinner;
+    private Button mInstrumentSerialNoButton;
 
     private RecyclerView mIntegratedDataRecyclerView;
     private IntegratedDataAdapter mAdapter;
@@ -86,7 +91,6 @@ public class IntegratedFormFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_integrated_form, container, false);
 
-
         final IntegratedDao integratedDao = IntegratedDao.get(getActivity());
         String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
         mIntegratedDatas = integratedDao.getIntegratedDatasByLocation(args);
@@ -98,12 +102,8 @@ public class IntegratedFormFragment extends Fragment {
         mIntegratedDatas = integratedDatasFilteredByDate;
         Log.d("filteredSize", Integer.toString(integratedDatasFilteredByDate.size()));
 
-
-
-
-
-//        mCurrentLocation = (TextView) v.findViewById(R.id.location);
-//        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+        mCurrentLocation = (TextView) v.findViewById(R.id.location);
+        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         mStartDateButton = (Button)v.findViewById(R.id.current_date);
         updateDate();
@@ -115,7 +115,6 @@ public class IntegratedFormFragment extends Fragment {
                 dialog.show(manager, DIALOG_DATE);
             }
         });
-
 
         mBarometricPressureField = (EditText)v.findViewById(R.id.barometric_field);
         Log.d("iDatas.size():", Integer.toString(mIntegratedDatas.size()));
@@ -142,7 +141,21 @@ public class IntegratedFormFragment extends Fragment {
             }
         });
 
+        mInstrumentSerialNoSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+        final ArrayAdapter<CharSequence> instrumentSerialAdapter;
+        instrumentSerialAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.instantaneous_integrated_probe, R.layout.dark_spinner_layout);
+        mInstrumentSerialNoSpinner.setAdapter(instrumentSerialAdapter);
 
+        mInstrumentSerialNoButton = (Button) v.findViewById(R.id.instrument_serial_no_button);
+        mInstrumentSerialNoButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                for(int i = 0; i < mIntegratedDatas.size(); i++) {
+                    mIntegratedDatas.get(i).setInstrumentSerialNumber(mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()).toString());
+                }
+                integratedDao.updateIntegratedDatas(mIntegratedDatas);
+                Toast.makeText(getActivity(), R.string.updated_instrument_ime_datas,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mIntegratedDataRecyclerView = (RecyclerView) v.findViewById(R.id.integrated_data_recycler_view);
         mIntegratedDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -175,6 +188,7 @@ public class IntegratedFormFragment extends Fragment {
                 integratedData.setInspectorUserName(mUser.getUsername());
                 integratedData.setStartDate(currentDate);
                 integratedData.setEndDate(new Date(integratedData.getStartDate().getTime() + 1800000));
+                integratedData.setInstrumentSerialNumber(mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()).toString());
 
                 if(mBarometricPressureField.getText().toString().trim().length() == 0)
                     integratedData.setBarometricPressure(defaultBarometricPressure);

@@ -68,6 +68,7 @@ public class IntegratedDataFragment extends Fragment {
     private Spinner mGridIdSpinner;
     private TextView mStartDateField;
     private TextView mSampleIdField;
+    private TextView mInstrumentSerialNoField;
     private EditText mBagNumberField;
     private TextView mBaroLevelField;
     private Button mStartDateButton;
@@ -161,6 +162,9 @@ public class IntegratedDataFragment extends Fragment {
         mSampleIdField = (TextView) v.findViewById(R.id.sample_id_field);
         //mSampleIdField.setText(mIntegratedData.getSampleId());
 
+        mInstrumentSerialNoField = (TextView) v.findViewById(R.id.serial_no_field);
+        mInstrumentSerialNoField.setText(mIntegratedData.getInstrumentSerialNumber());
+
         mBagNumberField = (EditText) v.findViewById(R.id.bag_number_field);
         if(mIntegratedData.getBagNumber() != 0)
             mBagNumberField.setText(Integer.toString(mIntegratedData.getBagNumber()));
@@ -193,7 +197,7 @@ public class IntegratedDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0) mIntegratedData.setMethaneReading(0);
+                if (s=="" || count == 0|| s.toString().equals(".")) mIntegratedData.setMethaneReading(0);
                 else mIntegratedData.setMethaneReading(Double.parseDouble(s.toString()));
             }
 

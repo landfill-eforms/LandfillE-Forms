@@ -47,12 +47,15 @@ public class DataDump {
     public void setWarmSpotDatas(List<WarmSpotData> warmSpotDatas) {
         mWarmSpotDatas = warmSpotDatas;
     }
+
     public List<IntegratedData> getIntegratedDatas() {
         return mIntegratedDatas;
     }
+
     public void setIntegratedDatas(List<IntegratedData> integratedDatas) {
         mIntegratedDatas = integratedDatas;
     }
+
     public List<IseData> getIseDatas() {
         return mIseDatas;
     }
@@ -60,6 +63,7 @@ public class DataDump {
     public void setIseDatas(List<IseData> iseDatas) {
             mIseDatas = iseDatas;
     }
+
     public List<ProbeData> getProbeDatas() {
         return mProbeDatas;
     }

@@ -46,6 +46,7 @@ public class WarmSpotDataFragment extends Fragment {
     private EditText mDescriptionField;//Text
     private EditText mEstimatedSizeField;//Number
     private EditText mMethaneLevelField;
+    private Spinner mInstrumentSerialNoSpinner;
     private Button mDateButton;
     private Button mSubmitButton;
 
@@ -163,6 +164,26 @@ public class WarmSpotDataFragment extends Fragment {
 
             }
         });
+
+        mInstrumentSerialNoSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+        ArrayAdapter<CharSequence> instrumentSerialAdapter;
+        instrumentSerialAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.instantaneous_integrated_probe, R.layout.dark_spinner_layout);
+        mInstrumentSerialNoSpinner.setAdapter(instrumentSerialAdapter);
+        mInstrumentSerialNoSpinner.setSelection(instrumentSerialAdapter.getPosition(mWarmSpotData.getInstrumentSerial()));
+
+        mInstrumentSerialNoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mWarmSpotData.setInstrumentSerial(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         mDescriptionField = (EditText)v.findViewById(R.id.description);
         mDescriptionField.setText(mWarmSpotData.getDescription());
