@@ -31,12 +31,19 @@ import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.database.Site;
 import com.landfilleforms.android.landfille_forms.database.dao.IntegratedDao;
+import com.landfilleforms.android.landfille_forms.database.dao.IseDao;
+import com.landfilleforms.android.landfille_forms.ise.IseDataPagerActivity;
 import com.landfilleforms.android.landfille_forms.model.IntegratedData;
+import com.landfilleforms.android.landfille_forms.model.IseData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -306,6 +313,10 @@ public class IntegratedDataFragment extends Fragment {
                     dialogDeleteIntegratedEntry(alertBuilder);
 
                 }
+                else if (tempMethaneLevel >= 25) {
+                    //create a new ISE dialog
+                    dialogIseDataEntry(alertBuilder);
+                }
                 else{
                     //use this after all other ones are working
                     getActivity().finish();
@@ -416,6 +427,146 @@ public class IntegratedDataFragment extends Fragment {
         AlertDialog deleteAlert = alertBuilder.create();
         deleteAlert.setTitle("Delete Integrated Entry");
         deleteAlert.show();
+    }
+
+    private void dialogIseDataEntry(AlertDialog.Builder alertBuilder) {
+        final AlertDialog.Builder redirectionAlert = new AlertDialog.Builder(getActivity());
+        alertBuilder.setMessage("CH4 levels are over 25! There is an ISE! Navigate to ISE form?")
+                .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                //comment this out temp
+                //getActivity().finish();
+                dialogISENavigation(redirectionAlert);
+                IntegratedDao.get(getActivity()).updateIntegratedData(mIntegratedData);
+                //later, need to redirect to appropriate location's IME list
+                //Toast.makeText(getActivity(), R.string.coming_soon_toast, Toast.LENGTH_SHORT).show();
+
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().finish();
+                //dialog.cancel();
+            }
+        });
+        AlertDialog alert = alertBuilder.create();
+        alert.setTitle("New ISE");
+        alert.show();
+    }
+
+    private void dialogISENavigation(final AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("Would you like to create a new ISE or add to an existing one?")
+                .setCancelable(false).setPositiveButton("Add to Existing ISE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //TODO: Should open up another dialog on click w/ a Spinner composed of all the IME#s for that month.(Or maybe just include every single IME# but that sounds like a bad idea.
+                //Check if IME #s exist. If not show a toast saying that there are no available.
+                final IseDao iseDao = IseDao.get(getActivity());
+                String [] args = {mIntegratedData.getLocation()};
+                List<IseData> iseDatas = iseDao.getIseDatasByLocation(args);
+                if(iseDatas.size() == 0) {
+                    //TODO: Create string resource
+                    Toast.makeText(getActivity(),"No ISE entries exist.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    final AlertDialog.Builder newRedirectionAlert = new AlertDialog.Builder(getActivity());
+                    dialogExistingIse(newRedirectionAlert);
+                }
+            }//temp fix, set this to cancel to rearrange order of options
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().finish();
+                //dialog.cancel();
+            }
+        }).setNegativeButton("Create a new ISE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //make a new ISE
+                Log.d("Location:",mIntegratedData.getLocation());
+                //String generatedIseNumber = generateISEnumber(mIntegratedData.getLocation(), mIntegratedData.getStartDate());
+
+                //mIntegratedData.setImeNumber(generatedImeNumber);//Don't think this line will edit the Instantaneous entry in the DB since the block that does that is in the submit
+                IseData iseData = new IseData();
+                iseData.setLocation(mIntegratedData.getLocation());
+                iseData.setDate(mIntegratedData.getStartDate());
+                iseData.setGridId(mIntegratedData.getGridId());
+                //iseData.setIseNumber(mInstantaneousData.getImeNumber());
+                iseData.setMethaneReading(tempMethaneLevel);
+                iseData.setInspectorFullName(mUser.getFullName());
+                iseData.setInspectorUserName(mUser.getUsername());
+                IseDao.get(getActivity()).addIseData(iseData);
+                Intent navigateIMEForm = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
+                startActivity(navigateIMEForm);
+                //Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        AlertDialog alert = alertBuilder.create();
+        alert.setTitle("ISE Navigation");
+        alert.show();
+
+    }
+
+    private void dialogExistingIse(AlertDialog.Builder redirectionAlert) {
+
+        redirectionAlert.setTitle("Add to existing IME");
+        redirectionAlert.setMessage("Which existing IME would you like to use?").setCancelable(false).setPositiveButton("Generate IME", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //String generatedImeNumber = generateISEnumber(mInstantaneousData.getLandFillLocation(), mInstantaneousData.getStartDate());
+
+                //mInstantaneousData.setImeNumber(generatedImeNumber);//Don't think this line will edit the Instantaneous entry in the DB since the block that does that is in the submit
+                IseData iseData = new IseData();
+                //imeData.setIseNumber(mCurrentIseNumber);
+                iseData.setLocation(mIntegratedData.getLocation());
+                iseData.setDate(mIntegratedData.getStartDate());
+                iseData.setGridId(mIntegratedData.getGridId());
+                iseData.setMethaneReading(tempMethaneLevel);
+                iseData.setInspectorFullName(mUser.getFullName());
+                iseData.setInspectorUserName(mUser.getUsername());
+                IseDao.get(getActivity()).addIseData(iseData);
+                Intent navigateIMEForm = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
+                startActivity(navigateIMEForm);
+            }//temp fix, set this to cancel to rearrange order of options
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().finish();
+                //dialog.cancel();
+            }
+        });
+        redirectionAlert.setView(R.layout.dialog_add_to_existing_ise);
+        Spinner existingIseSpinner;
+        final IseDao imeDao = IseDao.get(getActivity());
+        String [] args = {mIntegratedData.getLocation()};
+        List<IseData> mImeDatas = imeDao.getIseDatasByLocation(args);
+        //ImeNumbers for spinner
+        Set<String> iseNumbers = new HashSet<String>();
+        for(IseData iseData: mImeDatas) {
+            if(iseData.getIseNumber() != null && iseData.getIseNumber().trim().length() != 0)
+                iseNumbers.add(iseData.getIseNumber());
+        }
+        iseNumbers.add("");
+        existingIseSpinner = (Spinner) redirectionAlert.show().findViewById(R.id.existing_ise_spinner);
+        List<String> iseNumbersList = new ArrayList<String>(iseNumbers);
+        ArrayAdapter<String> iseNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, iseNumbersList);
+        existingIseSpinner.setAdapter(iseNumberSpinnerItems);
+//        existingIseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                mCurrentIseNumber = parent.getItemAtPosition(position).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                mCurrentImeNumber = "";
+//            }
+//        });
+
     }
 
     private String generateSampleId(String currentSite, Date currentDate, String currentGrid) {
