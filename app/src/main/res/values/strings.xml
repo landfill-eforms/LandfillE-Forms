@@ -133,6 +133,7 @@
     <string name="search_button_label">Search</string>
     <string name="ch4_list_item_label">CH4(ppm):</string>
     <string name="pressure_h20_label">Pressure H20:</string>
+    <string name="ime_no_label">IME No.:</string>
 
 
     <!-- Array for Equipment Spinner-->
