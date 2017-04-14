@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -243,6 +244,8 @@ public class ProbeFormFragment extends Fragment {
         private TextView mWaterPressureView;
         private TextView mMethanePercentageView;
         private Button mEditButton;
+        private CardView mCardView;
+        private TextView mDateView;
 
 
         public ProbeDataHolder(View itemView){
@@ -251,14 +254,27 @@ public class ProbeFormFragment extends Fragment {
             mProbeNumberView = (TextView) itemView.findViewById(R.id.list_item_probe_data_probe_number_view);
             mWaterPressureView = (TextView) itemView.findViewById(R.id.list_item_probe_data_water_pressure_view);
             mMethanePercentageView = (TextView) itemView.findViewById(R.id.list_item_probe_data_methane_percentage_view);
-            mEditButton = (Button)itemView.findViewById(R.id.list_item_probe_edit_button);
-            mEditButton.setOnClickListener(new View.OnClickListener() {
+
+            mDateView = (TextView) itemView.findViewById(R.id.list_item_probe_data_start_date_view);
+
+            mCardView = (CardView)itemView.findViewById(R.id.probe_data_cv);
+            mCardView.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
                     Intent intent = ProbeDataPagerActivity.newIntent(getActivity(), mProbeData.getId());
                     startActivity(intent);
                 }
+
             });
+//            mEditButton = (Button)itemView.findViewById(R.id.list_item_probe_edit_button);
+//            mEditButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = ProbeDataPagerActivity.newIntent(getActivity(), mProbeData.getId());
+//                    startActivity(intent);
+//                }
+//            });
         }
 
         public void bindProbeData(ProbeData probeData) {
@@ -266,6 +282,7 @@ public class ProbeFormFragment extends Fragment {
             mProbeNumberView.setText(mProbeData.getProbeNumber());
             mWaterPressureView.setText(Double.toString(mProbeData.getWaterPressure()));
             mMethanePercentageView.setText(Double.toString(mProbeData.getMethanePercentage()));
+//            mDateView.setText(DateFormat.format("yyyy-MM-dd", mProbeData.getStartDate()));
             //Set colors depending on ch4 level in RecyclerView
             if (mProbeData.getMethanePercentage() >= 5.0) {
                 mProbeNumberView.setTextColor(Color.RED);
