@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -126,8 +127,8 @@ public class IseFormFragment extends Fragment {
 
 
 
-        mCurrentLocation = (TextView) v.findViewById(R.id.ise_location);
-        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+//        mCurrentLocation = (TextView) v.findViewById(R.id.ise_location);
+//        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         //Finds all the grids related to a list of ISE entries
         Set<String> iseGrids = new HashSet<String>();
@@ -287,7 +288,7 @@ public class IseFormFragment extends Fragment {
 
         private TextView mMethaneReadingView;
         private Button mEditButton;
-
+        private CardView mCardView;
 
         public IseDataHolder(View itemView){
             super(itemView);
@@ -296,24 +297,36 @@ public class IseFormFragment extends Fragment {
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_ise_data_gridid_view);
             mMethaneReadingView = (TextView) itemView.findViewById(R.id.list_item_ise_data_methane_level_view);
             mStartDateView = (TextView) itemView.findViewById(R.id.list_item_ise_date_view);
-            mEditButton = (Button)itemView.findViewById(R.id.list_item_ise_edit_button);
-            mEditButton.setOnClickListener(new View.OnClickListener() {
+
+            mCardView = (CardView)itemView.findViewById(R.id.ise_data_cv);
+            mCardView.setOnClickListener(new View.OnClickListener(){
+
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v){
                     Intent intent = IseDataPagerActivity.newIntent(getActivity(), mIseData.getId());
                     startActivity(intent);
                 }
+
             });
+
+//            mEditButton = (Button)itemView.findViewById(R.id.list_item_ise_edit_button);
+//            mEditButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = IseDataPagerActivity.newIntent(getActivity(), mIseData.getId());
+//                    startActivity(intent);
+//                }
+//            });
         }
 
         public void bindIseData(IseData iseData) {
             mIseData = iseData;
             mGridIdView.setText(mIseData.getGridId());
             mMethaneReadingView.setText(Double.toString(mIseData.getMethaneReading()));
-            mStartDateView.setText(DateFormat.format("M/d/yyyy",mIseData.getDate()));
+            mStartDateView.setText(DateFormat.format("yyyy-MM-dd",mIseData.getDate()));
             mGridIdView.setTextColor(Color.RED);
             mMethaneReadingView.setTextColor(Color.RED);
-            mStartDateView.setTextColor(Color.RED);
+            mStartDateView.setTextColor(Color.WHITE);
         }
 
         @Override
