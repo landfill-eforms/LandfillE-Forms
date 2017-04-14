@@ -133,6 +133,7 @@
                 <EditText
                     android:id="@+id/ise_methane_reading"
                     android:layout_width="match_parent"
+                    android:gravity="top"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:textColor="@color/white"
@@ -165,7 +166,8 @@
                 android:scrollbars="vertical"
                 android:minLines="6"
                 android:textColor="@color/colorPrimaryDark"
-                android:background="@color/white" />
+                android:background="@color/white"
+                android:gravity="top"/>
 
             <Button
                 android:layout_weight="9"

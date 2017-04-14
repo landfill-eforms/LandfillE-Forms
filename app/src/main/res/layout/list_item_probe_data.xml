@@ -8,33 +8,130 @@
               android:paddingBottom="5dp"
               android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/list_item_probe_data_probe_number_view"
-        android:layout_width="0dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/probe_data_cv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
-
-    <TextView
-        android:id="@+id/list_item_probe_data_water_pressure_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
-
-    <TextView
-        android:id="@+id/list_item_probe_data_methane_percentage_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        />
-    <Button
-        android:id="@+id/list_item_probe_edit_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".25"
-        android:text="Edit"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
         android:background="@color/darkThemeButtonBackground"
-        android:textStyle="normal|bold"
-        android:textColor="@color/white"/>
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/darkThemeButtonBackground"
+            android:padding="16dp">
+
+            <!--Grid ID-->
+
+            <TextView
+                android:id="@+id/probe_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                android:text="@string/probe_number_label"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_probe_data_probe_number_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/probe_label_cv"
+                android:textSize="20sp" />
+
+            <!--Pressure Reading-->
+            <TextView
+                android:id="@+id/pressure_reading_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/probe_label_cv"
+                android:layout_marginRight="16dp"
+                android:text="@string/pressure_h20_label"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_probe_data_water_pressure_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/pressure_reading_label_cv"
+                android:layout_toEndOf="@+id/pressure_reading_label_cv" />
+
+            <!--Methane Percent Reading-->
+
+            <TextView
+                android:id="@+id/methane_percent_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pressure_reading_label_cv"
+                android:layout_marginRight="16dp"
+                android:text="CH4(%): "
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_probe_data_methane_percentage_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/methane_percent_label_cv"
+                android:layout_toEndOf="@+id/methane_percent_label_cv" />
+
+
+            <TextView
+                android:id="@+id/list_item_probe_data_start_date_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/methane_percent_label_cv" />
+
+            <!--<TextView-->
+            <!--android:id="@+id/list_item_instantaneous_inspector_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/methane_reading_label_cv"-->
+            <!--android:layout_marginStart="40dp"-->
+            <!--android:layout_toEndOf="@+id/list_item_instantaneous_data_start_date_view" />-->
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_probe_data_probe_number_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_probe_data_water_pressure_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/list_item_probe_data_methane_percentage_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--/>-->
+    <!--<Button-->
+        <!--android:id="@+id/list_item_probe_edit_button"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight=".25"-->
+        <!--android:text="Edit"-->
+        <!--android:background="@color/darkThemeButtonBackground"-->
+        <!--android:textStyle="normal|bold"-->
+        <!--android:textColor="@color/white"/>-->
 </LinearLayout>
