@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -101,8 +102,8 @@ public class IntegratedFormFragment extends Fragment {
 
 
 
-        mCurrentLocation = (TextView) v.findViewById(R.id.location);
-        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+//        mCurrentLocation = (TextView) v.findViewById(R.id.location);
+//        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         mStartDateButton = (Button)v.findViewById(R.id.current_date);
         updateDate();
@@ -256,6 +257,7 @@ public class IntegratedFormFragment extends Fragment {
         private TextView mBagNumberView;
         private TextView mMethaneReadingView;
         private Button mEditButton;
+        private CardView mCardView;
 
 
         public IntegratedDataHolder(View itemView){
@@ -264,14 +266,25 @@ public class IntegratedFormFragment extends Fragment {
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_integrated_data_gridid_view);
             mMethaneReadingView = (TextView) itemView.findViewById(R.id.list_item_integrated_data_methane_level_view);
             mBagNumberView = (TextView) itemView.findViewById(R.id.list_item_integrated_data_bag_number_view);
-            mEditButton = (Button)itemView.findViewById(R.id.list_item_integrated_edit_button);
-            mEditButton.setOnClickListener(new View.OnClickListener() {
+
+            mCardView = (CardView)itemView.findViewById(R.id.integrated_data_cv);
+            mCardView.setOnClickListener(new View.OnClickListener() {
+
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v){
                     Intent intent = IntegratedDataPagerActivity.newIntent(getActivity(), mIntegratedData.getId());
                     startActivity(intent);
                 }
+
             });
+//            mEditButton = (Button)itemView.findViewById(R.id.list_item_integrated_edit_button);
+//            mEditButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = IntegratedDataPagerActivity.newIntent(getActivity(), mIntegratedData.getId());
+//                    startActivity(intent);
+//                }
+//            });
         }
 
         public void bindIntegratedData(IntegratedData integratedData) {
