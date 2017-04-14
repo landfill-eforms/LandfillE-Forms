@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,11 +38,14 @@ import java.util.UUID;
 
 
 public class IseDataFragment extends Fragment {
+    private static final String TAG = "IseDataFrag:";
     private static final String ARG_ISE_DATA_ID = "ise_data_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
     private static final String DIALOG_TIME = "DialogTime";
     private static final int REQUEST_START_TIME = 1;
+
+    private boolean newlyCreatedData;
 
     private IseData mIseData;
     private TextView mIseField;
@@ -63,9 +68,16 @@ public class IseDataFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        //TODO: Check if we need user info for Ise/Probe/Warmspot
         super.onCreate(savedInstanceState);
         UUID iseDataId = (UUID) getArguments().getSerializable(ARG_ISE_DATA_ID);
         mIseData = IseDao.get(getActivity()).getIseData(iseDataId);
+
+        if(mIseData.getGridId() == null)
+            newlyCreatedData = true;
+        else
+            newlyCreatedData = false;
+
         setHasOptionsMenu(true);
     }
 
@@ -219,7 +231,29 @@ public class IseDataFragment extends Fragment {
             }
         });
 
-
+        //TODO: fix this
+        //This deletes newly created entries if you back out but I don't think this is a good solution
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i(TAG, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    if(newlyCreatedData) {
+                        IseDao.get(getActivity()).removeIseData(mIseData);
+                        Toast.makeText(getActivity(), R.string.new_ise_cancelation_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), R.string.unsaved_changes_discarded_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    getActivity().finish();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         return v;
     }
 

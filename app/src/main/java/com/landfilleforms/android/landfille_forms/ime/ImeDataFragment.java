@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +40,7 @@ import java.util.UUID;
 
 //Done
 public class ImeDataFragment extends Fragment {
+    private static final String TAG = "ImeDataFrag:";
     private static final String ARG_IME_DATA_ID = "ime_data_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
@@ -45,6 +48,7 @@ public class ImeDataFragment extends Fragment {
     private static final int REQUEST_START_TIME = 1;
 
     private ImeData mImeData;
+    private boolean newlyCreatedData;
 
     private TextView mImeField;
     private TextView mLocationLabel;
@@ -72,6 +76,11 @@ public class ImeDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID imeDataId = (UUID) getArguments().getSerializable(ARG_IME_DATA_ID);
         mImeData = ImeDao.get(getActivity()).getImeData(imeDataId);
+
+        if(mImeData.getGridId() == null)
+            newlyCreatedData = true;
+        else
+            newlyCreatedData = false;
 
         setHasOptionsMenu(true);
     }
@@ -235,7 +244,29 @@ public class ImeDataFragment extends Fragment {
             }
         });
 
-
+        //TODO: fix this
+        //This deletes newly created entries if you back out but I don't think this is a good solution
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i(TAG, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    if(newlyCreatedData) {
+                        ImeDao.get(getActivity()).removeImeData(mImeData);
+                        Toast.makeText(getActivity(), R.string.new_ime_cancelation_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), R.string.unsaved_changes_discarded_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    getActivity().finish();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         return v;
     }
 

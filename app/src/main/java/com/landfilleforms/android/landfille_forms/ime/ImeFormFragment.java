@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.landfilleforms.android.landfille_forms.R;
@@ -172,8 +173,21 @@ public class ImeFormFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_ime:
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
-                dialogIMENavigation(alertBuilder);
+                if(mImeDatas.size() !=0){
+                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
+                    dialogIMENavigation(alertBuilder);
+                }
+                else{
+                    ImeData imeData = new ImeData();
+                    //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
+                    imeData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+                    imeData.setInspectorFullName(mUser.getFullName());
+                    imeData.setInspectorUserName(mUser.getUsername());
+                    imeData.setImeNumber(generateIMEnumber(mCurrentLocation.getText().toString(),new Date()));
+                    ImeDao.get(getActivity()).addImeData(imeData);
+                    Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
+                    startActivity(intent);
+                }
                 return true;
             case android.R.id.home:
                 this.getActivity().onBackPressed();
@@ -216,7 +230,7 @@ public class ImeFormFragment extends Fragment {
                 .setCancelable(false).setPositiveButton("Add to Current IME", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ImeData imeData = new ImeData();
+                /*ImeData imeData = new ImeData();
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 imeData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 imeData.setInspectorFullName(mUser.getFullName());
@@ -224,8 +238,8 @@ public class ImeFormFragment extends Fragment {
                 imeData.setImeNumber(mCurrentImeNumber);
                 ImeDao.get(getActivity()).addImeData(imeData);
                 Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
-                startActivity(intent);
-
+                startActivity(intent);*/
+                Toast.makeText(getActivity(),R.string.option_repair_toast, Toast.LENGTH_SHORT).show();
             }//temp fix, set this to cancel to rearrange order of options
         }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -240,7 +254,7 @@ public class ImeFormFragment extends Fragment {
                 imeData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 imeData.setInspectorFullName(mUser.getFullName());
                 imeData.setInspectorUserName(mUser.getUsername());
-                imeData.setImeNumber(mCurrentImeNumber);
+                imeData.setImeNumber(generateIMEnumber(mCurrentLocation.getText().toString(),new Date()));
                 ImeDao.get(getActivity()).addImeData(imeData);
                 Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
                 startActivity(intent);
@@ -272,7 +286,6 @@ public class ImeFormFragment extends Fragment {
             sb.append(Site.TOYON.getShortName());
 
 
-        sb.append(Integer.toString(year).substring(2,4));
         sb.append(Integer.toString(year).substring(2,4));
         if(month < 10)
             sb.append(0);

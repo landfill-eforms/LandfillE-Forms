@@ -198,8 +198,8 @@ public class WarmSpotFormFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-//            Intent intent = WarmSpotDataPagerActivity.newIntent(getActivity(), mWarmSpotData.getId());
-//            startActivity(intent);
+            Intent intent = WarmSpotDataPagerActivity.newIntent(getActivity(), mWarmSpotData.getId());
+            startActivity(intent);
         }
     }
 

@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,12 +38,14 @@ import java.util.UUID;
  */
 
 public class ProbeDataFragment extends Fragment {
+    private static final String TAG = "ProbeDataFrag:";
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
     private static final String ARG_PROBE_DATA_ID = "probe_data_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
     private ProbeData mProbeData;
+    private boolean newlyCreatedData;
 
     private TextView mLocationLabel;
     private Spinner mProbeNumberSpinner;
@@ -66,6 +70,11 @@ public class ProbeDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID probeDataId = (UUID) getArguments().getSerializable(ARG_PROBE_DATA_ID);
         mProbeData = ProbeDao.get(getActivity()).getProbeData(probeDataId);
+
+        if(mProbeData.getProbeNumber() == null)
+            newlyCreatedData = true;
+        else
+            newlyCreatedData = false;
 
         setHasOptionsMenu(true);
     }
@@ -222,6 +231,29 @@ public class ProbeDataFragment extends Fragment {
             }
         });
 
+        //TODO: fix this
+        //This deletes newly created entries if you back out but I don't think this is a good solution
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        v.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.i(TAG, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    if(newlyCreatedData) {
+                        ProbeDao.get(getActivity()).removeProbeData(mProbeData);
+                        Toast.makeText(getActivity(), R.string.new_probe_cancelation_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), R.string.unsaved_changes_discarded_toast, Toast.LENGTH_SHORT).show();
+                    }
+                    getActivity().finish();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
         return v;
     }
 
