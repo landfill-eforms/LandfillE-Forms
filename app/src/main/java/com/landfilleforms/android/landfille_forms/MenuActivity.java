@@ -2,17 +2,14 @@ package com.landfilleforms.android.landfille_forms;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -41,10 +38,8 @@ public class MenuActivity extends AppCompatActivity
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
+        mUser = session.getCurrentUser();
+        Log.d("UserName:", mUser.getUsername());
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,6 +107,10 @@ public class MenuActivity extends AppCompatActivity
             case R.id.nav_locations:
                 Intent i = new Intent(this,LocationActivity.class);
                 startActivity(i);
+                break;
+            //case import, navigate to export fragment
+            case R.id.nav_import:
+                fm.beginTransaction().replace(R.id.context_frame, new ImportFragment()).commit();
                 break;
             //case export , navigate to export fragment
             case R.id.nav_export:

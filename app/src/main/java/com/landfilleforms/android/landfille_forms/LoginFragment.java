@@ -16,11 +16,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
 import com.landfilleforms.android.landfille_forms.database.dao.UserDao;
 import com.landfilleforms.android.landfille_forms.database.util.TestUtil;
 import com.landfilleforms.android.landfille_forms.model.User;
+import com.landfilleforms.android.landfille_forms.util.BCrypt;
 
 import java.util.List;
 
@@ -52,8 +54,11 @@ public class LoginFragment extends Fragment {
             startActivity(i);
         }
         mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
-        TestUtil.insertDummyUserData(mDatabase);
         mExistingUsers = UserDao.get(getActivity()).getUsers();
+        if(mExistingUsers.size() == 0) {
+            TestUtil.insertDummyUserData(mDatabase);
+            mExistingUsers = UserDao.get(getActivity()).getUsers();
+        }
 
         mUser.setUsername("");
         mUser.setPassword("");
@@ -105,9 +110,8 @@ public class LoginFragment extends Fragment {
                 if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().trim().length() > 0) {
                     boolean loginInfoValid = false;
                     for(int i = 0; i < mExistingUsers.size(); i++) {
-                        Log.d("UserName", mExistingUsers.get(i).getUsername());
-                        if(mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && mUser.getPassword().equals(mExistingUsers.get(i).getPassword())) {
-                            session.createLoginSession(mExistingUsers.get(i).getUsername(), mExistingUsers.get(i).getFullName());
+                        if (mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && BCrypt.checkpw(mUser.getPassword(), mExistingUsers.get(i).getPassword())) {
+                            session.createLoginSession(mExistingUsers.get(i));
                             loginInfoValid = true;
                             break;
                         }
@@ -165,7 +169,6 @@ public class LoginFragment extends Fragment {
         super.onDestroy();
         Log.d(TAG, "onDestroy() called");
     }
-
 
     private Cursor getAllUsers() {
         // COMPLETED (6) Inside, call query on mDb passing in the table name and projection String [] order by COLUMN_TIMESTAMP

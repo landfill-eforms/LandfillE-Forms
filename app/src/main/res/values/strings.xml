@@ -52,6 +52,8 @@
     <string name="export_successful_toast">Export Successful!</string>
     <string name="no_data">There is no data to be exported.</string>
     <string name="export_unsuccessful_toast">Export Unsuccessful..</string>
+    <string name="import_successful_toast">Import Successful!</string>
+    <string name="import_unsuccessful_toast">Import Unsuccessful..</string>
     <string name="instantaneous_form_header">Instantaneous Entries</string>
     <string name="instantaenous_data_header">Instantaneous Form</string>
     <string name="ime_form_header">IME Entries</string>
@@ -63,7 +65,7 @@
     <string name="json_export_header">Export</string>
     <string name="submit_button_label">Submit</string>
     <string name="coming_soon_toast">Coming soon!</string>
-    <string name= "to_be_determined_toast">To be determined</string>
+    <string name="to_be_determined_toast">To be determined</string>
     <string name="baro_reading_label">Barometric pressure</string>
     <string name="start_time_label">Start Time</string>
     <string name="end_time_label">End Time</string>
@@ -338,7 +340,6 @@
     </string-array>
 
 
-
     <string-array name="sheldon_grid">
         <item>1</item>
         <item>2</item>
@@ -453,8 +454,6 @@
     </string-array>
 
 
-
-
     <string-array name="bishops_probe">
         <item>01A</item>
         <item>02A</item>
@@ -517,7 +516,6 @@
         <item>12B</item>
         <item>12C</item>
     </string-array>
-
 
 
     <string-array name="lopez_probe">
@@ -720,7 +718,7 @@
         <item>425908759</item>
 
     </string-array>
-    
+
     <string-array name="perc_co2_n2_pressure">
 
         <item>GM05311</item>
@@ -737,7 +735,7 @@
         <item>17192486</item>
         <item>33435442</item>
         <item>425908759</item>
-        
+
     </string-array>
 
     <string-array name="percent_ch4">
@@ -766,7 +764,7 @@
         <item>425908759</item>
 
     </string-array>
-    
+
     <string-array name="ppm_h2s">
 
         <item>E0X058</item>

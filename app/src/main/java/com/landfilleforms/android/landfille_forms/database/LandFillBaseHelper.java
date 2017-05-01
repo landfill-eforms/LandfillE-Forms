@@ -30,10 +30,15 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
     public void onCreate (SQLiteDatabase db) {
         Log.d("Create:", "User Table");
         db.execSQL("create table " + UsersTable.NAME + " (" +
-                UsersTable.Cols.ID + " integer primary key autoincrement, " +
+                UsersTable.Cols.ID + " integer primary key, " +
                 UsersTable.Cols.USERNAME + ", " +
                 UsersTable.Cols.PASSWORD + ", " +
-                UsersTable.Cols.FULLNAME + ")"
+                UsersTable.Cols.FIRST_NAME + ", " +
+                UsersTable.Cols.MIDDLE_NAME + ", " +
+                UsersTable.Cols.LAST_NAME + ", " +
+                UsersTable.Cols.EMAIL_ADDRESS + ", " +
+                UsersTable.Cols.EMPLOYEE_ID + ", " +
+                UsersTable.Cols.ENABLED + ")"
         );
 
         db.execSQL("create table " + InstantaneousDataTable.NAME + "(" +

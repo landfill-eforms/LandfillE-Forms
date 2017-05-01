@@ -114,8 +114,13 @@ public class LandFillDbSchema {
         public static final class Cols {
             public static final String ID = "id";
             public static final String USERNAME = "username";
-            public static final String PASSWORD = "password";//In the real thing, the password won't be stored like this.
-            public static final String FULLNAME = "fullname";
+            public static final String PASSWORD = "password";
+            public static final String FIRST_NAME = "first_name";
+            public static final String MIDDLE_NAME = "middle_name";
+            public static final String LAST_NAME = "last_name";
+            public static final String EMAIL_ADDRESS = "email_address";
+            public static final String EMPLOYEE_ID = "employee_id";
+            public static final String ENABLED = "enabled";
         }
     }
 }

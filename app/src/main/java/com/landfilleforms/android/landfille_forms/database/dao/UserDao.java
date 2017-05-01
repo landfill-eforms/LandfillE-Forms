@@ -41,8 +41,11 @@ public class UserDao {
         mDatabase.insert(UsersTable.NAME, null, values);
     }
 
-    public void removeUser(User u) {
-
+    public void addUsers(List<User> users) {
+        for(User u:users){
+            ContentValues values = getContentValues(u);
+            mDatabase.insert(UsersTable.NAME, null, values);
+        }
     }
 
     public List<User> getUsers() {
@@ -91,10 +94,15 @@ public class UserDao {
 
     private static ContentValues getContentValues(User user) {
         ContentValues values = new ContentValues();
-        values.put(UsersTable.Cols.ID, user.getId().toString());
+        values.put(UsersTable.Cols.ID, user.getId());
         values.put(UsersTable.Cols.USERNAME, user.getUsername());
         values.put(UsersTable.Cols.PASSWORD, user.getPassword());
-        values.put(UsersTable.Cols.FULLNAME, user.getFullName());
+        values.put(UsersTable.Cols.FIRST_NAME, user.getFirstName());
+        values.put(UsersTable.Cols.MIDDLE_NAME, user.getMiddleName());
+        values.put(UsersTable.Cols.LAST_NAME, user.getLastName());
+        values.put(UsersTable.Cols.EMAIL_ADDRESS, user.getEmailAddress());
+        values.put(UsersTable.Cols.EMPLOYEE_ID, user.getEmployeeId());
+        values.put(UsersTable.Cols.ENABLED, user.isEnabled());
 
         return values;
     }
