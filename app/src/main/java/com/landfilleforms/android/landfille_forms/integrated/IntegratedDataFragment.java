@@ -118,11 +118,8 @@ public class IntegratedDataFragment extends Fragment {
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
+        mUser = session.getCurrentUser();
         Log.d("UserName:", mUser.getUsername());
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
     }
 
     @Override
@@ -529,7 +526,7 @@ public class IntegratedDataFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 //make a new ISE
                 Log.d("Location:",mIntegratedData.getLocation());
-                String generatedIseNumber = generateIseNumber(mIntegratedData.getLocation(), mIntegratedData.getStartDate());
+                String generatedIseNumber = IseDao.get(getActivity()).generateIseNumber(mIntegratedData.getLocation(), mIntegratedData.getStartDate());
 
 
                 IseData iseData = new IseData();
@@ -541,8 +538,8 @@ public class IntegratedDataFragment extends Fragment {
                 iseData.setInspectorFullName(mUser.getFullName());
                 iseData.setInspectorUserName(mUser.getUsername());
                 IseDao.get(getActivity()).addIseData(iseData);
-                Intent navigateIMEForm = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
-                startActivity(navigateIMEForm);
+                Intent navigateISEForm = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
+                startActivity(navigateISEForm);
                 //Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
 
             }
@@ -555,11 +552,11 @@ public class IntegratedDataFragment extends Fragment {
 
     private void dialogExistingIse(AlertDialog.Builder redirectionAlert) {
 
-        redirectionAlert.setTitle("Add to existing IME");
-        redirectionAlert.setMessage("Which existing IME would you like to use?").setCancelable(false).setPositiveButton("Generate IME", new DialogInterface.OnClickListener() {
+        redirectionAlert.setTitle("Add to existing ISE");
+        redirectionAlert.setMessage("Which existing ISE would you like to use?").setCancelable(false).setPositiveButton("Generate ISE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String generatedImeNumber = generateIseNumber(mIntegratedData.getLocation(), mIntegratedData.getStartDate());
+                String generatedIseNumber = IseDao.get(getActivity()).generateIseNumber(mIntegratedData.getLocation(), mIntegratedData.getStartDate());
 
                 IseData iseData = new IseData();
                 iseData.setIseNumber(mCurrentIseNumber);
@@ -662,41 +659,5 @@ public class IntegratedDataFragment extends Fragment {
         sb.append(day);
 
         return sb.toString();
-    }
-
-    private String generateIseNumber(String currentSite, Date currentDate) {
-        StringBuilder sb = new StringBuilder();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(currentDate);
-        int month = cal.get(Calendar.MONTH) + 1;
-        int year = cal.get(Calendar.YEAR);
-        int sequenceNumber;
-
-        if (currentSite.equals(Site.BISHOPS.getName()))
-            sb.append(Site.BISHOPS.getShortName());
-        else if (currentSite.equals(Site.GAFFEY.getName()))
-            sb.append(Site.GAFFEY.getShortName());
-        else if (currentSite.equals(Site.LOPEZ.getName()))
-            sb.append(Site.LOPEZ.getShortName());
-        else if (currentSite.equals(Site.SHELDON.getName()))
-            sb.append(Site.SHELDON.getShortName());
-        else if (currentSite.equals(Site.TOYON.getName()))
-            sb.append(Site.TOYON.getShortName());
-        sb.append(Integer.toString(year).substring(2,4));
-        if(month < 10)
-            sb.append(0);
-        sb.append(month);
-
-
-        IseDao iseDao = IseDao.get(getActivity());
-        String[] args = {currentSite};
-        sequenceNumber = iseDao.getIseSequenceNumber(args, currentDate) + 1;
-        sb.append("-");
-        if(sequenceNumber < 10)
-            sb.append(0);
-        sb.append(sequenceNumber);
-
-        return sb.toString();
-
     }
 }

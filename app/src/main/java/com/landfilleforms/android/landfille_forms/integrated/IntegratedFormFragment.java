@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,12 +77,8 @@ public class IntegratedFormFragment extends Fragment {
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
+        mUser = session.getCurrentUser();
         Log.d("UserName:", mUser.getUsername());
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
-
         currentDate = new Date();
 
     }

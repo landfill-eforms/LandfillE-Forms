@@ -27,14 +27,12 @@ import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
-import com.landfilleforms.android.landfille_forms.database.Site;
 import com.landfilleforms.android.landfille_forms.database.dao.IseDao;
 import com.landfilleforms.android.landfille_forms.model.IseData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -71,11 +69,8 @@ public class IseFormFragment extends Fragment {
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
-        Log.d("UserName:", mUser.getUsername());
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
+        mUser = session.getCurrentUser();
+        Log.d("UserName:", mUser.getUsername());;
     }
 
     @Override
@@ -173,7 +168,7 @@ public class IseFormFragment extends Fragment {
                     iseData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                     iseData.setInspectorFullName(mUser.getFullName());
                     iseData.setInspectorUserName(mUser.getUsername());
-                    iseData.setIseNumber(generateIseNumber(iseData.getLocation(),new Date()));
+                    iseData.setIseNumber(IseDao.get(getActivity()).generateIseNumber(iseData.getLocation(),new Date()));
                     IseDao.get(getActivity()).addIseData(iseData);
                     Intent intent = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
                     startActivity(intent);
@@ -243,7 +238,7 @@ public class IseFormFragment extends Fragment {
                 iseData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 iseData.setInspectorFullName(mUser.getFullName());
                 iseData.setInspectorUserName(mUser.getUsername());
-                iseData.setIseNumber(generateIseNumber(iseData.getLocation(),new Date()));
+                iseData.setIseNumber(IseDao.get(getActivity()).generateIseNumber(iseData.getLocation(),new Date()));
                 IseDao.get(getActivity()).addIseData(iseData);
                 Intent intent = IseDataPagerActivity.newIntent(getActivity(),iseData.getId());
                 startActivity(intent);
@@ -254,43 +249,6 @@ public class IseFormFragment extends Fragment {
         alert.show();
 
     }
-
-    private String generateIseNumber(String currentSite, Date currentDate) {
-        StringBuilder sb = new StringBuilder();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(currentDate);
-        int month = cal.get(Calendar.MONTH) + 1;
-        int year = cal.get(Calendar.YEAR);
-        int sequenceNumber;
-
-        if (currentSite.equals(Site.BISHOPS.getName()))
-            sb.append(Site.BISHOPS.getShortName());
-        else if (currentSite.equals(Site.GAFFEY.getName()))
-            sb.append(Site.GAFFEY.getShortName());
-        else if (currentSite.equals(Site.LOPEZ.getName()))
-            sb.append(Site.LOPEZ.getShortName());
-        else if (currentSite.equals(Site.SHELDON.getName()))
-            sb.append(Site.SHELDON.getShortName());
-        else if (currentSite.equals(Site.TOYON.getName()))
-            sb.append(Site.TOYON.getShortName());
-        sb.append(Integer.toString(year).substring(2,4));
-        if(month < 10)
-            sb.append(0);
-        sb.append(month);
-
-
-        IseDao iseDao = IseDao.get(getActivity());
-        String[] args = {currentSite};
-        sequenceNumber = iseDao.getIseSequenceNumber(args, currentDate) + 1;
-        sb.append("-");
-        if(sequenceNumber < 10)
-            sb.append(0);
-        sb.append(sequenceNumber);
-
-        return sb.toString();
-
-    }
-
 
     //For RecycleView
     private class IseDataHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

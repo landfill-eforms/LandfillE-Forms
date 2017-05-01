@@ -4,11 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.landfilleforms.android.landfille_forms.database.Site;
 import com.landfilleforms.android.landfille_forms.database.cursorwrapper.IseDataCursorWrapper;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.IseDataTable;
 import com.landfilleforms.android.landfille_forms.model.IseData;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -171,6 +174,43 @@ public class IseDao {
         mDatabase.update(IseDataTable.NAME, values,
                 IseDataTable.Cols.UUID + "= ?",
                 new String[] {uuidString});
+    }
+
+
+
+
+
+    public String generateIseNumber(String currentSite, Date currentDate) {
+        StringBuilder sb = new StringBuilder();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int year = cal.get(Calendar.YEAR);
+        int sequenceNumber;
+
+        if (currentSite.equals(Site.BISHOPS.getName()))
+            sb.append(Site.BISHOPS.getShortName());
+        else if (currentSite.equals(Site.GAFFEY.getName()))
+            sb.append(Site.GAFFEY.getShortName());
+        else if (currentSite.equals(Site.LOPEZ.getName()))
+            sb.append(Site.LOPEZ.getShortName());
+        else if (currentSite.equals(Site.SHELDON.getName()))
+            sb.append(Site.SHELDON.getShortName());
+        else if (currentSite.equals(Site.TOYON.getName()))
+            sb.append(Site.TOYON.getShortName());
+        sb.append(Integer.toString(year).substring(2,4));
+        if(month < 10)
+            sb.append(0);
+        sb.append(month);
+
+        String[] args = {currentSite};
+        sequenceNumber = getIseSequenceNumber(args, currentDate) + 1;
+        sb.append("-");
+        if(sequenceNumber < 10)
+            sb.append(0);
+        sb.append(sequenceNumber);
+
+        return sb.toString();
     }
 
     private static ContentValues getContentValues(IseData iseData) {

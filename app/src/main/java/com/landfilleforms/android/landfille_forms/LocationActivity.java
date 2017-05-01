@@ -31,10 +31,8 @@ public class LocationActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
+        mUser = session.getCurrentUser();
+        Log.d("UserName:", mUser.getUsername());
     }
 
 

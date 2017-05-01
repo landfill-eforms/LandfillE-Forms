@@ -23,7 +23,21 @@ public class TestUtil {
         List<ContentValues> list = new ArrayList<ContentValues>();
 
         ContentValues cv = new ContentValues();
-        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "jhamilton");
+        cv.put(LandFillDbSchema.UsersTable.Cols.ID, 0);
+        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "android_admin");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "$2a$04$wheOtEm29FE1MSn3iwWQ6ulXHWY4sg5QXUasrEJm1JhTaxBrxGZIm");
+        cv.put(LandFillDbSchema.UsersTable.Cols.FIRST_NAME, "Android");
+        cv.put(LandFillDbSchema.UsersTable.Cols.MIDDLE_NAME, "");
+        cv.put(LandFillDbSchema.UsersTable.Cols.LAST_NAME, "Admin");
+        cv.put(LandFillDbSchema.UsersTable.Cols.EMAIL_ADDRESS, "3s.grantkang@gmail.com");
+        cv.put(LandFillDbSchema.UsersTable.Cols.EMPLOYEE_ID, "");
+        cv.put(LandFillDbSchema.UsersTable.Cols.ENABLED, true);
+        list.add(cv);
+
+
+
+
+/*        cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "jhamilton");
         cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
         cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "John Hamilton");
         list.add(cv);
@@ -80,7 +94,7 @@ public class TestUtil {
         cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "gyu");
         cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "password");
         cv.put(LandFillDbSchema.UsersTable.Cols.FULLNAME, "George Yu");
-        list.add(cv);
+        list.add(cv);*/
 		
         try {
             db.beginTransaction();

@@ -3,14 +3,13 @@ package com.landfilleforms.android.landfille_forms;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.landfilleforms.android.landfille_forms.model.User;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
@@ -34,10 +33,8 @@ public class WelcomeFragment extends Fragment{
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
+        mUser = session.getCurrentUser();
+        Log.d("UserName:", mUser.getUsername());
     }
 
 

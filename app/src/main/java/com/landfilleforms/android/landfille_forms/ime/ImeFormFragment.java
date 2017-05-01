@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,14 +27,12 @@ import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
-import com.landfilleforms.android.landfille_forms.database.Site;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -76,11 +73,7 @@ public class ImeFormFragment extends Fragment {
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
-        Log.d("UserName:", mUser.getUsername());
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
+        mUser = session.getCurrentUser();
     }
 
     @Override
@@ -183,7 +176,7 @@ public class ImeFormFragment extends Fragment {
                     imeData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                     imeData.setInspectorFullName(mUser.getFullName());
                     imeData.setInspectorUserName(mUser.getUsername());
-                    imeData.setImeNumber(generateIMEnumber(mCurrentLocation.getText().toString(),new Date()));
+                    imeData.setImeNumber(ImeDao.get(getActivity()).generateIMEnumber(mCurrentLocation.getText().toString(),new Date()));
                     ImeDao.get(getActivity()).addImeData(imeData);
                     Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
                     startActivity(intent);
@@ -254,7 +247,7 @@ public class ImeFormFragment extends Fragment {
                 imeData.setLocation(getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
                 imeData.setInspectorFullName(mUser.getFullName());
                 imeData.setInspectorUserName(mUser.getUsername());
-                imeData.setImeNumber(generateIMEnumber(mCurrentLocation.getText().toString(),new Date()));
+                imeData.setImeNumber(ImeDao.get(getActivity()).generateIMEnumber(mCurrentLocation.getText().toString(),new Date()));
                 ImeDao.get(getActivity()).addImeData(imeData);
                 Intent intent = ImeDataPagerActivity.newIntent(getActivity(),imeData.getId());
                 startActivity(intent);
@@ -265,43 +258,6 @@ public class ImeFormFragment extends Fragment {
         alert.show();
 
     }
-
-    private String generateIMEnumber(String currentSite, Date currentDate) {
-        StringBuilder sb = new StringBuilder();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(currentDate);
-        int month = cal.get(Calendar.MONTH) + 1;        //For java's Calendar, January = 0
-        int year = cal.get(Calendar.YEAR);
-        int sequenceNumber;
-
-        if (currentSite.equals(Site.BISHOPS.getName()))
-            sb.append(Site.BISHOPS.getShortName());
-        else if (currentSite.equals(Site.GAFFEY.getName()))
-            sb.append(Site.GAFFEY.getShortName());
-        else if (currentSite.equals(Site.LOPEZ.getName()))
-            sb.append(Site.LOPEZ.getShortName());
-        else if (currentSite.equals(Site.SHELDON.getName()))
-            sb.append(Site.SHELDON.getShortName());
-        else if (currentSite.equals(Site.TOYON.getName()))
-            sb.append(Site.TOYON.getShortName());
-
-
-        sb.append(Integer.toString(year).substring(2,4));
-        if(month < 10)
-            sb.append(0);
-        sb.append(month);
-        //TODO: generate sequence number by getting info from DB(Maybe by COUNT)
-        ImeDao imeDao = ImeDao.get(getActivity());
-        String[] args = {currentSite};
-        sequenceNumber = imeDao.getImeSequenceNumber(args, currentDate) + 1;
-        sb.append("-");
-        if(sequenceNumber < 10)
-            sb.append(0);
-        sb.append(sequenceNumber);
-
-        return sb.toString();
-    }
-
 
     //For RecycleView
     private class ImeDataHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -377,7 +333,6 @@ public class ImeFormFragment extends Fragment {
 
 
     }
-
 
     private class ImeDataAdapter extends RecyclerView.Adapter<ImeDataHolder> {
 

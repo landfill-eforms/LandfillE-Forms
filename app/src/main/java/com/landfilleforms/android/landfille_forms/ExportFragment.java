@@ -62,10 +62,8 @@ public class ExportFragment extends Fragment {
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
+        mUser = session.getCurrentUser();
+        Log.d("UserName:", mUser.getUsername());
     }
     @Nullable
     @Override
@@ -128,8 +126,7 @@ public class ExportFragment extends Fragment {
 
                         myOutWriter.close();
                         fOut.close();
-                        messageResId = R.string.export_successful_toast;
-                        Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.export_successful_toast, Toast.LENGTH_SHORT).show();
                         mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
                         mDatabase.execSQL("delete from "+ LandFillDbSchema.InstantaneousDataTable.NAME);
                         mDatabase.execSQL("delete from "+ LandFillDbSchema.ImeDataTable.NAME);

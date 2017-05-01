@@ -2,7 +2,6 @@ package com.landfilleforms.android.landfille_forms.instantaneous;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,9 +41,9 @@ import java.util.List;
  */
 
 public class InstantaneousFormFragment extends Fragment {
-    private static final String TAG = "InstantaneousFormFrag";
+    private static final String TAG = "InstantaneousFormFragm";
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
-    private static final Double defaultBarometricPressure = 30.0;
+    private static final Double DEFAULT_BAROMETRIC_PRESSURE = 30.0;
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
@@ -53,7 +51,7 @@ public class InstantaneousFormFragment extends Fragment {
 
     private SessionManager session;
     private User mUser;
-    List<InstantaneousData> mInstantaneousDatas;
+    private List<InstantaneousData> mInstantaneousDatas;
 
     private TextView mCurrentLocation;
 
@@ -64,7 +62,6 @@ public class InstantaneousFormFragment extends Fragment {
 
     private RecyclerView mInstantaneousDataRecyclerView;
     private InstantaneousDataAdapter mAdapter;
-
 
 
     @Override
@@ -81,27 +78,24 @@ public class InstantaneousFormFragment extends Fragment {
         session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
 
-        HashMap<String,String> currentUser = session.getUserDetails();
-        mUser = new User();
-        mUser.setUsername(currentUser.get(SessionManager.KEY_USERNAME));
+
+        mUser = session.getCurrentUser();
         Log.d("UserName:", mUser.getUsername());
-        mUser.setFullName(currentUser.get(SessionManager.KEY_USERFULLNAME));
 
         currentDate = new Date();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_instantaneous_form, container, false);
-
-
         final InstantaneousDao instantaneousDao = InstantaneousDao.get(getActivity());
-        String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
+
+        String[] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
         mInstantaneousDatas = instantaneousDao.getInstantaneousDatasByLocation(args);
+
         List<InstantaneousData> filteredByDateInstantaneousDatas = new ArrayList<>();
-        for(int i = 0; i < mInstantaneousDatas.size(); i++) {
-            if(currentDate.getMonth() == mInstantaneousDatas.get(i).getStartDate().getMonth() && currentDate.getYear() == mInstantaneousDatas.get(i).getStartDate().getYear() && currentDate.getDate() == mInstantaneousDatas.get(i).getStartDate().getDate())
+        for (int i = 0; i < mInstantaneousDatas.size(); i++) {
+            if (currentDate.getMonth() == mInstantaneousDatas.get(i).getStartDate().getMonth() && currentDate.getYear() == mInstantaneousDatas.get(i).getStartDate().getYear() && currentDate.getDate() == mInstantaneousDatas.get(i).getStartDate().getDate())
                 filteredByDateInstantaneousDatas.add(mInstantaneousDatas.get(i));
         }
         mInstantaneousDatas = filteredByDateInstantaneousDatas;
@@ -111,7 +105,7 @@ public class InstantaneousFormFragment extends Fragment {
         mCurrentLocation = (TextView) v.findViewById(R.id.location);
 //        mCurrentLocation.setText(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
-        mStartDateButton = (Button)v.findViewById(R.id.current_date);
+        mStartDateButton = (Button) v.findViewById(R.id.current_date);
         updateDate();
         mStartDateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -123,38 +117,35 @@ public class InstantaneousFormFragment extends Fragment {
         });
 
 
-        mBarometricPressureField = (EditText)v.findViewById(R.id.barometric_field);
+        mBarometricPressureField = (EditText) v.findViewById(R.id.barometric_field);
         Log.d("iDatas.size():", Integer.toString(mInstantaneousDatas.size()));
-        if(mInstantaneousDatas.size() != 0 && mInstantaneousDatas.get(0).getBarometricPressure() != 0)
+        if (mInstantaneousDatas.size() != 0 && mInstantaneousDatas.get(0).getBarometricPressure() != 0)
             mBarometricPressureField.setText(Double.toString(mInstantaneousDatas.get(0).getBarometricPressure()));
         else
-            mBarometricPressureField.setText(Double.toString(defaultBarometricPressure));
+            mBarometricPressureField.setText(Double.toString(DEFAULT_BAROMETRIC_PRESSURE));
 
 
         mBarometricPressureButton = (Button) v.findViewById(R.id.barometric_button);
         mBarometricPressureButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                for(int i = 0; i < mInstantaneousDatas.size(); i++) {
+                for (int i = 0; i < mInstantaneousDatas.size(); i++) {
                     if (mBarometricPressureField.getText().toString().trim().length() == 0) {
                         mBarometricPressureField.setText("30.0");
                         mInstantaneousDatas.get(i).setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
-                        Toast.makeText(getActivity(), R.string.blank_barometric_toast,Toast.LENGTH_SHORT).show();
-                    }
-                    else
+                        Toast.makeText(getActivity(), R.string.blank_barometric_toast, Toast.LENGTH_SHORT).show();
+                    } else
                         mInstantaneousDatas.get(i).setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
                 }
                 instantaneousDao.updateInstantaneousDatas(mInstantaneousDatas);
-                Toast.makeText(getActivity(), R.string.updated_barometric_toast,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.updated_barometric_toast, Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         mInstantaneousDataRecyclerView = (RecyclerView) v.findViewById(R.id.instantaneous_data_recycler_view);
         mInstantaneousDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
-
 
 
         return v;
@@ -185,13 +176,13 @@ public class InstantaneousFormFragment extends Fragment {
                 instantaneousData.setStartDate(currentDate);
                 instantaneousData.setEndDate(new Date(instantaneousData.getStartDate().getTime() + 1800000));
 
-                if(mBarometricPressureField.getText().toString().trim().length() == 0)
-                    instantaneousData.setBarometricPressure(defaultBarometricPressure);
+                if (mBarometricPressureField.getText().toString().trim().length() == 0)
+                    instantaneousData.setBarometricPressure(DEFAULT_BAROMETRIC_PRESSURE);
                 else
                     instantaneousData.setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
                 //TODO: I commented this out since the entry shouldn't be added to the DB until submit is pressed.
                 InstantaneousDao.get(getActivity()).addInstantaneousData(instantaneousData);
-                Intent intent = InstantaneousDataPagerActivity.newIntent(getActivity(),instantaneousData.getId());
+                Intent intent = InstantaneousDataPagerActivity.newIntent(getActivity(), instantaneousData.getId());
 
 
                 startActivity(intent);
@@ -223,22 +214,20 @@ public class InstantaneousFormFragment extends Fragment {
     //TODO: Make it query based on date as well as location(Location done), date should be changed from dropdown
     private void updateUI() {
         InstantaneousDao instantaneousDao = InstantaneousDao.get(getActivity());
-        String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
+        String[] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
         mInstantaneousDatas = instantaneousDao.getInstantaneousDatasByLocation(args);
-
-
 
 
         //TODO: Change this so it checks for date in the SQL query.         Issues: DB stores date as a long. So if we query by date, it might just look for entries w/ that exact time+date.
         List<InstantaneousData> filteredByDateInstantaneousDatas = new ArrayList<>();
-        for(int i = 0; i < mInstantaneousDatas.size(); i++) {
-            if(currentDate.getMonth() == mInstantaneousDatas.get(i).getStartDate().getMonth() && currentDate.getYear() == mInstantaneousDatas.get(i).getStartDate().getYear() && currentDate.getDate() == mInstantaneousDatas.get(i).getStartDate().getDate())
+        for (int i = 0; i < mInstantaneousDatas.size(); i++) {
+            if (currentDate.getMonth() == mInstantaneousDatas.get(i).getStartDate().getMonth() && currentDate.getYear() == mInstantaneousDatas.get(i).getStartDate().getYear() && currentDate.getDate() == mInstantaneousDatas.get(i).getStartDate().getDate())
                 filteredByDateInstantaneousDatas.add(mInstantaneousDatas.get(i));
         }
         mInstantaneousDatas = filteredByDateInstantaneousDatas;
         Log.d("filteredSize", Integer.toString(filteredByDateInstantaneousDatas.size()));
 
-        if(mAdapter == null) {
+        if (mAdapter == null) {
             mAdapter = new InstantaneousDataAdapter(mInstantaneousDatas);
             mInstantaneousDataRecyclerView.setAdapter(mAdapter);
         } else {
@@ -248,14 +237,14 @@ public class InstantaneousFormFragment extends Fragment {
     }
 
     private void updateDate() {
-        mStartDateButton.setText(DateFormat.format("EEEE, MMM d, yyyy",currentDate));
+        mStartDateButton.setText(DateFormat.format("EEEE, MMM d, yyyy", currentDate));
     }
 
     private void updateBarometricPressure() {
-        if(mInstantaneousDatas.size() != 0 && mInstantaneousDatas.get(0).getBarometricPressure() != 0)
+        if (mInstantaneousDatas.size() != 0 && mInstantaneousDatas.get(0).getBarometricPressure() != 0)
             mBarometricPressureField.setText(Double.toString(mInstantaneousDatas.get(0).getBarometricPressure()));
         else
-            mBarometricPressureField.setText(Double.toString(defaultBarometricPressure));
+            mBarometricPressureField.setText(Double.toString(DEFAULT_BAROMETRIC_PRESSURE));
     }
 
     //For RecyclerView
@@ -274,7 +263,7 @@ public class InstantaneousFormFragment extends Fragment {
 
         //Form Data Holder
 
-        public InstantaneousDataHolder(View itemView){
+        public InstantaneousDataHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             mGridIdView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_gridid_view);
@@ -284,7 +273,7 @@ public class InstantaneousFormFragment extends Fragment {
             //mEndTimeView = (TextView) itemView.findViewById(R.id.list_item_instantaneous_data_end_time_view);
             mInstUser = (TextView) itemView.findViewById(R.id.list_item_instantaneous_inspector_name);
 
-            mCardView = (CardView)itemView.findViewById(R.id.instantaneous_data_cv);
+            mCardView = (CardView) itemView.findViewById(R.id.instantaneous_data_cv);
             mCardView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -310,19 +299,17 @@ public class InstantaneousFormFragment extends Fragment {
             mInstantaneousData = instantaneousData;
             mGridIdView.setText(mInstantaneousData.getGridId());
             mMethaneReadingView.setText(Double.toString(mInstantaneousData.getMethaneReading()));
-            mStartDateView.setText(DateFormat.format("yyyy-MM-dd",mInstantaneousData.getStartDate()));
+            mStartDateView.setText(DateFormat.format("yyyy-MM-dd", mInstantaneousData.getStartDate()));
             //Set colors depending on ch4 level in RecyclerView
             if (mInstantaneousData.getMethaneReading() >= 500) {
                 mGridIdView.setTextColor(Color.RED);
                 mMethaneReadingView.setTextColor(Color.RED);
                 mStartDateView.setTextColor(Color.RED);
-            }
-            else if (mInstantaneousData.getMethaneReading() >= 200 && mInstantaneousData.getMethaneReading() <500) {
-                mGridIdView.setTextColor(Color.rgb(255,165,0));
-                mMethaneReadingView.setTextColor(Color.rgb(255,165,0));
-                mStartDateView.setTextColor(Color.rgb(255,165,0));
-            }
-            else {
+            } else if (mInstantaneousData.getMethaneReading() >= 200 && mInstantaneousData.getMethaneReading() < 500) {
+                mGridIdView.setTextColor(Color.rgb(255, 165, 0));
+                mMethaneReadingView.setTextColor(Color.rgb(255, 165, 0));
+                mStartDateView.setTextColor(Color.rgb(255, 165, 0));
+            } else {
                 mGridIdView.setTextColor(Color.WHITE);
                 mMethaneReadingView.setTextColor(Color.WHITE);
                 mStartDateView.setTextColor(Color.WHITE);
@@ -337,6 +324,7 @@ public class InstantaneousFormFragment extends Fragment {
 //            startActivity(intent);
         }
     }
+
 
     //list_item_instantaneous_data.xml
     private class InstantaneousDataAdapter extends RecyclerView.Adapter<InstantaneousDataHolder> {

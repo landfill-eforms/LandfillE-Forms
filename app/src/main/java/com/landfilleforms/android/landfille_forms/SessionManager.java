@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.landfilleforms.android.landfille_forms.model.User;
+
 import java.util.HashMap;
 
 /**
@@ -29,10 +32,7 @@ public class SessionManager {
 
     private static final String IS_LOGGED_IN = "IsLoggedIn";
 
-    public static final String KEY_USERNAME = "userName";
-
-    public static final String KEY_USERFULLNAME = "fullName";
-
+    public static final String KEY_USER_JSON = "currentUserJson";
 
     public SessionManager(Context context) {
         this.context = context;
@@ -40,11 +40,11 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void createLoginSession(String userName, String fullName) {
+    public void createLoginSession(User currentUser) {
         editor.putBoolean(IS_LOGGED_IN, true);
-        editor.putString(KEY_USERNAME, userName);
-        editor.putString(KEY_USERFULLNAME, fullName);
-
+        Gson gson = new Gson();
+        String userJson = gson.toJson(currentUser);
+        editor.putString(KEY_USER_JSON, userJson);
         editor.commit();
     }
 
@@ -64,11 +64,10 @@ public class SessionManager {
         return pref.getBoolean(IS_LOGGED_IN, false);
     }
 
-    public HashMap<String, String> getUserDetails() {
-        HashMap<String, String> user = new HashMap<String, String>();
-        user.put(KEY_USERNAME, pref.getString(KEY_USERNAME, null));
-        user.put(KEY_USERFULLNAME, pref.getString(KEY_USERFULLNAME, null));
-        return user;
+    public User getCurrentUser() {
+        Gson gson = new Gson();
+        String json = pref.getString(KEY_USER_JSON, "");
+        return gson.fromJson(json, User.class);
     }
 
     public void logoutUser() {

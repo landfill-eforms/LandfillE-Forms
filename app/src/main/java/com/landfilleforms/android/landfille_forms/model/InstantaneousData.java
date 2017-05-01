@@ -37,9 +37,13 @@ public class InstantaneousData {
         return mId;
     }
 
-    public String getLandFillLocation() { return mLocation; }
+    public String getLandFillLocation() {
+        return mLocation;
+    }
 
-    public void setLandFillLocation(String landFillLocation) { this.mLocation = landFillLocation; }
+    public void setLandFillLocation(String landFillLocation) {
+        this.mLocation = landFillLocation;
+    }
 
     public double getBarometricPressure() {
         return mBarometricPressure;
@@ -57,9 +61,13 @@ public class InstantaneousData {
         this.gridId = gridId;
     }
 
-    public String getInspectorName() { return mInspectorName; }
+    public String getInspectorName() {
+        return mInspectorName;
+    }
 
-    public void setInspectorName(String inspectorName) { this.mInspectorName = inspectorName; }
+    public void setInspectorName(String inspectorName) {
+        this.mInspectorName = inspectorName;
+    }
 
     public String getInspectorUserName() {
         return mInspectorUserName;
@@ -85,9 +93,13 @@ public class InstantaneousData {
         mEndDate = endDate;
     }
 
-    public String getInstrumentSerialNumber() { return instrumentSerialNumber; }
+    public String getInstrumentSerialNumber() {
+        return instrumentSerialNumber;
+    }
 
-    public void setInstrumentSerialNumber(String instrumentSerialNumber) { this.instrumentSerialNumber = instrumentSerialNumber; }
+    public void setInstrumentSerialNumber(String instrumentSerialNumber) {
+        this.instrumentSerialNumber = instrumentSerialNumber;
+    }
 
     public double getMethaneReading() {
         return methaneReading;
@@ -97,7 +109,11 @@ public class InstantaneousData {
         this.methaneReading = methaneReading;
     }
 
-    public String getImeNumber() { return imeNumber; }
+    public String getImeNumber() {
+        return imeNumber;
+    }
 
-    public void setImeNumber(String imeNumber) { this.imeNumber = imeNumber; }
+    public void setImeNumber(String imeNumber) {
+        this.imeNumber = imeNumber;
+    }
 }
