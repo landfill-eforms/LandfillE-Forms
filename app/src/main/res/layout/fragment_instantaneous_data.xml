@@ -279,12 +279,11 @@
 
                 <EditText
                     android:id="@+id/methane_reading"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:textColor="@android:color/white"
-                    android:textSize="20dp"
-                    />
+                    android:textSize="20dp" />
 
             </TableRow>
 

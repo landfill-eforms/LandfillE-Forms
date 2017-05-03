@@ -8,10 +8,18 @@
     android:clickable="true"
     android:textAlignment="center"
     android:visibility="visible"
-    android:background="@color/lighterBackgroundTheme"
+    android:background="@color/backgroundTheme"
     >
+    
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/activity_scroll_view"-->
+        <!--android:fillViewport="true">-->
 
 
+    <!--</ScrollView>-->
+    
     <!--Bishops, Gaffey, Lopez, Sheldon, Toyon-->
 
     <!--Activity page is divided into 3 equal linear layouts-->
