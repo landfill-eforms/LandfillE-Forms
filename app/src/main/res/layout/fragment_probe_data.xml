@@ -166,15 +166,14 @@
 
                 <EditText
                     android:id="@+id/water_pressure_field"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
                     android:layout_margin="3dp"
-                    android:textColor="@color/white"
+                    android:inputType="numberDecimal"
                     android:textAllCaps="false"
-                    android:textStyle="normal"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
-                    />
+                    android:textStyle="normal" />
             </TableRow>
 
             <TableRow>
@@ -194,16 +193,15 @@
 
                 <EditText
                     android:id="@+id/methane_percentage_field"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:inputType="numberDecimal"
                     android:layout_margin="3dp"
-                    android:textColor="@color/white"
+                    android:inputType="numberDecimal"
                     android:textAllCaps="false"
-                    android:textStyle="normal"
+                    android:textColor="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textSize="20dp"
-                    />
+                    android:textStyle="normal" />
             </TableRow>
 
 

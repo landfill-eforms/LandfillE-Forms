@@ -83,13 +83,13 @@
 
                 <TextView
                     android:id="@+id/ise_field"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:textAllCaps="false"
-                    android:textStyle="normal"
+                    android:textColor="@android:color/white"
                     android:textSize="20dp"
-                    android:textColor="@android:color/white" />
+                    android:textStyle="normal" />
 
             </TableRow>
 
@@ -132,15 +132,15 @@
 
                 <EditText
                     android:id="@+id/ise_methane_reading"
-                    android:layout_width="match_parent"
-                    android:gravity="top"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:textColor="@color/white"
                     android:layout_margin="3dp"
+                    android:gravity="top"
+                    android:inputType="numberDecimal"
                     android:textAllCaps="false"
-                    android:textStyle="normal"
-                    android:textSize="20dp" />
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
 
             </TableRow>
 

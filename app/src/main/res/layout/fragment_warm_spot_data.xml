@@ -114,15 +114,14 @@
 
                 <EditText
                     android:id="@+id/estimated_size"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textNoSuggestions"
                     android:layout_margin="3dp"
-                    android:textColor="@color/white"
+                    android:inputType="textNoSuggestions"
                     android:textAllCaps="false"
-                    android:textStyle="normal"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
-                    />
+                    android:textStyle="normal" />
             </TableRow>
 
             <TableRow>
@@ -141,15 +140,14 @@
 
                 <EditText
                     android:id="@+id/methane_reading"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
                     android:layout_margin="3dp"
-                    android:textColor="@color/white"
+                    android:inputType="numberDecimal"
                     android:textAllCaps="false"
-                    android:textStyle="normal"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
-                    />
+                    android:textStyle="normal" />
             </TableRow>
 
             <TableRow>
