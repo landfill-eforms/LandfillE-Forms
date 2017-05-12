@@ -8,8 +8,8 @@ The Landfill e-Forms Mobile Application is a data entry application for the City
 	* [Mobile Application Database](https://github.com/landfill-eforms/landfill-android-app/blob/master/README.md#mobile-application-database)
 * [Environment Setup](https://github.com/landfill-eforms/landfill-android-app/blob/master/README.md#environment-setup)
 * [Application Installation](https://github.com/landfill-eforms/landfill-android-app/blob/master/README.md#application-installation)
-	* [Install through Android Studio](https://github.com/landfill-eforms/landfill-android-app/blob/master/README.md#install-android-studio)
-	* [Install through File Download](https://github.com/landfill-eforms/landfill-android-app/blob/master/README.md#install-file-download)
+	* [Install through Android Studio](https://github.com/landfill-eforms/landfill-android-app/blob/master/README.md#install-through-android-studio)
+	* [Install through File Download](https://github.com/landfill-eforms/landfill-android-app/blob/master/README.md#install-through-file-download)
 
 ## Prerequisites
 This sections lists the prerequisites for each component of the mobile application separately.
@@ -45,7 +45,7 @@ The ```app``` folder will contain three folders: manifests, java, and res.
 ## Application Installation
 For application installation, a phone running Android 5.1 (Lollipop) or higher is required. 
 
-NOTE: If there are any installation issues, you may have to first go into the device's security setting and enable ```Unknown sources``` which allows the installation of applications from sources other than the Google Play Store.
+NOTE: Go into the device's security setting and enable ```Unknown sources``` which allows the installation of applications from sources other than the Google Play Store.
 
 ### Install through Android Studio
 
@@ -55,7 +55,7 @@ Connect phone to computer running Android Studio and make sure it recognizes the
 
 With device connected, in the menus go to ```Build > Build APK``` and application will be installed on device. 
 
-NOTE: If there has been a change in the database, go to the Application Manager on device and Clear All application data to avoid application crashing. The application will be installed but will crash if there are conflicts in the database. Be sure to clear data for clean install.
+NOTE: After any updates to the database, go to the ```Application Manager``` on device and ```Clear All``` application data to avoid application crashing. The application will be installed but will crash if there are conflicts in the database. Be sure to clear data for clean install.
 
 ### Install through File Download
 
@@ -67,5 +67,6 @@ landfill-android-app > app > build > outputs > apk
 
 Send .apk file to selected device and open .apk file for immediate installation.
 
-NOTE: If there has been a change in the database, go to the Application Manager on device and Clear All application data to avoid application crashing. The application will be installed but will crash if there are conflicts in the database. Be sure to clear data for clean install.
+NOTE: After any updates to the database, go to the ```Application Manager``` on device and ```Clear All``` application data to avoid application crashing. The application will be installed but will crash if there are conflicts in the database. Be sure to clear data for clean install.
+
 
