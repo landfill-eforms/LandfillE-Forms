@@ -41,7 +41,7 @@
     <string name="ise_label">ISE #:</string>
     <string name="grid_id_label">Grid ID: </string>
     <string name="grid_id_hint">Ex: LOP-1234?</string>
-    <string name="methane_reading_label">CH4(ppm) Reading</string>
+    <string name="methane_reading_label">Peak CH4(ppm)</string>
     <string name="methane_reading_hint">Values: 0\-1000?</string>
     <string name="time_reading_label">Time</string>
     <string name="date_picker_title">Date:</string>
@@ -149,22 +149,6 @@
     <string name="ime_no_label">IME No.:</string>
 
 
-    <!-- Array for Equipment Spinner-->
-    <string-array name="equipment_array">
-        <item>400UH</item>
-        <item>475-III</item>
-        <item>6400</item>
-        <item>DD20</item>
-        <item>Eagle-401</item>
-        <item>Eagle-438</item>
-        <item>GEM-2000</item>
-        <item>GEM-5000</item>
-        <item>GX-94</item>
-        <item>ISCO 150</item>
-        <item>MP-10</item>
-        <item>MP-15</item>
-        <item>MP-20</item>
-    </string-array>
 
     <string-array name="empty_array">
 
@@ -697,94 +681,6 @@
         <item>15A</item>
         <item>15B</item>
         <item>16A</item>
-    </string-array>
-
-
-    <!--Serial Number for Equipment Types-->
-    <string-array name="instantaneous_integrated_probe">
-
-        <item>GM05311</item>
-        <item>GM05322</item>
-        <item>GM05326</item>
-        <item>GM05328</item>
-        <item>GM05881</item>
-        <item>GM12524</item>
-        <item>G501938</item>
-        <item>12111812</item>
-        <item>67176223</item>
-        <item>121126615</item>
-        <item>7157035</item>
-        <item>17192486</item>
-        <item>33435442</item>
-        <item>425908759</item>
-
-    </string-array>
-
-    <string-array name="perc_co2_n2_pressure">
-
-        <item>GM05311</item>
-        <item>GM05322</item>
-        <item>GM05326</item>
-        <item>GM05328</item>
-        <item>GM05881</item>
-        <item>GM12524</item>
-        <item>G501938</item>
-        <item>12111812</item>
-        <item>67176223</item>
-        <item>121126615</item>
-        <item>7157035</item>
-        <item>17192486</item>
-        <item>33435442</item>
-        <item>425908759</item>
-
-    </string-array>
-
-    <string-array name="percent_ch4">
-
-        <item>E0X058</item>
-        <item>E84103</item>
-        <item>GM05311</item>
-        <item>GM05322</item>
-        <item>GM05326</item>
-        <item>GM05328</item>
-        <item>GM05881</item>
-        <item>GM12524</item>
-        <item>G501938</item>
-
-    </string-array>
-
-    <string-array name="ppm_ch4">
-
-        <item>E84103</item>
-        <item>12111812</item>
-        <item>67176223</item>
-        <item>121126615</item>
-        <item>7157035</item>
-        <item>17192486</item>
-        <item>33435442</item>
-        <item>425908759</item>
-
-    </string-array>
-
-    <string-array name="ppm_h2s">
-
-        <item>E0X058</item>
-        <item>G501938</item>
-
-    </string-array>
-
-    <string-array name="perc_o2">
-
-        <item>E0X058</item>
-        <item>E84103</item>
-        <item>GM05311</item>
-        <item>GM05322</item>
-        <item>GM05326</item>
-        <item>GM05328</item>
-        <item>GM05881</item>
-        <item>GM12524</item>
-        <item>G501938</item>
-
     </string-array>
 
 

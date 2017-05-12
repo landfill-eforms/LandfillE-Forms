@@ -121,7 +121,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"/>
             </TableRow>
 
             <TableRow>
@@ -147,9 +147,9 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"
+                    />
             </TableRow>
-
             <TableRow>
                 <TextView
                     style="?android:listSeparatorTextViewStyle"

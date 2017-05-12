@@ -1,6 +1,6 @@
 package com.landfilleforms.android.landfille_forms;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
