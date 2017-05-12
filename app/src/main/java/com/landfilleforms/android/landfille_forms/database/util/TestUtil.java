@@ -25,7 +25,7 @@ public class TestUtil {
         ContentValues cv = new ContentValues();
         cv.put(LandFillDbSchema.UsersTable.Cols.ID, 0);
         cv.put(LandFillDbSchema.UsersTable.Cols.USERNAME, "android_admin");
-        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "$2a$04$wheOtEm29FE1MSn3iwWQ6ulXHWY4sg5QXUasrEJm1JhTaxBrxGZIm");
+        cv.put(LandFillDbSchema.UsersTable.Cols.PASSWORD, "$2a$07$RVBGN544b9xFzS//B6Y8FedBXwj0kE..3XzGeWcSyJMvBoOokpSFS");
         cv.put(LandFillDbSchema.UsersTable.Cols.FIRST_NAME, "Android");
         cv.put(LandFillDbSchema.UsersTable.Cols.MIDDLE_NAME, "");
         cv.put(LandFillDbSchema.UsersTable.Cols.LAST_NAME, "Admin");
@@ -109,6 +109,8 @@ public class TestUtil {
             db.endTransaction();
         }
     }
+
+    //This probably won't work
     public static void insertDummyInstantaneousData(SQLiteDatabase db) {
         if (db == null) {
             return;
@@ -124,7 +126,7 @@ public class TestUtil {
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSPECTOR_NAME, "William Andrews");
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.START_DATE, "date");//CHANGE THIS TO 11/8/2016
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.END_DATE, "date");
-        cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSTRUMENT_SERIAL, "2345");
+        cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSTRUMENT_ID, "2345");
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.MAX_METHANE_READING, 1000);
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.IME_NUMBER, "LC-110816-01");
         list.add(cv);
@@ -137,7 +139,7 @@ public class TestUtil {
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSPECTOR_NAME, "William Andrews");
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.START_DATE, "date");//CHANGE THIS TO 11/8/2016
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.END_DATE, "date");
-        cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSTRUMENT_SERIAL, "2345");
+        cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSTRUMENT_ID, "2345");
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.MAX_METHANE_READING, 8000);
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.IME_NUMBER, "LC-110816-02");
         list.add(cv);
@@ -150,7 +152,7 @@ public class TestUtil {
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSPECTOR_NAME, "William Andrews");
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.START_DATE, "date");//CHANGE THIS TO 11/8/2016
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.END_DATE, "date");
-        cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSTRUMENT_SERIAL, "2345");
+        cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSTRUMENT_ID, "2345");
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.MAX_METHANE_READING, 4000);
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.IME_NUMBER, "LC-110816-01");
         list.add(cv);
@@ -163,7 +165,7 @@ public class TestUtil {
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSPECTOR_NAME, "William Andrews");
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.START_DATE, "date");//CHANGE THIS TO 11/8/2016
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.END_DATE, "date");
-        cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSTRUMENT_SERIAL, "2345");
+        cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.INSTRUMENT_ID, "2345");
         cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.MAX_METHANE_READING, 150);
         //cv.put(LandFillDbSchema.InstantaneousDataTable.Cols.IME_NUMBER, "");
         list.add(cv);

@@ -1,10 +1,12 @@
 package com.landfilleforms.android.landfille_forms;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,13 +19,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentTypeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.UserDao;
 import com.landfilleforms.android.landfille_forms.database.util.TestUtil;
+import com.landfilleforms.android.landfille_forms.model.ImportedData;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
+import com.landfilleforms.android.landfille_forms.model.InstrumentType;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.util.BCrypt;
 
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +52,7 @@ public class LoginFragment extends Fragment {
     private EditText mUsernameField;
     private EditText mPasswordField;
     private Button mLoginButton;
+    private Button mImportButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,9 +119,10 @@ public class LoginFragment extends Fragment {
         mLoginButton = (Button)v.findViewById(R.id.login_submit);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().trim().length() > 0) {
+                if(mUser.getUsername().trim().length() > 0 && mUser.getPassword().length() > 0) {
                     boolean loginInfoValid = false;
                     for(int i = 0; i < mExistingUsers.size(); i++) {
+                        Log.d("Username",mExistingUsers.get(i).getUsername());
                         if (mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && BCrypt.checkpw(mUser.getPassword(), mExistingUsers.get(i).getPassword())) {
                             session.createLoginSession(mExistingUsers.get(i));
                             loginInfoValid = true;
@@ -128,6 +141,62 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
+
+        //TODO: DR this function from importfragment
+        mImportButton = (Button) v.findViewById(R.id.import_button);
+        mImportButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Context context = getActivity();
+                String fileName = "LandFillDataImport.json";
+                String path = "LandfillData" + File.separator +"Import";
+                try{
+                    File myFile = new File(Environment.getExternalStorageDirectory()+File.separator+path);
+                    myFile.mkdirs();
+
+                    GsonBuilder builder = new GsonBuilder();
+                    builder.serializeNulls();
+                    builder.setDateFormat("EEE, dd MMM yyyy HH:mm:ss");
+                    Gson gson = builder.create();
+
+                    ImportedData importedData = gson.fromJson(new FileReader(Environment.getExternalStorageDirectory() + File.separator + path + File.separator + fileName),ImportedData.class);
+                    //Log.d("ImportFrag:",importedData.getUsers().get(0).getUsername());
+
+                    mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
+                    mDatabase.execSQL("delete from "+ LandFillDbSchema.UsersTable.NAME);
+                    mDatabase.execSQL("delete from "+ LandFillDbSchema.InstrumentsTable.NAME);
+                    mDatabase.execSQL("delete from "+ LandFillDbSchema.InstrumentTypesTable.NAME);
+                    TestUtil.insertDummyUserData(mDatabase);
+                    UserDao.get(getActivity()).addUsers(importedData.getUsers());
+                    List<InstrumentType> instrumentTypes = new ArrayList<>();
+                    List<Integer> existingInstrumentTypeIds = new ArrayList<>();
+                    for(Instrument i:importedData.getInstruments()){
+                        if(!existingInstrumentTypeIds.contains(i.getInstrumentType().getId())){
+                            instrumentTypes.add(i.getInstrumentType());
+                            existingInstrumentTypeIds.add(i.getInstrumentType().getId());
+                            Log.d("InstrumentTypeId",Integer.toString(i.getInstrumentType().getId()));
+                        }
+                    }
+
+                    InstrumentTypeDao.get(getActivity()).addInstrumentTypes(instrumentTypes);
+                    InstrumentDao.get(getActivity()).addInstruments(importedData.getInstruments());
+
+                    Instrument testInstrument = InstrumentDao.get(getActivity()).getInstrument("1");
+                    Log.d("ImportFrag", testInstrument.getInstrumentType().getManufacturer());
+                    Toast.makeText(context,R.string.import_successful_toast, Toast.LENGTH_SHORT).show();
+                    mExistingUsers = importedData.getUsers();
+
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context,R.string.import_unsuccessful_toast, Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+
+
+
         return v;
     }
 
@@ -182,4 +251,5 @@ public class LoginFragment extends Fragment {
                 null
         );
     }
+
 }

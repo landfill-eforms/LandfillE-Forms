@@ -42,6 +42,7 @@ public class WelcomeFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().setTitle("Home");
         View view = inflater.inflate(R.layout.fragment_welcome_screen,container,false);
         mWelcomeText = (TextView) view.findViewById(R.id.welcome_text);
         mWelcomeText.setText("Welcome " +  mUser.getFullName() + "! \n What would you like to do?");

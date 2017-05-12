@@ -33,7 +33,7 @@ public class IntegratedDao {
 
     private IntegratedDao (Context context) {
         mContext = context.getApplicationContext();
-        mDatabase = new LandFillBaseHelper(mContext).getReadableDatabase();
+        mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
     public void addIntegratedData(IntegratedData d) {
@@ -53,7 +53,11 @@ public class IntegratedDao {
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                integratedDatas.add(cursor.getIntegratedData());
+                IntegratedData i = cursor.getIntegratedData();
+                if(i.getInstrument() != null) {
+                    i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
+                }
+                integratedDatas.add(i);
                 cursor.moveToNext();
             }
         } finally {
@@ -70,7 +74,11 @@ public class IntegratedDao {
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                integratedDatas.add(cursor.getIntegratedData());
+                IntegratedData i = cursor.getIntegratedData();
+                if(i.getInstrument() != null) {
+                    i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
+                }
+                integratedDatas.add(i);
                 cursor.moveToNext();
             }
         } finally {
@@ -89,7 +97,11 @@ public class IntegratedDao {
                 return null;
             }
             cursor.moveToFirst();
-            return cursor.getIntegratedData();
+            IntegratedData i = cursor.getIntegratedData();
+            if(i.getInstrument() != null) {
+                i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
+            }
+            return i;
         } finally {
             cursor.close();
         }
@@ -121,7 +133,9 @@ public class IntegratedDao {
         values.put(IntegratedDataTable.Cols.UUID, integratedData.getId().toString());
         values.put(IntegratedDataTable.Cols.LOCATION, integratedData.getLocation());
         values.put(IntegratedDataTable.Cols.GRID_ID, integratedData.getGridId());
-        values.put(IntegratedDataTable.Cols.INSTRUMENT_SERIAL, integratedData.getInstrumentSerialNumber());
+        if(integratedData.getInstrument() != null){
+            values.put(IntegratedDataTable.Cols.INSTRUMENT_ID, integratedData.getInstrument().getId());
+        }
         values.put(IntegratedDataTable.Cols.BARO_PRESSURE, integratedData.getBarometricPressure());
         values.put(IntegratedDataTable.Cols.INSPECTOR_NAME, integratedData.getInspectorName());
         values.put(IntegratedDataTable.Cols.INSPECTOR_USERNAME, integratedData.getInspectorUserName());

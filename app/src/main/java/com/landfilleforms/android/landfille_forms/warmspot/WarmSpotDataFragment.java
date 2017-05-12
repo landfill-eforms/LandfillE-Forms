@@ -28,10 +28,13 @@ import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 //Done?
@@ -41,6 +44,7 @@ public class WarmSpotDataFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
+    List<Instrument> mInstruments;
     private WarmSpotData mWarmSpotData;
     private boolean newlyCreatedData;
 
@@ -50,7 +54,7 @@ public class WarmSpotDataFragment extends Fragment {
     private EditText mDescriptionField;//Text
     private EditText mEstimatedSizeField;//Number
     private EditText mMethaneLevelField;
-    private Spinner mInstrumentSerialNoSpinner;
+    private Spinner mInstrumentSpinner;
     private Button mDateButton;
     private Button mSubmitButton;
 
@@ -106,7 +110,7 @@ public class WarmSpotDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_warm_spot_data, container, false);
-
+        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mWarmSpotData.getLocation());
 
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mWarmSpotData.getInspectorFullName());
@@ -173,21 +177,18 @@ public class WarmSpotDataFragment extends Fragment {
             }
         });
 
-        mInstrumentSerialNoSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
-        ArrayAdapter<CharSequence> instrumentSerialAdapter;
-        instrumentSerialAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.instantaneous_integrated_probe, R.layout.dark_spinner_layout);
-        mInstrumentSerialNoSpinner.setAdapter(instrumentSerialAdapter);
-        mInstrumentSerialNoSpinner.setSelection(instrumentSerialAdapter.getPosition(mWarmSpotData.getInstrumentSerial()));
-
-        mInstrumentSerialNoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+        ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
+        mInstrumentSpinner.setAdapter(instrumentAdapter);
+        mInstrumentSpinner.setSelection(instrumentAdapter.getPosition(mWarmSpotData.getInstrument()));
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mWarmSpotData.setInstrumentSerial(parent.getItemAtPosition(position).toString());
+                mWarmSpotData.setInstrument((Instrument)parent.getItemAtPosition(position));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 

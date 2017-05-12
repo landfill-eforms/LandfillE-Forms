@@ -32,9 +32,11 @@ import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.ime.ImeDataPagerActivity;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotDataPagerActivity;
@@ -62,6 +64,7 @@ public class InstantaneousDataFragment extends Fragment {
     private static final int REQUEST_START_TIME = 1;
     private static final int REQUEST_END_TIME = 2;
 
+    List<Instrument> mInstruments;
     private double tempMethaneLevel;//For the dialogs
     private InstantaneousData mInstantaneousData;
     private TextView mInspectorLabel;
@@ -77,6 +80,7 @@ public class InstantaneousDataFragment extends Fragment {
     private TextView imeField;
     private TextView mLocationLabel;
     private Spinner mInstrumentSerialNoSpinner;
+    private Spinner mInstrumentSpinner;
     private String mCurrentImeNumber;
     private boolean newlyCreatedData;
 
@@ -145,6 +149,12 @@ public class InstantaneousDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_instantaneous_data, container, false);
+        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mInstantaneousData.getLandFillLocation());
+        Log.d("InstrumentsSize",Integer.toString(mInstruments.size()));
+        for(Instrument i:mInstruments){
+            Log.d("Instrument",Integer.toString(i.getId()));
+        }
+
 
         mBaroLevelField = (TextView)v.findViewById(R.id.baro_reading);
         if(mInstantaneousData.getBarometricPressure() != 0)
@@ -223,21 +233,18 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-        mInstrumentSerialNoSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
-        ArrayAdapter<CharSequence> instrumentSerialAdapter;
-        instrumentSerialAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.instantaneous_integrated_probe, R.layout.dark_spinner_layout);
-        mInstrumentSerialNoSpinner.setAdapter(instrumentSerialAdapter);
-        mInstrumentSerialNoSpinner.setSelection(instrumentSerialAdapter.getPosition(mInstantaneousData.getInstrumentSerialNumber()));
-
-        mInstrumentSerialNoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+        ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
+        mInstrumentSpinner.setAdapter(instrumentAdapter);
+        mInstrumentSpinner.setSelection(instrumentAdapter.getPosition(mInstantaneousData.getInstrument()));
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mInstantaneousData.setInstrumentSerialNumber(parent.getItemAtPosition(position).toString());
+                mInstantaneousData.setInstrument((Instrument)parent.getItemAtPosition(position));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -583,7 +590,8 @@ public class InstantaneousDataFragment extends Fragment {
                 warmSpotData.setMaxMethaneReading(tempMethaneLevel);
                 warmSpotData.setDate(mInstantaneousData.getStartDate());
                 warmSpotData.setLocation(mInstantaneousData.getLandFillLocation());
-                warmSpotData.setInstrumentSerial(mInstantaneousData.getInstrumentSerialNumber());
+                //TODO: related to instrument change
+                //warmSpotData.setInstrument(mInstantaneousData.getInstrument());
                 warmSpotData.setInspectorFullName(mUser.getFullName());
                 warmSpotData.setInspectorUserName(mUser.getUsername());
                 WarmSpotDao.get(getActivity()).addWarmSpotData(warmSpotData);

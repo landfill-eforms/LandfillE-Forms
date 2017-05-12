@@ -5,6 +5,7 @@ import android.database.CursorWrapper;
 
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.InstantaneousDataTable;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 
 import java.util.Date;
 import java.util.UUID;
@@ -27,9 +28,10 @@ public class InstantaneousDataCursorWrapper extends CursorWrapper {
         String inspectorUserName = getString(getColumnIndex(InstantaneousDataTable.Cols.INSPECTOR_USERNAME));
         long startDate = getLong(getColumnIndex(InstantaneousDataTable.Cols.START_DATE));
         long endDate = getLong(getColumnIndex(InstantaneousDataTable.Cols.END_DATE));
-        String instrumentSerialNumber = getString(getColumnIndex(InstantaneousDataTable.Cols.INSTRUMENT_SERIAL));
         double methaneReading = getDouble(getColumnIndex(InstantaneousDataTable.Cols.MAX_METHANE_READING));
         String ime_number = getString(getColumnIndex(InstantaneousDataTable.Cols.IME_NUMBER));
+
+        Instrument instrument = new Instrument(getInt(getColumnIndex(InstantaneousDataTable.Cols.INSTRUMENT_ID)));
 
         InstantaneousData instantaneousData = new InstantaneousData(UUID.fromString(uuidString));
         instantaneousData.setLandFillLocation(location);
@@ -39,7 +41,7 @@ public class InstantaneousDataCursorWrapper extends CursorWrapper {
         instantaneousData.setInspectorUserName(inspectorUserName);
         instantaneousData.setStartDate(new Date(startDate));
         instantaneousData.setEndDate(new Date(endDate));
-        instantaneousData.setInstrumentSerialNumber(instrumentSerialNumber);
+        instantaneousData.setInstrument(instrument);
         instantaneousData.setMethaneReading(methaneReading);
         instantaneousData.setImeNumber(ime_number);
 

@@ -110,7 +110,7 @@ public class MenuActivity extends AppCompatActivity
                 break;
             //case import, navigate to export fragment
             case R.id.nav_import:
-                fm.beginTransaction().replace(R.id.context_frame, new ImportFragment()).commit();
+                fm.beginTransaction().replace(R.id.context_frame,new ImportFragment()).commit();
                 break;
             //case export , navigate to export fragment
             case R.id.nav_export:

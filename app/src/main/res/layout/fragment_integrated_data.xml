@@ -137,11 +137,10 @@
                     android:textSize="20dp"
                     />
 
-                <TextView
+                <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/serial_no_field"
-                    android:textColor="@color/white"
+                    android:id="@+id/instrument_serial_no_spinner"
                     android:textSize="20dp"/>
 
             </TableRow>

@@ -17,7 +17,7 @@ public class WarmSpotData {
     private String mInspectorFullName;
     private String mInspectorUserName;
     private double mMaxMethaneReading;
-    private String mInstrumentSerial;
+    private Instrument mInstrument;
 
     public WarmSpotData() {
         this(UUID.randomUUID());
@@ -96,11 +96,11 @@ public class WarmSpotData {
         mMaxMethaneReading = maxMethaneReading;
     }
 
-    public String getInstrumentSerial() {
-        return mInstrumentSerial;
+    public Instrument getInstrument() {
+        return mInstrument;
     }
 
-    public void setInstrumentSerial(String instrumentSerial) {
-        mInstrumentSerial = instrumentSerial;
+    public void setInstrument(Instrument instrument) {
+        mInstrument = instrument;
     }
 }

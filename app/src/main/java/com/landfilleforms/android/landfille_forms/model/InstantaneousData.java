@@ -17,7 +17,7 @@ public class InstantaneousData {
     private String mInspectorUserName;
     private Date mStartDate;
     private Date mEndDate;//This is going to be the same date as the start date but we need this to set the end time
-    private String instrumentSerialNumber;
+    private Instrument mInstrument;
     private double methaneReading;
     private String imeNumber;//Auto-generated
 
@@ -93,12 +93,12 @@ public class InstantaneousData {
         mEndDate = endDate;
     }
 
-    public String getInstrumentSerialNumber() {
-        return instrumentSerialNumber;
+    public Instrument getInstrument() {
+        return mInstrument;
     }
 
-    public void setInstrumentSerialNumber(String instrumentSerialNumber) {
-        this.instrumentSerialNumber = instrumentSerialNumber;
+    public void setInstrument(Instrument instrument) {
+        this.mInstrument = instrument;
     }
 
     public double getMethaneReading() {

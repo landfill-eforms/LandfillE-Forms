@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.InstantaneousDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.UsersTable;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.InstrumentsTable;
+import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.InstrumentTypesTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ImeDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.WarmSpotDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.IntegratedDataTable;
@@ -41,6 +43,32 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 UsersTable.Cols.ENABLED + ")"
         );
 
+        db.execSQL("create table " + InstrumentTypesTable.NAME + " (" +
+                InstrumentTypesTable.Cols.ID + " integer primary key, " +
+                InstrumentTypesTable.Cols.TYPE + ", " +
+                InstrumentTypesTable.Cols.MANUFACTURER + ", " +
+                InstrumentTypesTable.Cols.DESCRIPTION + ", " +
+                InstrumentTypesTable.Cols.INSTANTANEOUS + ", " +
+                InstrumentTypesTable.Cols.PROBE + ", " +
+                InstrumentTypesTable.Cols.METHANE_PERCENT + ", " +
+                InstrumentTypesTable.Cols.METHANE_PPM + ", " +
+                InstrumentTypesTable.Cols.HYDROGEN_SULFIDE_PPM + ", " +
+                InstrumentTypesTable.Cols.OXYGEN_PERCENT + ", " +
+                InstrumentTypesTable.Cols.CARBON_DIOXIDE_PERCENT + ", " +
+                InstrumentTypesTable.Cols.NITROGEN_PERCENT + ", " +
+                InstrumentTypesTable.Cols.PRESSURE + ")"
+        );
+
+        db.execSQL("create table " + InstrumentsTable.NAME + " (" +
+                InstrumentsTable.Cols.ID + " integer primary key, " +
+                InstrumentsTable.Cols.SERIAL_NUMBER + ", " +
+                InstrumentsTable.Cols.INSTRUMENT_STATUS + ", " +
+                InstrumentsTable.Cols.SITE + ", " +
+                InstrumentsTable.Cols.DESCRIPTION + ", " +
+                InstrumentsTable.Cols.INSTRUMENT_TYPE_ID + ", " +
+                "FOREIGN KEY(" +InstrumentsTable.Cols.INSTRUMENT_TYPE_ID + ") REFERENCES "+ InstrumentTypesTable.NAME + "("+ InstrumentTypesTable.Cols.ID +")" + ")"
+        );
+
         db.execSQL("create table " + InstantaneousDataTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
                 InstantaneousDataTable.Cols.UUID + ", " +
@@ -51,9 +79,10 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 InstantaneousDataTable.Cols.INSPECTOR_USERNAME + ", " +
                 InstantaneousDataTable.Cols.START_DATE + ", " +
                 InstantaneousDataTable.Cols.END_DATE + ", " +
-                InstantaneousDataTable.Cols.INSTRUMENT_SERIAL + ", " +
+                InstantaneousDataTable.Cols.INSTRUMENT_ID + ", " +
                 InstantaneousDataTable.Cols.MAX_METHANE_READING + ", " +
-                InstantaneousDataTable.Cols.IME_NUMBER + ")"
+                InstantaneousDataTable.Cols.IME_NUMBER + ", " +
+                "FOREIGN KEY(" +InstantaneousDataTable.Cols.INSTRUMENT_ID + ") REFERENCES "+ InstrumentsTable.NAME + "("+ InstrumentsTable.Cols.ID +")" + ")"
         );
 
         db.execSQL("create table " + ImeDataTable.NAME + "(" +
@@ -80,7 +109,8 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 WarmSpotDataTable.Cols.INSPECTOR_NAME + "," +
                 WarmSpotDataTable.Cols.INSPECTOR_USERNAME + "," +
                 WarmSpotDataTable.Cols.MAX_METHANE_READING + "," +
-                WarmSpotDataTable.Cols.INSTRUMENT_SERIAL + ")"
+                WarmSpotDataTable.Cols.INSTRUMENT_ID + "," +
+                "FOREIGN KEY(" +WarmSpotDataTable.Cols.INSTRUMENT_ID + ") REFERENCES "+ InstrumentsTable.NAME + "("+ InstrumentsTable.Cols.ID +")" + ")"
         );
 
         db.execSQL("create table " + IntegratedDataTable.NAME + "(" +
@@ -88,7 +118,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 IntegratedDataTable.Cols.UUID + "," +
                 IntegratedDataTable.Cols.LOCATION + "," +
                 IntegratedDataTable.Cols.GRID_ID + "," +
-                IntegratedDataTable.Cols.INSTRUMENT_SERIAL + "," +
+                IntegratedDataTable.Cols.INSTRUMENT_ID + "," +
                 IntegratedDataTable.Cols.BARO_PRESSURE + "," +
                 IntegratedDataTable.Cols.INSPECTOR_NAME + "," +
                 IntegratedDataTable.Cols.INSPECTOR_USERNAME + "," +
@@ -97,7 +127,8 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 IntegratedDataTable.Cols.START_DATE + "," +
                 IntegratedDataTable.Cols.END_DATE + "," +
                 IntegratedDataTable.Cols.VOLUME_READING + "," +
-                IntegratedDataTable.Cols.MAX_METHANE_READING + ")"
+                IntegratedDataTable.Cols.MAX_METHANE_READING + "," +
+                "FOREIGN KEY(" +IntegratedDataTable.Cols.INSTRUMENT_ID + ") REFERENCES "+ InstrumentsTable.NAME + "("+ InstrumentsTable.Cols.ID +")" + ")"
         );
 
         //add ISE data table
@@ -127,6 +158,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 ProbeDataTable.Cols.METHANE_PERCENTAGE + "," +
                 ProbeDataTable.Cols.REMARKS + ")"
         );
+
     }
 
     //When we add/remove columns. Change version number.

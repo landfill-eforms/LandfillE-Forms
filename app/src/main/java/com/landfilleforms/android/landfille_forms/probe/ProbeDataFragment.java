@@ -27,10 +27,13 @@ import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.database.dao.ProbeDao;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.ProbeData;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -43,6 +46,8 @@ public class ProbeDataFragment extends Fragment {
     private static final String ARG_PROBE_DATA_ID = "probe_data_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
+
+    private List<Instrument> mInstruments;
 
     private ProbeData mProbeData;
     private boolean newlyCreatedData;
@@ -106,6 +111,10 @@ public class ProbeDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_probe_data, container, false);
+        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForProbe(mProbeData.getLocation());
+        for(Instrument i:mInstruments) {
+            Log.d("ProbeDataFrag","Instrument.id=" + Integer.toString(i.getId()));
+        }
 
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mProbeData.getInspectorName());
