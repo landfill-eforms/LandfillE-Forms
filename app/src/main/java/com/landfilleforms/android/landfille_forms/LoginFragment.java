@@ -59,6 +59,9 @@ public class LoginFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mUser = new User();
         Log.d(TAG, "onCreate(Bundle) called");
+        String path = "LandfillData" + File.separator +"Import";
+        File myFile = new File(Environment.getExternalStorageDirectory()+File.separator+path);
+        myFile.mkdirs();
 
         session = new SessionManager(getActivity().getApplicationContext());
         if(session.isLoggedIn()) {
@@ -124,6 +127,9 @@ public class LoginFragment extends Fragment {
                     for(int i = 0; i < mExistingUsers.size(); i++) {
                         Log.d("Username",mExistingUsers.get(i).getUsername());
                         if (mUser.getUsername().equals(mExistingUsers.get(i).getUsername()) && BCrypt.checkpw(mUser.getPassword(), mExistingUsers.get(i).getPassword())) {
+                            if(!mExistingUsers.get(i).isEnabled()){
+                                break;
+                            }
                             session.createLoginSession(mExistingUsers.get(i));
                             loginInfoValid = true;
                             break;

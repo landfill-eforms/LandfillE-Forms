@@ -3,6 +3,7 @@ package com.landfilleforms.android.landfille_forms;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -51,7 +52,7 @@ public class MenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        android.app.FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.context_frame,new WelcomeFragment()).commit();
 
 
@@ -97,7 +98,7 @@ public class MenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        android.app.FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         switch(id) {
             //case home, navigate back to welcome fragment
             case R.id.nav_home:

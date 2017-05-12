@@ -182,6 +182,7 @@ public class IntegratedFormFragment extends Fragment {
             case R.id.menu_item_new_integrated:
                 IntegratedData integratedData = new IntegratedData();
                 integratedData.setLocation(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
+                integratedData.setVolumeReading(9);
                 integratedData.setInspectorName(mUser.getFullName());
                 integratedData.setInspectorUserName(mUser.getUsername());
                 integratedData.setStartDate(currentDate);
