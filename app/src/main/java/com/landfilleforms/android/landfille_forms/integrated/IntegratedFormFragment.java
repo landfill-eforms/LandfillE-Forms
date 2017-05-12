@@ -27,13 +27,14 @@ import android.widget.Toast;
 import com.landfilleforms.android.landfille_forms.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.database.dao.IntegratedDao;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.IntegratedData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -48,6 +49,7 @@ public class IntegratedFormFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
 
     private Date currentDate;
+    private List<Instrument> mInstruments;
 
     private SessionManager session;
     private User mUser;
@@ -85,6 +87,7 @@ public class IntegratedFormFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_integrated_form, container, false);
+        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION));
 
         final IntegratedDao integratedDao = IntegratedDao.get(getActivity());
         String [] args = {this.getActivity().getIntent().getStringExtra(EXTRA_LANDFILL_LOCATION)};
@@ -137,15 +140,15 @@ public class IntegratedFormFragment extends Fragment {
         });
 
         mInstrumentSerialNoSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
-        final ArrayAdapter<CharSequence> instrumentSerialAdapter;
-        instrumentSerialAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.instantaneous_integrated_probe, R.layout.dark_spinner_layout);
-        mInstrumentSerialNoSpinner.setAdapter(instrumentSerialAdapter);
+        ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
+        mInstrumentSerialNoSpinner.setAdapter(instrumentAdapter);
 
         mInstrumentSerialNoButton = (Button) v.findViewById(R.id.instrument_serial_no_button);
         mInstrumentSerialNoButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Log.d("InstrumentSerialNo",(((Instrument) mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition())).getSerialNumber()));
                 for(int i = 0; i < mIntegratedDatas.size(); i++) {
-                    mIntegratedDatas.get(i).setInstrumentSerialNumber(mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()).toString());
+                    mIntegratedDatas.get(i).setInstrument((Instrument)mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()));
                 }
                 integratedDao.updateIntegratedDatas(mIntegratedDatas);
                 Toast.makeText(getActivity(), R.string.updated_instrument_ime_datas,Toast.LENGTH_SHORT).show();
@@ -183,7 +186,7 @@ public class IntegratedFormFragment extends Fragment {
                 integratedData.setInspectorUserName(mUser.getUsername());
                 integratedData.setStartDate(currentDate);
                 integratedData.setEndDate(new Date(integratedData.getStartDate().getTime() + 1800000));
-                integratedData.setInstrumentSerialNumber(mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()).toString());
+                integratedData.setInstrument((Instrument)mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()));
 
                 if(mBarometricPressureField.getText().toString().trim().length() == 0)
                     integratedData.setBarometricPressure(defaultBarometricPressure);

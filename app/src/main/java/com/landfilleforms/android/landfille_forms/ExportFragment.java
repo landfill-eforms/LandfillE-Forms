@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -112,7 +113,7 @@ public class ExportFragment extends Fragment {
 
                     Date d = new Date();
                     String name = "LandFillDataExport" + d.toString() + ".json";
-                    String path = "LandfillData";
+                    String path = "LandfillData" + File.separator +"Export";
                     try {
 
                         File myFile = new File(Environment.getExternalStorageDirectory()+File.separator+path);

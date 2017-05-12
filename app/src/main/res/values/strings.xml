@@ -116,7 +116,8 @@
     <string name="new_ime_cancelation_toast">New IME Entry discarded.</string>
     <string name="unsaved_changes_discarded_toast">Unsaved changes discarded.</string>
     <string name="option_repair_toast">This option currently has bugs. Please use the other one.</string>
-
+    <string name="import_header">Import</string>
+    <string name="ime_grids_label">Grids:</string>
     <string name="size_label">Size</string>
     <string name="size_input_label">Size:</string>
     <string name="description">Description:</string>

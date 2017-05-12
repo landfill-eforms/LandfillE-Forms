@@ -11,7 +11,7 @@ public class IntegratedData {
     private UUID mId;
     private String mLocation;
     private String mGridId;
-    private String mInstrumentSerialNumber;
+    private Instrument mInstrument;
     private double mBarometricPressure;
     private String mInspectorName;
     private String mInspectorUserName;
@@ -52,12 +52,12 @@ public class IntegratedData {
         mGridId = gridId;
     }
 
-    public String getInstrumentSerialNumber() {
-        return mInstrumentSerialNumber;
+    public Instrument getInstrument() {
+        return mInstrument;
     }
 
-    public void setInstrumentSerialNumber(String instrumentSerialNumber) {
-        mInstrumentSerialNumber = instrumentSerialNumber;
+    public void setInstrument(Instrument instrument) {
+        mInstrument = instrument;
     }
 
     public double getBarometricPressure() {

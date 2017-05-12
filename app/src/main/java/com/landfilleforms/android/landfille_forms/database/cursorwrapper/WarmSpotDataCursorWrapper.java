@@ -3,6 +3,7 @@ package com.landfilleforms.android.landfille_forms.database.cursorwrapper;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.WarmSpotDataTable;
 
@@ -28,7 +29,8 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
         String inspectorFullName = getString(getColumnIndex(WarmSpotDataTable.Cols.INSPECTOR_NAME));
         String inspectorUserName = getString(getColumnIndex(WarmSpotDataTable.Cols.INSPECTOR_USERNAME));
         double methaneReading = getDouble(getColumnIndex(WarmSpotDataTable.Cols.MAX_METHANE_READING));
-        String instrumentSerialNumber = getString(getColumnIndex(WarmSpotDataTable.Cols.INSTRUMENT_SERIAL));
+
+        Instrument instrument = new Instrument(getInt(getColumnIndex(WarmSpotDataTable.Cols.INSTRUMENT_ID)));
 
         WarmSpotData warmSpotData = new WarmSpotData(UUID.fromString(uuidString));
         warmSpotData.setLocation(location);
@@ -39,7 +41,7 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
         warmSpotData.setInspectorFullName(inspectorFullName);
         warmSpotData.setInspectorUserName(inspectorUserName);
         warmSpotData.setMaxMethaneReading(methaneReading);
-        warmSpotData.setInstrumentSerial(instrumentSerialNumber);
+        warmSpotData.setInstrument(instrument);
 
         return warmSpotData;
     }

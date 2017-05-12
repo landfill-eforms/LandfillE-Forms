@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/grid_id_label"
+                android:text="@string/ime_grids_label"
                 android:textStyle="normal|bold"
                 android:textColor="@color/white"
                 android:textSize="20dp"

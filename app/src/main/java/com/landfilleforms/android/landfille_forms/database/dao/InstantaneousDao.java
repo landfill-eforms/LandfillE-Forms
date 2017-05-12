@@ -45,7 +45,6 @@ public class InstantaneousDao {
         mDatabase.delete(InstantaneousDataTable.NAME, InstantaneousDataTable.Cols.UUID + "= ?", new String[] {d.getId().toString()});
     }
 
-    //Data is already plural but I made it Datas to show that we're getting all the data from the table
     public List<InstantaneousData> getInstantaneousDatas() {
         List<InstantaneousData> instantaneousForm = new ArrayList<>();
 
@@ -54,7 +53,11 @@ public class InstantaneousDao {
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                instantaneousForm.add(cursor.getInstantaneousData());
+                InstantaneousData i = cursor.getInstantaneousData();
+                if(i.getInstrument() != null) {
+                    i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
+                }
+                instantaneousForm.add(i);
                 cursor.moveToNext();
             }
         } finally {
@@ -73,7 +76,11 @@ public class InstantaneousDao {
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                instantaneousForm.add(cursor.getInstantaneousData());
+                InstantaneousData i = cursor.getInstantaneousData();
+                if(i.getInstrument() != null) {
+                    i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
+                }
+                instantaneousForm.add(i);
                 cursor.moveToNext();
             }
         } finally {
@@ -91,7 +98,11 @@ public class InstantaneousDao {
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                instantaneousForm.add(cursor.getInstantaneousData());
+                InstantaneousData i = cursor.getInstantaneousData();
+                if(i.getInstrument() != null) {
+                    i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
+                }
+                instantaneousForm.add(i);
                 cursor.moveToNext();
             }
         } finally {
@@ -111,7 +122,11 @@ public class InstantaneousDao {
                 return null;
             }
             cursor.moveToFirst();
-            return cursor.getInstantaneousData();
+            InstantaneousData i = cursor.getInstantaneousData();
+            if(i.getInstrument() != null) {
+                i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
+            }
+            return i;
         } finally {
             cursor.close();
         }
@@ -147,7 +162,9 @@ public class InstantaneousDao {
         values.put(InstantaneousDataTable.Cols.INSPECTOR_USERNAME, instantaneousData.getInspectorUserName());
         values.put(InstantaneousDataTable.Cols.START_DATE, instantaneousData.getStartDate().getTime());
         values.put(InstantaneousDataTable.Cols.END_DATE, instantaneousData.getEndDate().getTime());
-        values.put(InstantaneousDataTable.Cols.INSTRUMENT_SERIAL, instantaneousData.getInstrumentSerialNumber());
+        if(instantaneousData.getInstrument() != null){
+            values.put(InstantaneousDataTable.Cols.INSTRUMENT_ID, instantaneousData.getInstrument().getId());
+        }
         values.put(InstantaneousDataTable.Cols.MAX_METHANE_READING, instantaneousData.getMethaneReading());
         values.put(InstantaneousDataTable.Cols.IME_NUMBER, instantaneousData.getImeNumber());
 

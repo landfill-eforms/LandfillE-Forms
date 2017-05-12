@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.IntegratedDataTable;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.IntegratedData;
 
 import java.util.Date;
@@ -21,7 +22,6 @@ public class IntegratedDataCursorWrapper extends CursorWrapper{
         String uuidString = getString(getColumnIndex(IntegratedDataTable.Cols.UUID));
         String location =  getString(getColumnIndex(IntegratedDataTable.Cols.LOCATION));
         String gridId =  getString(getColumnIndex(IntegratedDataTable.Cols.GRID_ID));
-        String instrumentSerialNumber =  getString(getColumnIndex(IntegratedDataTable.Cols.INSTRUMENT_SERIAL));
         double barometricPressure =  getDouble(getColumnIndex(IntegratedDataTable.Cols.BARO_PRESSURE));
         String inspectorName =  getString(getColumnIndex(IntegratedDataTable.Cols.INSPECTOR_NAME));
         String inspectorUsername =  getString(getColumnIndex(IntegratedDataTable.Cols.INSPECTOR_USERNAME));
@@ -32,10 +32,12 @@ public class IntegratedDataCursorWrapper extends CursorWrapper{
         int volumeReading =  getInt(getColumnIndex(IntegratedDataTable.Cols.VOLUME_READING));
         double methaneReading =  getDouble(getColumnIndex(IntegratedDataTable.Cols.MAX_METHANE_READING));
 
+        Instrument instrument = new Instrument(getInt(getColumnIndex(IntegratedDataTable.Cols.INSTRUMENT_ID)));
+
         IntegratedData integratedData = new IntegratedData(UUID.fromString(uuidString));
         integratedData.setLocation(location);
         integratedData.setGridId(gridId);
-        integratedData.setInstrumentSerialNumber(instrumentSerialNumber);
+        integratedData.setInstrument(instrument);
         integratedData.setBarometricPressure(barometricPressure);
         integratedData.setInspectorName(inspectorName);
         integratedData.setInspectorUserName(inspectorUsername);

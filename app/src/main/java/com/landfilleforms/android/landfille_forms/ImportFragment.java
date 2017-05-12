@@ -17,15 +17,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentTypeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.UserDao;
 import com.landfilleforms.android.landfille_forms.database.util.TestUtil;
 import com.landfilleforms.android.landfille_forms.model.ImportedData;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
+import com.landfilleforms.android.landfille_forms.model.InstrumentType;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.util.BCrypt;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -44,18 +50,18 @@ public class ImportFragment extends Fragment {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-
-        session = new SessionManager(getActivity().getApplicationContext());
+        //Not having the import fragment check for login yet since I'm letting users access it w/ logging in
+/*        session = new SessionManager(getActivity().getApplicationContext());
         session.checkLogin();
 
-        mUser = session.getCurrentUser();
+        mUser = session.getCurrentUser();*/
     }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_import, container, false);
-        getActivity().setTitle("Import");
+        getActivity().setTitle(R.string.import_header);
         mImportButton = (Button) view.findViewById(R.id.menu_import_button);
         mImportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -63,7 +69,8 @@ public class ImportFragment extends Fragment {
                 String fileName = "LandFillDataImport.json";
                 String path = "LandfillData" + File.separator +"Import";
                 try{
-                    checkJsonFileExistence(fileName,path);
+                    File myFile = new File(Environment.getExternalStorageDirectory()+File.separator+path);
+                    myFile.mkdirs();
 
                     GsonBuilder builder = new GsonBuilder();
                     builder.serializeNulls();
@@ -75,9 +82,25 @@ public class ImportFragment extends Fragment {
 
                     mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
                     mDatabase.execSQL("delete from "+ LandFillDbSchema.UsersTable.NAME);
+                    mDatabase.execSQL("delete from "+ LandFillDbSchema.InstrumentsTable.NAME);
+                    mDatabase.execSQL("delete from "+ LandFillDbSchema.InstrumentTypesTable.NAME);
                     TestUtil.insertDummyUserData(mDatabase);
                     UserDao.get(getActivity()).addUsers(importedData.getUsers());
+                    List<InstrumentType> instrumentTypes = new ArrayList<>();
+                    List<Integer> existingInstrumentTypeIds = new ArrayList<>();
+                    for(Instrument i:importedData.getInstruments()){
+                        if(!existingInstrumentTypeIds.contains(i.getInstrumentType().getId())){
+                            instrumentTypes.add(i.getInstrumentType());
+                            existingInstrumentTypeIds.add(i.getInstrumentType().getId());
+                            Log.d("InstrumentTypeId",Integer.toString(i.getInstrumentType().getId()));
+                        }
+                    }
 
+                    InstrumentTypeDao.get(getActivity()).addInstrumentTypes(instrumentTypes);
+                    InstrumentDao.get(getActivity()).addInstruments(importedData.getInstruments());
+
+                    Instrument testInstrument = InstrumentDao.get(getActivity()).getInstrument("1");
+                    Log.d("ImportFrag", testInstrument.getInstrumentType().getManufacturer());
                     Toast.makeText(context,R.string.import_successful_toast, Toast.LENGTH_SHORT).show();
 
                 } catch(Exception e) {

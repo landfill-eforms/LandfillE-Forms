@@ -65,7 +65,7 @@ public class UserDao {
         return users;
     }
 
-    public User getUser(UUID id) {
+    public User getUser(String id) {
         UserCursorWrapper cursor = queryUsers (
                 UsersTable.Cols.ID + " = ? ",
                 new String[] { id.toString()}

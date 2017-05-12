@@ -19,7 +19,7 @@ public class LandFillDbSchema {
             public static final String INSPECTOR_USERNAME = "inspector_username";
             public static final String START_DATE = "start_date";
             public static final String END_DATE = "end_date";
-            public static final String INSTRUMENT_SERIAL = "instrument_serial_number";
+            public static final String INSTRUMENT_ID = "instrument_id";
             public static final String MAX_METHANE_READING = "max_methane_reading";
             public static final String IME_NUMBER = "ime_number";
         }
@@ -53,7 +53,7 @@ public class LandFillDbSchema {
             public static final String INSPECTOR_NAME = "inspector_name";
             public static final String INSPECTOR_USERNAME = "inspector_username";
             public static final String MAX_METHANE_READING = "max_methane_reading";
-            public static final String INSTRUMENT_SERIAL = "instrument_serial_number";
+            public static final String INSTRUMENT_ID = "instrument_id";
 
         }
     }
@@ -64,7 +64,7 @@ public class LandFillDbSchema {
             public static final String UUID = "uuid";
             public static final String LOCATION = "location";
             public static final String GRID_ID = "grid_id";
-            public static final String INSTRUMENT_SERIAL = "instrument_serial";
+            public static final String INSTRUMENT_ID = "instrument_id";
             public static final String BARO_PRESSURE = "barometric_pressure";
             public static final String INSPECTOR_NAME = "inspector_name";
             public static final String INSPECTOR_USERNAME = "inspector_username";
@@ -121,6 +121,37 @@ public class LandFillDbSchema {
             public static final String EMAIL_ADDRESS = "email_address";
             public static final String EMPLOYEE_ID = "employee_id";
             public static final String ENABLED = "enabled";
+        }
+    }
+
+    public static final class InstrumentsTable {
+        public static final String NAME = "instruments";
+        public static class Cols {
+            public static final String ID = "id";
+            public static final String SERIAL_NUMBER = "serial_no";
+            public static final String INSTRUMENT_STATUS = "instrument_status";
+            public static final String SITE = "site";//TODO: Check w/ Alvin about this. Not sure if an instrument should be limited to just 1 site
+            public static final String DESCRIPTION = "description";
+            public static final String INSTRUMENT_TYPE_ID = "instrument_type_id";
+        }
+    }
+
+    public static final class InstrumentTypesTable {
+        public static final String NAME = "instrument_types";
+        public static class Cols {
+            public static final String ID = "id";
+            public static final String TYPE = "type";
+            public static final String MANUFACTURER = "manufacturer";
+            public static final String DESCRIPTION = "description";
+            public static final String INSTANTANEOUS = "instantaneous";
+            public static final String PROBE = "probe";
+            public static final String METHANE_PERCENT = "methane_percent";
+            public static final String METHANE_PPM = "methane_ppm";
+            public static final String HYDROGEN_SULFIDE_PPM = "hydrogen_sulfide_ppm";
+            public static final String OXYGEN_PERCENT = "oxygen_percent";
+            public static final String CARBON_DIOXIDE_PERCENT = "carbon_dioxide_percent";
+            public static final String NITROGEN_PERCENT = "nitrogen_percent";
+            public static final String PRESSURE = "pressure";
         }
     }
 }

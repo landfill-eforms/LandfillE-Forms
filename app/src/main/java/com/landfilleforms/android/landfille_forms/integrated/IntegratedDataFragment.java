@@ -31,9 +31,11 @@ import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.SessionManager;
 import com.landfilleforms.android.landfille_forms.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.database.Site;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.database.dao.IntegratedDao;
 import com.landfilleforms.android.landfille_forms.database.dao.IseDao;
 import com.landfilleforms.android.landfille_forms.ise.IseDataPagerActivity;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.IntegratedData;
 import com.landfilleforms.android.landfille_forms.model.IseData;
 import com.landfilleforms.android.landfille_forms.model.User;
@@ -41,7 +43,6 @@ import com.landfilleforms.android.landfille_forms.model.User;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -62,6 +63,7 @@ public class IntegratedDataFragment extends Fragment {
     private static final int REQUEST_START_TIME = 1;
     private static final int REQUEST_END_TIME = 2;
 
+    private List<Instrument> mInstruments;
     private double tempMethaneLevel;//For the dialogs
     private IntegratedData mIntegratedData;
     private String mCurrentIseNumber;
@@ -72,7 +74,7 @@ public class IntegratedDataFragment extends Fragment {
     private Spinner mGridIdSpinner;
     private TextView mStartDateField;
     private TextView mSampleIdField;
-    private TextView mInstrumentSerialNoField;
+    private Spinner mInstrumentSpinner;
     private EditText mBagNumberField;
     private TextView mBaroLevelField;
     private Button mStartDateButton;
@@ -153,6 +155,7 @@ public class IntegratedDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_integrated_data, container, false);
+        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mIntegratedData.getLocation());
 
         mInspectorField = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorField.setText(mIntegratedData.getInspectorName());
@@ -170,8 +173,20 @@ public class IntegratedDataFragment extends Fragment {
         mSampleIdField = (TextView) v.findViewById(R.id.sample_id_field);
         //mSampleIdField.setText(mIntegratedData.getSampleId());
 
-        mInstrumentSerialNoField = (TextView) v.findViewById(R.id.serial_no_field);
-        mInstrumentSerialNoField.setText(mIntegratedData.getInstrumentSerialNumber());
+        mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+        ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
+        mInstrumentSpinner.setAdapter(instrumentAdapter);
+        mInstrumentSpinner.setSelection(instrumentAdapter.getPosition(mIntegratedData.getInstrument()));
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mIntegratedData.setInstrument((Instrument)parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         mBagNumberField = (EditText) v.findViewById(R.id.bag_number_field);
         if(mIntegratedData.getBagNumber() != 0)

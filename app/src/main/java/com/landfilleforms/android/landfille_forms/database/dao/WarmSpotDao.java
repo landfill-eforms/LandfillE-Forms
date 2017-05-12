@@ -55,7 +55,11 @@ public class WarmSpotDao {
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                warmSpotForm.add(cursor.getWarmSpotData());
+                WarmSpotData w = cursor.getWarmSpotData();
+                if(w.getInstrument() != null) {
+                    w.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(w.getInstrument().getId())));
+                }
+                warmSpotForm.add(w);
                 cursor.moveToNext();
             }
         } finally {
@@ -73,7 +77,11 @@ public class WarmSpotDao {
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
-                warmSpotDatas.add(cursor.getWarmSpotData());
+                WarmSpotData w = cursor.getWarmSpotData();
+                if(w.getInstrument() != null) {
+                    w.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(w.getInstrument().getId())));
+                }
+                warmSpotDatas.add(w);
                 cursor.moveToNext();
             }
         } finally {
@@ -92,7 +100,11 @@ public class WarmSpotDao {
                 return null;
             }
             cursor.moveToFirst();
-            return cursor.getWarmSpotData();
+            WarmSpotData w = cursor.getWarmSpotData();
+            if(w.getInstrument() != null) {
+                w.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(w.getInstrument().getId())));
+            }
+            return w;
         } finally {
             cursor.close();
         }
@@ -117,7 +129,9 @@ public class WarmSpotDao {
         values.put(WarmSpotDataTable.Cols.ESTIMATED_SIZE, warmSpotData.getEstimatedSize());
         values.put(WarmSpotDataTable.Cols.INSPECTOR_NAME, warmSpotData.getInspectorFullName());
         values.put(WarmSpotDataTable.Cols.INSPECTOR_USERNAME, warmSpotData.getInspectorUserName());
-        values.put(WarmSpotDataTable.Cols.INSTRUMENT_SERIAL, warmSpotData.getInstrumentSerial());
+        if(warmSpotData.getInstrument() != null){
+            values.put(WarmSpotDataTable.Cols.INSTRUMENT_ID, warmSpotData.getInstrument().getId());
+        }
         values.put(WarmSpotDataTable.Cols.MAX_METHANE_READING, warmSpotData.getMaxMethaneReading());
 
         return values;
