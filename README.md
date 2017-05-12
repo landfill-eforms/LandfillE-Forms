@@ -55,7 +55,7 @@ Connect phone to computer running Android Studio and make sure it recognizes the
 
 With device connected, in the menus go to ```Build > Build APK``` and application will be installed on device. 
 
-NOTE: After any updates to the database, go to the ```Application Manager``` on device and ```Clear All``` application data to avoid application crashing. The application will be installed but will crash if there are conflicts in the database. Be sure to clear data for clean install.
+NOTE: After any updates to the database, go to the ```Application Manager``` on device, select the Landfill e-Forms Application, and ```Clear All``` application data to avoid application crashing. The application will be installed but will crash if there are conflicts in the database. Be sure to clear data for clean install.
 
 ### Install through File Download
 
@@ -67,6 +67,6 @@ landfill-android-app > app > build > outputs > apk
 
 Send .apk file to selected device and open .apk file for immediate installation.
 
-NOTE: After any updates to the database, go to the ```Application Manager``` on device and ```Clear All``` application data to avoid application crashing. The application will be installed but will crash if there are conflicts in the database. Be sure to clear data for clean install.
+NOTE: After any updates to the database, go to the ```Application Manager``` on device, select the Landfill e-Forms Application, and ```Clear All``` application data to avoid application crashing. The application will be installed but will crash if there are conflicts in the database. Be sure to clear data for clean install.
 
 
