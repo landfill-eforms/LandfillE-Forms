@@ -1,17 +1,17 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
-import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousFormActivity;
-import com.landfilleforms.android.landfille_forms.ime.ImeFormActivity;
-import com.landfilleforms.android.landfille_forms.integrated.IntegratedFormActivity;
-import com.landfilleforms.android.landfille_forms.ise.IseFormActivity;
-import com.landfilleforms.android.landfille_forms.probe.ProbeFormActivity;
-import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotFormActivity;
+import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.instantaneous.InstantaneousFormActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.ime.ImeFormActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.integrated.IntegratedFormActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.ise.IseFormActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.probe.ProbeFormActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.warmspot.WarmSpotFormActivity;
 
 /**
  * Created by aaleman on 2/2/17.

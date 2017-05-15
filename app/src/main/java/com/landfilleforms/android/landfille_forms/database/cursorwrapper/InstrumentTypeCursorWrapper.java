@@ -7,12 +7,19 @@ import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.Inst
 import com.landfilleforms.android.landfille_forms.model.InstrumentType;
 
 /**
- * Created by Work on 5/10/2017.
+ * InstrumentTypeCursorWrapper.java
+ * Purpose: Cursor wrapper class for the instrument_types table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a InstrumentType Java object.
  */
 
 public class InstrumentTypeCursorWrapper extends CursorWrapper {
     public InstrumentTypeCursorWrapper(Cursor cursor) { super(cursor); }
 
+    /*
+    * Returns a InstrumentType object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public InstrumentType getInstrumentType() {
         int id = getInt(getColumnIndex(InstrumentTypesTable.Cols.ID));
         String type = getString(getColumnIndex(InstrumentTypesTable.Cols.TYPE));

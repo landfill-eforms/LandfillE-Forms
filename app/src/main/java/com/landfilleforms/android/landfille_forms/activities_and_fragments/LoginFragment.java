@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments;
 
 
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
 import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
@@ -31,6 +32,7 @@ import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.InstrumentType;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.util.BCrypt;
+import com.landfilleforms.android.landfille_forms.util.SessionManager;
 
 import java.io.File;
 import java.io.FileReader;

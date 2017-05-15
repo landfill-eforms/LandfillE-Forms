@@ -3,9 +3,9 @@ package com.landfilleforms.android.landfille_forms.model;
 import java.util.List;
 
 /**
- * Created by Work on 2/23/2017.
+ * DataDump.java
+ * Purpose: Object used to get all the data so that it can be exported.
  */
-
 public class DataDump {
     List<InstantaneousData> mInstantaneousDatas;
     List<ImeData> mImeDatas;

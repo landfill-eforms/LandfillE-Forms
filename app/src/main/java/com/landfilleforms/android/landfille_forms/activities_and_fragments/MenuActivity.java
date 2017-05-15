@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.model.User;
-
-import java.util.HashMap;
+import com.landfilleforms.android.landfille_forms.util.SessionManager;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

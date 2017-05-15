@@ -5,10 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.UUID;
 
 /**
- * Created by Work on 11/1/2016.
- * Probably going to have to get rid of the Username/password setters
+ * User.java
+ * Purpose: Model for the User
  */
-
 public class User {
     @SerializedName("id") private String mId;
     @SerializedName("username") private String mUsername;

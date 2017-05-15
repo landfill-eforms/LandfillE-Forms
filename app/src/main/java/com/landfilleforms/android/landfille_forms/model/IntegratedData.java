@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 3/27/2017.
+ * IntegratedData.java
+ * Purpose: Model for the IntegratedData
  */
-
 public class IntegratedData {
     private UUID mId;
     private String mLocation;

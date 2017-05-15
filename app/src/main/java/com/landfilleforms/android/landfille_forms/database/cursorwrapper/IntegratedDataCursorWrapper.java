@@ -12,12 +12,19 @@ import java.util.UUID;
 
 
 /**
- * Created by Work on 3/27/2017.
+ * IntegratedDataCursorWrapper.java
+ * Purpose: Cursor wrapper class for the integrated_data table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a IntegratedData Java object.
  */
 
 public class IntegratedDataCursorWrapper extends CursorWrapper{
     public IntegratedDataCursorWrapper(Cursor cursor) { super(cursor); }
 
+    /*
+    * Returns a IntegratedData object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public IntegratedData getIntegratedData() {
         String uuidString = getString(getColumnIndex(IntegratedDataTable.Cols.UUID));
         String location =  getString(getColumnIndex(IntegratedDataTable.Cols.LOCATION));
@@ -31,7 +38,6 @@ public class IntegratedDataCursorWrapper extends CursorWrapper{
         long endDate =  getLong(getColumnIndex(IntegratedDataTable.Cols.END_DATE));
         int volumeReading =  getInt(getColumnIndex(IntegratedDataTable.Cols.VOLUME_READING));
         double methaneReading =  getDouble(getColumnIndex(IntegratedDataTable.Cols.MAX_METHANE_READING));
-
         Instrument instrument = new Instrument(getInt(getColumnIndex(IntegratedDataTable.Cols.INSTRUMENT_ID)));
 
         IntegratedData integratedData = new IntegratedData(UUID.fromString(uuidString));

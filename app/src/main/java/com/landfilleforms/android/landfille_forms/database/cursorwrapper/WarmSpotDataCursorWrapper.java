@@ -11,7 +11,10 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 2/16/2017.
+ * WarmSpotDataCursorWrapper.java
+ * Purpose: Cursor wrapper class for the warmspot_data table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a WarmSpotData Java object.
  */
 
 public class WarmSpotDataCursorWrapper extends CursorWrapper{
@@ -19,6 +22,10 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
         super(cursor);
     }
 
+    /*
+    * Returns a WarmSpotData object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public WarmSpotData getWarmSpotData() {
         String uuidString = getString(getColumnIndex(WarmSpotDataTable.Cols.UUID));
         String location = getString(getColumnIndex(WarmSpotDataTable.Cols.LOCATION));
@@ -29,7 +36,6 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
         String inspectorFullName = getString(getColumnIndex(WarmSpotDataTable.Cols.INSPECTOR_NAME));
         String inspectorUserName = getString(getColumnIndex(WarmSpotDataTable.Cols.INSPECTOR_USERNAME));
         double methaneReading = getDouble(getColumnIndex(WarmSpotDataTable.Cols.MAX_METHANE_READING));
-
         Instrument instrument = new Instrument(getInt(getColumnIndex(WarmSpotDataTable.Cols.INSTRUMENT_ID)));
 
         WarmSpotData warmSpotData = new WarmSpotData(UUID.fromString(uuidString));

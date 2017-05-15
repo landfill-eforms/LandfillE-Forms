@@ -19,9 +19,10 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Created by owchr on 4/5/2017.
+ * IseDao.java
+ * Purpose: Data access object class for IseData. Instead of using raw SQL queries, we use this
+ * class to access the DB to do basic CRUD operations on the ise_data table.
  */
-
 public class IseDao {
     public static IseDao sIseDao;
 
@@ -41,15 +42,26 @@ public class IseDao {
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
+    /**
+     * Adds a IseData to the DB.
+     * @param d The IseData to be added.
+     */
     public void addIseData(IseData d) {
         ContentValues values = getContentValues(d);
         mDatabase.insert(IseDataTable.NAME, null, values);
     }
 
+    /**
+     * Removes a IseData from the DB.
+     * @param d The IseData to be deleted.
+     */
     public void removeIseData(IseData d) {
         mDatabase.delete(IseDataTable.NAME, IseDataTable.Cols.UUID + "= ?", new String[] {d.getId().toString()});
     }
 
+    /**
+     * Retrieves a list of all IseData in the DB.
+     */
     public List<IseData> getIseDatas() {
         List<IseData> iseDatas = new ArrayList<>();
         IseDataCursorWrapper cursor = queryIseData(null, null);
@@ -67,6 +79,10 @@ public class IseDao {
         return iseDatas;
     }
 
+    /**
+     * Gets a list of IseData based on the location.
+     * @param location A string array containing the location.
+     */
     public List<IseData> getIseDatasByLocation(String[] location) {
         List<IseData> iseDatas = new ArrayList<>();
         IseDataCursorWrapper cursor = queryIseData(IseDataTable.Cols.LOCATION + "= ? ", location);
@@ -84,6 +100,10 @@ public class IseDao {
         return iseDatas;
     }
 
+    /**
+     * Gets a list of IseData based on the location & ise_number.
+     * @param locationAndIseNumber A string array containing the location & ise_number.
+     */
     public List<IseData> getIseDatasByLocationAndIse(String[] locationAndIseNumber) {
         List<IseData> iseDatas = new ArrayList<>();
         IseDataCursorWrapper cursor = queryIseData(IseDataTable.Cols.LOCATION + " = ? " + "AND " + IseDataTable.Cols.ISE_NUMBER + "= ? ", locationAndIseNumber);
@@ -101,6 +121,14 @@ public class IseDao {
         return iseDatas;
     }
 
+    /**
+     * Gets the sequence number that's to be added to the end of a newly created ISE number.
+     * The way it currently does this is bad and should be fixed. It currently generates the
+     * sequence number based on the number of ise numbers. There will be situations where an
+     * already used sequence number will be generated again.
+     * @param location The location that will be used to query the DB
+     * @param currentDate The date that will be used to query the DB.
+     */
     public int getIseSequenceNumber (String[] location, Date currentDate) {
         List<IseData> iseDatas = new ArrayList<>();
         IseDataCursorWrapper cursor = queryIseData(IseDataTable.Cols.LOCATION + "= ? ", location);
@@ -125,6 +153,11 @@ public class IseDao {
         return iseNumbers.size();
     }
 
+    /**
+     * Get a set of iseNumbers based on location and date.
+     * @param location The location that will be used to query the DB
+     * @param currentDate The date that will be used to query the DB.
+     */
     public Set<String> getIseNumbers (String[] location, Date currentDate) {
         List<IseData> iseDatas = new ArrayList<>();
         IseDataCursorWrapper cursor = queryIseData(IseDataTable.Cols.LOCATION + "= ? ", location);
@@ -150,7 +183,10 @@ public class IseDao {
     }
 
 
-
+    /**
+     * Retrieves a IseData object from the ise_data table.
+     * @param id The UUID of the IseData object to be retrieved.
+     */
     public IseData getIseData(UUID id) {
         IseDataCursorWrapper cursor = queryIseData(
                 IseDataTable.Cols.UUID + "= ? ",
@@ -167,6 +203,10 @@ public class IseDao {
         }
     }
 
+    /**
+     * Updates an entry from the ise_data table.
+     * @param iseData The ise data to be updated.
+     */
     public void updateIseData(IseData iseData) {
         String uuidString = iseData.getId().toString();
         ContentValues values = getContentValues(iseData);
@@ -176,10 +216,11 @@ public class IseDao {
                 new String[] {uuidString});
     }
 
-
-
-
-
+    /**
+     * Generates an ISE number by using the date & location.
+     * @param currentSite The site where the ISE is located.
+     * @param currentDate The date when the ISE data entry was made.
+     */
     public String generateIseNumber(String currentSite, Date currentDate) {
         StringBuilder sb = new StringBuilder();
         Calendar cal = Calendar.getInstance();
@@ -213,6 +254,11 @@ public class IseDao {
         return sb.toString();
     }
 
+    /**
+     * Takes the content of an IseData so we can use them to update/add entries from/to the ise_data
+     * table in our database.
+     * @param iseData The IseData object that content values are from.
+     */
     private static ContentValues getContentValues(IseData iseData) {
         ContentValues values = new ContentValues();
         values.put(IseDataTable.Cols.UUID, iseData.getId().toString());
@@ -228,6 +274,11 @@ public class IseDao {
         return values;
     }
 
+    /**
+     * Returns a cursor wrapper for the ise_data query result set.
+     * @param whereClause The where clause for the query.
+     * @param whereArgs The where arguments for the query.
+     */
     private IseDataCursorWrapper queryIseData(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 IseDataTable.NAME,

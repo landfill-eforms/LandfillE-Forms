@@ -15,9 +15,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by Work on 11/1/2016.
+ * UserDao.java
+ * Purpose: Data access object class for User. Instead of using raw SQL queries, we use this
+ * class to access the DB to do basic CRUD operations on the users table.
  */
-
 public class UserDao {
     public static UserDao sUserDao;
 
@@ -36,11 +37,19 @@ public class UserDao {
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
+    /**
+     * Adds a User to the DB.
+     * @param u The User to be added.
+     */
     public void addUser(User u) {
         ContentValues values = getContentValues(u);
         mDatabase.insert(UsersTable.NAME, null, values);
     }
 
+    /**
+     * Adds a list of User to the DB.
+     * @param users The list of User to be added.
+     */
     public void addUsers(List<User> users) {
         for(User u:users){
             ContentValues values = getContentValues(u);
@@ -48,6 +57,9 @@ public class UserDao {
         }
     }
 
+    /**
+     * Retrieves a list of all User in the DB.
+     */
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
 
@@ -65,6 +77,10 @@ public class UserDao {
         return users;
     }
 
+    /**
+     * Retrieves a User object from the users table.
+     * @param id The ID of the User object to be retrieved.
+     */
     public User getUser(String id) {
         UserCursorWrapper cursor = queryUsers (
                 UsersTable.Cols.ID + " = ? ",
@@ -83,15 +99,11 @@ public class UserDao {
         }
     }
 
-    public void updateUser(User user) {
-        String uuidString = user.getId().toString();
-        ContentValues values = getContentValues(user);
-
-        mDatabase.update(UsersTable.NAME, values,
-                UsersTable.Cols.ID + "= ?",
-                new String[] {uuidString});//We use String[] to avoid SQL injections.
-    }
-
+    /**
+     * Takes the content of a User so we can use them to update/add entries from/to the users
+     * table in our database.
+     * @param user The User object that content values are from.
+     */
     private static ContentValues getContentValues(User user) {
         ContentValues values = new ContentValues();
         values.put(UsersTable.Cols.ID, user.getId());
@@ -107,6 +119,11 @@ public class UserDao {
         return values;
     }
 
+    /**
+     * Returns a cursor wrapper for the users query result set.
+     * @param whereClause The where clause for the query.
+     * @param whereArgs The where arguments for the query.
+     */
     private UserCursorWrapper queryUsers(String whereClause, String[] whereArgs) {//The wrapper class reduces alot of repeated code
         Cursor cursor = mDatabase.query(
                 UsersTable.NAME,    //Name of table

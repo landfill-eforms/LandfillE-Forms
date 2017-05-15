@@ -20,10 +20,10 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Created by Work on 2/16/2017.
+ * ImeDao.java
+ * Purpose: Data access object class for ImeData. Instead of using raw SQL queries, we use this
+ * class to access the DB to do basic CRUD operations on the ime_data table.
  */
-
-//Done
 public class ImeDao {
     public static ImeDao sImeDao;
 
@@ -42,20 +42,29 @@ public class ImeDao {
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
+    /**
+     * Adds a ImeData to the DB.
+     * @param d The ImeData to be added.
+     */
     public void addImeData(ImeData d) {
         ContentValues values = getContentValues(d);
         mDatabase.insert(ImeDataTable.NAME, null, values);
     }
 
+    /**
+     * Removes a ImeData from the DB.
+     * @param d The ImeData to be deleted.
+     */
     public void removeImeData(ImeData d) {
         mDatabase.delete(ImeDataTable.NAME, ImeDataTable.Cols.UUID + "= ?", new String[] {d.getId().toString()});
     }
 
+    /**
+     * Gets a list of all ImeData in the DB.
+     */
     public List<ImeData> getImeDatas() {
         List<ImeData> imeDatas = new ArrayList<>();
-
-        ImeDataCursorWrapper cursor = queryImeData(null, null);//Having both values null effectively selects all
-
+        ImeDataCursorWrapper cursor = queryImeData(null, null);
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -68,12 +77,13 @@ public class ImeDao {
         return imeDatas;
     }
 
+    /**
+     * Gets a list of ImeData based on the location.
+     * @param location A string array containing the location.
+     */
     public List<ImeData> getImeDatasByLocation(String[] location) {
         List<ImeData> imeDatas = new ArrayList<>();
-
-        //Gotta create a WHERE clause
         ImeDataCursorWrapper cursor = queryImeData(ImeDataTable.Cols.LOCATION + "= ? ", location);
-
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -86,11 +96,13 @@ public class ImeDao {
         return imeDatas;
     }
 
+    /**
+     * Gets a list of ImeData based on the location & imeNumber.
+     * @param locationAndImeNumber A string array containing the location & ime_number.
+     */
     public List<ImeData> getImeDatasByLocationAndIme(String[] locationAndImeNumber) {
         List<ImeData> imeDatas = new ArrayList<>();
-
         ImeDataCursorWrapper cursor = queryImeData(ImeDataTable.Cols.LOCATION + " = ? " + "AND " + ImeDataTable.Cols.IME_NUMBER + "= ? ", locationAndImeNumber);
-
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -103,11 +115,17 @@ public class ImeDao {
         return imeDatas;
     }
 
+    /**
+     * Gets the sequence number that's to be added to the end of a newly created IME number.
+     * The way it currently does this is bad and should be fixed. It currently generates the
+     * sequence number based on the number of ime numbers. There will be situations where an
+     * already used sequence number will be generated again.
+     * @param location The location that will be used to query the DB
+     * @param currentDate The date that will be used to query the DB.
+     */
     public int getImeSequenceNumber (String[] location, Date currentDate) {
         List<ImeData> imeDatas = new ArrayList<>();
-
         ImeDataCursorWrapper cursor = queryImeData(ImeDataTable.Cols.LOCATION + "= ? ", location);
-
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -125,12 +143,14 @@ public class ImeDao {
         return imeNumbers.size();
     }
 
+    /**
+     * Get a set of imeNumbers based on location and date.
+     * @param location The location that will be used to query the DB
+     * @param currentDate The date that will be used to query the DB.
+     */
     public Set<String> getImeNumbers (String[] location, Date currentDate) {
         List<ImeData> imeDatas = new ArrayList<>();
-
-        //Gotta create a WHERE clause
         ImeDataCursorWrapper cursor = queryImeData(ImeDataTable.Cols.LOCATION + "= ? ", location);
-
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -148,8 +168,10 @@ public class ImeDao {
         return imeNumbers;
     }
 
-
-
+    /**
+     * Retrieves a ImeData object from the ime_data table.
+     * @param id The UUID of the ImeData object to be retrieved.
+     */
     public ImeData getImeData(UUID id) {
         ImeDataCursorWrapper cursor = queryImeData(
                 ImeDataTable.Cols.UUID + "= ? ",
@@ -166,15 +188,23 @@ public class ImeDao {
         }
     }
 
+    /**
+     * Updates an entry from the ime_data table.
+     * @param imeData The ime data to be updated.
+     */
     public void updateImeData(ImeData imeData) {
         String uuidString = imeData.getId().toString();
         ContentValues values = getContentValues(imeData);
-
         mDatabase.update(ImeDataTable.NAME, values,
                 ImeDataTable.Cols.UUID + "= ?",
                 new String[] {uuidString});
     }
 
+    /**
+     * Generates an IME number by using the date & location.
+     * @param currentSite The site where the IME is located.
+     * @param currentDate The date when the IME data entry was made.
+     */
     public String generateIMEnumber(String currentSite, Date currentDate) {
         StringBuilder sb = new StringBuilder();
         Calendar cal = Calendar.getInstance();
@@ -198,7 +228,6 @@ public class ImeDao {
         if(month < 10)
             sb.append(0);
         sb.append(month);
-        //TODO: generate sequence number by getting info from DB(Maybe by COUNT)
         String[] args = {currentSite};
         sequenceNumber = getImeSequenceNumber(args, currentDate) + 1;
         sb.append("-");
@@ -209,7 +238,11 @@ public class ImeDao {
         return sb.toString();
     }
 
-
+    /**
+     * Takes the content of an ImeData so we can use them to update/add entries from/to the ime_data
+     * table in our database.
+     * @param imeData The ImeData object that content values are from.
+     */
     private static ContentValues getContentValues(ImeData imeData) {
         ContentValues values = new ContentValues();
         values.put(ImeDataTable.Cols.UUID, imeData.getId().toString());
@@ -225,6 +258,11 @@ public class ImeDao {
         return values;
     }
 
+    /**
+     * Returns a cursor wrapper for the ime_data query result set.
+     * @param whereClause The where clause for the query.
+     * @param whereArgs The where arguments for the query.
+     */
     private ImeDataCursorWrapper queryImeData(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 ImeDataTable.NAME,

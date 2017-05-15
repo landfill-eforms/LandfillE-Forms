@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments;
 
 import android.support.v4.app.Fragment;
 import android.content.Context;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.database.LandFillBaseHelper;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
@@ -31,14 +32,13 @@ import com.landfilleforms.android.landfille_forms.model.ProbeData;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
+import com.landfilleforms.android.landfille_forms.util.SessionManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 

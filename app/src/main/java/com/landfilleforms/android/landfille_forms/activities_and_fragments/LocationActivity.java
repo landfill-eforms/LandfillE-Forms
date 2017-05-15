@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments;
 //Need to change this to a single fragment activity
 
 import android.content.Intent;
@@ -8,9 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.model.User;
-
-import java.util.HashMap;
+import com.landfilleforms.android.landfille_forms.util.SessionManager;
 
 /**
  * Created by aaleman on 2/2/17.

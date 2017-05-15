@@ -10,12 +10,19 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 3/27/2017.
+ * ProbeDataCursorWrapper.java
+ * Purpose: Cursor wrapper class for the probe_data table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a ProbeData Java object.
  */
 
 public class ProbeDataCursorWrapper extends CursorWrapper {
     public ProbeDataCursorWrapper(Cursor cursor) { super(cursor); }
 
+    /*
+    * Returns a ProbeData object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public ProbeData getProbeData() {
         String uuidString = getString(getColumnIndex(ProbeDataTable.Cols.UUID));
         String location = getString(getColumnIndex(ProbeDataTable.Cols.LOCATION));

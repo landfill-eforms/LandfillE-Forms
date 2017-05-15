@@ -11,7 +11,10 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 11/1/2016.
+ * InstantaneousDataCursorWrapper.java
+ * Purpose: Cursor wrapper class for the instantaneous_data table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a InstantaneousData Java object.
  */
 
 public class InstantaneousDataCursorWrapper extends CursorWrapper {
@@ -19,6 +22,10 @@ public class InstantaneousDataCursorWrapper extends CursorWrapper {
         super(cursor);
     }
 
+    /*
+    * Returns a InstantaneousData object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public InstantaneousData getInstantaneousData() {
         String uuidString = getString(getColumnIndex(InstantaneousDataTable.Cols.UUID));
         String location = getString(getColumnIndex(InstantaneousDataTable.Cols.LOCATION));
@@ -30,7 +37,6 @@ public class InstantaneousDataCursorWrapper extends CursorWrapper {
         long endDate = getLong(getColumnIndex(InstantaneousDataTable.Cols.END_DATE));
         double methaneReading = getDouble(getColumnIndex(InstantaneousDataTable.Cols.MAX_METHANE_READING));
         String ime_number = getString(getColumnIndex(InstantaneousDataTable.Cols.IME_NUMBER));
-
         Instrument instrument = new Instrument(getInt(getColumnIndex(InstantaneousDataTable.Cols.INSTRUMENT_ID)));
 
         InstantaneousData instantaneousData = new InstantaneousData(UUID.fromString(uuidString));

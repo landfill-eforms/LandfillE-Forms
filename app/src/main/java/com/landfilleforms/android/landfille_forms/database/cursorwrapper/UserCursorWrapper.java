@@ -9,12 +9,19 @@ import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.User
 import java.util.UUID;
 
 /**
- * Created by Work on 11/1/2016.
+ * UserCursorWrapper.java
+ * Purpose: Cursor wrapper class for the users table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a User Java object.
  */
 
 public class UserCursorWrapper extends CursorWrapper {
     public UserCursorWrapper(Cursor cursor) { super(cursor); }
 
+    /*
+    * Returns a User object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public User getUser() {
         String id = getString(getColumnIndex(UsersTable.Cols.ID));
         String username = getString(getColumnIndex(UsersTable.Cols.USERNAME));

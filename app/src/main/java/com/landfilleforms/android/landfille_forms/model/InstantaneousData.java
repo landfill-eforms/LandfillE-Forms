@@ -4,11 +4,10 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 10/30/2016.
+ * InstantaneousData.java
+ * Purpose: Model for the InstantaneousData
  */
-
 public class InstantaneousData {
-    //TODO: Use ORM, might have to put this off for way later since it makes us restructure a bunch of other things.
     private UUID mId;
     private String mLocation;//Auto-generated
     private double mBarometricPressure;

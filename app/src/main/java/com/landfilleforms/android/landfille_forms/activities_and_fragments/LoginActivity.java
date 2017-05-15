@@ -1,7 +1,5 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 

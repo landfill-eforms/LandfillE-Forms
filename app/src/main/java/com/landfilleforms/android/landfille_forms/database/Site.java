@@ -1,9 +1,9 @@
 package com.landfilleforms.android.landfille_forms.database;
 
 /**
- * Created by Work on 3/14/2017.
+ * Site.java
+ * Purpose: Just an enum with information about the landfill sites.
  */
-
 public enum Site {
 
     BISHOPS         ("Bishops", "BC", "", true),

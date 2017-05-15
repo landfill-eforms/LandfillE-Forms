@@ -10,12 +10,19 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 2/16/2017.
+ * ImeDataCursorWrapper.java
+ * Purpose: Cursor wrapper class for the ime_data table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a ImeData Java object.
  */
 
 public class ImeDataCursorWrapper extends CursorWrapper{
     public ImeDataCursorWrapper(Cursor cursor) { super(cursor); }
 
+    /*
+    * Returns a ImeData object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public ImeData getImeData() {
         String uuidString = getString(getColumnIndex(ImeDataTable.Cols.UUID));
         String imeNumber = getString(getColumnIndex(ImeDataTable.Cols.IME_NUMBER));
@@ -26,7 +33,6 @@ public class ImeDataCursorWrapper extends CursorWrapper{
         String inspectorFullName = getString(getColumnIndex(ImeDataTable.Cols.INSPECTOR_NAME));
         String inspectorUserName = getString(getColumnIndex(ImeDataTable.Cols.INSPECTOR_USERNAME));
         double methaneReading = getDouble(getColumnIndex(ImeDataTable.Cols.MAX_METHANE_READING));
-
 
         ImeData imeData = new ImeData(UUID.fromString(uuidString));
         imeData.setImeNumber(imeNumber);

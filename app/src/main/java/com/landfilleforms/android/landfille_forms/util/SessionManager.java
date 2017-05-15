@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms;
+package com.landfilleforms.android.landfille_forms.util;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,9 +7,8 @@ import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.LoginActivity;
 import com.landfilleforms.android.landfille_forms.model.User;
-
-import java.util.HashMap;
 
 /**
  * Created by Work on 2/3/2017.
