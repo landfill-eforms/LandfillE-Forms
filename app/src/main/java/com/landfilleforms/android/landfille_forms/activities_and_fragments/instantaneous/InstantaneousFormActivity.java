@@ -1,8 +1,8 @@
-package com.landfilleforms.android.landfille_forms.instantaneous;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.instantaneous;
 
 import android.support.v4.app.Fragment;
 
-import com.landfilleforms.android.landfille_forms.SingleFragmentActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.SingleFragmentActivity;
 
 /**
  * Created by Work on 11/3/2016.

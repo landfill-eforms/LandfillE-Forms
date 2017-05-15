@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.probe;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.probe;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,8 +1,8 @@
-package com.landfilleforms.android.landfille_forms.probe;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.probe;
 
 import android.support.v4.app.Fragment;
 
-import com.landfilleforms.android.landfille_forms.SingleFragmentActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.SingleFragmentActivity;
 
 /**
  * Created by Work on 3/27/2017.

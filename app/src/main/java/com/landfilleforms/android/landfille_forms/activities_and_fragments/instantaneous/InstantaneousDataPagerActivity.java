@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.instantaneous;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.instantaneous;
 
 import android.app.AlertDialog;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.warmspot;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.warmspot;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,13 +20,12 @@ import android.widget.TextView;
 
 
 import com.landfilleforms.android.landfille_forms.R;
-import com.landfilleforms.android.landfille_forms.SessionManager;
+import com.landfilleforms.android.landfille_forms.util.SessionManager;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.model.User;
 
 
-import java.util.HashMap;
 import java.util.List;
 
 /**

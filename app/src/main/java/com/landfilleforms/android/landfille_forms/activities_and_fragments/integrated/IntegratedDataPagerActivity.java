@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.integrated;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.integrated;
 
 import android.content.Context;
 import android.content.Intent;

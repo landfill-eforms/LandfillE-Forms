@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.instantaneous;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.instantaneous;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,9 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.landfilleforms.android.landfille_forms.DatePickerFragment;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
-import com.landfilleforms.android.landfille_forms.SessionManager;
+import com.landfilleforms.android.landfille_forms.util.SessionManager;
 import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.User;
@@ -33,7 +33,6 @@ import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**

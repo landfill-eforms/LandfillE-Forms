@@ -1,8 +1,8 @@
-package com.landfilleforms.android.landfille_forms.warmspot;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.warmspot;
 
 import android.support.v4.app.Fragment;
 
-import com.landfilleforms.android.landfille_forms.SingleFragmentActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.SingleFragmentActivity;
 
 //Done
 public class WarmSpotFormActivity extends SingleFragmentActivity {

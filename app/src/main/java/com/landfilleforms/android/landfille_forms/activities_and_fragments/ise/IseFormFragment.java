@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.ise;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.ise;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 
 import com.landfilleforms.android.landfille_forms.R;
-import com.landfilleforms.android.landfille_forms.SessionManager;
+import com.landfilleforms.android.landfille_forms.util.SessionManager;
 import com.landfilleforms.android.landfille_forms.database.dao.IseDao;
 import com.landfilleforms.android.landfille_forms.model.IseData;
 import com.landfilleforms.android.landfille_forms.model.User;
@@ -34,7 +34,6 @@ import com.landfilleforms.android.landfille_forms.model.User;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

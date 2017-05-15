@@ -1,7 +1,7 @@
-package com.landfilleforms.android.landfille_forms.ise;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.ise;
 
 import android.support.v4.app.Fragment;
-import com.landfilleforms.android.landfille_forms.SingleFragmentActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.SingleFragmentActivity;
 
 
 /**

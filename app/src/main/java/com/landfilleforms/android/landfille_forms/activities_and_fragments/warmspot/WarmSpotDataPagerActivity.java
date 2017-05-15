@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.warmspot;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.warmspot;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.instantaneous;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.instantaneous;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,25 +26,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.landfilleforms.android.landfille_forms.DatePickerFragment;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
-import com.landfilleforms.android.landfille_forms.SessionManager;
-import com.landfilleforms.android.landfille_forms.TimePickerFragment;
+import com.landfilleforms.android.landfille_forms.util.SessionManager;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.InstantaneousDao;
 import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
-import com.landfilleforms.android.landfille_forms.ime.ImeDataPagerActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.ime.ImeDataPagerActivity;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.InstantaneousData;
 import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.User;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
-import com.landfilleforms.android.landfille_forms.warmspot.WarmSpotDataPagerActivity;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.warmspot.WarmSpotDataPagerActivity;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

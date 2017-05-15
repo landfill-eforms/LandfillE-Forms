@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.ise;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.ise;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.database.dao.IseDao;
-import com.landfilleforms.android.landfille_forms.ise.IseDataFragment;
-import com.landfilleforms.android.landfille_forms.ise.IseDataPagerActivity;
 import com.landfilleforms.android.landfille_forms.model.IseData;
 
 import java.util.List;

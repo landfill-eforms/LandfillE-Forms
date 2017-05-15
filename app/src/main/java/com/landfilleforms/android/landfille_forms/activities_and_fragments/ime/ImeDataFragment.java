@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.ime;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.ime;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,11 +28,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.landfilleforms.android.landfille_forms.DatePickerFragment;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
-import com.landfilleforms.android.landfille_forms.TimePickerFragment;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
-import com.landfilleforms.android.landfille_forms.instantaneous.InstantaneousDataFragment;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.landfilleforms.android.landfille_forms.ise;
+package com.landfilleforms.android.landfille_forms.activities_and_fragments.ise;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,11 +26,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.landfilleforms.android.landfille_forms.DatePickerFragment;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
-import com.landfilleforms.android.landfille_forms.TimePickerFragment;
+import com.landfilleforms.android.landfille_forms.activities_and_fragments.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.database.dao.IseDao;
-import com.landfilleforms.android.landfille_forms.integrated.IntegratedDataFragment;
 import com.landfilleforms.android.landfille_forms.model.IseData;
 
 import java.util.Date;
