@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by owchr on 4/5/2017.
+ * IseData.java
+ * Purpose: Model for the IseData
  */
-
 public class IseData {
     private UUID mId;
     private String mIseNumber;

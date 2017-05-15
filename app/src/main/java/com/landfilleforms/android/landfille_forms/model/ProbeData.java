@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 3/27/2017.
+ * ProbeData.java
+ * Purpose: Model for the ProbeData
  */
-
 public class ProbeData {
     private UUID mId;
     private String mLocation;

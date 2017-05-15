@@ -15,9 +15,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by Work on 10/30/2016.
+ * InstantaneousDao.java
+ * Purpose: Data access object class for InstantaneousData. Instead of using raw SQL queries, we use this
+ * class to access the DB to do basic CRUD operations on the instantaneous_data table.
  */
-
 public class InstantaneousDao {
     public static InstantaneousDao sInstantaneousDao;
 
@@ -36,20 +37,29 @@ public class InstantaneousDao {
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
+    /**
+     * Adds a InstantaneousData to the DB.
+     * @param d The InstantaneousData to be added.
+     */
     public void addInstantaneousData(InstantaneousData d) {
         ContentValues values = getContentValues(d);
         mDatabase.insert(InstantaneousDataTable.NAME, null, values);
     }
 
+    /**
+     * Removes a InstantaneousData from the DB.
+     * @param d The InstantaneousData to be deleted.
+     */
     public void removeInstantaneousData(InstantaneousData d) {
         mDatabase.delete(InstantaneousDataTable.NAME, InstantaneousDataTable.Cols.UUID + "= ?", new String[] {d.getId().toString()});
     }
 
+    /**
+     * Retrieves a list of all InstantaneousData in the DB.
+     */
     public List<InstantaneousData> getInstantaneousDatas() {
         List<InstantaneousData> instantaneousForm = new ArrayList<>();
-
         InstantaneousDataCursorWrapper cursor = queryInstantaneousData(null, null);//Having both values null effectively selects all
-
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -66,13 +76,13 @@ public class InstantaneousDao {
         return instantaneousForm;
     }
 
-    //TODO just testing, may need to change how this works
+    /**
+     * Retrieves a list of InstantaneousData from the DB based on the location.
+     * @param location A String array containing the location
+     */
     public List<InstantaneousData> getInstantaneousDatasByLocation(String[] location) {
         List<InstantaneousData> instantaneousForm = new ArrayList<>();
-
-        //Gotta create a WHERE clause
-        InstantaneousDataCursorWrapper cursor = queryInstantaneousData(InstantaneousDataTable.Cols.LOCATION + "= ? ", location);//Having both values null effectively selects all
-
+        InstantaneousDataCursorWrapper cursor = queryInstantaneousData(InstantaneousDataTable.Cols.LOCATION + "= ? ", location);
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -89,12 +99,13 @@ public class InstantaneousDao {
         return instantaneousForm;
     }
 
+    /**
+     * Retrieves a list of InstantaneousData based on the location & grid.
+     * @param args String array containing the location and grid.
+     */
     public List<InstantaneousData> getInstantaneousDatasByLocationGrid(String[] args) {
         List<InstantaneousData> instantaneousForm = new ArrayList<>();
-
-        //Gotta create a WHERE clause
-        InstantaneousDataCursorWrapper cursor = queryInstantaneousData(InstantaneousDataTable.Cols.LOCATION + "= ? AND " + InstantaneousDataTable.Cols.GRID_ID + "= ?", args);//Having both values null effectively selects all
-
+        InstantaneousDataCursorWrapper cursor = queryInstantaneousData(InstantaneousDataTable.Cols.LOCATION + "= ? AND " + InstantaneousDataTable.Cols.GRID_ID + "= ?", args);
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -111,7 +122,10 @@ public class InstantaneousDao {
         return instantaneousForm;
     }
 
-
+    /**
+     * Retrieves a InstantaneousData object from the instantaneous_data table.
+     * @param id The UUID of the InstantaneousData object to be retrieved.
+     */
     public InstantaneousData getInstantaneousData(UUID id) {
         InstantaneousDataCursorWrapper cursor = queryInstantaneousData(
                 InstantaneousDataTable.Cols.UUID + "= ? ",
@@ -132,6 +146,10 @@ public class InstantaneousDao {
         }
     }
 
+    /**
+     * Updates an entry from the instantaneous_data table.
+     * @param instantaneousData The instantaneous data to be updated.
+     */
     public void updateInstantaneousData(InstantaneousData instantaneousData) {
         String uuidString = instantaneousData.getId().toString();
         ContentValues values = getContentValues(instantaneousData);
@@ -141,6 +159,10 @@ public class InstantaneousDao {
                 new String[] {uuidString});
     }
 
+    /**
+     * Updates a list of entries from the instantaneous_data table.
+     * @param instantaneousDatas List of InstantaneousData to be updated.
+     */
     public void updateInstantaneousDatas(List<InstantaneousData> instantaneousDatas) {
         for (int i = 0; i < instantaneousDatas.size(); i++) {
             String uuidString = instantaneousDatas.get(i).getId().toString();
@@ -152,6 +174,11 @@ public class InstantaneousDao {
         }
     }
 
+    /**
+     * Takes the content of an InstantaneousData so we can use them to update/add entries from/to the instantaneous_data
+     * table in our database.
+     * @param instantaneousData The InstantaneousData object that content values are from.
+     */
     private static ContentValues getContentValues(InstantaneousData instantaneousData) {
         ContentValues values = new ContentValues();
         values.put(InstantaneousDataTable.Cols.UUID, instantaneousData.getId().toString());
@@ -171,6 +198,11 @@ public class InstantaneousDao {
         return values;
     }
 
+    /**
+     * Returns a cursor wrapper for the instantaneous_data query result set.
+     * @param whereClause The where clause for the query.
+     * @param whereArgs The where arguments for the query.
+     */
     private InstantaneousDataCursorWrapper queryInstantaneousData(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 InstantaneousDataTable.NAME,

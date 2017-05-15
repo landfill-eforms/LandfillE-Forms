@@ -3,9 +3,9 @@ package com.landfilleforms.android.landfille_forms.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Work on 4/24/2017.
+ * Instrument.java
+ * Purpose: Model for the Instrument
  */
-
 public class Instrument {
     @SerializedName("id") private int mId;
     @SerializedName("serialNumber") private String mSerialNumber;

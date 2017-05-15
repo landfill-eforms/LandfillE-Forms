@@ -1,14 +1,14 @@
 package com.landfilleforms.android.landfille_forms.database;
 
 /**
- * Created by Work on 10/30/2016.
+ * LandFillBaseHelper.java
+ * Purpose: Creates all the tables in our DB. This class holds the names of all the tables/columns of our database.
+ * There is a inner class for each table and each of these inner classes has the name of the table
+ * and columns that belong to that table.
+ * The String constants are used when pulling data from the DB through queries or other methods.
  */
-
-//TODO: Turn the DB to relational one and use foreign keys
-
 public class LandFillDbSchema {
     public static final class InstantaneousDataTable {
-        //Kinda like a contract class
         public static final String NAME = "instantaneous_data";
         public static final class Cols {
             public static final String UUID = "uuid";
@@ -32,7 +32,7 @@ public class LandFillDbSchema {
             public static final String IME_NUMBER = "ime_number";
             public static final String LOCATION = "location";
             public static final String GRID_ID = "grid_id";
-            public static final String DATE = "date";               ///Derive time from date
+            public static final String DATE = "date";
             public static final String DESCRIPTION = "description";
             public static final String INSPECTOR_NAME = "inspector_name";
             public static final String INSPECTOR_USERNAME = "inspector_username";
@@ -47,7 +47,7 @@ public class LandFillDbSchema {
             public static final String UUID = "uuid";
             public static final String LOCATION = "location";
             public static final String GRID_ID = "grid_id";
-            public static final String DATE = "date";               ///Derive time from date
+            public static final String DATE = "date";
             public static final String DESCRIPTION = "description";
             public static final String ESTIMATED_SIZE = "estimated_size";
             public static final String INSPECTOR_NAME = "inspector_name";
@@ -68,7 +68,7 @@ public class LandFillDbSchema {
             public static final String BARO_PRESSURE = "barometric_pressure";
             public static final String INSPECTOR_NAME = "inspector_name";
             public static final String INSPECTOR_USERNAME = "inspector_username";
-            public static final String SAMPLE_ID = "sample_id"; //Seems similar to IME #(LocationCode-grid#-YearMonthDay
+            public static final String SAMPLE_ID = "sample_id";
             public static final String BAG_NUMBER = "bag_number";
             public static final String START_DATE = "start_date";
             public static final String END_DATE = "end_date";
@@ -130,7 +130,7 @@ public class LandFillDbSchema {
             public static final String ID = "id";
             public static final String SERIAL_NUMBER = "serial_no";
             public static final String INSTRUMENT_STATUS = "instrument_status";
-            public static final String SITE = "site";//TODO: Check w/ Alvin about this. Not sure if an instrument should be limited to just 1 site
+            public static final String SITE = "site";
             public static final String DESCRIPTION = "description";
             public static final String INSTRUMENT_TYPE_ID = "instrument_type_id";
         }

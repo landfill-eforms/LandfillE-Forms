@@ -2,6 +2,10 @@ package com.landfilleforms.android.landfille_forms.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * InstrumentType.java
+ * Purpose: Model for the InstrumentType
+ */
 public class InstrumentType {
     @SerializedName("id") private int mId;
     @SerializedName("type") private String mType;

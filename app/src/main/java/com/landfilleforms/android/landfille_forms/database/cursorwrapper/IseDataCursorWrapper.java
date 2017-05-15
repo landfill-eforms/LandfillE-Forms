@@ -8,12 +8,19 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by owchr on 4/5/2017.
+ * IseDataCursorWrapper.java
+ * Purpose: Cursor wrapper class for the ise_data table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a IseData Java object.
  */
 
 public class IseDataCursorWrapper extends CursorWrapper{
     public IseDataCursorWrapper(Cursor cursor) { super(cursor); }
 
+    /*
+    * Returns a IseData object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public IseData getIseData() {
         String uuidString = getString(getColumnIndex(IseDataTable.Cols.UUID));
         String iseNumber = getString(getColumnIndex(IseDataTable.Cols.ISE_NUMBER));

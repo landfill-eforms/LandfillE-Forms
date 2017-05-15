@@ -15,11 +15,10 @@ import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.Inte
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.IseDataTable;
 import com.landfilleforms.android.landfille_forms.database.LandFillDbSchema.ProbeDataTable;
 
-
 /**
- * Created by Work on 10/30/2016.
+ * LandFillBaseHelper.java
+ * Purpose: Creates all the tables in our DB.
  */
-
 public class LandFillBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "landfillBase.db";
@@ -131,7 +130,6 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(" +IntegratedDataTable.Cols.INSTRUMENT_ID + ") REFERENCES "+ InstrumentsTable.NAME + "("+ InstrumentsTable.Cols.ID +")" + ")"
         );
 
-        //add ISE data table
         db.execSQL("create table " + IseDataTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
                 IseDataTable.Cols.UUID + "," +
@@ -161,15 +159,19 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //When we add/remove columns. Change version number.
+
+    //The recommended way to update the DB when we make changes to the schema.
+    //We actually never used this method. Every time we made changes to the schema, we just
+    //cleared all the data/cache from the application setting.
+    /**
+     * The method to be called when we make changes to our DB
+     * @param db Our DB.
+     * @param oldVersion The old version number of our DB.
+     * @param newVersion The old version number of our DB.
+     */
     @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
-/*        db.execSQL("delete from "+ LandFillDbSchema.InstantaneousDataTable.NAME);
-        db.execSQL("delete from "+ LandFillDbSchema.ImeDataTable.NAME);
-        db.execSQL("delete from "+ LandFillDbSchema.WarmSpotDataTable.NAME);
-        db.execSQL("delete from "+ LandFillDbSchema.IntegratedDataTable.NAME);
-        db.execSQL("delete from "+ LandFillDbSchema.ProbeDataTable.NAME);*/
-
+        //Code to be executed.
     }
 
 }

@@ -13,12 +13,12 @@ import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 /**
- * Created by Work on 2/17/2017.
+ * WarmSpotDao.java
+ * Purpose: Data access object class for WarmSpotData. Instead of using raw SQL queries, we use this
+ * class to access the DB to do basic CRUD operations on the warmspot_data table.
  */
-
-//Done
-
 public class WarmSpotDao {
     public static WarmSpotDao sWarmSpotDao;
 
@@ -37,16 +37,26 @@ public class WarmSpotDao {
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
+    /**
+     * Adds a WarmSpotData to the DB.
+     * @param d The WarmSpotData to be added.
+     */
     public void addWarmSpotData(WarmSpotData d) {
         ContentValues values = getContentValues(d);
         mDatabase.insert(WarmSpotDataTable.NAME, null, values);
     }
 
+    /**
+     * Removes a WarmSpotData from the DB.
+     * @param d The WarmSpotData to be deleted.
+     */
     public void removeWarmSpotData(WarmSpotData d) {
         mDatabase.delete(WarmSpotDataTable.NAME, WarmSpotDataTable.Cols.UUID + "= ?", new String[] {d.getId().toString()});
     }
 
-    //Data is already plural but I made it Datas to show that we're getting all the data from the table
+    /**
+     * Retrieves a list of all WarmSpotData in the DB.
+     */
     public List<WarmSpotData> getWarmSpotDatas() {
         List<WarmSpotData> warmSpotForm = new ArrayList<>();
 
@@ -68,10 +78,13 @@ public class WarmSpotDao {
         return warmSpotForm;
     }
 
+    /**
+     * Retrieves a list of WarmSpotData from the DB based on the location.
+     * @param location A String array containing the location
+     */
     public List<WarmSpotData> getWarmSpotDatasByLocation(String[] location) {
         List<WarmSpotData> warmSpotDatas = new ArrayList<>();
 
-        //Gotta create a WHERE clause
         WarmSpotDataCursorWrapper cursor = queryWarmSpotData(WarmSpotDataTable.Cols.LOCATION + "= ? ", location);
 
         try {
@@ -90,6 +103,10 @@ public class WarmSpotDao {
         return warmSpotDatas;
     }
 
+    /**
+     * Retrieves a WarmSpotData object from the warmspot_data table.
+     * @param id The UUID of the WarmSpotData object to be retrieved.
+     */
     public WarmSpotData getWarmSpotData(UUID id) {
         WarmSpotDataCursorWrapper cursor = queryWarmSpotData(
                 WarmSpotDataTable.Cols.UUID + "= ? ",
@@ -110,6 +127,10 @@ public class WarmSpotDao {
         }
     }
 
+    /**
+     * Updates an entry from the warmspot_data table.
+     * @param warmSpotData The warmspot data to be updated.
+     */
     public void updateWarmSpotData(WarmSpotData warmSpotData) {
         String uuidString = warmSpotData.getId().toString();
         ContentValues values = getContentValues(warmSpotData);
@@ -119,6 +140,11 @@ public class WarmSpotDao {
                 new String[] {uuidString});
     }
 
+    /**
+     * Takes the content of an WarmSpotData so we can use them to update/add entries from/to the warmspot_data
+     * table in our database.
+     * @param warmSpotData The WarmSpotData object that content values are from.
+     */
     private static ContentValues getContentValues(WarmSpotData warmSpotData) {
         ContentValues values = new ContentValues();
         values.put(WarmSpotDataTable.Cols.UUID, warmSpotData.getId().toString());
@@ -137,6 +163,11 @@ public class WarmSpotDao {
         return values;
     }
 
+    /**
+     * Returns a cursor wrapper for the warmspot_data query result set.
+     * @param whereClause The where clause for the query.
+     * @param whereArgs The where arguments for the query.
+     */
     private WarmSpotDataCursorWrapper queryWarmSpotData(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 WarmSpotDataTable.NAME,

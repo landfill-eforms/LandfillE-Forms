@@ -15,9 +15,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by Work on 3/27/2017.
+ * ProbeDao.java
+ * Purpose: Data access object class for ProbeData. Instead of using raw SQL queries, we use this
+ * class to access the DB to do basic CRUD operations on the probe_data table.
  */
-
 public class ProbeDao {
     public static ProbeDao sProbeDao;
 
@@ -36,15 +37,26 @@ public class ProbeDao {
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
+    /**
+     * Adds a ProbeData to the DB.
+     * @param d The ProbeData to be added.
+     */
     public void addProbeData(ProbeData d) {
         ContentValues values = getContentValues(d);
         mDatabase.insert(ProbeDataTable.NAME, null, values);
     }
 
+    /**
+     * Removes a ProbeData from the DB.
+     * @param d The ProbeData to be deleted.
+     */
     public void removeProbeData(ProbeData d) {
         mDatabase.delete(ProbeDataTable.NAME, ProbeDataTable.Cols.UUID + "= ?", new String[] {d.getId().toString()});
     }
 
+    /**
+     * Retrieves a list of all ProbeData in the DB.
+     */
     public List<ProbeData> getProbeDatas() {
         List<ProbeData> probeDatas = new ArrayList<>();
 
@@ -62,6 +74,10 @@ public class ProbeDao {
         return probeDatas;
     }
 
+    /**
+     * Retrieves a list of ProbeData from the DB based on the location.
+     * @param location A String array containing the location
+     */
     public List<ProbeData> getProbeDatasByLocation(String[] location) {
         List<ProbeData> probeDatas = new ArrayList<>();
 
@@ -79,6 +95,10 @@ public class ProbeDao {
         return probeDatas;
     }
 
+    /**
+     * Retrieves a ProbeData object from the probe_data table.
+     * @param id The UUID of the ProbeData object to be retrieved.
+     */
     public ProbeData getProbeData(UUID id) {
         ProbeDataCursorWrapper cursor = queryProbeData(
                 ProbeDataTable.Cols.UUID + "= ? ",
@@ -95,6 +115,10 @@ public class ProbeDao {
         }
     }
 
+    /**
+     * Updates an entry from the probe_data table.
+     * @param probeData The probe data to be updated.
+     */
     public void updateProbeData(ProbeData probeData) {
         String uuidString = probeData.getId().toString();
         ContentValues values = getContentValues(probeData);
@@ -104,6 +128,10 @@ public class ProbeDao {
                 new String[] {uuidString});
     }
 
+    /**
+     * Updates a list of entries from the probe_data table.
+     * @param probeDatas List of ProbeData to be updated.
+     */
     public void updateProbeDatas(List<ProbeData> probeDatas) {
         for(int i = 0; i < probeDatas.size(); i++) {
             String uuidString = probeDatas.get(i).getId().toString();
@@ -115,6 +143,11 @@ public class ProbeDao {
         }
     }
 
+    /**
+     * Takes the content of an ProbeData so we can use them to update/add entries from/to the probe_data
+     * table in our database.
+     * @param probeData The ProbeData object that content values are from.
+     */
     private static ContentValues getContentValues(ProbeData probeData) {
         ContentValues values = new ContentValues();
         values.put(ProbeDataTable.Cols.UUID, probeData.getId().toString());
@@ -131,6 +164,11 @@ public class ProbeDao {
         return values;
     }
 
+    /**
+     * Returns a cursor wrapper for the probe_data query result set.
+     * @param whereClause The where clause for the query.
+     * @param whereArgs The where arguments for the query.
+     */
     private ProbeDataCursorWrapper queryProbeData(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 ProbeDataTable.NAME,

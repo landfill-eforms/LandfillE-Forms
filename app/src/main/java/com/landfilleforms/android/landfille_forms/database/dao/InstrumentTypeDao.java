@@ -12,6 +12,11 @@ import com.landfilleforms.android.landfille_forms.model.InstrumentType;
 
 import java.util.List;
 
+/**
+ * InstrumentTypeDao.java
+ * Purpose: Data access object class for InstantaneousData. Instead of using raw SQL queries, we use this
+ * class to access the DB to do basic CRUD operations on the instantaneous_data table.
+ */
 public class InstrumentTypeDao {
     public static InstrumentTypeDao sInstrumentTypeDao;
 
@@ -30,6 +35,10 @@ public class InstrumentTypeDao {
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
+    /**
+     * Inserts a list of Instruments to the DB.
+     * @param instrumentTypes The list of InstrumentType to be inserted.
+     */
     public void addInstrumentTypes(List<InstrumentType> instrumentTypes) {
         for(InstrumentType it:instrumentTypes) {
             ContentValues values = getContentValues(it);
@@ -37,17 +46,19 @@ public class InstrumentTypeDao {
         }
     }
 
+    /**
+     * Retrieves an InstrumentType object from the instruments table.
+     * @param id The ID of the InstrumentType object to be retrieved.
+     */
     public InstrumentType getInstrumentType(int id) {
         InstrumentTypeCursorWrapper cursor = queryInstrumentTypes(
                 InstrumentTypesTable.Cols.ID + " = ? ",
                 new String[] { Integer.toString(id) }
         );
-
         try {
             if(cursor.getCount() == 0) {
                 return null;
             }
-
             cursor.moveToFirst();
             return cursor.getInstrumentType();
         } finally {
@@ -55,6 +66,11 @@ public class InstrumentTypeDao {
         }
     }
 
+    /**
+     * Takes the content of an InstrumentType so we can use them to update/add entries from/to the
+     * instrument_types table in our database.
+     * @param instrumentType The InstrumentType object that content values are from.
+     */
     private static ContentValues getContentValues(InstrumentType instrumentType) {
         ContentValues values = new ContentValues();
         values.put(InstrumentTypesTable.Cols.ID,instrumentType.getId());
@@ -74,6 +90,11 @@ public class InstrumentTypeDao {
         return values;
     }
 
+    /**
+     * Returns a cursor wrapper for the instrument_types query result set.
+     * @param whereClause The where clause for the query.
+     * @param whereArgs The where arguments for the query.
+     */
     private InstrumentTypeCursorWrapper queryInstrumentTypes(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 InstrumentTypesTable.NAME,

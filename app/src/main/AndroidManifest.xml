@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities_and_fragments.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -21,76 +21,76 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".instantaneous.InstantaneousFormActivity"
+            android:name=".activities_and_fragments.instantaneous.InstantaneousFormActivity"
             android:label="@string/instantaneous_form_header"
-            android:parentActivityName=".LocationActivity"
+            android:parentActivityName=".activities_and_fragments.LocationActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".instantaneous.InstantaneousDataPagerActivity"
+            android:name=".activities_and_fragments.instantaneous.InstantaneousDataPagerActivity"
             android:label="@string/instantaenous_data_header"
             android:screenOrientation="portrait"/>
         <!-- android:parentActivityName=".instantaneous.InstantaneousFormActivity"/> -->
         <activity
-            android:name=".LocationActivity"
+            android:name=".activities_and_fragments.LocationActivity"
             android:label="@string/location_header"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName=".activities_and_fragments.MenuActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".TestsActivity"
+            android:name=".activities_and_fragments.TestsActivity"
             android:label="@string/tests_header"
-            android:parentActivityName=".LocationActivity"
+            android:parentActivityName=".activities_and_fragments.LocationActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ime.ImeFormActivity"
+            android:name=".activities_and_fragments.ime.ImeFormActivity"
             android:label="@string/ime_form_header"
-            android:parentActivityName=".LocationActivity"
+            android:parentActivityName=".activities_and_fragments.LocationActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ime.ImeDataPagerActivity"
+            android:name=".activities_and_fragments.ime.ImeDataPagerActivity"
             android:label="@string/ime_data_header"
             android:screenOrientation="portrait"/>
         <!-- android:parentActivityName=".ime.ImeFormActivity" -->
         <activity
-            android:name=".warmspot.WarmSpotFormActivity"
+            android:name=".activities_and_fragments.warmspot.WarmSpotFormActivity"
             android:label="@string/warm_spot_form_header"
-            android:parentActivityName=".LocationActivity"
+            android:parentActivityName=".activities_and_fragments.LocationActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".warmspot.WarmSpotDataPagerActivity"
+            android:name=".activities_and_fragments.warmspot.WarmSpotDataPagerActivity"
             android:label="@string/warm_spot_data_header"
             android:screenOrientation="portrait"/>
         <!-- android:parentActivityName=".warmspot.WarmSpotFormActivity" -->
         <activity
-            android:name=".probe.ProbeFormActivity"
+            android:name=".activities_and_fragments.probe.ProbeFormActivity"
             android:label="@string/probe_form_header"
-            android:parentActivityName=".LocationActivity"
+            android:parentActivityName=".activities_and_fragments.LocationActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".probe.ProbeDataPagerActivity"
+            android:name=".activities_and_fragments.probe.ProbeDataPagerActivity"
             android:label="@string/probe_data_header"
             android:screenOrientation="portrait"/>
         <!-- android:parentActivityName=".probe.ProbeFormActivity" -->
         <activity
-            android:name=".integrated.IntegratedFormActivity"
+            android:name=".activities_and_fragments.integrated.IntegratedFormActivity"
             android:label="@string/integrated_form_header"
-            android:parentActivityName=".LocationActivity"
+            android:parentActivityName=".activities_and_fragments.LocationActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".integrated.IntegratedDataPagerActivity"
+            android:name=".activities_and_fragments.integrated.IntegratedDataPagerActivity"
             android:label="@string/integrated_data_header"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ise.IseFormActivity"
+            android:name=".activities_and_fragments.ise.IseFormActivity"
             android:label="@string/ise_form_header"
-            android:parentActivityName=".LocationActivity"
+            android:parentActivityName=".activities_and_fragments.LocationActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ise.IseDataPagerActivity"
+            android:name=".activities_and_fragments.ise.IseDataPagerActivity"
             android:label="@string/ise_data_header"
             android:screenOrientation="portrait"/>
         <!--android:parentActivityName=".probe.ProbeFormActivity"-->
         <activity
-            android:name=".MenuActivity"
+            android:name=".activities_and_fragments.MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>

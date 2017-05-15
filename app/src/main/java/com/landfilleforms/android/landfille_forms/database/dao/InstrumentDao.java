@@ -14,6 +14,11 @@ import com.landfilleforms.android.landfille_forms.model.Instrument;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * InstrumentDao.java
+ * Purpose: Data access object class for Instrument. Instead of using raw SQL queries, we use this
+ * class to access the DB to do basic CRUD operations on the instruments table.
+ */
 public class InstrumentDao {
     public static InstrumentDao sInstrumentDao;
 
@@ -32,6 +37,9 @@ public class InstrumentDao {
         mDatabase = new LandFillBaseHelper(mContext).getWritableDatabase();
     }
 
+    /**
+     * Retrieves a list of all Instruments in the DB.
+     */
     public List<Instrument> getInstruments() {
         List<Instrument> instruments = new ArrayList<>();
 
@@ -51,13 +59,14 @@ public class InstrumentDao {
         return instruments;
     }
 
+    /**
+     * Retrieves a list of all Instruments that is used for surface methane emission monitoring in a particular site.
+     * @param site Name of the site used for the query
+     */
     public List<Instrument> getInstrumentsBySiteForSurface(String site) {
         List<Instrument> instruments = new ArrayList<>();
-
         String[] siteArgs = {site.toUpperCase(), ""};
-
         InstrumentCursorWrapper cursor = queryInstruments(InstrumentsTable.Cols.SITE + " = ? " + "OR " + InstrumentsTable.Cols.SITE + " = ? ", siteArgs);
-
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -74,13 +83,14 @@ public class InstrumentDao {
         return instruments;
     }
 
+    /**
+     * Retrieves a list of all Instruments that is used for probe monitoring in a particular site.
+     * @param site Name of the site used for the query
+     */
     public List<Instrument> getInstrumentsBySiteForProbe(String site) {
         List<Instrument> instruments = new ArrayList<>();
-
         String[] siteArgs = {site.toUpperCase(), ""};
-
         InstrumentCursorWrapper cursor = queryInstruments(InstrumentsTable.Cols.SITE + " = ? " + "OR " + InstrumentsTable.Cols.SITE + "= ? ", siteArgs);
-
         try {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
@@ -97,6 +107,10 @@ public class InstrumentDao {
         return instruments;
     }
 
+    /**
+     * Retrieves a Instrument object from the instruments table.
+     * @param id The ID of the Instrument object to be retrieved.
+     */
     public Instrument getInstrument(String id) {
         InstrumentCursorWrapper cursor = queryInstruments(
                 InstrumentsTable.Cols.ID + " =? ",
@@ -117,6 +131,10 @@ public class InstrumentDao {
         }
     }
 
+    /**
+     * Inserts a list of Instruments to the DB.
+     * @param instruments The list of Instrument to be inserted.
+     */
     public void addInstruments(List<Instrument> instruments) {
         for(Instrument i:instruments) {
             ContentValues values = getContentValues(i);
@@ -124,6 +142,11 @@ public class InstrumentDao {
         }
     }
 
+    /**
+     * Takes the content of an Instrument so we can use them to update/add entries from/to the
+     * instruments table in our database.
+     * @param instrument The Instrument object that content values are from.
+     */
     private static ContentValues getContentValues(Instrument instrument) {
         ContentValues values = new ContentValues();
         values.put(InstrumentsTable.Cols.ID,instrument.getId());
@@ -136,6 +159,11 @@ public class InstrumentDao {
         return values;
     }
 
+    /**
+     * Returns a cursor wrapper for the instruments query result set.
+     * @param whereClause The where clause for the query.
+     * @param whereArgs The where arguments for the query.
+     */
     private InstrumentCursorWrapper queryInstruments(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 InstrumentsTable.NAME,

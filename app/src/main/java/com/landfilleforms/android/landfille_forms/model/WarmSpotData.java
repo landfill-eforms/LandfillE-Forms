@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 2/16/2017.
+ * WarmSpotData.java
+ * Purpose: Model for the WarmSpotData
  */
-
 public class WarmSpotData {
     private UUID mId;
     private String mLocation;

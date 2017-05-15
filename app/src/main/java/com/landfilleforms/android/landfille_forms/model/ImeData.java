@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Work on 2/16/2017.
+ * ImeData.java
+ * Purpose: Model for the ImeData
  */
-
 public class ImeData {
     private UUID mId;
     private String mImeNumber;

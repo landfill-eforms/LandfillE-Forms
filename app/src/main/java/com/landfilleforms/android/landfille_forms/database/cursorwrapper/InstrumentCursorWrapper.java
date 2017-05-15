@@ -8,9 +8,20 @@ import com.landfilleforms.android.landfille_forms.database.dao.InstrumentTypeDao
 import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.InstrumentType;
 
+/**
+ * InstrumentCursorWrapper.java
+ * Purpose: Cursor wrapper class for the instruments table query result set.
+ * It pulls the data from the current row that the cursor is at & uses the data
+ * to construct a Instrument Java object.
+ */
+
 public class InstrumentCursorWrapper extends CursorWrapper {
     public InstrumentCursorWrapper(Cursor cursor) { super(cursor); }
 
+    /*
+    * Returns a Instrument object built using the data taken from each of the columns
+    * from the current row.
+    * */
     public Instrument getInstrument() {
         int id = getInt(getColumnIndex(InstrumentsTable.Cols.ID));
         String serialNumber = getString(getColumnIndex(InstrumentsTable.Cols.SERIAL_NUMBER));
