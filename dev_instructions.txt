@@ -1,0 +1,5 @@
+Development Instructions
+
+For Android Development, Android Programming: The Big Nerd Ranch (2nd Edition) was a great tool in helping us understand Android and how both Java and XML worked together.
+
+NOTE: It is important to understand how the XML and Java work together. It is the only way to develop for Android. Not understanding these relationships will cause a delay in development. The file names are written so you can easily which two or more files are linked together. Once the development team understands these relationships, implementing the rest of the functionalities for the LEF project should be simple enough.
