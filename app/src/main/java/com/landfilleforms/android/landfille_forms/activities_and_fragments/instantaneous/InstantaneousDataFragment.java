@@ -43,6 +43,7 @@ import com.landfilleforms.android.landfille_forms.activities_and_fragments.warms
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -533,25 +534,14 @@ public class InstantaneousDataFragment extends Fragment {
             if(imeData.getImeNumber() != null && imeData.getImeNumber().trim().length() != 0)
                 imeNumbers.add(imeData.getImeNumber());
         }
-        imeNumbers.add("");
         existingImeSpinner = (Spinner) redirectionAlert.show().findViewById(R.id.existing_ime_spinner);
         List<String> imeNumbersList = new ArrayList<String>(imeNumbers);
+        Collections.sort(imeNumbersList);
         ArrayAdapter<String> imeNumberSpinnerItems = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, imeNumbersList){
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
 
-                View v = null;
-
-                if (position == 0) {
-                    TextView tv = new TextView(getContext());
-                    tv.setHeight(0);
-                    tv.setVisibility(View.GONE);
-                    v = tv;
-                }
-                else {
-
-                    v = super.getDropDownView(position, null, parent);
-                }
+                View v = super.getDropDownView(position, null, parent);
 
                 parent.setVerticalScrollBarEnabled(false);
                 return v;
@@ -559,7 +549,7 @@ public class InstantaneousDataFragment extends Fragment {
         };
 
         existingImeSpinner.setAdapter(imeNumberSpinnerItems);
-        existingImeSpinner.setSelection(imeNumberSpinnerItems.getPosition(imeNumberSpinnerItems.getItem(1).toString()));
+        existingImeSpinner.setSelection(imeNumberSpinnerItems.getPosition(imeNumberSpinnerItems.getItem(0).toString()));
         existingImeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
