@@ -60,13 +60,14 @@
                 android:textStyle="normal|bold"
                 android:textSize="20dp"
                 android:layout_marginRight="5dp" />
+            <!--Added input of negative numbers-->
             <EditText
+                android:id="@+id/barometric_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/barometric_field"
-                android:inputType="numberDecimal"
-                android:textSize="20dp"
-                android:textColor="@color/white"/>
+                android:inputType="numberSigned"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

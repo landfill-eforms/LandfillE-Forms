@@ -114,12 +114,13 @@
                     android:textColor="@color/white"
                     android:textAllCaps="false"
                     android:textSize="18dp"/>
-
+<!-- Added padding -->
                 <TextView
                     android:id="@+id/baro_reading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/holo_blue_bright"
+                    android:paddingLeft="50dp"
                     />
 
 

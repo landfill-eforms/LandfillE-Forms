@@ -175,7 +175,7 @@ public class IntegratedFormFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_integrated_form, menu);
     }
-
+    //changed timr from 30mins to 25mins
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -186,7 +186,7 @@ public class IntegratedFormFragment extends Fragment {
                 integratedData.setInspectorName(mUser.getFullName());
                 integratedData.setInspectorUserName(mUser.getUsername());
                 integratedData.setStartDate(currentDate);
-                integratedData.setEndDate(new Date(integratedData.getStartDate().getTime() + 1800000));
+                integratedData.setEndDate(new Date(integratedData.getStartDate().getTime() + 1500000));
                 integratedData.setInstrument((Instrument)mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()));
 
                 if(mBarometricPressureField.getText().toString().trim().length() == 0)
