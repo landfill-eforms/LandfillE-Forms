@@ -274,7 +274,8 @@ public class ProbeFormFragment extends Fragment {
 //                }
 //            });
         }
-
+        //<----------------------------------------------------------------------------
+        //Color changing for methane and h2o occur here need values to be clarified to make appropriate changes
         public void bindProbeData(ProbeData probeData) {
             mProbeData = probeData;
             mProbeNumberView.setText(mProbeData.getProbeNumber());

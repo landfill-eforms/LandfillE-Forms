@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LandfillE-Forms.iml" filepath="$PROJECT_DIR$/LandfillE-Forms.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/landfill-android-app.iml" filepath="$PROJECT_DIR$/landfill-android-app.iml" />
     </modules>
   </component>
 </project>
