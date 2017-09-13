@@ -336,11 +336,14 @@ public class IntegratedDataFragment extends Fragment {
                 //System.out.println(mInstantaneousData.getMethaneReading());
                 //case where ch4 is over 500, indicated as an IME
 
-                if (tempMethaneLevel == 0){
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//Commented out this if statement so it doesnt delete entry when clicking on methane section and
+// instead saves it if user clicks submit but if user clicks methane then backs out it still saves entry
+              /*  if (tempMethaneLevel == 0){
                     dialogDeleteIntegratedEntry(alertBuilder);
 
-                }
-                else if (tempMethaneLevel >= 25) {
+                }*/
+                if (tempMethaneLevel >= 25) {
                     //create a new ISE dialog
                     dialogIseDataEntry(alertBuilder);
                 }

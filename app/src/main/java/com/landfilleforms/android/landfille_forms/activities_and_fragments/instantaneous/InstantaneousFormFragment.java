@@ -42,7 +42,7 @@ import java.util.List;
 public class InstantaneousFormFragment extends Fragment {
     private static final String TAG = "InstantaneousFormFragm";
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
-    private static final Double DEFAULT_BAROMETRIC_PRESSURE = 30.0;
+    private static final Double DEFAULT_BAROMETRIC_PRESSURE = 30.02;
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
@@ -129,7 +129,7 @@ public class InstantaneousFormFragment extends Fragment {
             public void onClick(View view) {
                 for (int i = 0; i < mInstantaneousDatas.size(); i++) {
                     if (mBarometricPressureField.getText().toString().trim().length() == 0) {
-                        mBarometricPressureField.setText("30.0");
+                        mBarometricPressureField.setText("30.01");
                         mInstantaneousDatas.get(i).setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
                         Toast.makeText(getActivity(), R.string.blank_barometric_toast, Toast.LENGTH_SHORT).show();
                     } else
