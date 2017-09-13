@@ -173,7 +173,7 @@ public class InstantaneousFormFragment extends Fragment {
                 instantaneousData.setInspectorName(mUser.getFullName());
                 instantaneousData.setInspectorUserName(mUser.getUsername());
                 instantaneousData.setStartDate(currentDate);
-                instantaneousData.setEndDate(new Date(instantaneousData.getStartDate().getTime() + 1800000));
+                instantaneousData.setEndDate(new Date(instantaneousData.getStartDate().getTime() + 1500000));
 
                 if (mBarometricPressureField.getText().toString().trim().length() == 0)
                     instantaneousData.setBarometricPressure(DEFAULT_BAROMETRIC_PRESSURE);
