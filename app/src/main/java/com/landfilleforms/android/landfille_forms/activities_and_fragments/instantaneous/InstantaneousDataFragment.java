@@ -174,7 +174,8 @@ public class InstantaneousDataFragment extends Fragment {
         //attempting to save value with 2 sig figs by default
         mMethaneLevelField = (EditText)v.findViewById(R.id.methane_reading);
         if(mInstantaneousData.getMethaneReading() != 0)
-            mMethaneLevelField.setText(Double.toString(mInstantaneousData.getMethaneReading()));
+            //Update once the value has been clicked it will display as a 2 sig fig
+            mMethaneLevelField.setText(String.format("%.2f", mInstantaneousData.getMethaneReading()));
         mMethaneLevelField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
