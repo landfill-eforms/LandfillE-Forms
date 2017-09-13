@@ -175,7 +175,7 @@ public class IntegratedFormFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_integrated_form, menu);
     }
-    //changed timr from 30mins to 25mins
+    //changed timer from 30mins to 25mins
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -317,9 +317,9 @@ public class IntegratedFormFragment extends Fragment {
                 mBagNumberView.setTextColor(Color.rgb(255,165,0));
             }
             else {
-                mGridIdView.setTextColor(Color.WHITE);
-                mMethaneReadingView.setTextColor(Color.WHITE);
-                mBagNumberView.setTextColor(Color.WHITE);
+                mGridIdView.setTextColor(Color.GREEN);
+                mMethaneReadingView.setTextColor(Color.GREEN);
+                mBagNumberView.setTextColor(Color.GREEN);
             }
         }
 
