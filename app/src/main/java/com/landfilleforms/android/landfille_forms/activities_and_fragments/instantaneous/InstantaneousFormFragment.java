@@ -297,7 +297,8 @@ public class InstantaneousFormFragment extends Fragment {
         public void bindInstantaneousData(InstantaneousData instantaneousData) {
             mInstantaneousData = instantaneousData;
             mGridIdView.setText(mInstantaneousData.getGridId());
-            mMethaneReadingView.setText(Double.toString(mInstantaneousData.getMethaneReading()));
+            //this display value with 2 sig figs
+            mMethaneReadingView.setText(String.format("%.2f", mInstantaneousData.getMethaneReading()));
             mStartDateView.setText(DateFormat.format("yyyy-MM-dd", mInstantaneousData.getStartDate()));
             //Set colors depending on ch4 level in RecyclerView
             if (mInstantaneousData.getMethaneReading() >= 500) {
