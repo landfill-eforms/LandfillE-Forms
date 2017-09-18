@@ -293,7 +293,8 @@ public class IseFormFragment extends Fragment {
         public void bindIseData(IseData iseData) {
             mIseData = iseData;
             mGridIdView.setText(mIseData.getGridId());
-            mMethaneReadingView.setText(Double.toString(mIseData.getMethaneReading()));
+            //display 2 sig figs
+            mMethaneReadingView.setText(String.format("%.2f", mIseData.getMethaneReading()));
             mStartDateView.setText(DateFormat.format("yyyy-MM-dd",mIseData.getDate()));
             mGridIdView.setTextColor(Color.RED);
             mMethaneReadingView.setTextColor(Color.RED);

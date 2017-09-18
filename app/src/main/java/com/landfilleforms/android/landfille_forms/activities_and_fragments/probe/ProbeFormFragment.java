@@ -281,8 +281,11 @@ public class ProbeFormFragment extends Fragment {
         public void bindProbeData(ProbeData probeData) {
             mProbeData = probeData;
             mProbeNumberView.setText(mProbeData.getProbeNumber());
-            mWaterPressureView.setText(Double.toString(mProbeData.getWaterPressure()));
-            mMethanePercentageView.setText(Double.toString(mProbeData.getMethanePercentage()));
+
+            //2 sig figs for displayed data
+            mWaterPressureView.setText(String.format("%.2f", mProbeData.getWaterPressure()));
+            mMethanePercentageView.setText(String.format("%.2f", mProbeData.getMethanePercentage()));
+
 //            mDateView.setText(DateFormat.format("yyyy-MM-dd", mProbeData.getStartDate()));
             //Set colors depending on ch4 level in RecyclerView
             if (mProbeData.getMethanePercentage() >= 5.0) {

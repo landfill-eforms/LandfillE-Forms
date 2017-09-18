@@ -311,7 +311,9 @@ public class ImeFormFragment extends Fragment {
         public void bindImeData(ImeData imeData) {
             mImeData = imeData;
             mGridIdView.setText(mImeData.getGridId());
-            mMethaneReadingView.setText(Double.toString(mImeData.getMethaneReading()));
+            //display 2 sig figs
+            mMethaneReadingView.setText(String.format("%.2f", mImeData.getMethaneReading()));
+
             mStartDateView.setText(DateFormat.format("yyyy-MM-dd",mImeData.getDate()));
             mIMEno.setText(mImeData.getImeNumber());
             //mStartTimeView.setText(DateFormat.format("HH:mm:ss",mImeData.getStartDate()));
