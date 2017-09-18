@@ -43,7 +43,7 @@ public class ProbeFormFragment extends Fragment {
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
 
     //For ProbeFormFragment, InstananeousFormFragment and IntegratedFormFragment I changed all default values to 2 sig figs
-    private static final Double defaultBarometricPressure = 30.00;
+    private static final Double defaultBarometricPressure = 30.01;
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
@@ -119,7 +119,7 @@ public class ProbeFormFragment extends Fragment {
             public void onClick(View view) {
                 for(int i = 0; i < mProbeDatas.size(); i++) {
                     if (mBarometricPressureField.getText().toString().trim().length() == 0) {
-                        mBarometricPressureField.setText("30.00");
+                        mBarometricPressureField.setText("30.02");
                         mProbeDatas.get(i).setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
                     }
                     else

@@ -44,7 +44,7 @@ import java.util.List;
 public class IntegratedFormFragment extends Fragment {
     private static String TAG = "IntegratedFormFrag";
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
-    private static final Double defaultBarometricPressure = 30.00;
+    private static final Double defaultBarometricPressure = 30.01;
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
@@ -127,7 +127,7 @@ public class IntegratedFormFragment extends Fragment {
             public void onClick(View view) {
                 for(int i = 0; i < mIntegratedDatas.size(); i++) {
                     if (mBarometricPressureField.getText().toString().trim().length() == 0) {
-                        mBarometricPressureField.setText("30.00");
+                        mBarometricPressureField.setText("30.02");
                         mIntegratedDatas.get(i).setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
                         Toast.makeText(getActivity(), R.string.blank_barometric_toast, Toast.LENGTH_SHORT).show();
                     }
