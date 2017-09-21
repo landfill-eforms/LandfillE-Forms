@@ -167,7 +167,9 @@ public class ProbeDataFragment extends Fragment {
 
         mWaterPressureField = (EditText)v.findViewById(R.id.water_pressure_field);
         if(mProbeData.getWaterPressure() != 0)
-            mWaterPressureField.setText(Double.toString(mProbeData.getWaterPressure()));
+            //retrieve data in 2 sig figs
+            mWaterPressureField.setText(String.format("%.2f", mProbeData.getWaterPressure()));
+
         mWaterPressureField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -189,7 +191,9 @@ public class ProbeDataFragment extends Fragment {
 
         mMethanePercentageField = (EditText)v.findViewById(R.id.methane_percentage_field);
         if(mProbeData.getMethanePercentage() != 0)
-            mMethanePercentageField.setText(Double.toString(mProbeData.getMethanePercentage()));
+            //retrieve data in 2 sig figs
+            mMethanePercentageField.setText(String.format("%.2f", mProbeData.getMethanePercentage()));
+
         mMethanePercentageField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
