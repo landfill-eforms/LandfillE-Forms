@@ -1,7 +1,7 @@
 package com.landfilleforms.android.landfille_forms.activities_and_fragments.ise;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -305,5 +305,17 @@ public class IseDataFragment extends Fragment {
         deleteAlert.show();
     }
 
-
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public void halt(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("You are leaving fields blank!\n If you would like to save hit submit.")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("Active Data");
+        deleteAlert.show();
+    }
 }

@@ -1,6 +1,7 @@
 package com.landfilleforms.android.landfille_forms.activities_and_fragments.integrated;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +10,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.database.dao.IntegratedDao;
 import com.landfilleforms.android.landfille_forms.model.IntegratedData;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -68,10 +71,14 @@ public class IntegratedDataPagerActivity extends AppCompatActivity {
     //TODO: Implement so that it asks if you wanna discard changes when back is pressed. Issues: Data pager might mess up how data is saved.
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //this generates the dialog when user backs out
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        IntegratedDataFragment t = new IntegratedDataFragment();
+
+        t.halt(alertBuilder);
+        Toast.makeText(getBaseContext(), "Hello", Toast.LENGTH_LONG).show();
 
 
-        this.finish();
     }
+
 }

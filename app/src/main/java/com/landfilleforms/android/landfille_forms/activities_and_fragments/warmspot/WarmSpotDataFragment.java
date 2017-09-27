@@ -1,7 +1,7 @@
 package com.landfilleforms.android.landfille_forms.activities_and_fragments.warmspot;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -250,6 +250,7 @@ public class WarmSpotDataFragment extends Fragment {
             public void onClick(View view) {
                 if(mWarmSpotData.getMaxMethaneReading() < 200 || mWarmSpotData.getMaxMethaneReading() >=500) {
                     Toast.makeText(getActivity(), R.string.improper_methane_warmspot_toast, Toast.LENGTH_SHORT).show();
+
                 }
                 else {
                     getActivity().finish();
@@ -319,6 +320,20 @@ public class WarmSpotDataFragment extends Fragment {
         });
         AlertDialog deleteAlert = alertBuilder.create();
         deleteAlert.setTitle("Delete Warmspot Entry");
+        deleteAlert.show();
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public void halt(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("You are leaving fields blank!\n If you would like to save hit submit.")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("Active Data");
         deleteAlert.show();
     }
 

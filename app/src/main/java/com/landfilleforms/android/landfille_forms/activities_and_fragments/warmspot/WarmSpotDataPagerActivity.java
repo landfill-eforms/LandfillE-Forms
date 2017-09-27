@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
@@ -62,5 +64,17 @@ public class WarmSpotDataPagerActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //this generates the dialog when user backs out
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        WarmSpotDataFragment t = new WarmSpotDataFragment();
+
+        t.halt(alertBuilder);
+        Toast.makeText(getBaseContext(), "Hello", Toast.LENGTH_LONG).show();
+
+
     }
 }

@@ -303,6 +303,8 @@ public class IntegratedFormFragment extends Fragment {
         public void bindIntegratedData(IntegratedData integratedData) {
             mIntegratedData = integratedData;
             mGridIdView.setText(mIntegratedData.getGridId());
+
+            //convers to 2 sig figs updated comment
             mMethaneReadingView.setText(String.format("%.2f", mIntegratedData.getMethaneReading()));
             mBagNumberView.setText(Integer.toString(mIntegratedData.getBagNumber()));
             //Set colors depending on ch4 level in RecyclerView
