@@ -44,7 +44,7 @@ import java.util.List;
 public class IntegratedFormFragment extends Fragment {
     private static String TAG = "IntegratedFormFrag";
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
-    private static final Double defaultBarometricPressure = 30.0;
+    private static final Double defaultBarometricPressure = 30.01;
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
@@ -127,7 +127,7 @@ public class IntegratedFormFragment extends Fragment {
             public void onClick(View view) {
                 for(int i = 0; i < mIntegratedDatas.size(); i++) {
                     if (mBarometricPressureField.getText().toString().trim().length() == 0) {
-                        mBarometricPressureField.setText("30.0");
+                        mBarometricPressureField.setText("30.02");
                         mIntegratedDatas.get(i).setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
                         Toast.makeText(getActivity(), R.string.blank_barometric_toast, Toast.LENGTH_SHORT).show();
                     }
@@ -175,7 +175,7 @@ public class IntegratedFormFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_integrated_form, menu);
     }
-    //changed timr from 30mins to 25mins
+    //changed timer from 30mins to 25mins
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -303,7 +303,9 @@ public class IntegratedFormFragment extends Fragment {
         public void bindIntegratedData(IntegratedData integratedData) {
             mIntegratedData = integratedData;
             mGridIdView.setText(mIntegratedData.getGridId());
-            mMethaneReadingView.setText(Double.toString(mIntegratedData.getMethaneReading()));
+
+            //convers to 2 sig figs updated comment
+            mMethaneReadingView.setText(String.format("%.2f", mIntegratedData.getMethaneReading()));
             mBagNumberView.setText(Integer.toString(mIntegratedData.getBagNumber()));
             //Set colors depending on ch4 level in RecyclerView
             if (mIntegratedData.getMethaneReading() >= 25) {
@@ -317,9 +319,9 @@ public class IntegratedFormFragment extends Fragment {
                 mBagNumberView.setTextColor(Color.rgb(255,165,0));
             }
             else {
-                mGridIdView.setTextColor(Color.WHITE);
-                mMethaneReadingView.setTextColor(Color.WHITE);
-                mBagNumberView.setTextColor(Color.WHITE);
+                mGridIdView.setTextColor(Color.GREEN);
+                mMethaneReadingView.setTextColor(Color.GREEN);
+                mBagNumberView.setTextColor(Color.GREEN);
             }
         }
 

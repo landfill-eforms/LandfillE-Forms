@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.database.dao.ProbeDao;
@@ -64,14 +65,16 @@ public class ProbeDataPagerActivity extends AppCompatActivity {
             }
         }
     }
-
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //TODO: Implement so that it asks if you wanna discard changes when back is pressed. Issues: Data pager might mess up how data is saved.
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //this generates the dialog when user backs out
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        ProbeDataFragment t = new ProbeDataFragment();
 
+        t.halt(alertBuilder);
+        Toast.makeText(getBaseContext(), "Hello", Toast.LENGTH_LONG).show();
 
-        this.finish();
     }
 }

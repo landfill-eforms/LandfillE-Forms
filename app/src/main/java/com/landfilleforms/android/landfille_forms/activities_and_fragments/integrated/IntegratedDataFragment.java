@@ -336,11 +336,14 @@ public class IntegratedDataFragment extends Fragment {
                 //System.out.println(mInstantaneousData.getMethaneReading());
                 //case where ch4 is over 500, indicated as an IME
 
-                if (tempMethaneLevel == 0){
-                    dialogDeleteIntegratedEntry(alertBuilder);
-
-                }
-                else if (tempMethaneLevel >= 25) {
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//Commented out this if statement so it doesnt delete entry when clicking on methane section and
+// instead saves it if user clicks submit but if user clicks methane then backs out it still saves entry
+//                if (tempMethaneLevel == 0){
+//                    dialogDeleteIntegratedEntry(alertBuilder);
+//
+//                }
+                if (tempMethaneLevel >= 25) {
                     //create a new ISE dialog
                     dialogIseDataEntry(alertBuilder);
                 }
@@ -442,7 +445,7 @@ public class IntegratedDataFragment extends Fragment {
     }
 
 
-    private void dialogEmptyMethaneFieldIntegratedEntryCheck(AlertDialog.Builder alertBuilder) {
+    public void dialogEmptyMethaneFieldIntegratedEntryCheck(AlertDialog.Builder alertBuilder) {
         alertBuilder.setMessage("This entry has no methane level. Delete this entry?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -462,7 +465,7 @@ public class IntegratedDataFragment extends Fragment {
         deleteAlert.show();
     }
 
-    private void dialogDeleteIntegratedEntry(AlertDialog.Builder alertBuilder) {
+    public void dialogDeleteIntegratedEntry(AlertDialog.Builder alertBuilder) {
         alertBuilder.setMessage("Are you sure you want to delete this entry?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -479,6 +482,20 @@ public class IntegratedDataFragment extends Fragment {
         });
         AlertDialog deleteAlert = alertBuilder.create();
         deleteAlert.setTitle("Delete Integrated Entry");
+        deleteAlert.show();
+    }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public void halt(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("You are leaving fields blank!\n If you would like to save hit submit.")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("Active Data");
         deleteAlert.show();
     }
 

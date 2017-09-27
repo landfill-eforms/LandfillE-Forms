@@ -1,7 +1,7 @@
 package com.landfilleforms.android.landfille_forms.activities_and_fragments.probe;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -167,7 +167,9 @@ public class ProbeDataFragment extends Fragment {
 
         mWaterPressureField = (EditText)v.findViewById(R.id.water_pressure_field);
         if(mProbeData.getWaterPressure() != 0)
-            mWaterPressureField.setText(Double.toString(mProbeData.getWaterPressure()));
+            //retrieve data in 2 sig figs
+            mWaterPressureField.setText(String.format("%.2f", mProbeData.getWaterPressure()));
+
         mWaterPressureField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -189,7 +191,9 @@ public class ProbeDataFragment extends Fragment {
 
         mMethanePercentageField = (EditText)v.findViewById(R.id.methane_percentage_field);
         if(mProbeData.getMethanePercentage() != 0)
-            mMethanePercentageField.setText(Double.toString(mProbeData.getMethanePercentage()));
+            //retrieve data in 2 sig figs
+            mMethanePercentageField.setText(String.format("%.2f", mProbeData.getMethanePercentage()));
+
         mMethanePercentageField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -306,6 +310,8 @@ public class ProbeDataFragment extends Fragment {
         deleteAlert.show();
     }
 
+
+
     private void dialogWaterNotification(AlertDialog.Builder alertBuilder) {
         alertBuilder.setMessage("H2O pressure is above 1.0. Are you sure the reading is over 1.0?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -341,5 +347,17 @@ public class ProbeDataFragment extends Fragment {
         deleteAlert.setTitle("CH4 Readings");
         deleteAlert.show();
     }
-
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public void halt(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("You are leaving fields blank!\n If you would like to save hit submit.")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("Active Data");
+        deleteAlert.show();
+    }
 }
