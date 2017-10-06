@@ -1,6 +1,7 @@
 package com.landfilleforms.android.landfille_forms.activities_and_fragments.ime;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -137,6 +138,14 @@ public class ImeDataFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (mImeData.getMethaneReading() < 500) {
+                    mMethaneLevelField.setBackgroundColor(Color.RED);
+                    mSubmitButton.setEnabled(false);
+
+                } else {
+                    mMethaneLevelField.setBackgroundColor(Color.GREEN);
+                    mSubmitButton.setEnabled(true);
+                }
 
             }
         });
