@@ -120,8 +120,37 @@
                     android:textColor="@color/white"
 
                     />
+                <Button
+                    android:id="@+id/add"
+                    android:textColor="@color/white"
+                    android:background="@color/darkThemeButtonBackground"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"/>
 
             </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/gridList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:textSize="20dp"
+                    />
+                <Button
+                    android:id="@+id/remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:background="@color/darkThemeButtonBackground"
+                    android:text="Delete"
+                    />
+            </TableRow>
+
 
             <TableRow>
 
