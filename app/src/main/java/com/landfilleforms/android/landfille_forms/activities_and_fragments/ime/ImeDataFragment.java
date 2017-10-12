@@ -65,7 +65,6 @@ public class ImeDataFragment extends Fragment {
     private Button insert,delete;
     private TextView mGridList;
     private StringBuilder gridBuilder = new StringBuilder();
-    private String a;
     private String value;
 
 
