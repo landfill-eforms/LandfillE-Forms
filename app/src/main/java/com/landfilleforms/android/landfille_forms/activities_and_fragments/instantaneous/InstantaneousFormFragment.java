@@ -42,7 +42,7 @@ import java.util.List;
 public class InstantaneousFormFragment extends Fragment {
     private static final String TAG = "InstantaneousFormFragm";
     private static final String EXTRA_LANDFILL_LOCATION = "com.landfilleforms.android.landfille_forms.landfill_location";
-    private static final Double DEFAULT_BAROMETRIC_PRESSURE = 30.0;
+    private static final Double DEFAULT_BAROMETRIC_PRESSURE = 30.02;
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
@@ -129,7 +129,7 @@ public class InstantaneousFormFragment extends Fragment {
             public void onClick(View view) {
                 for (int i = 0; i < mInstantaneousDatas.size(); i++) {
                     if (mBarometricPressureField.getText().toString().trim().length() == 0) {
-                        mBarometricPressureField.setText("30.0");
+                        mBarometricPressureField.setText("30.01");
                         mInstantaneousDatas.get(i).setBarometricPressure(Double.parseDouble(mBarometricPressureField.getText().toString()));
                         Toast.makeText(getActivity(), R.string.blank_barometric_toast, Toast.LENGTH_SHORT).show();
                     } else
@@ -173,7 +173,7 @@ public class InstantaneousFormFragment extends Fragment {
                 instantaneousData.setInspectorName(mUser.getFullName());
                 instantaneousData.setInspectorUserName(mUser.getUsername());
                 instantaneousData.setStartDate(currentDate);
-                instantaneousData.setEndDate(new Date(instantaneousData.getStartDate().getTime() + 1800000));
+                instantaneousData.setEndDate(new Date(instantaneousData.getStartDate().getTime() + 1500000));
 
                 if (mBarometricPressureField.getText().toString().trim().length() == 0)
                     instantaneousData.setBarometricPressure(DEFAULT_BAROMETRIC_PRESSURE);
@@ -297,7 +297,8 @@ public class InstantaneousFormFragment extends Fragment {
         public void bindInstantaneousData(InstantaneousData instantaneousData) {
             mInstantaneousData = instantaneousData;
             mGridIdView.setText(mInstantaneousData.getGridId());
-            mMethaneReadingView.setText(Double.toString(mInstantaneousData.getMethaneReading()));
+            //this display value with 2 sig figs
+            mMethaneReadingView.setText(String.format("%.2f", mInstantaneousData.getMethaneReading()));
             mStartDateView.setText(DateFormat.format("yyyy-MM-dd", mInstantaneousData.getStartDate()));
             //Set colors depending on ch4 level in RecyclerView
             if (mInstantaneousData.getMethaneReading() >= 500) {

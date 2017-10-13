@@ -1,7 +1,9 @@
 package com.landfilleforms.android.landfille_forms.activities_and_fragments.warmspot;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -107,10 +109,15 @@ public class WarmSpotDataFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_warm_spot_data, container, false);
         mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mWarmSpotData.getLocation());
+
+
+        //sample setting up for early button use
+        mSubmitButton = (Button)v.findViewById(R.id.submit);
 
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mWarmSpotData.getInspectorFullName());
@@ -129,9 +136,17 @@ public class WarmSpotDataFragment extends Fragment {
                 else mWarmSpotData.setMaxMethaneReading(Double.parseDouble(s.toString()));
             }
 
+            //gives a red background for validation when its wrong and green if its good to go
             @Override
             public void afterTextChanged(Editable s) {
+                if (mWarmSpotData.getMaxMethaneReading() < 200 || mWarmSpotData.getMaxMethaneReading() > 500) {
+                    mMethaneLevelField.setBackgroundColor(Color.RED);
+                    mSubmitButton.setEnabled(false);
 
+                } else {
+                    mMethaneLevelField.setBackgroundColor(Color.GREEN);
+                    mSubmitButton.setEnabled(true);
+                }
             }
         });
 
@@ -244,12 +259,12 @@ public class WarmSpotDataFragment extends Fragment {
         });
 
 
-        mSubmitButton = (Button)v.findViewById(R.id.submit);
         mSubmitButton.setText(R.string.submit_button_label);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if(mWarmSpotData.getMaxMethaneReading() < 200 || mWarmSpotData.getMaxMethaneReading() >=500) {
                     Toast.makeText(getActivity(), R.string.improper_methane_warmspot_toast, Toast.LENGTH_SHORT).show();
+
                 }
                 else {
                     getActivity().finish();
@@ -324,6 +339,20 @@ public class WarmSpotDataFragment extends Fragment {
         });
         AlertDialog deleteAlert = alertBuilder.create();
         deleteAlert.setTitle("Delete Warmspot Entry");
+        deleteAlert.show();
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public void halt(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("You are leaving fields blank!\n If you would like to save hit submit.")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("Active Data");
         deleteAlert.show();
     }
 

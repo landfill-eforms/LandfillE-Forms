@@ -99,6 +99,45 @@
             </TableRow>
 
             <TableRow>
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:background="@color/backgroundTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Instrument: "
+                    android:textColor="@color/white"
+                    android:layout_margin="3dp"
+                    android:textAllCaps="false"
+                    android:textStyle="normal|bold"
+                    android:textSize="20dp"
+                    />
+                <!--TODO: Maybe make this a spinner so they can switch it to an existing IME? Or create a new one. In any case, the user shouldn't be an EditText.-->
+                <Spinner
+                    android:id="@+id/ins_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+
+                    />
+                <!--<TextView-->
+                <!--android:id="@+id/instrumentTextViewTest"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:layout_margin="3dp"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textStyle="normal"-->
+                <!--android:textSize="20dp"-->
+                <!--/>-->
+
+            </TableRow>
+
+
+
+
+            <TableRow>
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
                     android:background="@color/backgroundTheme"
@@ -120,8 +159,37 @@
                     android:textColor="@color/white"
 
                     />
+                <Button
+                    android:id="@+id/add"
+                    android:textColor="@color/white"
+                    android:background="@color/darkThemeButtonBackground"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"/>
 
             </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/gridList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:textSize="20dp"
+                    />
+                <Button
+                    android:id="@+id/remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:background="@color/darkThemeButtonBackground"
+                    android:text="Delete"
+                    />
+            </TableRow>
+
 
             <TableRow>
 
