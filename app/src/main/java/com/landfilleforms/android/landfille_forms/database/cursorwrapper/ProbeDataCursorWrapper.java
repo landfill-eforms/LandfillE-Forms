@@ -26,6 +26,7 @@ public class ProbeDataCursorWrapper extends CursorWrapper {
     public ProbeData getProbeData() {
         String uuidString = getString(getColumnIndex(ProbeDataTable.Cols.UUID));
         String location = getString(getColumnIndex(ProbeDataTable.Cols.LOCATION));
+        String instrument = getString(getColumnIndex(ProbeDataTable.Cols.INSTRUMENT));
         long date = getLong(getColumnIndex(ProbeDataTable.Cols.DATE));
         String inspectorName = getString(getColumnIndex(ProbeDataTable.Cols.INSPECTOR_NAME));
         String inspectorUserName = getString(getColumnIndex(ProbeDataTable.Cols.INSPECTOR_USERNAME));
@@ -37,6 +38,7 @@ public class ProbeDataCursorWrapper extends CursorWrapper {
 
         ProbeData probeData = new ProbeData(UUID.fromString(uuidString));
         probeData.setLocation(location);
+        probeData.setInstrument(instrument);
         probeData.setDate(new Date(date));
         probeData.setInspectorName(inspectorName);
         probeData.setInspectorUserName(inspectorUserName);

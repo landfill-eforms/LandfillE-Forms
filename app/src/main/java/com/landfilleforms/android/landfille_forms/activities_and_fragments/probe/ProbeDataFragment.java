@@ -140,14 +140,34 @@ public class ProbeDataFragment extends Fragment {
         //set the spinner to the arrayadapter
         mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
 
+
+
         //trying to save position but not working
         selectedPosition = mInstrumentSpinner.getSelectedItemPosition();
+
+        // Find and set the position of the currently selected instrument.
+        int position = 0;
+        int index = 0;
+        for (Instrument instrument : this.mInstrumentList) {
+            if (String.valueOf(instrument.getId()).equals(mProbeData.getInstrument())) {
+                position = index;
+                break;
+            }
+            index++;
+        }
+        mInstrumentSpinner.setSelection(position);
 
         mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                selectedPosition = position;
+                selectedPosition = position;
                 mInstrumentSpinner.setSelection(selectedPosition);
+
+                // Save instrument as the instrument's ID.
+                Object o = parent.getItemAtPosition(position);
+                if (o instanceof Instrument) {
+                    mProbeData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

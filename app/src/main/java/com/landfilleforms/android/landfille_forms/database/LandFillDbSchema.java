@@ -99,6 +99,7 @@ public class LandFillDbSchema {
         public static class Cols {
             public static final String UUID = "uuid";
             public static final String LOCATION = "location";
+            public static final String INSTRUMENT = "instrument";
             public static final String DATE = "date";
             public static final String INSPECTOR_NAME = "inspector_name";
             public static final String INSPECTOR_USERNAME = "inspector_username";
