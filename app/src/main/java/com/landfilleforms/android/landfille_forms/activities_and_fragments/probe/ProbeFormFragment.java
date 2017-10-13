@@ -288,7 +288,47 @@ public class ProbeFormFragment extends Fragment {
 
 //            mDateView.setText(DateFormat.format("yyyy-MM-dd", mProbeData.getStartDate()));
             //Set colors depending on ch4 level in RecyclerView
+            //BELOW IS THE OG
+//            if (mProbeData.getMethanePercentage() >= 5.0) {
+//                mProbeNumberView.setTextColor(Color.RED);
+//                mWaterPressureView.setTextColor(Color.RED);
+//                mMethanePercentageView.setTextColor(Color.RED);
+//            }
+//            else if (mProbeData.getMethanePercentage() >= 0.1 && mProbeData.getMethanePercentage() < 4.9) {
+//                mProbeNumberView.setTextColor(Color.rgb(255,165,0));
+//                mWaterPressureView.setTextColor(Color.rgb(255,165,0));
+//                mMethanePercentageView.setTextColor(Color.rgb(255,165,0));
+//            }
+//            else {
+//                mProbeNumberView.setTextColor(Color.WHITE);
+//                mWaterPressureView.setTextColor(Color.WHITE);
+//                mMethanePercentageView.setTextColor(Color.WHITE);
+//            }
+            //END OF OG
+            // START OF NEW
             if (mProbeData.getMethanePercentage() >= 5.0) {
+//<<<<<<< HEAD
+                mMethanePercentageView.setTextColor(Color.RED);
+            }
+            else if (mProbeData.getMethanePercentage() >= 0.1 && mProbeData.getMethanePercentage() < 4.9) {
+                mMethanePercentageView.setTextColor(Color.rgb(255,165,0));
+            }
+            else {
+                mMethanePercentageView.setTextColor(Color.WHITE);
+            }
+
+            if (mProbeData.getWaterPressure() >= 1.0) {
+                mWaterPressureView.setTextColor(Color.RED);
+            }
+            else if (mProbeData.getWaterPressure() >= 0.2 && mProbeData.getWaterPressure() < 0.9) {
+                mWaterPressureView.setTextColor(Color.rgb(255,165,0));
+            }
+            else {
+                mWaterPressureView.setTextColor(Color.WHITE);
+            }
+            //END OF NEW
+
+//=======
                 //mProbeNumberView.setTextColor(Color.RED);
                 //mWaterPressureView.setTextColor(Color.RED);
                 mMethanePercentageView.setTextColor(Color.RED);
@@ -311,6 +351,7 @@ public class ProbeFormFragment extends Fragment {
             }
             else
                 mWaterPressureView.setTextColor(Color.WHITE);
+>>>>>>> 083e3b555c682a1b2f033eb58d6af9d6640772c3
         }
 
         @Override
