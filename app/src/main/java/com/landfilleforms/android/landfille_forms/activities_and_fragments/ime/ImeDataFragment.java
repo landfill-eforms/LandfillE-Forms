@@ -99,7 +99,8 @@ public class ImeDataFragment extends Fragment {
         UUID imeDataId = (UUID) getArguments().getSerializable(ARG_IME_DATA_ID);
         mImeData = ImeDao.get(getActivity()).getImeData(imeDataId);
 
-        if(mImeData.getGridId() == null)
+        // We need a better way to determine if the reading is new.
+        if(mImeData.getGridId() == null && mImeData.getMethaneReading() == 0)
             newlyCreatedData = true;
         else
             newlyCreatedData = false;
@@ -354,7 +355,11 @@ public class ImeDataFragment extends Fragment {
             public void onClick(View view) {
                 if(mImeData.getMethaneReading() < 500){
                     Toast.makeText(getActivity(), R.string.improper_methane_ime_toast, Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if (mImeData.getGridId() == null || mImeData.getGridId().isEmpty()) {
+                    Toast.makeText(getActivity(), R.string.ime_undefined_grids_toast, Toast.LENGTH_SHORT).show();
+                }
+                else {
                     getActivity().finish();
                     Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
 
