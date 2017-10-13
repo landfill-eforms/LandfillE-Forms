@@ -197,7 +197,21 @@ public class WarmSpotDataFragment extends Fragment {
         //handles adding and remove grids from builder
         insert = (Button) v.findViewById(R.id.add);
         delete = (Button) v.findViewById(R.id.remove);
+
         mGridList = (TextView) v.findViewById(R.id.gridList);
+
+        insert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addGrid();
+            }
+        } );
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeGrid();
+            }
+        });
 
         mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
@@ -361,6 +375,29 @@ public class WarmSpotDataFragment extends Fragment {
         AlertDialog deleteAlert = alertBuilder.create();
         deleteAlert.setTitle("Active Data");
         deleteAlert.show();
+    }
+
+    private void addGrid(){
+        mGridList.setText((gridBuilder.append(String.valueOf(mGridIdSpinner.getSelectedItem()) + " ")).toString());
+        mWarmSpotData.setGridId(gridBuilder.toString());
+    }
+
+    private void removeGrid(){
+        String grid = String.valueOf(mGridIdSpinner.getSelectedItem());
+        int index = gridBuilder.indexOf(grid);
+        if(gridBuilder.length() > 0 && index > -1)  {
+            gridBuilder.replace(index, index + grid.length(), "");
+//            remove white space after deleting grid
+            int temp = gridBuilder.indexOf("  ");
+
+            while(temp > -1) {
+                gridBuilder.replace(index, index + 1, "");
+                temp = gridBuilder.indexOf("  ");
+            }
+
+            mGridList.setText(gridBuilder.toString());
+            mWarmSpotData.setGridId(gridBuilder.toString());
+        }
     }
 
 }
