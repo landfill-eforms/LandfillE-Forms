@@ -247,6 +247,7 @@ public class ImeDao {
         ContentValues values = new ContentValues();
         values.put(ImeDataTable.Cols.UUID, imeData.getId().toString());
         values.put(ImeDataTable.Cols.IME_NUMBER, imeData.getImeNumber());
+        values.put(ImeDataTable.Cols.INSTRUMENT, imeData.getInstrument());
         values.put(ImeDataTable.Cols.LOCATION, imeData.getLocation());
         values.put(ImeDataTable.Cols.GRID_ID, imeData.getGridId());
         values.put(ImeDataTable.Cols.DATE, imeData.getDate().getTime());
