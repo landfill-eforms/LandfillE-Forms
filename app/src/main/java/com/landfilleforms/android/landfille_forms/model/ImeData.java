@@ -12,6 +12,7 @@ public class ImeData {
     private String mImeNumber;
     private String mLocation;
     private String mGridId;
+    private String mInstrument;
     private Date mDate;
     private String mDescription;
     private transient String mInspectorFullName;
@@ -53,6 +54,14 @@ public class ImeData {
 
     public void setGridId(String gridId) {
         mGridId = gridId;
+    }
+
+    public String getInstrument() {
+        return mInstrument;
+    }
+
+    public void setInstrument(String mInstrument) {
+        this.mInstrument = mInstrument;
     }
 
     public Date getDate() {

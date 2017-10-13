@@ -152,6 +152,7 @@ public class ProbeDao {
         ContentValues values = new ContentValues();
         values.put(ProbeDataTable.Cols.UUID, probeData.getId().toString());
         values.put(ProbeDataTable.Cols.LOCATION, probeData.getLocation());
+        values.put(ProbeDataTable.Cols.INSTRUMENT, probeData.getInstrument());
         values.put(ProbeDataTable.Cols.DATE, probeData.getDate().getTime());
         values.put(ProbeDataTable.Cols.INSPECTOR_NAME, probeData.getInspectorName());
         values.put(ProbeDataTable.Cols.INSPECTOR_USERNAME, probeData.getInspectorUserName());

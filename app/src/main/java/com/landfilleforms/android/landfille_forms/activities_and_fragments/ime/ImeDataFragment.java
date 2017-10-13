@@ -33,9 +33,12 @@ import com.landfilleforms.android.landfille_forms.activities_and_fragments.DateP
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.activities_and_fragments.TimePickerFragment;
 import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import static com.landfilleforms.android.landfille_forms.R.id.gridList;
@@ -50,6 +53,8 @@ public class ImeDataFragment extends Fragment {
     private static final String DIALOG_TIME = "DialogTime";
     private static final int REQUEST_START_TIME = 1;
 
+    private static int selectedPosition = 0;
+
     private ImeData mImeData;
     private boolean newlyCreatedData;
 
@@ -61,12 +66,16 @@ public class ImeDataFragment extends Fragment {
     private EditText mMethaneLevelField;
     private Button mDateButton;
     private Button mStartTimeButton;
+    private TextView mInstrumentLabel;
+
     private Button mSubmitButton;
     private Button insert,delete;
     private TextView mGridList;
     private StringBuilder gridBuilder = new StringBuilder();
     private String value;
 
+    private Spinner mInstrumentSpinner; //Instrument spinner
+    private List<Instrument> mInstrumentList; //Instrument List
 
 
 
@@ -82,10 +91,16 @@ public class ImeDataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Getting Instrument List
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+
+
         UUID imeDataId = (UUID) getArguments().getSerializable(ARG_IME_DATA_ID);
         mImeData = ImeDao.get(getActivity()).getImeData(imeDataId);
 
-        if(mImeData.getGridId() == null)
+        // We need a better way to determine if the reading is new.
+        if(mImeData.getGridId() == null && mImeData.getMethaneReading() == 0)
             newlyCreatedData = true;
         else
             newlyCreatedData = false;
@@ -125,6 +140,62 @@ public class ImeDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_ime_data, container, false);
+
+        //Instrument
+        mInstrumentSpinner = (Spinner)v.findViewById(R.id.ins_spinner); //Set Instrument spinner to its ID
+
+        //Make arrayadapter of instruments to add items from the list to the spinner
+        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<Instrument>(this.getActivity(), android.R.layout.simple_spinner_item, mInstrumentList);
+        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        //set the spinner to the arrayadapter
+        mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
+
+        //trying to save position but not working
+        selectedPosition = mInstrumentSpinner.getSelectedItemPosition();
+
+        // Find and set the position of the currently selected instrument.
+        int position = 0;
+        int index = 0;
+        for (Instrument instrument : this.mInstrumentList) {
+            if (String.valueOf(instrument.getId()).equals(mImeData.getInstrument())) {
+                position = index;
+                break;
+            }
+            index++;
+        }
+        mInstrumentSpinner.setSelection(position);
+/*
+        if(mImeData.getInstrument() != null) {
+            mInstrumentSpinner.setSelection(Integer.parseInt(mImeData.getInstrument()));
+
+        }
+        mInstrumentSpinner.setSelection(Integer.parseInt(mImeData.getInstrument()));
+*/
+
+//       mInstrumentSpinner.setSelection(Integer.parseInt(mImeData.getInstrument()));
+
+        Toast.makeText(getActivity(), selectedPosition + " ", Toast.LENGTH_SHORT).show();
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedPosition = position;
+                mInstrumentSpinner.setSelection(selectedPosition);
+
+                // Save instrument as the instrument's ID.
+                Object o = parent.getItemAtPosition(position);
+                if (o instanceof Instrument) {
+                    mImeData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
 
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
@@ -230,6 +301,8 @@ public class ImeDataFragment extends Fragment {
         mImeField = (TextView)v.findViewById(R.id.ime_field);
         mImeField.setText(mImeData.getImeNumber());
 
+
+
         mDescriptionField = (EditText)v.findViewById(R.id.description);
         mDescriptionField.setText(mImeData.getDescription());
         mDescriptionField.addTextChangedListener(new TextWatcher() {
@@ -282,7 +355,11 @@ public class ImeDataFragment extends Fragment {
             public void onClick(View view) {
                 if(mImeData.getMethaneReading() < 500){
                     Toast.makeText(getActivity(), R.string.improper_methane_ime_toast, Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if (mImeData.getGridId() == null || mImeData.getGridId().isEmpty()) {
+                    Toast.makeText(getActivity(), R.string.ime_undefined_grids_toast, Toast.LENGTH_SHORT).show();
+                }
+                else {
                     getActivity().finish();
                     Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
 

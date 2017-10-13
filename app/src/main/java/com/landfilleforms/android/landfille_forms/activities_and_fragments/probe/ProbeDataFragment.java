@@ -49,6 +49,8 @@ public class ProbeDataFragment extends Fragment {
 
     private List<Instrument> mInstruments;
 
+    private static int selectedPosition = 0;
+
     private ProbeData mProbeData;
     private boolean newlyCreatedData;
 
@@ -62,6 +64,12 @@ public class ProbeDataFragment extends Fragment {
     private EditText mMethanePercentageField;
     private Button mSubmitButton;
 
+
+
+    private Spinner mInstrumentSpinner; //Instrument spinner
+    private List<Instrument> mInstrumentList; //Instrument List
+
+
     public static ProbeDataFragment newInstance(UUID probeDataId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_PROBE_DATA_ID, probeDataId);
@@ -73,6 +81,10 @@ public class ProbeDataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Getting Instrument List
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+
         UUID probeDataId = (UUID) getArguments().getSerializable(ARG_PROBE_DATA_ID);
         mProbeData = ProbeDao.get(getActivity()).getProbeData(probeDataId);
 
@@ -111,10 +123,57 @@ public class ProbeDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_probe_data, container, false);
-        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForProbe(mProbeData.getLocation());
+
+
+        /*   mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForProbe(mProbeData.getLocation());
         for(Instrument i:mInstruments) {
             Log.d("ProbeDataFrag","Instrument.id=" + Integer.toString(i.getId()));
         }
+*/
+        //Instrument
+        mInstrumentSpinner = (Spinner)v.findViewById(R.id.probe_ins_spinner); //Set Instrument spinner to its ID
+
+        //Make arrayadapter of instruments to add items from the list to the spinner
+        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<Instrument>(this.getActivity(), android.R.layout.simple_spinner_item, mInstrumentList);
+        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        //set the spinner to the arrayadapter
+        mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
+
+
+
+        //trying to save position but not working
+        selectedPosition = mInstrumentSpinner.getSelectedItemPosition();
+
+        // Find and set the position of the currently selected instrument.
+        int position = 0;
+        int index = 0;
+        for (Instrument instrument : this.mInstrumentList) {
+            if (String.valueOf(instrument.getId()).equals(mProbeData.getInstrument())) {
+                position = index;
+                break;
+            }
+            index++;
+        }
+        mInstrumentSpinner.setSelection(position);
+
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedPosition = position;
+                mInstrumentSpinner.setSelection(selectedPosition);
+
+                // Save instrument as the instrument's ID.
+                Object o = parent.getItemAtPosition(position);
+                if (o instanceof Instrument) {
+                    mProbeData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mProbeData.getInspectorName());
