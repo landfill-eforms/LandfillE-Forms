@@ -60,7 +60,9 @@ public class WarmSpotDataFragment extends Fragment {
     private Button mDateButton;
     private Button mSubmitButton;
 
-
+    private Button insert,delete;
+    private TextView mGridList;
+    private StringBuilder gridBuilder = new StringBuilder();
 
     public static WarmSpotDataFragment newInstance(UUID warmspotDataId) {
         Bundle args = new Bundle();
@@ -191,6 +193,11 @@ public class WarmSpotDataFragment extends Fragment {
 
             }
         });
+
+        //handles adding and remove grids from builder
+        insert = (Button) v.findViewById(R.id.add);
+        delete = (Button) v.findViewById(R.id.remove);
+        mGridList = (TextView) v.findViewById(R.id.gridList);
 
         mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);

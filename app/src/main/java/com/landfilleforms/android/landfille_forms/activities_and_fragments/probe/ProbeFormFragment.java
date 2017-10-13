@@ -307,7 +307,7 @@ public class ProbeFormFragment extends Fragment {
             //END OF OG
             // START OF NEW
             if (mProbeData.getMethanePercentage() >= 5.0) {
-<<<<<<< HEAD
+//<<<<<<< HEAD
                 mMethanePercentageView.setTextColor(Color.RED);
             }
             else if (mProbeData.getMethanePercentage() >= 0.1 && mProbeData.getMethanePercentage() < 4.9) {
@@ -328,7 +328,7 @@ public class ProbeFormFragment extends Fragment {
             }
             //END OF NEW
 
-=======
+//=======
                 //mProbeNumberView.setTextColor(Color.RED);
                 //mWaterPressureView.setTextColor(Color.RED);
                 mMethanePercentageView.setTextColor(Color.RED);
