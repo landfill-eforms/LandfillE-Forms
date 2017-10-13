@@ -751,9 +751,9 @@ public class LoginFragment extends Fragment {
                             "  } ]\n" +
                             "}";
 
-                    ImportedData importedData = gson.fromJson(fakeJsonForEmulator, ImportedData.class);
+//                    ImportedData importedData = gson.fromJson(fakeJsonForEmulator, ImportedData.class);
 
-//                    ImportedData importedData = gson.fromJson(new FileReader(Environment.getExternalStorageDirectory() + File.separator + path + File.separator + fileName),ImportedData.class);
+                    ImportedData importedData = gson.fromJson(new FileReader(Environment.getExternalStorageDirectory() + File.separator + path + File.separator + fileName),ImportedData.class);
                     //Log.d("ImportFrag:",importedData.getUsers().get(0).getUsername());
 
                     mDatabase = new LandFillBaseHelper(getActivity()).getWritableDatabase();
