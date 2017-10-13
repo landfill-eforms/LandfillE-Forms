@@ -124,6 +124,10 @@ public class WarmSpotDataFragment extends Fragment {
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mWarmSpotData.getInspectorFullName());
 
+        insert = (Button) v.findViewById(R.id.add);
+        delete = (Button) v.findViewById(R.id.remove);
+        mGridList = (TextView) v.findViewById(R.id.gridList);
+
         mMethaneLevelField = (EditText)v.findViewById(R.id.methane_reading);
         mMethaneLevelField.setText(Double.toString(mWarmSpotData.getMaxMethaneReading()));
         mMethaneLevelField.addTextChangedListener(new TextWatcher() {
@@ -193,12 +197,6 @@ public class WarmSpotDataFragment extends Fragment {
 
             }
         });
-
-        //handles adding and remove grids from builder
-        insert = (Button) v.findViewById(R.id.add);
-        delete = (Button) v.findViewById(R.id.remove);
-
-        mGridList = (TextView) v.findViewById(R.id.gridList);
 
         insert.setOnClickListener(new View.OnClickListener() {
             @Override

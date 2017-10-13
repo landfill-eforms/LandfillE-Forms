@@ -195,8 +195,6 @@ public class ImeDataFragment extends Fragment {
         });
 
 
-
-
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mImeData.getInspectorFullName());
 
