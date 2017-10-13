@@ -1,6 +1,7 @@
 package com.landfilleforms.android.landfille_forms.activities_and_fragments.ime;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +38,9 @@ import com.landfilleforms.android.landfille_forms.model.ImeData;
 import java.util.Date;
 import java.util.UUID;
 
+import static com.landfilleforms.android.landfille_forms.R.id.gridList;
+import static com.landfilleforms.android.landfille_forms.R.id.remove;
+
 //Done
 public class ImeDataFragment extends Fragment {
     private static final String TAG = "ImeDataFrag:";
@@ -58,6 +62,11 @@ public class ImeDataFragment extends Fragment {
     private Button mDateButton;
     private Button mStartTimeButton;
     private Button mSubmitButton;
+    private Button insert,delete;
+    private TextView mGridList;
+    private StringBuilder gridBuilder = new StringBuilder();
+    private String value;
+
 
 
 
@@ -121,6 +130,11 @@ public class ImeDataFragment extends Fragment {
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorLabel.setText(mImeData.getInspectorFullName());
 
+        //handles adding and remove grids from builder
+        insert = (Button) v.findViewById(R.id.add);
+        delete = (Button) v.findViewById(remove);
+        mGridList = (TextView) v.findViewById(gridList);
+
         mMethaneLevelField = (EditText)v.findViewById(R.id.methane_reading);
         mMethaneLevelField.setText(Double.toString(mImeData.getMethaneReading()));
         mMethaneLevelField.addTextChangedListener(new TextWatcher() {
@@ -137,6 +151,14 @@ public class ImeDataFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (mImeData.getMethaneReading() < 500) {
+                    mMethaneLevelField.setBackgroundColor(Color.RED);
+                    mSubmitButton.setEnabled(false);
+
+                } else {
+                    mMethaneLevelField.setBackgroundColor(Color.GREEN);
+                    mSubmitButton.setEnabled(true);
+                }
 
             }
         });
@@ -171,7 +193,7 @@ public class ImeDataFragment extends Fragment {
         mGridIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mImeData.setGridId(parent.getItemAtPosition(position).toString());
+                value = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -180,6 +202,30 @@ public class ImeDataFragment extends Fragment {
             }
         });
 
+        insert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addGrid();
+            }
+        } );
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeGrid();
+            }
+        });
+
+        mGridList.setText(mImeData.getGridId());
+
+        if (mImeData.getGridId() != null) {
+            gridBuilder = new StringBuilder(mImeData.getGridId());
+
+        }
+//        mImeData.setGridId(gridBuilder.toString());
+
+        //mGridList.setText((gridBuilder.append(String.valueOf(mGridIdSpinner.getSelectedItem()) + " ")).toString());
+        //mGridList.setText(mImeData.setGridId(gridBuilder.toString()));
+//        mImeData.setGridId(gridBuilder.toString());
 
         mImeField = (TextView)v.findViewById(R.id.ime_field);
         mImeField.setText(mImeData.getImeNumber());
@@ -239,6 +285,7 @@ public class ImeDataFragment extends Fragment {
                 } else {
                     getActivity().finish();
                     Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -331,5 +378,30 @@ public class ImeDataFragment extends Fragment {
         deleteAlert.setTitle("Active Data");
         deleteAlert.show();
     }
+
+    private void addGrid(){
+        mGridList.setText((gridBuilder.append(String.valueOf(mGridIdSpinner.getSelectedItem()) + " ")).toString());
+        mImeData.setGridId(gridBuilder.toString());
+    }
+
+    private void removeGrid(){
+        String grid = String.valueOf(mGridIdSpinner.getSelectedItem());
+        int index = gridBuilder.indexOf(grid);
+        if(gridBuilder.length() > 0 && index > -1)  {
+            gridBuilder.replace(index, index + grid.length(), "");
+//            remove white space after deleting grid
+            int temp = gridBuilder.indexOf("  ");
+
+            while(temp > -1) {
+                gridBuilder.replace(index, index + 1, "");
+                temp = gridBuilder.indexOf("  ");
+            }
+
+            mGridList.setText(gridBuilder.toString());
+            mImeData.setGridId(gridBuilder.toString());
+        }
+    }
+
+
 
 }

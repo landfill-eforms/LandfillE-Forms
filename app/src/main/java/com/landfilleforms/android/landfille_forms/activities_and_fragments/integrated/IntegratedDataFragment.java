@@ -220,7 +220,10 @@ public class IntegratedDataFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s=="" || count == 0|| s.toString().equals(".")) mIntegratedData.setMethaneReading(0);
+                if (s=="" || count == 0|| s.toString().equals("."))
+                    //Set 0 or blank to a null to display later
+                    mIntegratedData.setMethaneReading(0);
+
                 else mIntegratedData.setMethaneReading(Double.parseDouble(s.toString()));
             }
 
