@@ -211,6 +211,8 @@ public class WarmSpotDataFragment extends Fragment {
             }
         });
 
+        mGridList.setText(mWarmSpotData.getGridId());
+
         mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
         mInstrumentSpinner.setAdapter(instrumentAdapter);
