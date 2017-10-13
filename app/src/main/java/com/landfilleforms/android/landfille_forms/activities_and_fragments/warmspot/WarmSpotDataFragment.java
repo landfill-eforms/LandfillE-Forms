@@ -268,8 +268,13 @@ public class WarmSpotDataFragment extends Fragment {
                 Log.i(TAG, "keyCode: " + keyCode);
                 if( keyCode == KeyEvent.KEYCODE_BACK ) {
                     if(newlyCreatedData) {
-                        WarmSpotDao.get(getActivity()).removeWarmSpotData(mWarmSpotData);
-                        Toast.makeText(getActivity(), R.string.new_warmspot_cancelation_toast, Toast.LENGTH_SHORT).show();
+                        //NEW
+                        //ADDING THIS THIS TO WARN A DELETE
+                        AlertDialog.Builder alertBuilder =  new AlertDialog.Builder(getActivity());
+                        dialogDeleteWarmspotEntry(alertBuilder);
+//                        Instead of this
+//                        WarmSpotDao.get(getActivity()).removeWarmSpotData(mWarmSpotData);
+//                        Toast.makeText(getActivity(), R.string.new_warmspot_cancelation_toast, Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Toast.makeText(getActivity(), R.string.unsaved_changes_discarded_toast, Toast.LENGTH_SHORT).show();
