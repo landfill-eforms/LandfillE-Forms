@@ -152,6 +152,18 @@ public class ImeDataFragment extends Fragment {
 
         //trying to save position but not working
         selectedPosition = mInstrumentSpinner.getSelectedItemPosition();
+
+        // Find and set the position of the currently selected instrument.
+        int position = 0;
+        int index = 0;
+        for (Instrument instrument : this.mInstrumentList) {
+            if (String.valueOf(instrument.getId()).equals(mImeData.getInstrument())) {
+                position = index;
+                break;
+            }
+            index++;
+        }
+        mInstrumentSpinner.setSelection(position);
 /*
         if(mImeData.getInstrument() != null) {
             mInstrumentSpinner.setSelection(Integer.parseInt(mImeData.getInstrument()));
@@ -168,8 +180,13 @@ public class ImeDataFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedPosition = position;
                 mInstrumentSpinner.setSelection(selectedPosition);
-                mImeData.setInstrument(parent.getItemAtPosition(position).toString());
-//                mImeData.setInstrument(String.valueOf(selectedPosition));
+
+                // Save instrument as the instrument's ID.
+                Object o = parent.getItemAtPosition(position);
+                if (o instanceof Instrument) {
+                    mImeData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                }
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
