@@ -10,6 +10,7 @@ import java.util.UUID;
 public class ProbeData {
     private UUID mId;
     private String mLocation;
+    private String mInstrument;
     private Date mDate;
     private String mInspectorName;
     private String mInspectorUserName;
@@ -18,6 +19,7 @@ public class ProbeData {
     private double mWaterPressure;
     private double mMethanePercentage;
     private String mRemarks;
+
 
     public ProbeData() { this(UUID.randomUUID()); }
 
@@ -100,5 +102,13 @@ public class ProbeData {
 
     public void setRemarks(String remarks) {
         mRemarks = remarks;
+    }
+
+    public String getInstrument() {
+        return mInstrument;
+    }
+
+    public void setInstrument(String mInstrument) {
+        this.mInstrument = mInstrument;
     }
 }

@@ -148,6 +148,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 "_id integer primary key autoincrement, " +
                 ProbeDataTable.Cols.UUID + "," +
                 ProbeDataTable.Cols.LOCATION + "," +
+                ProbeDataTable.Cols.INSTRUMENT + "," +
                 ProbeDataTable.Cols.DATE + "," +
                 ProbeDataTable.Cols.INSPECTOR_NAME + "," +
                 ProbeDataTable.Cols.INSPECTOR_USERNAME + "," +
