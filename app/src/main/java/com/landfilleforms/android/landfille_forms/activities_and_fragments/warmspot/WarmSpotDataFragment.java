@@ -35,8 +35,11 @@ import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.UUID;
 
 //Done?
@@ -47,6 +50,7 @@ public class WarmSpotDataFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
 
     List<Instrument> mInstruments;
+    Set<String> grids = new TreeSet<>();
     private WarmSpotData mWarmSpotData;
     private boolean newlyCreatedData;
 
@@ -78,7 +82,7 @@ public class WarmSpotDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID warmspotDataId = (UUID) getArguments().getSerializable(ARG_WARM_SPOT_DATA_ID);
         mWarmSpotData = WarmSpotDao.get(getActivity()).getWarmSpotData(warmspotDataId);
-        if(mWarmSpotData.getGridId() == null)
+        if(mWarmSpotData.getGrids() == null)
             newlyCreatedData = true;
         else
             newlyCreatedData = false;
@@ -182,14 +186,14 @@ public class WarmSpotDataFragment extends Fragment {
                 adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, R.layout.dark_spinner_layout);;
         }
         mGridIdSpinner.setAdapter(adapter);
-        mGridIdSpinner.setSelection(adapter.getPosition(mWarmSpotData.getGridId()));
+        mGridIdSpinner.setSelection(adapter.getPosition(mWarmSpotData.getGrids()));
 
 
 
         mGridIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mWarmSpotData.setGridId(parent.getItemAtPosition(position).toString());
+                mWarmSpotData.setGrids(parent.getItemAtPosition(position).toString());
             }
 
             @Override
@@ -211,7 +215,10 @@ public class WarmSpotDataFragment extends Fragment {
             }
         });
 
-        mGridList.setText(mWarmSpotData.getGridId());
+        if (mWarmSpotData.getGrids() != null) {
+            Arrays.asList(mWarmSpotData.getGrids().split(","));
+            updateGridListString();
+        }
 
         mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
@@ -288,6 +295,9 @@ public class WarmSpotDataFragment extends Fragment {
 
                 }
                 else {
+
+                    mWarmSpotData.setGrids(grids.toString());
+
                     getActivity().finish();
                     Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
                 }
@@ -377,27 +387,18 @@ public class WarmSpotDataFragment extends Fragment {
         deleteAlert.show();
     }
 
+    private void updateGridListString() {
+        mGridList.setText(grids.toString());
+    }
+
     private void addGrid(){
-        mGridList.setText((gridBuilder.append(String.valueOf(mGridIdSpinner.getSelectedItem()) + " ")).toString());
-        mWarmSpotData.setGridId(gridBuilder.toString());
+        grids.add(String.valueOf(mGridIdSpinner.getSelectedItem()));
+        updateGridListString();
     }
 
     private void removeGrid(){
-        String grid = String.valueOf(mGridIdSpinner.getSelectedItem());
-        int index = gridBuilder.indexOf(grid);
-        if(gridBuilder.length() > 0 && index > -1)  {
-            gridBuilder.replace(index, index + grid.length(), "");
-//            remove white space after deleting grid
-            int temp = gridBuilder.indexOf("  ");
-
-            while(temp > -1) {
-                gridBuilder.replace(index, index + 1, "");
-                temp = gridBuilder.indexOf("  ");
-            }
-
-            mGridList.setText(gridBuilder.toString());
-            mWarmSpotData.setGridId(gridBuilder.toString());
-        }
+        grids.remove(String.valueOf(mGridIdSpinner.getSelectedItem()));
+        updateGridListString();
     }
 
 }

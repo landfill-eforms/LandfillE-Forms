@@ -29,7 +29,7 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
     public WarmSpotData getWarmSpotData() {
         String uuidString = getString(getColumnIndex(WarmSpotDataTable.Cols.UUID));
         String location = getString(getColumnIndex(WarmSpotDataTable.Cols.LOCATION));
-        String gridId = getString(getColumnIndex(WarmSpotDataTable.Cols.GRID_ID));
+        String grids = getString(getColumnIndex(WarmSpotDataTable.Cols.GRIDS));
         long date = getLong(getColumnIndex(WarmSpotDataTable.Cols.DATE));
         String description = getString(getColumnIndex(WarmSpotDataTable.Cols.DESCRIPTION));
         String estimatedSize = getString(getColumnIndex(WarmSpotDataTable.Cols.ESTIMATED_SIZE));
@@ -40,7 +40,7 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
 
         WarmSpotData warmSpotData = new WarmSpotData(UUID.fromString(uuidString));
         warmSpotData.setLocation(location);
-        warmSpotData.setGridId(gridId);
+        warmSpotData.setGrids(grids);
         warmSpotData.setDate(new Date(date));
         warmSpotData.setDescription(description);
         warmSpotData.setEstimatedSize(estimatedSize);

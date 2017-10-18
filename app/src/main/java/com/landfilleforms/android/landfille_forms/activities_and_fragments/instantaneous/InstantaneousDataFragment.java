@@ -583,7 +583,7 @@ public class InstantaneousDataFragment extends Fragment {
                 WarmSpotData warmSpotData = new WarmSpotData();
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 //temp default is lopez
-                warmSpotData.setGridId(mInstantaneousData.getGridId());
+                warmSpotData.setGrids(mInstantaneousData.getGridId()); // FIXME WIll this be an issue?
                 warmSpotData.setMaxMethaneReading(tempMethaneLevel);
                 warmSpotData.setDate(mInstantaneousData.getStartDate());
                 warmSpotData.setLocation(mInstantaneousData.getLandFillLocation());
