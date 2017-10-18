@@ -64,9 +64,9 @@ public class InstantaneousDao {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
                 InstantaneousData i = cursor.getInstantaneousData();
-                if(i.getInstrument() != null) {
+                /*if(i.getInstrument() != null) {
                     i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
-                }
+                }*/
                 instantaneousForm.add(i);
                 cursor.moveToNext();
             }
@@ -87,9 +87,9 @@ public class InstantaneousDao {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
                 InstantaneousData i = cursor.getInstantaneousData();
-                if(i.getInstrument() != null) {
+                /*if(i.getInstrument() != null) {
                     i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
-                }
+                }*/
                 instantaneousForm.add(i);
                 cursor.moveToNext();
             }
@@ -110,9 +110,9 @@ public class InstantaneousDao {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
                 InstantaneousData i = cursor.getInstantaneousData();
-                if(i.getInstrument() != null) {
+                /*if(i.getInstrument() != null) {
                     i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
-                }
+                }*/
                 instantaneousForm.add(i);
                 cursor.moveToNext();
             }
@@ -137,9 +137,9 @@ public class InstantaneousDao {
             }
             cursor.moveToFirst();
             InstantaneousData i = cursor.getInstantaneousData();
-            if(i.getInstrument() != null) {
+            /*if(i.getInstrument() != null) {
                 i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
-            }
+            }*/
             return i;
         } finally {
             cursor.close();
@@ -185,13 +185,14 @@ public class InstantaneousDao {
         values.put(InstantaneousDataTable.Cols.LOCATION, instantaneousData.getLandFillLocation());
         values.put(InstantaneousDataTable.Cols.BARO_PRESSURE, instantaneousData.getBarometricPressure());
         values.put(InstantaneousDataTable.Cols.GRID_ID, instantaneousData.getGridId());
+        values.put(InstantaneousDataTable.Cols.INSTRUMENT, instantaneousData.getInstrument());
         values.put(InstantaneousDataTable.Cols.INSPECTOR_NAME, instantaneousData.getInspectorName());
         values.put(InstantaneousDataTable.Cols.INSPECTOR_USERNAME, instantaneousData.getInspectorUserName());
         values.put(InstantaneousDataTable.Cols.START_DATE, instantaneousData.getStartDate().getTime());
         values.put(InstantaneousDataTable.Cols.END_DATE, instantaneousData.getEndDate().getTime());
-        if(instantaneousData.getInstrument() != null){
+        /*if(instantaneousData.getInstrument() != null){
             values.put(InstantaneousDataTable.Cols.INSTRUMENT_ID, instantaneousData.getInstrument().getId());
-        }
+        }*/
         values.put(InstantaneousDataTable.Cols.MAX_METHANE_READING, instantaneousData.getMethaneReading());
         values.put(InstantaneousDataTable.Cols.IME_NUMBER, instantaneousData.getImeNumber());
 

@@ -74,14 +74,15 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 InstantaneousDataTable.Cols.LOCATION + ", " +
                 InstantaneousDataTable.Cols.BARO_PRESSURE + ", " +
                 InstantaneousDataTable.Cols.GRID_ID + ", " +
+                InstantaneousDataTable.Cols.INSTRUMENT + "," +
                 InstantaneousDataTable.Cols.INSPECTOR_NAME + ", " +
                 InstantaneousDataTable.Cols.INSPECTOR_USERNAME + ", " +
                 InstantaneousDataTable.Cols.START_DATE + ", " +
                 InstantaneousDataTable.Cols.END_DATE + ", " +
-                InstantaneousDataTable.Cols.INSTRUMENT_ID + ", " +
+                //InstantaneousDataTable.Cols.INSTRUMENT_ID + ", " +
                 InstantaneousDataTable.Cols.MAX_METHANE_READING + ", " +
-                InstantaneousDataTable.Cols.IME_NUMBER + ", " +
-                "FOREIGN KEY(" +InstantaneousDataTable.Cols.INSTRUMENT_ID + ") REFERENCES "+ InstrumentsTable.NAME + "("+ InstrumentsTable.Cols.ID +")" + ")"
+                InstantaneousDataTable.Cols.IME_NUMBER + ")"
+               // "FOREIGN KEY(" +InstantaneousDataTable.Cols.INSTRUMENT_ID + ") REFERENCES "+ InstrumentsTable.NAME + "("+ InstrumentsTable.Cols.ID +")" + ")"
         );
 
         db.execSQL("create table " + ImeDataTable.NAME + "(" +

@@ -66,7 +66,7 @@ public class InstantaneousDataFragment extends Fragment {
     private static final int REQUEST_START_TIME = 1;
     private static final int REQUEST_END_TIME = 2;
 
-    List<Instrument> mInstruments;
+    //List<Instrument> mInstruments;
     private double tempMethaneLevel;//For the dialogs
     private InstantaneousData mInstantaneousData;
     private TextView mInspectorLabel;
@@ -78,17 +78,21 @@ public class InstantaneousDataFragment extends Fragment {
     private Button mStartTimeButton;
     private Button mEndTimeButton;
     private Button mSubmitButton;
-    private EditText mInstrumentField;
+   // private EditText mInstrumentField;
     private TextView imeField;
     private TextView mLocationLabel;
-    private Spinner mInstrumentSerialNoSpinner;
-    private Spinner mInstrumentSpinner;
+    //private Spinner mInstrumentSerialNoSpinner;
+    //private Spinner mInstrumentSpinner;
     private String mCurrentImeNumber;
     private boolean newlyCreatedData;
 
     //chris added this
     private User mUser;
     private SessionManager session;
+
+    private static int selectedPosition = 0;
+    private Spinner mInstrumentSpinner;
+    private List<Instrument> mInstrumentList;
 
     public static InstantaneousDataFragment newInstance(UUID instantaneousDataId) {
         Bundle args = new Bundle();
@@ -102,6 +106,11 @@ public class InstantaneousDataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Getting Instrument List
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+
+
         UUID instantaneousDataId = (UUID) getArguments().getSerializable(ARG_INSTANTANEOUS_DATA_ID);
         mInstantaneousData = InstantaneousDao.get(getActivity()).getInstantaneousData(instantaneousDataId);
         if(mInstantaneousData.getGridId() == null)
@@ -151,12 +160,53 @@ public class InstantaneousDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_instantaneous_data, container, false);
-        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mInstantaneousData.getLandFillLocation());
+        /*mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mInstantaneousData.getLandFillLocation());
         Log.d("InstrumentsSize",Integer.toString(mInstruments.size()));
         for(Instrument i:mInstruments){
             Log.d("Instrument",Integer.toString(i.getId()));
-        }
+        }*/
 
+        //Instrument
+        mInstrumentSpinner = (Spinner) v.findViewById(R.id.instant_spinner);
+
+        //Make arrayAdapter of instruments to add items from the list to the spinner
+        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, mInstrumentList);
+        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        //set the spinner to the arrayAdapter
+        mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
+
+        //Find and set the position of the currently selected instrument.
+        int position = 0;
+        int index = 0;
+        for(Instrument instrument: this.mInstrumentList){
+            if(String.valueOf(instrument.getId()).equals(mInstantaneousData.getInstrument())){
+                position = index;
+                break;
+            }
+            index++;
+        }
+        mInstrumentSpinner.setSelection(position);
+
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedPosition = position;
+                mInstrumentSpinner.setSelection(selectedPosition);
+
+                Object o = parent.getItemAtPosition(position);
+                if(o instanceof Instrument){
+                    mInstantaneousData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         mBaroLevelField = (TextView)v.findViewById(R.id.baro_reading);
         if(mInstantaneousData.getBarometricPressure() != 0)
@@ -241,7 +291,7 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-        mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+        /*mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
         mInstrumentSpinner.setAdapter(instrumentAdapter);
         mInstrumentSpinner.setSelection(instrumentAdapter.getPosition(mInstantaneousData.getInstrument()));
@@ -256,7 +306,7 @@ public class InstantaneousDataFragment extends Fragment {
             }
         });
 
-
+*/
 /*        imeField = (TextView) v.findViewById(R.id.ime_field);
         imeField.setText(mInstantaneousData.getImeNumber());*/
 
@@ -587,8 +637,8 @@ public class InstantaneousDataFragment extends Fragment {
                 warmSpotData.setMaxMethaneReading(tempMethaneLevel);
                 warmSpotData.setDate(mInstantaneousData.getStartDate());
                 warmSpotData.setLocation(mInstantaneousData.getLandFillLocation());
-                //TODO: related to instrument change
-                //warmSpotData.setInstrument(mInstantaneousData.getInstrument());
+               /* //TODO: related to instrument change
+                //warmSpotData.setInstrument(mInstantaneousData.getInstrument());*/
                 warmSpotData.setInspectorFullName(mUser.getFullName());
                 warmSpotData.setInspectorUserName(mUser.getUsername());
                 WarmSpotDao.get(getActivity()).addWarmSpotData(warmSpotData);

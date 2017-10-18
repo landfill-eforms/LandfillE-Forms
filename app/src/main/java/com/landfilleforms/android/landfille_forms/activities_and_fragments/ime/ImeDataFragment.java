@@ -66,7 +66,7 @@ public class ImeDataFragment extends Fragment {
     private EditText mMethaneLevelField;
     private Button mDateButton;
     private Button mStartTimeButton;
-    private TextView mInstrumentLabel;
+    //private TextView mInstrumentLabel;
 
     private Button mSubmitButton;
     private Button insert,delete;
