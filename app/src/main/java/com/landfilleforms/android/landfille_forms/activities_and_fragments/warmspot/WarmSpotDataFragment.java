@@ -50,8 +50,8 @@ public class WarmSpotDataFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
-    List<Instrument> mInstruments;
-    Set<String> grids = new TreeSet<>();
+    private List<Instrument> mInstruments;
+    private Set<String> grids = new TreeSet<>();
     private WarmSpotData mWarmSpotData;
     private boolean newlyCreatedData;
 
@@ -164,6 +164,13 @@ public class WarmSpotDataFragment extends Fragment {
         mLocationLabel = (TextView) v.findViewById(R.id.location);
         mLocationLabel.setText(mWarmSpotData.getLocation());
 
+        String[] gridArray = null;
+        if (mWarmSpotData.getGrids() != null) {
+            gridArray = mWarmSpotData.getGrids().split(", ");
+            grids.addAll(Arrays.asList(gridArray));
+            updateGridListString();
+        }
+
         //TODO: Create a grid table in the DB and use that instead.
         mGridIdSpinner = (Spinner)v.findViewById(R.id.grid_id);
         ArrayAdapter<CharSequence> adapter;
@@ -187,9 +194,7 @@ public class WarmSpotDataFragment extends Fragment {
                 adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, R.layout.dark_spinner_layout);;
         }
         mGridIdSpinner.setAdapter(adapter);
-        mGridIdSpinner.setSelection(adapter.getPosition(mWarmSpotData.getGrids()));
-
-
+        mGridIdSpinner.setSelection(gridArray != null ? adapter.getPosition(gridArray[gridArray.length - 1]) : 0);
 
         mGridIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -216,10 +221,7 @@ public class WarmSpotDataFragment extends Fragment {
             }
         });
 
-        if (mWarmSpotData.getGrids() != null) {
-            grids.addAll(Arrays.asList(mWarmSpotData.getGrids().split(", ")));
-            updateGridListString();
-        }
+
 
         mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);

@@ -11,7 +11,7 @@ public class ImeData {
     private UUID mId;
     private String mImeNumber;
     private String mLocation;
-    private String mGridId;
+    private String mGrids;
     private String mInstrument;
     private Date mDate;
     private String mDescription;
@@ -48,12 +48,12 @@ public class ImeData {
         mLocation = location;
     }
 
-    public String getGridId() {
-        return mGridId;
+    public String getGrids() {
+        return mGrids;
     }
 
-    public void setGridId(String gridId) {
-        mGridId = gridId;
+    public void setGrids(String grids) {
+        mGrids = grids;
     }
 
     public String getInstrument() {

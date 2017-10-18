@@ -137,9 +137,9 @@ public class ImeFormFragment extends Fragment {
         //Finds all the grids related to a list of IME entries
         Set<String> imeGrids = new HashSet<String>();
         for(int i = 0; i < mImeDatas.size(); i++) {
-            if(mImeDatas.get(i).getGridId() != null && mImeDatas.get(i).getGridId().trim().length() != 0)
-                //imeGrids.add(mImeDatas.get(i).getGridId());
-                sample = sample + mImeDatas.get(i).getGridId();
+            if(mImeDatas.get(i).getGrids() != null && mImeDatas.get(i).getGrids().trim().length() != 0)
+                //imeGrids.add(mImeDatas.get(i).getGrids());
+                sample = sample + mImeDatas.get(i).getGrids();
 
         }
 
@@ -327,7 +327,7 @@ public class ImeFormFragment extends Fragment {
 
         public void bindImeData(ImeData imeData) {
             mImeData = imeData;
-            mGridIdView.setText(mImeData.getGridId());
+            mGridIdView.setText(mImeData.getGrids());
             //display 2 sig figs
             mMethaneReadingView.setText(String.format("%.2f", mImeData.getMethaneReading()));
 

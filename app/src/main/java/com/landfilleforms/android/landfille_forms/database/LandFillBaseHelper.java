@@ -89,7 +89,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 ImeDataTable.Cols.UUID + "," +
                 ImeDataTable.Cols.IME_NUMBER + "," +
                 ImeDataTable.Cols.LOCATION + "," +
-                ImeDataTable.Cols.GRID_ID + "," +
+                ImeDataTable.Cols.GRIDS + "," +
                 ImeDataTable.Cols.INSTRUMENT + "," +
                 ImeDataTable.Cols.DATE + "," +
                 ImeDataTable.Cols.DESCRIPTION + "," +

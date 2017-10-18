@@ -249,7 +249,7 @@ public class ImeDao {
         values.put(ImeDataTable.Cols.IME_NUMBER, imeData.getImeNumber());
         values.put(ImeDataTable.Cols.INSTRUMENT, imeData.getInstrument());
         values.put(ImeDataTable.Cols.LOCATION, imeData.getLocation());
-        values.put(ImeDataTable.Cols.GRID_ID, imeData.getGridId());
+        values.put(ImeDataTable.Cols.GRIDS, imeData.getGrids());
         values.put(ImeDataTable.Cols.DATE, imeData.getDate().getTime());
         values.put(ImeDataTable.Cols.DESCRIPTION, imeData.getDescription());
         values.put(ImeDataTable.Cols.INSPECTOR_NAME, imeData.getInspectorFullName());
