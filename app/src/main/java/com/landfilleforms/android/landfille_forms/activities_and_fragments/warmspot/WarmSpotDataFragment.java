@@ -34,6 +34,7 @@ import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
+import com.landfilleforms.android.landfille_forms.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -193,7 +194,7 @@ public class WarmSpotDataFragment extends Fragment {
         mGridIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mWarmSpotData.setGrids(parent.getItemAtPosition(position).toString());
+                // Do nothing.
             }
 
             @Override
@@ -216,7 +217,7 @@ public class WarmSpotDataFragment extends Fragment {
         });
 
         if (mWarmSpotData.getGrids() != null) {
-            Arrays.asList(mWarmSpotData.getGrids().split(","));
+            grids.addAll(Arrays.asList(mWarmSpotData.getGrids().split(", ")));
             updateGridListString();
         }
 
@@ -296,7 +297,7 @@ public class WarmSpotDataFragment extends Fragment {
                 }
                 else {
 
-                    mWarmSpotData.setGrids(grids.toString());
+                    mWarmSpotData.setGrids(StringUtils.collectionToSortedString(grids, ", "));
 
                     getActivity().finish();
                     Toast.makeText(getActivity(), R.string.warmspot_added_toast, Toast.LENGTH_SHORT).show();
@@ -313,6 +314,7 @@ public class WarmSpotDataFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.i(TAG, "keyCode: " + keyCode);
                 if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    System.out.println(mWarmSpotData);
                     if(newlyCreatedData) {
                         //NEW
                         //ADDING THIS THIS TO WARN A DELETE
@@ -388,7 +390,7 @@ public class WarmSpotDataFragment extends Fragment {
     }
 
     private void updateGridListString() {
-        mGridList.setText(grids.toString());
+        mGridList.setText(StringUtils.collectionToSortedString(grids, ", "));
     }
 
     private void addGrid(){

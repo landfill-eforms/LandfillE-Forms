@@ -44,9 +44,7 @@ public class WarmSpotData {
         return mGrids;
     }
 
-    public void setGrids(String grids) {
-        mGrids = grids;
-    }
+    public void setGrids(String grids) {  mGrids = grids; }
 
     public Date getDate() {
         return mDate;
