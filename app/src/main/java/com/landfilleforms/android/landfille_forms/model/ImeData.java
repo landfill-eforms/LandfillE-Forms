@@ -12,7 +12,7 @@ public class ImeData {
     private String mImeNumber;
     private String mLocation;
     private String mGrids;
-    private String mInstrument;
+    private Integer mInstrument;
     private Date mDate;
     private String mDescription;
     private transient String mInspectorFullName;
@@ -56,11 +56,11 @@ public class ImeData {
         mGrids = grids;
     }
 
-    public String getInstrument() {
+    public Integer getInstrument() {
         return mInstrument;
     }
 
-    public void setInstrument(String mInstrument) {
+    public void setInstrument(Integer mInstrument) {
         this.mInstrument = mInstrument;
     }
 

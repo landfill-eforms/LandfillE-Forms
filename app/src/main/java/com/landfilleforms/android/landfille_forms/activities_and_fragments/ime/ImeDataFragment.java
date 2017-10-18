@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.landfilleforms.android.landfille_forms.R.id.gridList;
 import static com.landfilleforms.android.landfille_forms.R.id.remove;
@@ -96,8 +97,9 @@ public class ImeDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //Getting Instrument List
-        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
-
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments().stream()
+                .filter(i -> i.getInstrumentType().isInstantaneous())
+                .collect(Collectors.toList());
 
         UUID imeDataId = (UUID) getArguments().getSerializable(ARG_IME_DATA_ID);
         mImeData = ImeDao.get(getActivity()).getImeData(imeDataId);
@@ -161,7 +163,7 @@ public class ImeDataFragment extends Fragment {
         int position = 0;
         int index = 0;
         for (Instrument instrument : this.mInstrumentList) {
-            if (String.valueOf(instrument.getId()).equals(mImeData.getInstrument())) {
+            if (instrument.getId() == mImeData.getInstrument()) {
                 position = index;
                 break;
             }
@@ -188,7 +190,7 @@ public class ImeDataFragment extends Fragment {
                 // Save instrument as the instrument's ID.
                 Object o = parent.getItemAtPosition(position);
                 if (o instanceof Instrument) {
-                    mImeData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                    mImeData.setInstrument(((Instrument)parent.getItemAtPosition(position)).getId());
                 }
 
             }
