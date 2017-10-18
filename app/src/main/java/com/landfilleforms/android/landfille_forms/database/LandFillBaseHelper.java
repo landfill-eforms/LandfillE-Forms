@@ -137,6 +137,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 IseDataTable.Cols.ISE_NUMBER + "," +
                 IseDataTable.Cols.LOCATION + "," +
                 IseDataTable.Cols.GRID_ID + "," +
+                IseDataTable.Cols.INSTRUMENT + "," +
                 IseDataTable.Cols.DATE + "," +
                 IseDataTable.Cols.DESCRIPTION + "," +
                 IseDataTable.Cols.INSPECTOR_NAME + "," +

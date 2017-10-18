@@ -26,6 +26,7 @@ public class IseDataCursorWrapper extends CursorWrapper{
         String iseNumber = getString(getColumnIndex(IseDataTable.Cols.ISE_NUMBER));
         String location = getString(getColumnIndex(IseDataTable.Cols.LOCATION));
         String gridId = getString(getColumnIndex(IseDataTable.Cols.GRID_ID));
+        String instrument = getString(getColumnIndex(IseDataTable.Cols.INSTRUMENT));
         long date = getLong(getColumnIndex(IseDataTable.Cols.DATE));
         String description = getString(getColumnIndex(IseDataTable.Cols.DESCRIPTION));
         String inspectorFullName = getString(getColumnIndex(IseDataTable.Cols.INSPECTOR_NAME));
@@ -36,6 +37,7 @@ public class IseDataCursorWrapper extends CursorWrapper{
         iseData.setIseNumber(iseNumber);
         iseData.setLocation(location);
         iseData.setGridId(gridId);
+        iseData.setInstrument(instrument);
         iseData.setDate(new Date(date));
         iseData.setDescription(description);
         iseData.setInspectorFullName(inspectorFullName);

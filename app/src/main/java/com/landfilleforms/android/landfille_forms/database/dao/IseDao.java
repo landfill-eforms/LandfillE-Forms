@@ -265,6 +265,7 @@ public class IseDao {
         values.put(IseDataTable.Cols.ISE_NUMBER, iseData.getIseNumber());
         values.put(IseDataTable.Cols.LOCATION, iseData.getLocation());
         values.put(IseDataTable.Cols.GRID_ID, iseData.getGridId());
+        values.put(IseDataTable.Cols.INSTRUMENT, iseData.getInstrument());
         values.put(IseDataTable.Cols.DATE, iseData.getDate().getTime());
         values.put(IseDataTable.Cols.DESCRIPTION, iseData.getDescription());
         values.put(IseDataTable.Cols.INSPECTOR_NAME, iseData.getInspectorFullName());
