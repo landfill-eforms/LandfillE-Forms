@@ -36,10 +36,15 @@ import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.model.ImeData;
 import com.landfilleforms.android.landfille_forms.model.Instrument;
+import com.landfilleforms.android.landfille_forms.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.landfilleforms.android.landfille_forms.R.id.gridList;
 import static com.landfilleforms.android.landfille_forms.R.id.remove;
@@ -76,7 +81,7 @@ public class ImeDataFragment extends Fragment {
 
     private Spinner mInstrumentSpinner; //Instrument spinner
     private List<Instrument> mInstrumentList; //Instrument List
-
+    private Set<String> grids = new TreeSet<>();
 
 
     public static ImeDataFragment newInstance(UUID imeDataId) {
@@ -87,20 +92,20 @@ public class ImeDataFragment extends Fragment {
         return fragment;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Getting Instrument List
-        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
-
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments().stream()
+                .filter(i -> i.getInstrumentType().isInstantaneous())
+                .collect(Collectors.toList());
 
         UUID imeDataId = (UUID) getArguments().getSerializable(ARG_IME_DATA_ID);
         mImeData = ImeDao.get(getActivity()).getImeData(imeDataId);
 
         // We need a better way to determine if the reading is new.
-        if(mImeData.getGridId() == null && mImeData.getMethaneReading() == 0)
+        if(mImeData.getGrids() == null && mImeData.getMethaneReading() == 0)
             newlyCreatedData = true;
         else
             newlyCreatedData = false;
@@ -158,7 +163,7 @@ public class ImeDataFragment extends Fragment {
         int position = 0;
         int index = 0;
         for (Instrument instrument : this.mInstrumentList) {
-            if (String.valueOf(instrument.getId()).equals(mImeData.getInstrument())) {
+            if (instrument.getId() == mImeData.getInstrument()) {
                 position = index;
                 break;
             }
@@ -185,7 +190,7 @@ public class ImeDataFragment extends Fragment {
                 // Save instrument as the instrument's ID.
                 Object o = parent.getItemAtPosition(position);
                 if (o instanceof Instrument) {
-                    mImeData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                    mImeData.setInstrument(((Instrument)parent.getItemAtPosition(position)).getId());
                 }
 
             }
@@ -194,8 +199,6 @@ public class ImeDataFragment extends Fragment {
 
             }
         });
-
-
 
 
         mInspectorLabel = (TextView)v.findViewById(R.id.inspector_name);
@@ -237,6 +240,13 @@ public class ImeDataFragment extends Fragment {
         mLocationLabel = (TextView) v.findViewById(R.id.location);
         mLocationLabel.setText(mImeData.getLocation());
 
+        String[] gridArray = null;
+        if (mImeData.getGrids() != null) {
+            gridArray = mImeData.getGrids().split(", ");
+            grids.addAll(Arrays.asList(gridArray));
+            updateGridListString();
+        }
+
         mGridIdSpinner = (Spinner)v.findViewById(R.id.grid_id);
         ArrayAdapter<CharSequence> adapter;
         switch(mImeData.getLocation()) {
@@ -259,7 +269,7 @@ public class ImeDataFragment extends Fragment {
                 adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.empty_array, R.layout.dark_spinner_layout);;
         }
         mGridIdSpinner.setAdapter(adapter);
-        mGridIdSpinner.setSelection(adapter.getPosition(mImeData.getGridId()));
+        mGridIdSpinner.setSelection(gridArray != null ? adapter.getPosition(gridArray[gridArray.length - 1]) : 0);
 
         mGridIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -286,22 +296,14 @@ public class ImeDataFragment extends Fragment {
             }
         });
 
-        mGridList.setText(mImeData.getGridId());
-
-        if (mImeData.getGridId() != null) {
-            gridBuilder = new StringBuilder(mImeData.getGridId());
-
-        }
-//        mImeData.setGridId(gridBuilder.toString());
+//        mImeData.setGrids(gridBuilder.toString());
 
         //mGridList.setText((gridBuilder.append(String.valueOf(mGridIdSpinner.getSelectedItem()) + " ")).toString());
-        //mGridList.setText(mImeData.setGridId(gridBuilder.toString()));
-//        mImeData.setGridId(gridBuilder.toString());
+        //mGridList.setText(mImeData.setGrids(gridBuilder.toString()));
+//        mImeData.setGrids(gridBuilder.toString());
 
         mImeField = (TextView)v.findViewById(R.id.ime_field);
         mImeField.setText(mImeData.getImeNumber());
-
-
 
         mDescriptionField = (EditText)v.findViewById(R.id.description);
         mDescriptionField.setText(mImeData.getDescription());
@@ -356,10 +358,13 @@ public class ImeDataFragment extends Fragment {
                 if(mImeData.getMethaneReading() < 500){
                     Toast.makeText(getActivity(), R.string.improper_methane_ime_toast, Toast.LENGTH_SHORT).show();
                 }
-                else if (mImeData.getGridId() == null || mImeData.getGridId().isEmpty()) {
+                else if (grids.isEmpty()) {
                     Toast.makeText(getActivity(), R.string.ime_undefined_grids_toast, Toast.LENGTH_SHORT).show();
                 }
                 else {
+
+                    mImeData.setGrids(StringUtils.collectionToSortedString(grids, ", "));
+
                     getActivity().finish();
                     Toast.makeText(getActivity(), R.string.ime_added_toast, Toast.LENGTH_SHORT).show();
 
@@ -456,27 +461,18 @@ public class ImeDataFragment extends Fragment {
         deleteAlert.show();
     }
 
+    private void updateGridListString() {
+        mGridList.setText(StringUtils.collectionToSortedString(grids, ", "));
+    }
+
     private void addGrid(){
-        mGridList.setText((gridBuilder.append(String.valueOf(mGridIdSpinner.getSelectedItem()) + " ")).toString());
-        mImeData.setGridId(gridBuilder.toString());
+        grids.add(String.valueOf(mGridIdSpinner.getSelectedItem()));
+        updateGridListString();
     }
 
     private void removeGrid(){
-        String grid = String.valueOf(mGridIdSpinner.getSelectedItem());
-        int index = gridBuilder.indexOf(grid);
-        if(gridBuilder.length() > 0 && index > -1)  {
-            gridBuilder.replace(index, index + grid.length(), "");
-//            remove white space after deleting grid
-            int temp = gridBuilder.indexOf("  ");
-
-            while(temp > -1) {
-                gridBuilder.replace(index, index + 1, "");
-                temp = gridBuilder.indexOf("  ");
-            }
-
-            mGridList.setText(gridBuilder.toString());
-            mImeData.setGridId(gridBuilder.toString());
-        }
+        grids.remove(String.valueOf(mGridIdSpinner.getSelectedItem()));
+        updateGridListString();
     }
 
 

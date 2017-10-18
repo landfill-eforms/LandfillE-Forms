@@ -327,6 +327,33 @@ public class ProbeFormFragment extends Fragment {
             }
             //END OF NEW
 
+//<<<<<<< HEAD
+//=======
+//                //mProbeNumberView.setTextColor(Color.RED);
+//                //mWaterPressureView.setTextColor(Color.RED);
+//                mMethanePercentageView.setTextColor(Color.RED);
+//            }
+//            else if (mProbeData.getMethanePercentage() >= 0.1 && mProbeData.getMethanePercentage() < 4.9) {
+//               // mProbeNumberView.setTextColor(Color.rgb(255,165,0));
+//                mWaterPressureView.setTextColor(Color.rgb(255,165,0));
+//                mMethanePercentageView.setTextColor(Color.rgb(255,165,0));
+//            }
+//            else {
+//               // mProbeNumberView.setTextColor(Color.WHITE);
+//                //mWaterPressureView.setTextColor(Color.WHITE);
+//                mMethanePercentageView.setTextColor(Color.WHITE);
+//            }
+//            if(mProbeData.getWaterPressure() >1.0){
+//                mWaterPressureView.setTextColor(Color.RED);
+//            }
+//            else if(mProbeData.getWaterPressure() >= 0.2 && mProbeData.getWaterPressure() <= 0.9){
+//                mWaterPressureView.setTextColor(Color.rgb(255,165, 0));
+//            }
+//            else
+//                mWaterPressureView.setTextColor(Color.WHITE);
+//>>>>>>> 083e3b555c682a1b2f033eb58d6af9d6640772c3
+//=======
+//>>>>>>> fc2c43e685f8daab4ede6cc388dcd4e5e652e7f5
         }
 
         @Override

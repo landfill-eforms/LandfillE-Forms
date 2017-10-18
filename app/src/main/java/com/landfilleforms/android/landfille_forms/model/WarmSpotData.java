@@ -10,7 +10,7 @@ import java.util.UUID;
 public class WarmSpotData {
     private UUID mId;
     private String mLocation;
-    private String mGridId;
+    private String mGrids;
     private Date mDate;
     private String mDescription;
     private String mEstimatedSize;
@@ -40,13 +40,11 @@ public class WarmSpotData {
         mLocation = location;
     }
 
-    public String getGridId() {
-        return mGridId;
+    public String getGrids() {
+        return mGrids;
     }
 
-    public void setGridId(String gridId) {
-        mGridId = gridId;
-    }
+    public void setGrids(String grids) {  mGrids = grids; }
 
     public Date getDate() {
         return mDate;
