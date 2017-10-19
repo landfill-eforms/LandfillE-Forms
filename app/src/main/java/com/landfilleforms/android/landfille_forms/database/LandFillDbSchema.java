@@ -66,7 +66,8 @@ public class LandFillDbSchema {
             public static final String UUID = "uuid";
             public static final String LOCATION = "location";
             public static final String GRID_ID = "grid_id";
-            public static final String INSTRUMENT_ID = "instrument_id";
+            public static final String INSTRUMENT = "instrument";
+//            public static final String INSTRUMENT_ID = "instrument_id";
             public static final String BARO_PRESSURE = "barometric_pressure";
             public static final String INSPECTOR_NAME = "inspector_name";
             public static final String INSPECTOR_USERNAME = "inspector_username";
