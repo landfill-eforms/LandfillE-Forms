@@ -210,7 +210,7 @@ public class IseDataFragment extends Fragment {
         int position = 0;
         int index = 0;
         for(Instrument instrument: this.mInstrumentList){
-            if(String.valueOf(instrument.getId()).equals(mIseData.getInstrument())){
+            if(instrument.getId() == mIseData.getInstrument()){
                 position = index;
                 break;
             }

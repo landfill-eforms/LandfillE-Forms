@@ -179,13 +179,13 @@ public class IntegratedDataFragment extends Fragment {
         int position = 0;
         int index = 0;
         for (Instrument instrument : this.mInstrumentList) {
-            if (String.valueOf(instrument.getId()).equals(mIntegratedData.getInstrument())) {
+            if (instrument.getId() == mIntegratedData.getInstrument()) {
                position = index;
                break;
             }
             index++;
         }
-            mInstrumentSpinner.setSelection(position);
+        mInstrumentSpinner.setSelection(position);
 
 
 

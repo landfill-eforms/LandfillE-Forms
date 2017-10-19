@@ -178,7 +178,7 @@ public class InstantaneousDataFragment extends Fragment {
         int position = 0;
         int index = 0;
         for(Instrument instrument: this.mInstrumentList){
-            if(String.valueOf(instrument.getId()).equals(mInstantaneousData.getInstrument())){
+            if(instrument.getId() == mInstantaneousData.getInstrument()){
                 position = index;
                 break;
             }

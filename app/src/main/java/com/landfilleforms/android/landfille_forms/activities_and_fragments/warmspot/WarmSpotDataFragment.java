@@ -144,7 +144,7 @@ public class WarmSpotDataFragment extends Fragment {
         int position = 0;
         int index = 0;
         for(Instrument instrument: this.mInstrumentList){
-            if(String.valueOf(instrument.getId()).equals(mWarmSpotData.getInstrument())){
+            if(instrument.getId() == mWarmSpotData.getInstrument()){
                 position = index;
                 break;
             }

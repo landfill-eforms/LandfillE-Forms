@@ -149,7 +149,7 @@ public class ProbeDataFragment extends Fragment {
         int position = 0;
         int index = 0;
         for (Instrument instrument : this.mInstrumentList) {
-            if (String.valueOf(instrument.getId()).equals(mProbeData.getInstrument())) {
+            if (instrument.getId() == mProbeData.getInstrument()) {
                 position = index;
                 break;
             }
