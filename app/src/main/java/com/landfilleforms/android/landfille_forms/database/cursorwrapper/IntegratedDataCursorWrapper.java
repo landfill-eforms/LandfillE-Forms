@@ -29,7 +29,7 @@ public class IntegratedDataCursorWrapper extends CursorWrapper{
         String uuidString = getString(getColumnIndex(IntegratedDataTable.Cols.UUID));
         String location =  getString(getColumnIndex(IntegratedDataTable.Cols.LOCATION));
         String gridId =  getString(getColumnIndex(IntegratedDataTable.Cols.GRID_ID));
-        String instrument = getString(getColumnIndex(IntegratedDataTable.Cols.INSTRUMENT));
+        Integer instrument = getInt(getColumnIndex(IntegratedDataTable.Cols.INSTRUMENT));
         double barometricPressure =  getDouble(getColumnIndex(IntegratedDataTable.Cols.BARO_PRESSURE));
         String inspectorName =  getString(getColumnIndex(IntegratedDataTable.Cols.INSPECTOR_NAME));
         String inspectorUsername =  getString(getColumnIndex(IntegratedDataTable.Cols.INSPECTOR_USERNAME));

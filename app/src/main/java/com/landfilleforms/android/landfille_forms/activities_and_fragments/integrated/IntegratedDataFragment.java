@@ -199,7 +199,7 @@ public class IntegratedDataFragment extends Fragment {
 
                Object o = parent.getItemAtPosition(position);
                if (o instanceof Instrument) {
-                   mIntegratedData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                   mIntegratedData.setInstrument(((Instrument)parent.getItemAtPosition(position)).getId());
                }
 
            }

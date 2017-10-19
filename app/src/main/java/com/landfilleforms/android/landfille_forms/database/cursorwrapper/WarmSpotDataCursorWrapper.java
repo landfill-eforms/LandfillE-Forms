@@ -30,7 +30,7 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
         String uuidString = getString(getColumnIndex(WarmSpotDataTable.Cols.UUID));
         String location = getString(getColumnIndex(WarmSpotDataTable.Cols.LOCATION));
         String grids = getString(getColumnIndex(WarmSpotDataTable.Cols.GRIDS));
-        String instrument = getString(getColumnIndex(WarmSpotDataTable.Cols.INSTRUMENT));
+        Integer instrument = getInt(getColumnIndex(WarmSpotDataTable.Cols.INSTRUMENT));
         long date = getLong(getColumnIndex(WarmSpotDataTable.Cols.DATE));
         String description = getString(getColumnIndex(WarmSpotDataTable.Cols.DESCRIPTION));
         String estimatedSize = getString(getColumnIndex(WarmSpotDataTable.Cols.ESTIMATED_SIZE));

@@ -11,7 +11,7 @@ public class IntegratedData {
     private UUID mId;
     private String mLocation;
     private String mGridId;
-    private String mInstrument;
+    private Integer mInstrument;
 //    private Instrument mInstrument;
     private double mBarometricPressure;
     private String mInspectorName;
@@ -53,11 +53,11 @@ public class IntegratedData {
         mGridId = gridId;
     }
 
-    public String getInstrument() {
+    public Integer getInstrument() {
         return mInstrument;
     }
 
-    public void setInstrument(String mInstrument) {
+    public void setInstrument(Integer mInstrument) {
         this.mInstrument = mInstrument;
     }
 

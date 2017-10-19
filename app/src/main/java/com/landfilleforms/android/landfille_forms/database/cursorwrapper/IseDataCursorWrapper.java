@@ -26,7 +26,7 @@ public class IseDataCursorWrapper extends CursorWrapper{
         String iseNumber = getString(getColumnIndex(IseDataTable.Cols.ISE_NUMBER));
         String location = getString(getColumnIndex(IseDataTable.Cols.LOCATION));
         String gridId = getString(getColumnIndex(IseDataTable.Cols.GRID_ID));
-        String instrument = getString(getColumnIndex(IseDataTable.Cols.INSTRUMENT));
+        Integer instrument = getInt(getColumnIndex(IseDataTable.Cols.INSTRUMENT));
         long date = getLong(getColumnIndex(IseDataTable.Cols.DATE));
         String description = getString(getColumnIndex(IseDataTable.Cols.DESCRIPTION));
         String inspectorFullName = getString(getColumnIndex(IseDataTable.Cols.INSPECTOR_NAME));

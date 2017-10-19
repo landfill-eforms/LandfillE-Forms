@@ -166,7 +166,7 @@ public class ProbeDataFragment extends Fragment {
                 // Save instrument as the instrument's ID.
                 Object o = parent.getItemAtPosition(position);
                 if (o instanceof Instrument) {
-                    mProbeData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                    mProbeData.setInstrument(((Instrument)parent.getItemAtPosition(position)).getId());
                 }
             }
             @Override

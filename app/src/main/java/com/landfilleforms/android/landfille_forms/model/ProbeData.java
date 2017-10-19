@@ -10,7 +10,7 @@ import java.util.UUID;
 public class ProbeData {
     private UUID mId;
     private String mLocation;
-    private String mInstrument;
+    private Integer mInstrument;
     private Date mDate;
     private String mInspectorName;
     private String mInspectorUserName;
@@ -104,11 +104,11 @@ public class ProbeData {
         mRemarks = remarks;
     }
 
-    public String getInstrument() {
+    public Integer getInstrument() {
         return mInstrument;
     }
 
-    public void setInstrument(String mInstrument) {
+    public void setInstrument(Integer mInstrument) {
         this.mInstrument = mInstrument;
     }
 }

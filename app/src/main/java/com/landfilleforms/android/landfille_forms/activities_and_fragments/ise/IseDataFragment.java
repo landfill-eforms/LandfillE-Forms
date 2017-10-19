@@ -226,7 +226,7 @@ public class IseDataFragment extends Fragment {
 
                 Object o = parent.getItemAtPosition(position);
                 if(o instanceof Instrument){
-                    mIseData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                    mIseData.setInstrument(((Instrument)parent.getItemAtPosition(position)).getId());
                 }
             }
 

@@ -194,7 +194,7 @@ public class InstantaneousDataFragment extends Fragment {
 
                 Object o = parent.getItemAtPosition(position);
                 if(o instanceof Instrument){
-                    mInstantaneousData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                    mInstantaneousData.setInstrument(((Instrument)parent.getItemAtPosition(position)).getId());
                 }
 
 

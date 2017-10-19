@@ -31,7 +31,7 @@ public class InstantaneousDataCursorWrapper extends CursorWrapper {
         String location = getString(getColumnIndex(InstantaneousDataTable.Cols.LOCATION));
         double barometricPressure = getDouble(getColumnIndex(InstantaneousDataTable.Cols.BARO_PRESSURE));
         String gridId = getString(getColumnIndex(InstantaneousDataTable.Cols.GRID_ID));
-        String instrument = getString(getColumnIndex(InstantaneousDataTable.Cols.INSTRUMENT));
+        Integer instrument = getInt(getColumnIndex(InstantaneousDataTable.Cols.INSTRUMENT));
         String inspectorName = getString(getColumnIndex(InstantaneousDataTable.Cols.INSPECTOR_NAME));
         String inspectorUserName = getString(getColumnIndex(InstantaneousDataTable.Cols.INSPECTOR_USERNAME));
         long startDate = getLong(getColumnIndex(InstantaneousDataTable.Cols.START_DATE));

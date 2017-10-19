@@ -12,7 +12,7 @@ public class InstantaneousData {
     private String mLocation;//Auto-generated
     private double mBarometricPressure;
     private String gridId;
-    private String mInstrument;
+    private Integer mInstrument;
     private String mInspectorName;//Should make this a user object, auto-generated
     private String mInspectorUserName;
     private Date mStartDate;
@@ -61,11 +61,11 @@ public class InstantaneousData {
         this.gridId = gridId;
     }
 
-    public String getInstrument() {
+    public Integer getInstrument() {
         return mInstrument;
     }
 
-    public void setInstrument(String mInstrument) {
+    public void setInstrument(Integer mInstrument) {
         this.mInstrument = mInstrument;
     }
 
