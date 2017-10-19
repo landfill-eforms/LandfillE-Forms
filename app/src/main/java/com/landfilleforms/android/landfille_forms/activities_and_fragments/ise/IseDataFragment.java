@@ -30,10 +30,13 @@ import android.widget.Toast;
 import com.landfilleforms.android.landfille_forms.activities_and_fragments.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.activities_and_fragments.TimePickerFragment;
+import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.database.dao.IseDao;
+import com.landfilleforms.android.landfille_forms.model.Instrument;
 import com.landfilleforms.android.landfille_forms.model.IseData;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -58,6 +61,12 @@ public class IseDataFragment extends Fragment {
     private Button mStartTimeButton;
     private Button mSubmitButton;
 
+    private List<Instrument> mInstrumentList;
+    private static int selectedPosition = 0;
+    private Spinner mInstrumentSpinner;
+
+
+
     public static IseDataFragment newInstance(UUID iseDataId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_ISE_DATA_ID, iseDataId);
@@ -70,6 +79,10 @@ public class IseDataFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         //TODO: Check if we need user info for Ise/Probe/Warmspot
         super.onCreate(savedInstanceState);
+
+        //Getting Instrument List
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+
         UUID iseDataId = (UUID) getArguments().getSerializable(ARG_ISE_DATA_ID);
         mIseData = IseDao.get(getActivity()).getIseData(iseDataId);
 
@@ -180,6 +193,48 @@ public class IseDataFragment extends Fragment {
             }
         });
 
+        //Instrument
+        mInstrumentSpinner = (Spinner) v.findViewById(R.id.ise_spinner);
+
+        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<Instrument>(this.getActivity(),
+                android.R.layout.simple_spinner_item, mInstrumentList);
+
+        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        //set the spinner to the arrayadapter
+        mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
+
+        selectedPosition = mInstrumentSpinner.getSelectedItemPosition();
+
+        //Find and set the position of the currently selected instrument.
+        int position = 0;
+        int index = 0;
+        for(Instrument instrument: this.mInstrumentList){
+            if(String.valueOf(instrument.getId()).equals(mIseData.getInstrument())){
+                position = index;
+                break;
+            }
+            index++;
+        }
+        mInstrumentSpinner.setSelection(position);
+
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedPosition = position;
+                mInstrumentSpinner.setSelection(selectedPosition);
+
+                Object o = parent.getItemAtPosition(position);
+                if(o instanceof Instrument){
+                    mIseData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         mIseField = (TextView)v.findViewById(R.id.ise_field);
         mIseField.setText(mIseData.getIseNumber());

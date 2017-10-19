@@ -139,7 +139,9 @@ public class IntegratedFormFragment extends Fragment {
             }
         });
 
-        mInstrumentSerialNoSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+
+        //Why is there a spinner here for instruments
+      /*  mInstrumentSerialNoSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
         mInstrumentSerialNoSpinner.setAdapter(instrumentAdapter);
 
@@ -153,7 +155,7 @@ public class IntegratedFormFragment extends Fragment {
                 integratedDao.updateIntegratedDatas(mIntegratedDatas);
                 Toast.makeText(getActivity(), R.string.updated_instrument_ime_datas,Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         mIntegratedDataRecyclerView = (RecyclerView) v.findViewById(R.id.integrated_data_recycler_view);
         mIntegratedDataRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -187,7 +189,7 @@ public class IntegratedFormFragment extends Fragment {
                 integratedData.setInspectorUserName(mUser.getUsername());
                 integratedData.setStartDate(currentDate);
                 integratedData.setEndDate(new Date(integratedData.getStartDate().getTime() + 1500000));
-                integratedData.setInstrument((Instrument)mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()));
+                //integratedData.setInstrument((Instrument)mInstrumentSerialNoSpinner.getItemAtPosition(mInstrumentSerialNoSpinner.getSelectedItemPosition()));
 
                 if(mBarometricPressureField.getText().toString().trim().length() == 0)
                     integratedData.setBarometricPressure(defaultBarometricPressure);

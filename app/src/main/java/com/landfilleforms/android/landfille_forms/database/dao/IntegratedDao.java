@@ -66,9 +66,9 @@ public class IntegratedDao {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
                 IntegratedData i = cursor.getIntegratedData();
-                if(i.getInstrument() != null) {
+               /* if(i.getInstrument() != null) {
                     i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
-                }
+                }*/
                 integratedDatas.add(i);
                 cursor.moveToNext();
             }
@@ -91,9 +91,9 @@ public class IntegratedDao {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
                 IntegratedData i = cursor.getIntegratedData();
-                if(i.getInstrument() != null) {
+                /*if(i.getInstrument() != null) {
                     i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
-                }
+                }*/
                 integratedDatas.add(i);
                 cursor.moveToNext();
             }
@@ -118,9 +118,9 @@ public class IntegratedDao {
             }
             cursor.moveToFirst();
             IntegratedData i = cursor.getIntegratedData();
-            if(i.getInstrument() != null) {
+            /*if(i.getInstrument() != null) {
                 i.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(i.getInstrument().getId())));
-            }
+            }*/
             return i;
         } finally {
             cursor.close();
@@ -166,9 +166,10 @@ public class IntegratedDao {
         values.put(IntegratedDataTable.Cols.UUID, integratedData.getId().toString());
         values.put(IntegratedDataTable.Cols.LOCATION, integratedData.getLocation());
         values.put(IntegratedDataTable.Cols.GRID_ID, integratedData.getGridId());
-        if(integratedData.getInstrument() != null){
+      /*  if(integratedData.getInstrument() != null){
             values.put(IntegratedDataTable.Cols.INSTRUMENT_ID, integratedData.getInstrument().getId());
-        }
+        }*/
+        values.put(IntegratedDataTable.Cols.INSTRUMENT, integratedData.getInstrument());
         values.put(IntegratedDataTable.Cols.BARO_PRESSURE, integratedData.getBarometricPressure());
         values.put(IntegratedDataTable.Cols.INSPECTOR_NAME, integratedData.getInspectorName());
         values.put(IntegratedDataTable.Cols.INSPECTOR_USERNAME, integratedData.getInspectorUserName());

@@ -30,13 +30,14 @@ public class WarmSpotDataCursorWrapper extends CursorWrapper{
         String uuidString = getString(getColumnIndex(WarmSpotDataTable.Cols.UUID));
         String location = getString(getColumnIndex(WarmSpotDataTable.Cols.LOCATION));
         String grids = getString(getColumnIndex(WarmSpotDataTable.Cols.GRIDS));
+        String instrument = getString(getColumnIndex(WarmSpotDataTable.Cols.INSTRUMENT));
         long date = getLong(getColumnIndex(WarmSpotDataTable.Cols.DATE));
         String description = getString(getColumnIndex(WarmSpotDataTable.Cols.DESCRIPTION));
         String estimatedSize = getString(getColumnIndex(WarmSpotDataTable.Cols.ESTIMATED_SIZE));
         String inspectorFullName = getString(getColumnIndex(WarmSpotDataTable.Cols.INSPECTOR_NAME));
         String inspectorUserName = getString(getColumnIndex(WarmSpotDataTable.Cols.INSPECTOR_USERNAME));
         double methaneReading = getDouble(getColumnIndex(WarmSpotDataTable.Cols.MAX_METHANE_READING));
-        Instrument instrument = new Instrument(getInt(getColumnIndex(WarmSpotDataTable.Cols.INSTRUMENT_ID)));
+        //Instrument instrument = new Instrument(getInt(getColumnIndex(WarmSpotDataTable.Cols.INSTRUMENT)));
 
         WarmSpotData warmSpotData = new WarmSpotData(UUID.fromString(uuidString));
         warmSpotData.setLocation(location);

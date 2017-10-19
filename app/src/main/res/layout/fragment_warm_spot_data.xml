@@ -180,6 +180,7 @@
                     android:textStyle="normal"
                     />
             </TableRow>
+<!--
             <TableRow>
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
@@ -201,6 +202,47 @@
                     android:textSize="20dp"/>
             </TableRow>
 
+
+-->
+
+            <TableRow>
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:background="@color/backgroundTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Instrument: "
+                android:textColor="@color/white"
+                android:layout_margin="3dp"
+                android:textAllCaps="false"
+                android:textStyle="normal|bold"
+                android:textSize="20dp"
+                />
+            <!--TODO: Maybe make this a spinner so they can switch it to an existing IME? Or create a new one. In any case, the user shouldn't be an EditText.-->
+            <Spinner
+                android:id="@+id/warm_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+
+                />
+            <!--<TextView-->
+            <!--android:id="@+id/instrumentTextViewTest"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:layout_margin="3dp"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textStyle="normal"-->
+            <!--android:textSize="20dp"-->
+            <!--/>-->
+
+
+
+
+
+            </TableRow>
 
 
         </TableLayout>

@@ -63,7 +63,7 @@ public class IntegratedDataFragment extends Fragment {
     private static final int REQUEST_START_TIME = 1;
     private static final int REQUEST_END_TIME = 2;
 
-    private List<Instrument> mInstruments;
+//    private List<Instrument> mInstruments;
     private double tempMethaneLevel;//For the dialogs
     private IntegratedData mIntegratedData;
     private String mCurrentIseNumber;
@@ -85,8 +85,17 @@ public class IntegratedDataFragment extends Fragment {
     private Button mSubmitButton;
 
 
+    private static int selectedPosition=0;
+    private Spinner getmInstrumentSpinner;
+    private List<Instrument>mInstrumentList;
 
-    private Spinner mInstrumentSerialNoSpinner;
+
+
+    //private TextView mInstrumentLabel;
+
+
+
+  //  private Spinner mInstrumentSerialNoSpinner;
 
     //chris added this
     private User mUser;
@@ -104,6 +113,8 @@ public class IntegratedDataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+
         UUID integratedDataId = (UUID) getArguments().getSerializable(ARG_INTEGRATED_DATA_ID);
         mIntegratedData = IntegratedDao.get(getActivity()).getIntegratedData(integratedDataId);
         if(mIntegratedData.getGridId() == null)
@@ -155,7 +166,50 @@ public class IntegratedDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_integrated_data, container, false);
-        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mIntegratedData.getLocation());
+        //    mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mIntegratedData.getLocation());
+
+        mInstrumentSpinner = (Spinner) v.findViewById(R.id.integrated_spinner);
+        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, mInstrumentList);
+        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
+
+        selectedPosition = mInstrumentSpinner.getSelectedItemPosition();
+
+        int position = 0;
+        int index = 0;
+        for (Instrument instrument : this.mInstrumentList) {
+            if (String.valueOf(instrument.getId()).equals(mIntegratedData.getInstrument())) {
+               position = index;
+               break;
+            }
+            index++;
+        }
+            mInstrumentSpinner.setSelection(position);
+
+
+
+
+
+       mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               selectedPosition= position;
+               mInstrumentSpinner.setSelection(selectedPosition);
+
+               Object o = parent.getItemAtPosition(position);
+               if (o instanceof Instrument) {
+                   mIntegratedData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+               }
+
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> parent) {
+
+           }
+       });
+
 
         mInspectorField = (TextView)v.findViewById(R.id.inspector_name);
         mInspectorField.setText(mIntegratedData.getInspectorName());
@@ -173,7 +227,7 @@ public class IntegratedDataFragment extends Fragment {
         mSampleIdField = (TextView) v.findViewById(R.id.sample_id_field);
         //mSampleIdField.setText(mIntegratedData.getSampleId());
 
-        mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+      /*  mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
         mInstrumentSpinner.setAdapter(instrumentAdapter);
         mInstrumentSpinner.setSelection(instrumentAdapter.getPosition(mIntegratedData.getInstrument()));
@@ -187,7 +241,7 @@ public class IntegratedDataFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
+*/
         mBagNumberField = (EditText) v.findViewById(R.id.bag_number_field);
         if(mIntegratedData.getBagNumber() != 0)
             mBagNumberField.setText(Integer.toString(mIntegratedData.getBagNumber()));

@@ -29,6 +29,7 @@ public class IntegratedDataCursorWrapper extends CursorWrapper{
         String uuidString = getString(getColumnIndex(IntegratedDataTable.Cols.UUID));
         String location =  getString(getColumnIndex(IntegratedDataTable.Cols.LOCATION));
         String gridId =  getString(getColumnIndex(IntegratedDataTable.Cols.GRID_ID));
+        String instrument = getString(getColumnIndex(IntegratedDataTable.Cols.INSTRUMENT));
         double barometricPressure =  getDouble(getColumnIndex(IntegratedDataTable.Cols.BARO_PRESSURE));
         String inspectorName =  getString(getColumnIndex(IntegratedDataTable.Cols.INSPECTOR_NAME));
         String inspectorUsername =  getString(getColumnIndex(IntegratedDataTable.Cols.INSPECTOR_USERNAME));
@@ -38,12 +39,13 @@ public class IntegratedDataCursorWrapper extends CursorWrapper{
         long endDate =  getLong(getColumnIndex(IntegratedDataTable.Cols.END_DATE));
         int volumeReading =  getInt(getColumnIndex(IntegratedDataTable.Cols.VOLUME_READING));
         double methaneReading =  getDouble(getColumnIndex(IntegratedDataTable.Cols.MAX_METHANE_READING));
-        Instrument instrument = new Instrument(getInt(getColumnIndex(IntegratedDataTable.Cols.INSTRUMENT_ID)));
+//        Instrument instrument = new Instrument(getInt(getColumnIndex(IntegratedDataTable.Cols.INSTRUMENT_ID)));
 
         IntegratedData integratedData = new IntegratedData(UUID.fromString(uuidString));
         integratedData.setLocation(location);
         integratedData.setGridId(gridId);
         integratedData.setInstrument(instrument);
+//        integratedData.setInstrument(instrument);
         integratedData.setBarometricPressure(barometricPressure);
         integratedData.setInspectorName(inspectorName);
         integratedData.setInspectorUserName(inspectorUsername);

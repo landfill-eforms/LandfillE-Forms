@@ -12,11 +12,12 @@ public class InstantaneousData {
     private String mLocation;//Auto-generated
     private double mBarometricPressure;
     private String gridId;
+    private String mInstrument;
     private String mInspectorName;//Should make this a user object, auto-generated
     private String mInspectorUserName;
     private Date mStartDate;
     private Date mEndDate;//This is going to be the same date as the start date but we need this to set the end time
-    private Instrument mInstrument;
+    //private Instrument mInstrument;
     private double methaneReading;
     private String imeNumber;//Auto-generated
 
@@ -60,6 +61,14 @@ public class InstantaneousData {
         this.gridId = gridId;
     }
 
+    public String getInstrument() {
+        return mInstrument;
+    }
+
+    public void setInstrument(String mInstrument) {
+        this.mInstrument = mInstrument;
+    }
+
     public String getInspectorName() {
         return mInspectorName;
     }
@@ -92,14 +101,14 @@ public class InstantaneousData {
         mEndDate = endDate;
     }
 
-    public Instrument getInstrument() {
+    /*public Instrument getInstrument() {
         return mInstrument;
     }
 
     public void setInstrument(Instrument instrument) {
         this.mInstrument = instrument;
     }
-
+*/
     public double getMethaneReading() {
         return methaneReading;
     }
