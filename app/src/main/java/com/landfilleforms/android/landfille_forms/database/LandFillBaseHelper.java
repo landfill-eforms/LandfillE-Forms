@@ -104,14 +104,15 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 WarmSpotDataTable.Cols.UUID + "," +
                 WarmSpotDataTable.Cols.LOCATION + "," +
                 WarmSpotDataTable.Cols.GRIDS + "," +
+                WarmSpotDataTable.Cols.INSTRUMENT + "," +
                 WarmSpotDataTable.Cols.DATE + "," +
                 WarmSpotDataTable.Cols.DESCRIPTION + "," +
                 WarmSpotDataTable.Cols.ESTIMATED_SIZE + "," +
                 WarmSpotDataTable.Cols.INSPECTOR_NAME + "," +
                 WarmSpotDataTable.Cols.INSPECTOR_USERNAME + "," +
-                WarmSpotDataTable.Cols.MAX_METHANE_READING + "," +
-                WarmSpotDataTable.Cols.INSTRUMENT_ID + "," +
-                "FOREIGN KEY(" +WarmSpotDataTable.Cols.INSTRUMENT_ID + ") REFERENCES "+ InstrumentsTable.NAME + "("+ InstrumentsTable.Cols.ID +")" + ")"
+                WarmSpotDataTable.Cols.MAX_METHANE_READING + ")"
+                //WarmSpotDataTable.Cols.INSTRUMENT_ID + ")"
+                //"FOREIGN KEY(" +WarmSpotDataTable.Cols.INSTRUMENT_ID + ") REFERENCES "+ InstrumentsTable.NAME + "("+ InstrumentsTable.Cols.ID +")" + ")"
         );
 
         db.execSQL("create table " + IntegratedDataTable.NAME + "(" +

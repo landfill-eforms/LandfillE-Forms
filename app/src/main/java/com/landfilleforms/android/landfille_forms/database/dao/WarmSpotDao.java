@@ -66,9 +66,9 @@ public class WarmSpotDao {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
                 WarmSpotData w = cursor.getWarmSpotData();
-                if(w.getInstrument() != null) {
+                /*if(w.getInstrument() != null) {
                     w.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(w.getInstrument().getId())));
-                }
+                }*/
                 warmSpotForm.add(w);
                 cursor.moveToNext();
             }
@@ -91,9 +91,9 @@ public class WarmSpotDao {
             cursor.moveToFirst();
             while(!cursor.isAfterLast()) {
                 WarmSpotData w = cursor.getWarmSpotData();
-                if(w.getInstrument() != null) {
+                /*if(w.getInstrument() != null) {
                     w.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(w.getInstrument().getId())));
-                }
+                }*/
                 warmSpotDatas.add(w);
                 cursor.moveToNext();
             }
@@ -118,9 +118,9 @@ public class WarmSpotDao {
             }
             cursor.moveToFirst();
             WarmSpotData w = cursor.getWarmSpotData();
-            if(w.getInstrument() != null) {
+            /*if(w.getInstrument() != null) {
                 w.setInstrument(InstrumentDao.get(mContext).getInstrument(Integer.toString(w.getInstrument().getId())));
-            }
+            }*/
             return w;
         } finally {
             cursor.close();
@@ -150,14 +150,15 @@ public class WarmSpotDao {
         values.put(WarmSpotDataTable.Cols.UUID, warmSpotData.getId().toString());
         values.put(WarmSpotDataTable.Cols.LOCATION, warmSpotData.getLocation());
         values.put(WarmSpotDataTable.Cols.GRIDS, warmSpotData.getGrids());
+        values.put(WarmSpotDataTable.Cols.INSTRUMENT, warmSpotData.getInstrument());
         values.put(WarmSpotDataTable.Cols.DATE, warmSpotData.getDate().getTime());
         values.put(WarmSpotDataTable.Cols.DESCRIPTION, warmSpotData.getDescription());
         values.put(WarmSpotDataTable.Cols.ESTIMATED_SIZE, warmSpotData.getEstimatedSize());
         values.put(WarmSpotDataTable.Cols.INSPECTOR_NAME, warmSpotData.getInspectorFullName());
         values.put(WarmSpotDataTable.Cols.INSPECTOR_USERNAME, warmSpotData.getInspectorUserName());
-        if(warmSpotData.getInstrument() != null){
+        /*if(warmSpotData.getInstrument() != null){
             values.put(WarmSpotDataTable.Cols.INSTRUMENT_ID, warmSpotData.getInstrument().getId());
-        }
+        }*/
         values.put(WarmSpotDataTable.Cols.MAX_METHANE_READING, warmSpotData.getMaxMethaneReading());
 
         return values;

@@ -49,6 +49,7 @@ public class LandFillDbSchema {
             public static final String UUID = "uuid";
             public static final String LOCATION = "location";
             public static final String GRIDS = "grids";
+            public static final String INSTRUMENT = "instrument";
             public static final String DATE = "date";
             public static final String DESCRIPTION = "description";
             public static final String ESTIMATED_SIZE = "estimated_size";

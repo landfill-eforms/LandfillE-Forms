@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.landfilleforms.android.landfille_forms.activities_and_fragments.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
 import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
@@ -50,7 +51,7 @@ public class WarmSpotDataFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
 
-    List<Instrument> mInstruments;
+    //List<Instrument> mInstruments;
     Set<String> grids = new TreeSet<>();
     private WarmSpotData mWarmSpotData;
     private boolean newlyCreatedData;
@@ -61,13 +62,19 @@ public class WarmSpotDataFragment extends Fragment {
     private EditText mDescriptionField;//Text
     private EditText mEstimatedSizeField;//Number
     private EditText mMethaneLevelField;
-    private Spinner mInstrumentSpinner;
+    //private Spinner mInstrumentSpinner;
     private Button mDateButton;
     private Button mSubmitButton;
 
     private Button insert,delete;
     private TextView mGridList;
     private StringBuilder gridBuilder = new StringBuilder();
+
+    private static int selectedPosition = 0;
+    private TextView mInstrumentLabel;
+    private Spinner mInstrumentSpinner;
+    private List<Instrument> mInstrumentList;
+
 
     public static WarmSpotDataFragment newInstance(UUID warmspotDataId) {
         Bundle args = new Bundle();
@@ -81,6 +88,10 @@ public class WarmSpotDataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+
+
         UUID warmspotDataId = (UUID) getArguments().getSerializable(ARG_WARM_SPOT_DATA_ID);
         mWarmSpotData = WarmSpotDao.get(getActivity()).getWarmSpotData(warmspotDataId);
         if(mWarmSpotData.getGrids() == null)
@@ -120,8 +131,45 @@ public class WarmSpotDataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_warm_spot_data, container, false);
-        mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mWarmSpotData.getLocation());
+        //mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mWarmSpotData.getLocation());
 
+        mInstrumentSpinner = (Spinner)v.findViewById(R.id.warm_spinner);
+
+        ArrayAdapter<Instrument> instrumentArrayAdapter= new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, mInstrumentList);
+        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
+        selectedPosition = mInstrumentSpinner.getSelectedItemPosition();
+
+        int position = 0;
+        int index = 0;
+        for(Instrument instrument: this.mInstrumentList){
+            if(String.valueOf(instrument.getId()).equals(mWarmSpotData.getInstrument())){
+                position = index;
+                break;
+            }
+            index++;
+        }
+        mInstrumentSpinner.setSelection(position);
+
+
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedPosition = position;
+                mInstrumentSpinner.setSelection(selectedPosition);
+
+                Object o = parent.getItemAtPosition(position);
+                if(o instanceof Instrument){
+                    mWarmSpotData.setInstrument(String.valueOf(((Instrument)parent.getItemAtPosition(position)).getId()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         //sample setting up for early button use
         mSubmitButton = (Button)v.findViewById(R.id.submit);
@@ -150,7 +198,7 @@ public class WarmSpotDataFragment extends Fragment {
             //gives a red background for validation when its wrong and green if its good to go
             @Override
             public void afterTextChanged(Editable s) {
-                if (mWarmSpotData.getMaxMethaneReading() < 200 || mWarmSpotData.getMaxMethaneReading() > 500) {
+                if (mWarmSpotData.getMaxMethaneReading() < 200 || mWarmSpotData.getMaxMethaneReading() > 499) {
                     mMethaneLevelField.setBackgroundColor(Color.RED);
                     mSubmitButton.setEnabled(false);
 
@@ -221,12 +269,12 @@ public class WarmSpotDataFragment extends Fragment {
             updateGridListString();
         }
 
-        mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
+        /*mInstrumentSpinner = (Spinner) v.findViewById(R.id.instrument_serial_no_spinner);
         ArrayAdapter<Instrument> instrumentAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstruments);
         mInstrumentSpinner.setAdapter(instrumentAdapter);
         mInstrumentSpinner.setSelection(instrumentAdapter.getPosition(mWarmSpotData.getInstrument()));
-        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
+        mInstrumentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {*/
+            /*@Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mWarmSpotData.setInstrument((Instrument)parent.getItemAtPosition(position));
             }
@@ -234,7 +282,7 @@ public class WarmSpotDataFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-        });
+        });*/
 
 
 
