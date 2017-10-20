@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.landfilleforms.android.landfille_forms.activities_and_fragments.DatePickerFragment;
 import com.landfilleforms.android.landfille_forms.R;
+import com.landfilleforms.android.landfille_forms.database.dao.ImeDao;
 import com.landfilleforms.android.landfille_forms.database.dao.InstrumentDao;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 import com.landfilleforms.android.landfille_forms.model.Instrument;
@@ -374,10 +375,13 @@ public class WarmSpotDataFragment extends Fragment {
                 if( keyCode == KeyEvent.KEYCODE_BACK ) {
                     System.out.println(mWarmSpotData);
                     if(newlyCreatedData) {
+                        WarmSpotDao.get(getActivity()).removeWarmSpotData(mWarmSpotData);
+                        Toast.makeText(getActivity(), R.string.new_ime_cancelation_toast, Toast.LENGTH_SHORT).show();
+
                         //NEW
                         //ADDING THIS THIS TO WARN A DELETE
-                        AlertDialog.Builder alertBuilder =  new AlertDialog.Builder(getActivity());
-                        dialogDeleteWarmspotEntry(alertBuilder);
+//                          AlertDialog.Builder alertBuilder =  new AlertDialog.Builder(getActivity());
+//                        dialogDeleteWarmspotEntry(alertBuilder);
 //                        Instead of this
 //                        WarmSpotDao.get(getActivity()).removeWarmSpotData(mWarmSpotData);
 //                        Toast.makeText(getActivity(), R.string.new_warmspot_cancelation_toast, Toast.LENGTH_SHORT).show();
