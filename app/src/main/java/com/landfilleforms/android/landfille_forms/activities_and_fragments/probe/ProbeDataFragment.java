@@ -35,6 +35,7 @@ import com.landfilleforms.android.landfille_forms.model.ProbeData;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Created by Work on 3/27/2017.
@@ -83,7 +84,9 @@ public class ProbeDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //Getting Instrument List
-        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments().stream()
+                .filter(i -> i.getInstrumentType().isProbe())
+                .collect(Collectors.toList());
 
         UUID probeDataId = (UUID) getArguments().getSerializable(ARG_PROBE_DATA_ID);
         mProbeData = ProbeDao.get(getActivity()).getProbeData(probeDataId);

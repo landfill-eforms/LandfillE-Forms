@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 //Done?
 public class WarmSpotDataFragment extends Fragment {
@@ -89,8 +90,9 @@ public class WarmSpotDataFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
-
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments().stream()
+                .filter(i -> i.getInstrumentType().isInstantaneous())
+                .collect(Collectors.toList());
 
         UUID warmspotDataId = (UUID) getArguments().getSerializable(ARG_WARM_SPOT_DATA_ID);
         mWarmSpotData = WarmSpotDao.get(getActivity()).getWarmSpotData(warmspotDataId);
@@ -201,10 +203,14 @@ public class WarmSpotDataFragment extends Fragment {
                 if (mWarmSpotData.getMaxMethaneReading() < 200 || mWarmSpotData.getMaxMethaneReading() > 499) {
                     mMethaneLevelField.setBackgroundColor(Color.RED);
                     mSubmitButton.setEnabled(false);
+                    //mSubmitButton.setBackgroundColor(Color.rgb(135,133,128));
 
                 } else {
                     mMethaneLevelField.setBackgroundColor(Color.GREEN);
                     mSubmitButton.setEnabled(true);
+                    //changes background color for button will find a better way to validate 'maybe'
+                    //goes with line 206
+//                    mSubmitButton.setBackgroundColor(Color.parseColor("#204f5e"));
                 }
             }
         });
@@ -343,6 +349,9 @@ public class WarmSpotDataFragment extends Fragment {
                 if(mWarmSpotData.getMaxMethaneReading() < 200 || mWarmSpotData.getMaxMethaneReading() >=500) {
                     Toast.makeText(getActivity(), R.string.improper_methane_warmspot_toast, Toast.LENGTH_SHORT).show();
 
+                }
+                else if(grids.isEmpty()){
+                    Toast.makeText(getActivity(), "Do not leave the grids empty.", Toast.LENGTH_LONG).show();
                 }
                 else {
 

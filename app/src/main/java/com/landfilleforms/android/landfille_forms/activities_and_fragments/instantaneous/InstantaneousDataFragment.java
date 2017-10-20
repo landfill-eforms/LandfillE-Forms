@@ -49,6 +49,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Created by Work on 11/4/2016.
@@ -106,7 +107,9 @@ public class InstantaneousDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //Getting Instrument List
-        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments().stream()
+                .filter(i -> i.getInstrumentType().isInstantaneous())
+                .collect(Collectors.toList());
 
 
         UUID instantaneousDataId = (UUID) getArguments().getSerializable(ARG_INSTANTANEOUS_DATA_ID);

@@ -148,7 +148,7 @@
 -->
 
 
-
+        <TableRow>
             <TextView
                 style="?android:listSeparatorTextViewStyle"
                 android:background="@color/backgroundTheme"
@@ -170,7 +170,7 @@
                 android:textColor="@color/white"
 
                 />
-            <!--<TextView-->
+        </TableRow>
             <!--android:id="@+id/instrumentTextViewTest"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->

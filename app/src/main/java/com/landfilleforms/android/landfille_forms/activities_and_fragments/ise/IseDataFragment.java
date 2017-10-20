@@ -38,6 +38,7 @@ import com.landfilleforms.android.landfille_forms.model.IseData;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 public class IseDataFragment extends Fragment {
@@ -81,7 +82,9 @@ public class IseDataFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //Getting Instrument List
-        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments().stream()
+                .filter(i -> i.getInstrumentType().isInstantaneous())
+                .collect(Collectors.toList());
 
         UUID iseDataId = (UUID) getArguments().getSerializable(ARG_ISE_DATA_ID);
         mIseData = IseDao.get(getActivity()).getIseData(iseDataId);

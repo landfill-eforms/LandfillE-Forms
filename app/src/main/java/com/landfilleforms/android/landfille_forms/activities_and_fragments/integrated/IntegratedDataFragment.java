@@ -47,6 +47,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Created by Work on 3/28/2017.
@@ -113,7 +114,9 @@ public class IntegratedDataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments();
+        mInstrumentList = InstrumentDao.get(getActivity()).getInstruments().stream()
+                .filter(i -> i.getInstrumentType().isInstantaneous())
+                .collect(Collectors.toList());
 
         UUID integratedDataId = (UUID) getArguments().getSerializable(ARG_INTEGRATED_DATA_ID);
         mIntegratedData = IntegratedDao.get(getActivity()).getIntegratedData(integratedDataId);
