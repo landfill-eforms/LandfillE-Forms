@@ -27,8 +27,8 @@ public class ImeDataCursorWrapper extends CursorWrapper{
         String uuidString = getString(getColumnIndex(ImeDataTable.Cols.UUID));
         String imeNumber = getString(getColumnIndex(ImeDataTable.Cols.IME_NUMBER));
         String location = getString(getColumnIndex(ImeDataTable.Cols.LOCATION));
-        String gridId = getString(getColumnIndex(ImeDataTable.Cols.GRID_ID));
-        String instrument = getString(getColumnIndex(ImeDataTable.Cols.INSTRUMENT));
+        String gridId = getString(getColumnIndex(ImeDataTable.Cols.GRIDS));
+        Integer instrument = getInt(getColumnIndex(ImeDataTable.Cols.INSTRUMENT));
         long date = getLong(getColumnIndex(ImeDataTable.Cols.DATE));
         String description = getString(getColumnIndex(ImeDataTable.Cols.DESCRIPTION));
         String inspectorFullName = getString(getColumnIndex(ImeDataTable.Cols.INSPECTOR_NAME));
@@ -38,7 +38,7 @@ public class ImeDataCursorWrapper extends CursorWrapper{
         ImeData imeData = new ImeData(UUID.fromString(uuidString));
         imeData.setImeNumber(imeNumber);
         imeData.setLocation(location);
-        imeData.setGridId(gridId);
+        imeData.setGrids(gridId);
         imeData.setInstrument(instrument);
         imeData.setDate(new Date(date));
         imeData.setDescription(description);

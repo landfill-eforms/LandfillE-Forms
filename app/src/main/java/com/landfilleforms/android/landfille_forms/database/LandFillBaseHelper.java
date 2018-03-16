@@ -89,7 +89,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 ImeDataTable.Cols.UUID + "," +
                 ImeDataTable.Cols.IME_NUMBER + "," +
                 ImeDataTable.Cols.LOCATION + "," +
-                ImeDataTable.Cols.GRID_ID + "," +
+                ImeDataTable.Cols.GRIDS + "," +
                 ImeDataTable.Cols.INSTRUMENT + "," +
                 ImeDataTable.Cols.DATE + "," +
                 ImeDataTable.Cols.DESCRIPTION + "," +
@@ -102,7 +102,7 @@ public class LandFillBaseHelper extends SQLiteOpenHelper {
                 "_id integer primary key autoincrement, " +
                 WarmSpotDataTable.Cols.UUID + "," +
                 WarmSpotDataTable.Cols.LOCATION + "," +
-                WarmSpotDataTable.Cols.GRID_ID + "," +
+                WarmSpotDataTable.Cols.GRIDS + "," +
                 WarmSpotDataTable.Cols.DATE + "," +
                 WarmSpotDataTable.Cols.DESCRIPTION + "," +
                 WarmSpotDataTable.Cols.ESTIMATED_SIZE + "," +

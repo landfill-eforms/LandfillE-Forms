@@ -149,7 +149,7 @@ public class WarmSpotDao {
         ContentValues values = new ContentValues();
         values.put(WarmSpotDataTable.Cols.UUID, warmSpotData.getId().toString());
         values.put(WarmSpotDataTable.Cols.LOCATION, warmSpotData.getLocation());
-        values.put(WarmSpotDataTable.Cols.GRID_ID, warmSpotData.getGridId());
+        values.put(WarmSpotDataTable.Cols.GRIDS, warmSpotData.getGrids());
         values.put(WarmSpotDataTable.Cols.DATE, warmSpotData.getDate().getTime());
         values.put(WarmSpotDataTable.Cols.DESCRIPTION, warmSpotData.getDescription());
         values.put(WarmSpotDataTable.Cols.ESTIMATED_SIZE, warmSpotData.getEstimatedSize());

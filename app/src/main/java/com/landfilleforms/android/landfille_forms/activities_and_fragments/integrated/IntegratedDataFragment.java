@@ -487,6 +487,27 @@ public class IntegratedDataFragment extends Fragment {
         deleteAlert.setTitle("Delete Integrated Entry");
         deleteAlert.show();
     }
+//NEW
+    private void dialogLeaveMethaneEmpty(AlertDialog.Builder alertBuilder) {
+        alertBuilder.setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        IntegratedDao.get(getActivity()).removeIntegratedData(mIntegratedData);
+                        getActivity().finish();
+                        Toast.makeText(getActivity(), R.string.entry_deleted_toast, Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog deleteAlert = alertBuilder.create();
+        deleteAlert.setTitle("Delete Integrated Entry");
+        deleteAlert.show();
+    }
+//END OF NEW
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public void halt(AlertDialog.Builder alertBuilder) {

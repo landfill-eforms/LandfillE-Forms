@@ -73,27 +73,57 @@
 
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
-                    android:background="@color/backgroundTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/grid_id_label"
                     android:layout_margin="3dp"
-                    android:textColor="@color/white"
+                    android:background="@color/backgroundTheme"
+                    android:text="@string/grid_id_label"
                     android:textAllCaps="false"
-                    android:textStyle="normal|bold"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
-                    />
+                    android:textStyle="normal|bold" />
 
                 <Spinner
                     android:id="@+id/grid_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@color/darkThemeButtonBackground"
+                    android:text="Add"
+                    android:textColor="@color/white" />
+
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/gridList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textSize="20dp"
                     />
-
+                <TextView
+                    android:textSize="20dp"
+                    />
+                <Button
+                    android:id="@+id/remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:background="@color/darkThemeButtonBackground"
+                    android:text="Delete"
+                    />
             </TableRow>
 
 

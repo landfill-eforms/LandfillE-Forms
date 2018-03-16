@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
-import android.text.Selection;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -43,7 +42,6 @@ import com.landfilleforms.android.landfille_forms.model.WarmSpotData;
 import com.landfilleforms.android.landfille_forms.activities_and_fragments.warmspot.WarmSpotDataPagerActivity;
 import com.landfilleforms.android.landfille_forms.database.dao.WarmSpotDao;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -484,7 +482,7 @@ public class InstantaneousDataFragment extends Fragment {
                 ImeData imeData = new ImeData();
                 imeData.setLocation(mInstantaneousData.getLandFillLocation());
                 imeData.setDate(mInstantaneousData.getStartDate());
-                imeData.setGridId(mInstantaneousData.getGridId());
+                imeData.setGrids(mInstantaneousData.getGridId());
                 imeData.setImeNumber(mInstantaneousData.getImeNumber());
                 imeData.setMethaneReading(tempMethaneLevel);
                 imeData.setInspectorFullName(mUser.getFullName());
@@ -516,7 +514,7 @@ public class InstantaneousDataFragment extends Fragment {
                 imeData.setImeNumber(mCurrentImeNumber);
                 imeData.setLocation(mInstantaneousData.getLandFillLocation());
                 imeData.setDate(mInstantaneousData.getStartDate());
-                imeData.setGridId(mInstantaneousData.getGridId());
+                imeData.setGrids(mInstantaneousData.getGridId());
                 imeData.setMethaneReading(tempMethaneLevel);
                 imeData.setInspectorFullName(mUser.getFullName());
                 imeData.setInspectorUserName(mUser.getUsername());
@@ -583,7 +581,7 @@ public class InstantaneousDataFragment extends Fragment {
                 WarmSpotData warmSpotData = new WarmSpotData();
                 //Log.d("From FormFrag",getActivity().getIntent().getStringExtra(EXTRA_USERNAME));
                 //temp default is lopez
-                warmSpotData.setGridId(mInstantaneousData.getGridId());
+                warmSpotData.setGrids(mInstantaneousData.getGridId()); // FIXME WIll this be an issue?
                 warmSpotData.setMaxMethaneReading(tempMethaneLevel);
                 warmSpotData.setDate(mInstantaneousData.getStartDate());
                 warmSpotData.setLocation(mInstantaneousData.getLandFillLocation());

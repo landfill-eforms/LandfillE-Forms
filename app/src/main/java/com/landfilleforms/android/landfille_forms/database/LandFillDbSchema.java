@@ -31,7 +31,7 @@ public class LandFillDbSchema {
             public static final String UUID = "uuid";
             public static final String IME_NUMBER = "ime_number";
             public static final String LOCATION = "location";
-            public static final String GRID_ID = "grid_id";
+            public static final String GRIDS = "grid_id";
             public static final String INSTRUMENT = "instrument";
             public static final String DATE = "date";
             public static final String DESCRIPTION = "description";
@@ -47,7 +47,7 @@ public class LandFillDbSchema {
         public static class Cols {
             public static final String UUID = "uuid";
             public static final String LOCATION = "location";
-            public static final String GRID_ID = "grid_id";
+            public static final String GRIDS = "grids";
             public static final String DATE = "date";
             public static final String DESCRIPTION = "description";
             public static final String ESTIMATED_SIZE = "estimated_size";
