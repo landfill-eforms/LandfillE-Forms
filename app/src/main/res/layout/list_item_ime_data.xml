@@ -28,45 +28,46 @@
             android:background="@color/darkThemeButtonBackground"
             android:padding="16dp">
 
+
             <!--Grid ID-->
 
             <TextView
-                android:id="@+id/grid_label_cv"
+                android:id="@+id/ime_label_cv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
-                android:text="@string/grid_id_label"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/list_item_ime_data_gridid_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/grid_label_cv"
-                android:textSize="20sp" />
-
-            <!--IME-->
-            <TextView
-                android:id="@+id/ime_label_cv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/grid_label_cv"
-                android:layout_marginRight="16dp"
                 android:text="@string/ime_no_label"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/list_item_ime_no_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/ime_label_cv"
-                android:layout_toEndOf="@id/ime_label_cv" />
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/ime_label_cv"
+                android:textSize="20sp" />
+
+            <!--IME-->
+            <TextView
+                android:id="@+id/grid_label_cv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ime_label_cv"
+                android:layout_marginRight="16dp"
+                android:text="@string/grid_id_label"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_item_ime_data_gridid_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/grid_label_cv"
+                android:layout_toEndOf="@id/grid_label_cv" />
 
 
             <!--Methane Reading-->
@@ -74,7 +75,7 @@
                 android:id="@+id/methane_reading_label_cv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ime_label_cv"
+                android:layout_below="@id/grid_label_cv"
                 android:layout_marginRight="16dp"
                 android:text="@string/ch4_list_item_label"
                 android:textColor="@color/white"
