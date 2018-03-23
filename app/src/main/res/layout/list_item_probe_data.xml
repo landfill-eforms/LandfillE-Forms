@@ -46,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/probe_label_cv"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/white"/>
 
             <!--Pressure Reading-->
             <TextView
