@@ -200,10 +200,9 @@
                     android:id="@+id/instant_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:popupBackground="@color/backgroundTheme"
                     android:textColor="@color/white"
-
-                    />
+                    android:textSize="20dp" />
                 <!--<TextView-->
                 <!--android:id="@+id/instrumentTextViewTest"-->
                 <!--android:layout_width="match_parent"-->
