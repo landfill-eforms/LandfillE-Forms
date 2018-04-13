@@ -211,7 +211,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:inputType="numberDecimal"
+                    android:inputType="phone"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20dp"

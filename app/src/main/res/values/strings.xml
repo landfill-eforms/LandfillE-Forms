@@ -35,7 +35,7 @@
     <string name="delete_probe_data">Remove Probe Data Entry</string>
     <string name="location_label">Location:</string>
     <string name="probe_number_label">Probe:</string>
-    <string name="water_pressure_label">Pressure "H2O:</string>
+    <string name="water_pressure_label">Pressure "''"H2O:</string>
     <string name="methane_percentage_label">%Methane:</string>
     <string name="ime_label">IME #:</string>
     <string name="ise_label">ISE #:</string>
