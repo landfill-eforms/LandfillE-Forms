@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/backgroundTheme">
+        android:background="@color/backgroundTheme"
+        >
 
         <TableLayout
             android:layout_width="match_parent"
@@ -113,14 +114,14 @@
                     android:text="@string/baro_reading_label"
                     android:textColor="@color/white"
                     android:textAllCaps="false"
-                    android:textSize="18dp"/>
+                    android:textSize="20dp"/>
 <!-- Added padding -->
                 <TextView
                     android:id="@+id/baro_reading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/holo_blue_bright"
-                    android:paddingLeft="50dp"
+                    android:paddingLeft="75dp"
                     />
 
 
@@ -144,49 +145,33 @@
                     android:id="@+id/probe_number_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="10dp"
                     />
 
             </TableRow>
 
 
-
-
             <TableRow>
-
                 <TextView
                     style="?android:listSeparatorTextViewStyle"
                     android:background="@color/backgroundTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Instrument: "
-                    android:textColor="@color/white"
                     android:layout_margin="3dp"
+                    android:textColor="@color/white"
                     android:textAllCaps="false"
                     android:textStyle="normal|bold"
-                    android:textSize="20sp"
-
+                    android:textSize="20dp"
                     />
-                <!--TODO: Maybe make this a spinner so they can switch it to an existing IME? Or create a new one. In any case, the user shouldn't be an EditText.-->
+
                 <Spinner
                     android:id="@+id/probe_ins_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-
-
+                    android:textSize="10dp"
                     />
-                <!--<TextView-->
-                <!--android:id="@+id/instrumentTextViewTest"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:layout_margin="3dp"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textStyle="normal"-->
-                <!--android:textSize="20dp"-->
-                <!--/>-->
+
 
             </TableRow>
 

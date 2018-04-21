@@ -169,8 +169,8 @@ public class IntegratedDataFragment extends Fragment {
         //    mInstruments = InstrumentDao.get(getActivity()).getInstrumentsBySiteForSurface(mIntegratedData.getLocation());
 
         mInstrumentSpinner = (Spinner) v.findViewById(R.id.integrated_spinner);
-        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, mInstrumentList);
-        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<>(this.getActivity(), R.layout.dark_spinner_layout, mInstrumentList);
+        instrumentArrayAdapter.setDropDownViewResource(R.layout.dark_spinner_layout);
 
         mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
 

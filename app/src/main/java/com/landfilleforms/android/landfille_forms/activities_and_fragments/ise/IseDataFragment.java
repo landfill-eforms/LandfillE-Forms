@@ -197,9 +197,9 @@ public class IseDataFragment extends Fragment {
         mInstrumentSpinner = (Spinner) v.findViewById(R.id.ise_spinner);
 
         ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<Instrument>(this.getActivity(),
-                android.R.layout.simple_spinner_item, mInstrumentList);
+                R.layout.dark_spinner_layout, mInstrumentList);
 
-        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        instrumentArrayAdapter.setDropDownViewResource(R.layout.dark_spinner_layout);
 
         //set the spinner to the arrayadapter
         mInstrumentSpinner.setAdapter(instrumentArrayAdapter);

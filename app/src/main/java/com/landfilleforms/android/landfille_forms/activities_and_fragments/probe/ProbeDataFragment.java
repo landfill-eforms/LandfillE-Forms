@@ -134,8 +134,8 @@ public class ProbeDataFragment extends Fragment {
         mInstrumentSpinner = (Spinner)v.findViewById(R.id.probe_ins_spinner); //Set Instrument spinner to its ID
 
         //Make arrayadapter of instruments to add items from the list to the spinner
-        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<Instrument>(this.getActivity(), android.R.layout.simple_spinner_item, mInstrumentList);
-        instrumentArrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        ArrayAdapter<Instrument> instrumentArrayAdapter = new ArrayAdapter<Instrument>(this.getActivity(), R.layout.dark_spinner_layout, mInstrumentList);
+        instrumentArrayAdapter.setDropDownViewResource(R.layout.dark_spinner_layout);
 
         //set the spinner to the arrayadapter
         mInstrumentSpinner.setAdapter(instrumentArrayAdapter);
